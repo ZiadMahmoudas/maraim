@@ -21,35 +21,27 @@
         --gold: #f03232;
         --gold-light: #ff6b6b;
         --gold-dark: #c91f1f;
-
         --cream: #f5f7fa;
         --beige: #eceff6;
         --beige-mid: #cfd5e3;
-
         --brown: #2e248f;
         --brown-light: #4b3fd1;
         --brown-dark: #141927;
-
         --gray-warm: #70798c;
         --gray-light: #f5f7fa;
         --white: #ffffff;
-
         --text-dark: #141927;
         --text-mid: #2b3142;
         --text-light: #6f7788;
-
         --shadow-gold: rgba(240, 50, 50, 0.25);
         --shadow-dark: rgba(20, 25, 39, 0.18);
-
         --font-display: "Cormorant Garamond", serif;
         --font-body: "DM Sans", sans-serif;
         --font-serif: "Libre Baskerville", serif;
         --font-display-ar: "Noto Naskh Arabic", serif;
         --font-body-ar: "Tajawal", sans-serif;
-
         --transition: cubic-bezier(0.4, 0, 0.2, 1);
       }
-
       html[lang="ar"] {
         --font-display: "Noto Naskh Arabic", serif;
         --font-body: "Tajawal", sans-serif;
@@ -61,7 +53,6 @@
       html[lang="ar"] .font-display {
         font-family: var(--font-display);
       }
-
       *,
       *::before,
       *::after {
@@ -94,7 +85,6 @@
       ul {
         list-style: none;
       }
-
       ::-webkit-scrollbar {
         width: 4px;
       }
@@ -202,12 +192,19 @@
       }
 
       .container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 40px;
+        width: min(100% - 32px, 1200px);
+        margin-inline: auto;
+        padding-inline: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
       }
       .navbar .container {
         display: flex;
+        align-items: center;
         justify-content: space-between;
       }
       .section-label {
@@ -234,7 +231,6 @@
         display: inline-block;
         flex-shrink: 0;
       }
-
       .section-title {
         font-family: var(--font-display);
         font-size: clamp(1.7rem, 4vw, 3.2rem);
@@ -332,7 +328,6 @@
         height: 18px;
       }
 
-      /* LANGUAGE TOGGLE */
       .lang-toggle {
         display: flex;
         align-items: center;
@@ -370,7 +365,6 @@
         font-size: 0.82rem;
       }
 
-      /* NAVBAR */
       .navbar {
         position: fixed;
         width: 100%;
@@ -484,7 +478,6 @@
         display: block;
       }
 
-      /* MOBILE DRAWER */
       .mobile-overlay {
         position: fixed;
         inset: 0;
@@ -499,7 +492,6 @@
         opacity: 1;
         visibility: visible;
       }
-
       .mobile-drawer {
         position: fixed;
         top: 0;
@@ -532,7 +524,6 @@
       html[dir="rtl"] .mobile-drawer.open {
         transform: translateX(0);
       }
-
       .mobile-close {
         position: absolute;
         top: 16px;
@@ -554,13 +545,11 @@
         left: auto;
         right: 16px;
       }
-
       .mobile-drawer-logo {
         margin-top: 30px;
         padding-bottom: 22px;
         border-bottom: 1px solid var(--beige-mid);
       }
-
       .mobile-lang-toggle {
         margin-top: 16px;
         display: flex;
@@ -589,7 +578,6 @@
         font-family: "Tajawal", sans-serif;
         font-size: 0.9rem;
       }
-
       .mobile-drawer-links {
         display: flex;
         flex-direction: column;
@@ -626,42 +614,56 @@
       /* HERO */
       .hero {
         min-height: 100svh;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         position: relative;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: var(--brown-dark);
       }
-      .hero-bg-pattern {
+      .hero-video-bg {
         position: absolute;
         inset: 0;
-        background-image:
-          radial-gradient(
-            circle at 20% 50%,
-            rgba(201, 169, 110, 0.07) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(92, 61, 30, 0.05) 0%,
-            transparent 40%
-          );
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
         pointer-events: none;
       }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          rgba(30, 15, 5, 0.82) 0%,
+          rgba(30, 15, 5, 0.55) 45%,
+          rgba(30, 15, 5, 0.28) 100%
+        );
+      }
+      html[dir="rtl"] .hero::before {
+        background: linear-gradient(
+          -90deg,
+          rgba(30, 15, 5, 0.82) 0%,
+          rgba(30, 15, 5, 0.55) 45%,
+          rgba(30, 15, 5, 0.28) 100%
+        );
+      }
       .hero-left {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 120px 60px 80px;
         position: relative;
         z-index: 2;
+        width: 100%;
+        max-width: 760px;
+        padding: 150px 60px 90px;
       }
       .hero-badge {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(201, 169, 110, 0.12);
-        border: 1px solid rgba(201, 169, 110, 0.3);
-        color: var(--gold-dark);
+        background: rgba(201, 169, 110, 0.18);
+        border: 1px solid rgba(201, 169, 110, 0.45);
+        color: var(--gold-light);
         padding: 7px 16px;
         font-family: var(--font-serif);
         font-size: 0.72rem;
@@ -682,7 +684,8 @@
         font-size: clamp(2.4rem, 5vw, 4.6rem);
         font-weight: 700;
         line-height: 1.05;
-        color: var(--text-dark);
+        color: var(--white);
+        text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
         margin-bottom: 22px;
         animation: fadeLeft 0.8s var(--transition) 0.4s both;
       }
@@ -692,13 +695,13 @@
         animation-name: fadeRight;
       }
       .hero-title .gold-text {
-        color: var(--gold);
+        color: var(--gold-light);
         display: block;
       }
       .hero-title .italic-text {
         font-style: italic;
         font-weight: 300;
-        color: var(--brown-light);
+        color: var(--gold);
         display: block;
         font-size: 0.82em;
       }
@@ -708,8 +711,8 @@
       }
       .hero-desc {
         font-size: 1rem;
-        color: var(--text-light);
-        max-width: 440px;
+        color: rgba(255, 255, 255, 0.78);
+        max-width: 560px;
         margin-bottom: 36px;
         line-height: 2;
         animation: fadeLeft 0.8s var(--transition) 0.6s both;
@@ -731,7 +734,7 @@
         gap: 32px;
         margin-top: 52px;
         padding-top: 36px;
-        border-top: 1px solid var(--beige-mid);
+        border-top: 1px solid rgba(201, 169, 110, 0.35);
         animation: fadeLeft 0.8s var(--transition) 1s both;
         flex-wrap: wrap;
       }
@@ -754,62 +757,7 @@
       }
       .stat-label {
         font-size: 0.75rem;
-        color: var(--text-light);
-      }
-      .hero-right {
-        position: relative;
-        overflow: hidden;
-        animation: fadeRight 0.8s var(--transition) 0.3s both;
-      }
-      html[lang="ar"] .hero-right {
-        animation-name: fadeLeft;
-      }
-      .hero-image-main {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .hero-image-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to right, var(--cream) 0%, transparent 25%);
-      }
-      html[lang="ar"] .hero-image-overlay {
-        background: linear-gradient(to left, var(--cream) 0%, transparent 25%);
-      }
-      .hero-floating-card {
-        position: absolute;
-        bottom: 50px;
-        left: 36px;
-        background: rgba(250, 247, 242, 0.97);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--beige-mid);
-        border-top: 3px solid var(--gold);
-        padding: 18px 22px;
-        box-shadow: 0 16px 50px var(--shadow-dark);
-        animation: float 4s ease-in-out infinite;
-        min-width: 200px;
-      }
-      .hero-floating-card .card-label {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: 0.7rem;
-        color: var(--text-light);
-        margin-bottom: 3px;
-      }
-      html[lang="ar"] .hero-floating-card .card-label {
-        font-family: "Tajawal", sans-serif;
-        font-style: normal;
-      }
-      .hero-floating-card .card-value {
-        font-family: var(--font-display);
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--gold);
-      }
-      .hero-floating-card .card-sub {
-        font-size: 0.75rem;
-        color: var(--text-light);
+        color: rgba(255, 255, 255, 0.62);
       }
       .hero-scroll-indicator {
         position: absolute;
@@ -820,61 +768,12 @@
         flex-direction: column;
         align-items: center;
         gap: 7px;
-        color: var(--text-light);
+        color: rgba(255, 255, 255, 0.7);
         font-family: var(--font-serif);
         font-style: italic;
         font-size: 0.7rem;
         animation: float 2s ease-in-out infinite;
         z-index: 3;
-      }
-      html[lang="ar"] .hero-scroll-indicator {
-        font-family: "Tajawal", sans-serif;
-        font-style: normal;
-      }
-      .scroll-mouse {
-        width: 20px;
-        height: 32px;
-        border: 1.5px solid var(--gold);
-        border-radius: 10px;
-        position: relative;
-      }
-      .scroll-mouse::after {
-        content: "";
-        width: 3px;
-        height: 6px;
-        background: var(--gold);
-        border-radius: 2px;
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation: float 1.5s ease-in-out infinite;
-      }
-
-      /* ============================================================
-         VIDEO FADE — التعديل الوحيد المضاف
-         ============================================================ */
-      .hero-video-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 0;
-        pointer-events: none;
-      }
-      .hero-video-fade-cover {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        background: var(--brown-dark);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .hero-video-fade-cover.fading {
-        opacity: 1;
       }
 
       /* MARQUEE */
@@ -1074,6 +973,7 @@
         transition: all 0.4s var(--transition);
         position: relative;
         border-bottom: 2px solid transparent;
+        cursor: pointer;
       }
       .product-card:hover {
         transform: translateY(-5px);
@@ -1118,25 +1018,6 @@
       .badge-best {
         background: var(--brown-dark);
         color: var(--gold-light);
-      }
-      .product-wishlist {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        width: 32px;
-        height: 32px;
-        background: rgba(255, 255, 255, 0.92);
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.9rem;
-        transition: all 0.3s;
-      }
-      .product-wishlist:hover {
-        background: #c0392b;
-        color: white;
       }
       .product-actions-overlay {
         position: absolute;
@@ -1460,168 +1341,65 @@
         color: var(--gold);
       }
 
-      /* CONTACT */
-      .contact {
-        padding: 100px 0;
-        background: var(--beige);
-      }
-      .contact-inner {
-        display: grid;
-        grid-template-columns: 1fr 1.4fr;
-        gap: 70px;
-        align-items: start;
-      }
-      .contact-info-title {
-        font-family: var(--font-display);
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 18px;
-        line-height: 1.25;
-      }
-      html[lang="ar"] .contact-info-title {
-        font-family: "Noto Naskh Arabic", serif;
-        line-height: 1.45;
-      }
-      .contact-info-title span {
-        color: var(--gold);
-      }
-      .contact-info-desc {
-        font-size: 0.93rem;
-        color: var(--text-light);
-        line-height: 1.9;
-        margin-bottom: 30px;
-      }
-      .contact-details {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        margin-bottom: 30px;
-      }
-      .contact-detail {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-      }
-      .detail-icon {
-        width: 42px;
-        height: 42px;
-        background: var(--gold-light);
+      /* CTA */
+      .cta-section {
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+        min-height: 560px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        flex-shrink: 0;
       }
-      .detail-label {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: 0.73rem;
-        color: var(--text-light);
-      }
-      html[lang="ar"] .detail-label {
-        font-family: "Tajawal", sans-serif;
-        font-style: normal;
-      }
-      .detail-value {
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: var(--text-dark);
-      }
-      .contact-form-wrap {
-        background: var(--white);
-        padding: 44px;
-        box-shadow: 0 6px 35px rgba(0, 0, 0, 0.07);
-        border-top: 3px solid var(--gold);
-      }
-      .form-title {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 28px;
-      }
-      html[lang="ar"] .form-title {
-        font-family: "Noto Naskh Arabic", serif;
-      }
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-      .form-group {
-        margin-bottom: 16px;
-      }
-      .form-group label {
-        display: block;
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: var(--text-mid);
-        margin-bottom: 7px;
-        letter-spacing: 0.03em;
-      }
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
+      .cta-video-bg {
+        position: absolute;
+        inset: 0;
         width: 100%;
-        padding: 12px 14px;
-        border: 1.5px solid var(--beige-mid);
-        font-family: var(--font-body);
-        font-size: 0.88rem;
-        color: var(--text-dark);
-        background: var(--gray-light);
-        transition: all 0.3s;
-        outline: none;
-        appearance: none;
-        -webkit-appearance: none;
-        border-radius: 2px;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+        pointer-events: none;
       }
-      .form-group input:focus,
-      .form-group select:focus,
-      .form-group textarea:focus {
-        border-color: var(--gold);
-        background: white;
-        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
-      }
-      .form-group textarea {
-        resize: vertical;
-        min-height: 110px;
-      }
-      .form-group select {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: left 12px center;
-        padding-left: 36px;
-      }
-      .form-submit {
-        width: 100%;
-        padding: 15px;
-        font-size: 0.98rem;
-        justify-content: center;
-        margin-top: 6px;
-      }
-      .form-success {
-        display: none;
-        text-align: center;
-        padding: 28px;
+      .cta-video-overlay {
+        position: absolute;
+        inset: 0;
         background: linear-gradient(
           135deg,
-          rgba(201, 169, 110, 0.08),
-          rgba(201, 169, 110, 0.04)
+          rgba(30, 15, 5, 0.82) 0%,
+          rgba(30, 15, 5, 0.55) 50%,
+          rgba(30, 15, 5, 0.75) 100%
         );
-        border: 1px solid var(--gold-light);
+        z-index: 1;
       }
-      .form-success.show {
-        display: block;
+      .cta-video-grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.35;
       }
-      .form-success h3 {
-        font-family: var(--font-display);
-        color: var(--gold);
-        font-size: 1.4rem;
-        margin-bottom: 7px;
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 4px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        z-index: 3;
       }
-      html[lang="ar"] .form-success h3 {
-        font-family: "Noto Naskh Arabic", serif;
+      .cta-content {
+        position: relative;
+        z-index: 4;
+        width: 100%;
+        padding: 90px 0;
+        text-align: center;
       }
 
       /* FOOTER */
@@ -1808,168 +1586,443 @@
         display: block;
       }
 
-      /* CTA SECTION */
-      .cta-section {
-        padding: 0;
-        position: relative;
-        overflow: hidden;
-        min-height: 560px;
+      /* LOGO */
+      .logo-main img,
+      .logo img,
+      .footer-brand img,
+      .mobile-drawer-logo img {
+        max-width: 150px;
+        height: auto;
+        display: block;
+      }
+      .navbar .logo-main img {
+        max-width: 103px;
+      }
+      .footer-brand img {
+        max-width: 170px;
+      }
+      .mobile-drawer-logo img {
+        max-width: 160px;
+      }
+
+      /* ================================================================
+         PRODUCT MODAL — with scrollable gallery
+         ================================================================ */
+      .pmodal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 6, 18, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 2000;
         display: flex;
         align-items: center;
+        justify-content: center;
+        padding: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          visibility 0.4s;
       }
-      .cta-video-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 0;
-        pointer-events: none;
+      .pmodal-overlay.open {
+        opacity: 1;
+        visibility: visible;
       }
-      .cta-video-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(30, 15, 5, 0.82) 0%,
-          rgba(30, 15, 5, 0.55) 50%,
-          rgba(30, 15, 5, 0.75) 100%
-        );
-        z-index: 1;
-      }
-      .cta-video-grain {
-        position: absolute;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-        z-index: 2;
-        pointer-events: none;
-        opacity: 0.35;
-      }
-      .cta-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 4px;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--gold),
-          transparent
-        );
-        z-index: 3;
-      }
-      .cta-content {
+
+      /* Modal wrapper */
+      .pmodal {
+        background: var(--cream);
+        border-radius: 10px;
+        width: min(1040px, 100%);
+        max-height: 100dvh;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6);
+        transform: translateY(30px) scale(0.97);
+        transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        z-index: 4;
-        width: 100%;
-        padding: 90px 0;
-        text-align: center;
       }
-      .cta-mute-btn {
+      .pmodal-overlay.open .pmodal {
+        transform: translateY(0) scale(1);
+      }
+
+      /* Close btn */
+      .pmodal-close {
         position: absolute;
-        top: 20px;
-        right: 20px;
-        z-index: 5;
+        top: 14px;
+        right: 14px;
         width: 38px;
         height: 38px;
-        background: rgba(201, 169, 110, 0.18);
-        border: 1px solid rgba(201, 169, 110, 0.4);
-        color: var(--gold-light);
+        background: rgba(240, 50, 50, 0.12);
+        border: 1.5px solid rgba(240, 50, 50, 0.3);
+        border-radius: 50%;
+        color: var(--gold);
         font-size: 1rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 2px;
-        transition: all 0.3s;
-        backdrop-filter: blur(8px);
+        transition: all 0.25s;
+        z-index: 20;
       }
-      .cta-mute-btn:hover {
+      .pmodal-close:hover {
         background: var(--gold);
-        color: white;
+        color: #fff;
+        transform: rotate(90deg);
       }
 
-      /* ABOUT */
-      .about-section {
-        padding: 100px 0;
-        background: var(--cream);
+      /* ── LEFT: gallery column ── */
+      .pmodal-gallery {
+        display: flex;
+        flex-direction: column;
+        background: var(--brown-dark);
+        overflow: hidden;
+        min-height: 0;
       }
-      .about-inner {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
+
+      /* Main big image */
+      .pmodal-main-img-wrap {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+      }
+      .pmodal-main-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition:
+          opacity 0.3s ease,
+          transform 0.4s ease;
+      }
+      .pmodal-main-img.switching {
+        opacity: 0;
+        transform: scale(1.04);
+      }
+      .pmodal-main-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(20, 25, 39, 0.18) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .pmodal-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        padding: 6px 14px;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.72rem;
+        color: #fff;
+        border-radius: 2px;
+        letter-spacing: 0.04em;
+        z-index: 2;
+      }
+      html[lang="ar"] .pmodal-badge {
+        font-style: normal;
+        font-family: "Tajawal", sans-serif;
+      }
+      .pmodal-badge.badge-new {
+        background: var(--gold);
+      }
+      .pmodal-badge.badge-best {
+        background: var(--brown-dark);
+        color: var(--gold-light);
+      }
+      .pmodal-badge.badge-sale {
+        background: #c0392b;
+      }
+
+      /* img counter */
+      .pmodal-img-counter {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(10, 8, 20, 0.7);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.68rem;
+        font-family: var(--font-body);
+        padding: 4px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.08em;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* Arrow nav on main image */
+      .pmodal-img-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: rgba(20, 25, 39, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
         align-items: center;
+        justify-content: center;
+        transition: all 0.22s;
+        z-index: 5;
+        opacity: 0;
       }
-      .about-images {
+      .pmodal-gallery:hover .pmodal-img-arrow {
+        opacity: 1;
+      }
+      .pmodal-img-arrow:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #fff;
+      }
+      .pmodal-img-arrow.prev {
+        left: 12px;
+      }
+      .pmodal-img-arrow.next {
+        right: 12px;
+      }
+      .pmodal-img-arrow[disabled] {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      /* ── THUMBNAILS STRIP ── */
+      .pmodal-thumbs-strip {
+        flex-shrink: 0;
+        background: rgba(8, 6, 18, 0.94);
+        border-top: 1px solid rgba(240, 50, 50, 0.18);
+        padding: 10px 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .pmodal-thumb-nav {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        padding: 0;
+        line-height: 1;
+      }
+      .pmodal-thumb-nav:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #fff;
+      }
+      .pmodal-thumb-nav:disabled {
+        opacity: 0.15;
+        pointer-events: none;
+      }
+
+      .pmodal-thumbs-outer {
+        flex: 1;
+        overflow: hidden;
         position: relative;
       }
-      .about-img-main {
-        width: 85%;
-        margin-left: auto;
-      }
-      html[lang="ar"] .about-img-main {
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .about-img-second {
+      .pmodal-thumbs-outer::before,
+      .pmodal-thumbs-outer::after {
+        content: "";
         position: absolute;
-        width: 50%;
-        bottom: -36px;
+        top: 0;
+        bottom: 0;
+        width: 18px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .pmodal-thumbs-outer::before {
         left: 0;
-        border: 6px solid var(--cream);
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+        background: linear-gradient(to right, rgba(8, 6, 18, 0.9), transparent);
       }
-      .about-content {
-        padding-top: 20px;
-      }
-      .about-quote {
-        font-family: var(--font-display);
-        font-style: italic;
-        font-size: 1.15rem;
-        font-weight: 300;
-        color: var(--gold);
-        margin: 22px 0;
-        padding: 18px 0 18px 22px;
-        border-right: 3px solid var(--gold);
-        line-height: 1.8;
-      }
-      html[lang="ar"] .about-quote {
-        font-family: "Noto Naskh Arabic", serif;
-        font-style: normal;
-        padding-right: 22px;
-        border-right: 3px solid var(--gold);
-        padding-left: 0;
-        border-left: none;
+      .pmodal-thumbs-outer::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(8, 6, 18, 0.9), transparent);
       }
 
-      /* RESPONSIVE */
+      .pmodal-thumbs-track {
+        display: flex;
+        gap: 7px;
+        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+        padding: 2px 3px;
+      }
+
+      .pmodal-thumb {
+        flex-shrink: 0;
+        width: 68px;
+        cursor: pointer;
+        transition:
+          transform 0.22s,
+          opacity 0.22s;
+        opacity: 0.42;
+      }
+      .pmodal-thumb:hover {
+        opacity: 0.78;
+        transform: translateY(-2px);
+      }
+      .pmodal-thumb.active {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+
+      .pmodal-thumb-img-wrap {
+        width: 68px;
+        height: 54px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition:
+          border-color 0.22s,
+          box-shadow 0.22s;
+      }
+      .pmodal-thumb.active .pmodal-thumb-img-wrap {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(240, 50, 50, 0.22);
+      }
+      .pmodal-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.32s;
+      }
+      .pmodal-thumb:hover img {
+        transform: scale(1.08);
+      }
+
+      .pmodal-thumb-label {
+        font-size: 0.56rem;
+        color: rgba(255, 255, 255, 0.32);
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        transition: color 0.22s;
+        font-family: var(--font-body);
+      }
+      .pmodal-thumb.active .pmodal-thumb-label {
+        color: var(--gold-light);
+        font-weight: 700;
+      }
+
+      /* ── RIGHT: info (scrollable) ── */
+      .pmodal-info {
+        padding: 36px 30px 28px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* ← scrollable */
+        max-height: 92dvh;
+        overscroll-behavior: contain;
+      }
+      .pmodal-info::-webkit-scrollbar {
+        width: 3px;
+      }
+      .pmodal-info::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 2px;
+      }
+
+      .pmodal-cat {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.72rem;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      html[lang="ar"] .pmodal-cat {
+        font-style: normal;
+        font-family: "Tajawal", sans-serif;
+      }
+      .pmodal-name {
+        font-family: var(--font-display);
+        font-size: 1.85rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        line-height: 1.15;
+        margin-bottom: 10px;
+      }
+      html[lang="ar"] .pmodal-name {
+        font-family: "Noto Naskh Arabic", serif;
+        line-height: 1.45;
+        font-size: 1.6rem;
+      }
+      .pmodal-rating {
+        color: var(--gold);
+        font-size: 0.95rem;
+        letter-spacing: 3px;
+        margin-bottom: 14px;
+      }
+      .pmodal-price {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      html[lang="ar"] .pmodal-price {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .pmodal-divider {
+        height: 1px;
+        background: var(--beige-mid);
+        margin-bottom: 20px;
+      }
+      .pmodal-desc-label {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.7rem;
+        color: var(--text-light);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      html[lang="ar"] .pmodal-desc-label {
+        font-style: normal;
+        font-family: "Tajawal", sans-serif;
+      }
+      .pmodal-desc {
+        font-size: 0.93rem;
+        color: var(--text-mid);
+        line-height: 2;
+        margin-bottom: 28px;
+      }
+      .pmodal-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: auto;
+      }
+      .pmodal-actions .btn {
+        justify-content: center;
+        font-size: 0.88rem;
+        padding: 13px 16px;
+        min-width: 130px;
+      }
+
+      /* ================================================================
+         RESPONSIVE
+         ================================================================ */
       @media (max-width: 1024px) {
-        .container {
-          padding: 0 28px;
-        }
-        .hero {
-          grid-template-columns: 1fr;
-          min-height: auto;
-        }
-        .hero-left {
-          padding: 110px 28px 60px;
-        }
-        .hero-right {
-          height: 55vh;
-          min-height: 320px;
-        }
-        .hero-image-overlay {
-          background: linear-gradient(to top, var(--cream) 0%, transparent 40%);
-        }
-        html[lang="ar"] .hero-image-overlay {
-          background: linear-gradient(to top, var(--cream) 0%, transparent 40%);
-        }
-        .hero-floating-card {
-          display: none;
-        }
         .categories-grid {
           grid-template-columns: 1fr 1fr;
         }
@@ -1998,33 +2051,15 @@
           grid-row: auto;
           min-height: 300px;
         }
-        .contact-inner {
-          grid-template-columns: 1fr;
-          gap: 50px;
-        }
         .footer-grid {
           grid-template-columns: 1fr 1fr;
           gap: 40px;
         }
-        .about-inner {
-          grid-template-columns: 1fr;
-          gap: 60px;
-        }
-        .about-img-second {
-          display: none;
-        }
-        .about-img-main {
-          width: 100%;
-          margin-left: 0;
-        }
-        .cta-section {
-          min-height: 460px;
+        .container {
+          width: min(100% - 28px, 1200px);
         }
       }
       @media (max-width: 768px) {
-        .container {
-          padding: 0 18px;
-        }
         .nav-links {
           display: none;
         }
@@ -2035,11 +2070,23 @@
           display: flex;
         }
         .hero-left {
-          padding: 146px 18px 50px;
+          max-width: 100%;
+          padding: 146px 18px 70px;
         }
-        .hero-right {
-          height: 45vh;
-          min-height: 260px;
+        .hero::before {
+          background: linear-gradient(
+            to bottom,
+            rgba(30, 15, 5, 0.82) 0%,
+            rgba(30, 15, 5, 0.55) 55%,
+            rgba(30, 15, 5, 0.85) 100%
+          );
+        }
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-actions .btn {
+          justify-content: center;
         }
         .hero-title {
           font-size: clamp(2rem, 8vw, 2.8rem);
@@ -2104,16 +2151,6 @@
           grid-column: auto;
           min-height: 280px;
         }
-        .contact {
-          padding: 60px 0;
-        }
-        .contact-form-wrap {
-          padding: 24px 18px;
-        }
-        .form-row {
-          grid-template-columns: 1fr;
-          gap: 0;
-        }
         .footer {
           padding: 50px 0 0;
         }
@@ -2126,12 +2163,6 @@
           gap: 6px;
           text-align: center;
           padding: 18px 0;
-        }
-        .cta-section {
-          min-height: 380px;
-        }
-        .cta-content {
-          padding: 60px 0;
         }
         .products-header {
           flex-direction: column;
@@ -2167,45 +2198,61 @@
           width: 48px;
           height: 48px;
         }
+        /* Modal mobile */
+        .pmodal {
+          grid-template-columns: 1fr;
+          max-height: 96dvh;
+          border-radius: 16px 16px 0 0;
+          align-self: flex-end;
+          width: 100%;
+        }
+        .pmodal-overlay {
+          align-items: flex-end;
+          padding: 0;
+        }
+        .pmodal-gallery {
+          max-height: 52vw;
+          min-height: 200px;
+        }
+        .pmodal-info {
+          padding: 22px 18px 24px;
+          max-height: 55dvh;
+        }
+        .pmodal-name {
+          font-size: 1.25rem;
+        }
+        .pmodal-price {
+          font-size: 1.45rem;
+        }
+        .pmodal-thumbs-strip {
+          padding: 8px 6px;
+        }
+        .pmodal-thumb {
+          width: 58px;
+        }
+        .pmodal-thumb-img-wrap {
+          width: 58px;
+          height: 46px;
+        }
+        .container {
+          width: min(100% - 20px, 1200px);
+        }
       }
       @media (max-width: 480px) {
-        .container {
-          padding: 0 14px;
-        }
-        .hero-left {
-          padding: 146px 14px 40px;
-        }
-        .hero-right {
-          height: 38vh;
-          min-height: 220px;
-        }
-        .hero-actions {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .hero-actions .btn {
-          justify-content: center;
-        }
-        .hero-stats {
-          gap: 12px;
-        }
-        .stat-num {
-          font-size: 1.5rem;
-        }
-        .categories-grid {
-          grid-template-columns: 1fr;
-        }
         .products-grid {
           grid-template-columns: 1fr;
         }
         .product-desc {
           display: block;
         }
+        .categories-grid {
+          grid-template-columns: 1fr;
+        }
         .footer-grid {
           grid-template-columns: 1fr;
         }
-        .contact-inner {
-          gap: 36px;
+        .container {
+          width: min(100% - 16px, 1200px);
         }
       }
       @media (hover: none) {
@@ -2217,195 +2264,8 @@
           opacity: 1;
           transform: scale(1);
         }
-      }
-      /* HERO FULL VIDEO */
-      .hero {
-        min-height: 100svh;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        background: var(--brown-dark);
-      }
-
-      .hero-video-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      /* Overlay عشان الكلام يبقى واضح */
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        background: linear-gradient(
-          90deg,
-          rgba(30, 15, 5, 0.82) 0%,
-          rgba(30, 15, 5, 0.55) 45%,
-          rgba(30, 15, 5, 0.28) 100%
-        );
-      }
-
-      html[dir="rtl"] .hero::before {
-        background: linear-gradient(
-          -90deg,
-          rgba(30, 15, 5, 0.82) 0%,
-          rgba(30, 15, 5, 0.55) 45%,
-          rgba(30, 15, 5, 0.28) 100%
-        );
-      }
-
-      .hero-bg-pattern,
-      .hero-right,
-      .hero-image-overlay,
-      .hero-floating-card {
-        display: none;
-      }
-
-      .hero-left {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        max-width: 760px;
-        padding: 150px 60px 90px;
-      }
-
-      .hero-badge {
-        background: rgba(201, 169, 110, 0.18);
-        border: 1px solid rgba(201, 169, 110, 0.45);
-        color: var(--gold-light);
-      }
-
-      .hero-title {
-        color: var(--white);
-        text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
-      }
-
-      .hero-title .gold-text {
-        color: var(--gold-light);
-      }
-
-      .hero-title .italic-text {
-        color: var(--gold);
-      }
-
-      .hero-desc {
-        color: rgba(255, 255, 255, 0.78);
-        max-width: 560px;
-      }
-
-      .hero-stats {
-        border-top: 1px solid rgba(201, 169, 110, 0.35);
-      }
-
-      .stat-label {
-        color: rgba(255, 255, 255, 0.62);
-      }
-
-      .hero-scroll-indicator {
-        color: rgba(255, 255, 255, 0.7);
-        z-index: 3;
-      }
-
-      /* Mobile */
-      @media (max-width: 768px) {
-        .hero {
-          min-height: 100svh;
-        }
-
-        .hero-left {
-          max-width: 100%;
-          padding: 146px 18px 70px;
-        }
-
-        .hero::before {
-          background: linear-gradient(
-            to bottom,
-            rgba(30, 15, 5, 0.82) 0%,
-            rgba(30, 15, 5, 0.55) 55%,
-            rgba(30, 15, 5, 0.85) 100%
-          );
-        }
-      }
-      .logo-main img,
-      .logo img,
-      .footer-brand img,
-      .mobile-drawer-logo img {
-        max-width: 150px;
-        height: auto;
-        display: block;
-      }
-
-      .navbar .logo-main img {
-        max-width: 103px;
-      }
-
-      .footer-brand img {
-        max-width: 170px;
-      }
-
-      .mobile-drawer-logo img {
-        max-width: 160px;
-      }
-      /* WIDTH FIX */
-      .container {
-        width: min(100% - 32px, 1200px);
-        margin-inline: auto;
-        padding-inline: 0;
-      }
-
-      /* Prevent horizontal overflow */
-      html,
-      body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      /* Logo width fix */
-      .logo-main img,
-      .logo img,
-      .footer-brand img,
-      .mobile-drawer-logo img {
-        max-width: 150px;
-        height: auto;
-        display: block;
-      }
-
-      .footer-brand img {
-        max-width: 170px;
-      }
-
-      .mobile-drawer-logo img {
-        max-width: 160px;
-      }
-
-      /* Responsive container */
-      @media (max-width: 1024px) {
-        .container {
-          width: min(100% - 28px, 1200px);
-          padding-inline: 0;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          width: min(100% - 20px, 1200px);
-          padding-inline: 0;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .container {
-          width: min(100% - 16px, 1200px);
-          padding-inline: 0;
+        .pmodal-img-arrow {
+          opacity: 1 !important;
         }
       }
     </style>
@@ -2416,7 +2276,6 @@
       id="mobileOverlay"
       onclick="closeMobileMenu()"
     ></div>
-
     <aside
       class="mobile-drawer"
       id="mobileMenu"
@@ -2480,29 +2339,14 @@
           >Offres</a
         >
       </nav>
-      <a
-        href="https://wa.me/213562314115"
-        class="btn btn-whatsapp mobile-drawer-btn"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-          />
-        </svg>
-        <span data-fr="WhatsApp" data-ar="واتساب">WhatsApp</span>
-      </a>
     </aside>
 
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
       <div class="container">
-        <a
-          href="index.html"
-          onclick="navigateTo('home')"
-          class="logo logo-main"
-        >
-          <img src="images/logo2.webp" alt="" />
-        </a>
+        <a href="index.html" onclick="navigateTo('home')" class="logo logo-main"
+          ><img src="images/logo2.webp" alt=""
+        /></a>
         <div class="navbar-inner">
           <div class="nav-links" id="navLinks">
             <a
@@ -2540,18 +2384,6 @@
                 ع
               </button>
             </div>
-            <a
-              href="https://wa.me/213562314115"
-              class="btn btn-whatsapp"
-              style="padding: 9px 18px; font-size: 0.83rem"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              <span data-fr="WhatsApp" data-ar="واتساب">WhatsApp</span>
-            </a>
             <button
               class="hamburger"
               onclick="openMobileMenu()"
@@ -2564,7 +2396,7 @@
       </div>
     </nav>
 
-    <!-- ========== HOME PAGE ========== -->
+    <!-- HOME PAGE -->
     <div class="page active" id="page-home">
       <section class="hero page active" id="homePage">
         <video
@@ -2577,7 +2409,6 @@
         >
           <source src="videos/1.mp4" type="video/mp4" />
         </video>
-
         <div class="hero-left">
           <div
             class="hero-badge"
@@ -2586,25 +2417,18 @@
           >
             ✦ Meubles de luxe en Algérie
           </div>
-
           <h1 class="hero-title">
             <span data-fr="Élégance" data-ar="أناقة">Élégance</span>
-            <span
-              class="gold-text"
-              data-fr="pour votre maison"
-              data-ar="لمنزلك"
+            <span class="gold-text" data-fr="pour votre maison" data-ar="لمنزلك"
+              >pour votre maison</span
             >
-              pour votre maison
-            </span>
             <span
               class="italic-text"
               data-fr="avec Royal Meubles Djelfa"
               data-ar="مع روائع الأثاث"
+              >avec Royal Meubles Djelfa</span
             >
-              avec Royal Meubles Djelfa
-            </span>
           </h1>
-
           <p
             class="hero-desc"
             data-fr="Découvrez une collection premium de chambres, salons et meubles raffinés avec livraison dans toutes les wilayas."
@@ -2613,37 +2437,31 @@
             Découvrez une collection premium de chambres, salons et meubles
             raffinés avec livraison dans toutes les wilayas.
           </p>
-
           <div class="hero-actions">
-            <a href="#" onclick="navigateTo('products')" class="btn btn-gold">
-              Voir les produits
-            </a>
-
-            <a href="https://wa.me/213562314115" class="btn btn-outline">
-              Commander sur WhatsApp
-            </a>
+            <a href="#" onclick="navigateTo('products')" class="btn btn-gold"
+              >Voir les produits</a
+            >
+            <a href="https://wa.me/213562314115" class="btn btn-outline"
+              >Commander sur WhatsApp</a
+            >
           </div>
-
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-num">500+</span>
-              <span class="stat-label">Clients</span>
+              <span class="stat-num">500+</span
+              ><span class="stat-label">Clients</span>
             </div>
-
             <div class="stat-item">
-              <span class="stat-num">48</span>
-              <span class="stat-label">Wilayas</span>
+              <span class="stat-num">48</span
+              ><span class="stat-label">Wilayas</span>
             </div>
-
             <div class="stat-item">
-              <span class="stat-num">24h</span>
-              <span class="stat-label">Support</span>
+              <span class="stat-num">24h</span
+              ><span class="stat-label">Support</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- MARQUEE -->
       <div class="marquee-strip">
         <div class="marquee-track" id="marqueeTrack">
           <div class="marquee-item">
@@ -2737,7 +2555,6 @@
         </div>
       </div>
 
-      <!-- CATEGORIES -->
       <section class="categories">
         <div class="container">
           <div class="categories-header reveal">
@@ -2876,7 +2693,7 @@
               <img
                 class="cat-img"
                 src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80&fit=crop"
-                alt="Meubles de bureau"
+                alt="Bureau"
               />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
@@ -2901,7 +2718,6 @@
         </div>
       </section>
 
-      <!-- FEATURES -->
       <section class="features-strip">
         <div class="container">
           <div class="features-grid">
@@ -2977,7 +2793,6 @@
         </div>
       </section>
 
-      <!-- FEATURED PRODUCTS -->
       <section class="products">
         <div class="container">
           <div class="products-header">
@@ -3020,7 +2835,6 @@
         </div>
       </section>
 
-      <!-- TESTIMONIALS -->
       <section class="testimonials" style="background: var(--gray-light)">
         <div class="container">
           <div class="testimonials-header reveal">
@@ -3048,8 +2862,6 @@
                 data-ar="خدمة ممتازة وأثاث بجودة استثنائية. طلبت غرفة نوم كاملة ووصلت في الوقت المحدد وبحالة مثالية. سأكرر الطلب بالتأكيد."
               >
                 Un service exceptionnel et des meubles de très haute qualité.
-                J'ai commandé une chambre complète, livrée à temps et en parfait
-                état. Je recommande vivement !
               </p>
               <div class="testimonial-author">
                 <div class="author-avatar-placeholder">F</div>
@@ -3064,8 +2876,8 @@
               <div class="testimonial-quote">"</div>
               <p
                 class="testimonial-text"
-                data-fr="Très satisfaite de mon salon. Le design est magnifique et la qualité est au rendez-vous. L'équipe a été très professionnelle lors de la livraison et du montage."
-                data-ar="أنا راضية جدًا عن الصالون الذي اشتريته. التصميم رائع والخامة عالية الجودة. الفريق كان محترفًا في التوصيل والتركيب."
+                data-fr="Très satisfaite de mon salon. Le design est magnifique et la qualité est au rendez-vous."
+                data-ar="أنا راضية جدًا عن الصالون الذي اشتريته. التصميم رائع والخامة عالية الجودة."
               >
                 Très satisfaite de mon salon. Le design est magnifique et la
                 qualité est au rendez-vous.
@@ -3083,11 +2895,10 @@
               <div class="testimonial-quote">"</div>
               <p
                 class="testimonial-text"
-                data-fr="J'ai commandé du mobilier de bureau complet. Expérience au top. Le rapport qualité-prix est excellent. Je conseille Royal Meubles Djelfa à tout le monde."
-                data-ar="طلبت أثاث مكتبي كامل وكانت التجربة ممتازة. السعر مناسب جدًا مقارنة بالجودة. أنصح الجميع بالتعامل مع روائع الأثاث."
+                data-fr="J'ai commandé du mobilier de bureau complet. Expérience au top. Le rapport qualité-prix est excellent."
+                data-ar="طلبت أثاث مكتبي كامل وكانت التجربة ممتازة. السعر مناسب جدًا مقارنة بالجودة."
               >
                 J'ai commandé du mobilier de bureau complet. Expérience au top.
-                Le rapport qualité-prix est excellent.
               </p>
               <div class="testimonial-author">
                 <div class="author-avatar-placeholder">K</div>
@@ -3102,7 +2913,6 @@
         </div>
       </section>
 
-      <!-- CTA SECTION -->
       <section class="cta-section">
         <video
           class="cta-video-bg"
@@ -3112,9 +2922,7 @@
           loop
           playsinline
           preload="metadata"
-          poster="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1400&q=70&fit=crop"
         >
-          <source src="./videos/2.mp4" type="video/mp4" />
           <source src="./videos/2.mp4" type="video/mp4" />
         </video>
         <div class="cta-video-overlay"></div>
@@ -3140,11 +2948,11 @@
             <p
               class="section-desc reveal"
               style="color: rgba(255, 255, 255, 0.65); margin: 0 auto 36px"
-              data-fr="Offre valable pour une durée limitée — Commandez maintenant via WhatsApp et nous vous contacterons immédiatement"
-              data-ar="العرض ساري لفترة محدودة — اطلب الآن عبر واتساب وسنتواصل معك فورًا"
+              data-fr="Offre valable pour une durée limitée — Commandez maintenant via WhatsApp"
+              data-ar="العرض ساري لفترة محدودة — اطلب الآن عبر واتساب"
             >
               Offre valable pour une durée limitée — Commandez maintenant via
-              WhatsApp et nous vous contacterons immédiatement
+              WhatsApp
             </p>
             <div
               class="reveal"
@@ -3171,22 +2979,13 @@
                   >Commander via WhatsApp</span
                 >
               </a>
-              <button
-                class="btn btn-outline"
-                style="border-color: rgba(255, 255, 255, 0.35); color: white"
-                onclick="navigateTo('contact')"
-                data-fr="Envoyer une demande"
-                data-ar="أرسل استفسارك"
-              >
-                Envoyer une demande
-              </button>
             </div>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- ========== PRODUCTS PAGE ========== -->
+    <!-- PRODUCTS PAGE -->
     <div class="page" id="page-products">
       <div style="padding-top: 90px"></div>
       <section class="products">
@@ -3218,7 +3017,6 @@
             >
               Tout
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'commodes')"
@@ -3243,7 +3041,6 @@
             >
               Chambres
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'salon')"
@@ -3252,7 +3049,6 @@
             >
               Canapés
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'living')"
@@ -3261,7 +3057,6 @@
             >
               Living
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'tables')"
@@ -3270,7 +3065,6 @@
             >
               Tables
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'wardrobe')"
@@ -3279,7 +3073,6 @@
             >
               Armoires
             </button>
-
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'office')"
@@ -3294,142 +3087,7 @@
       </section>
     </div>
 
-    <!-- ========== ABOUT PAGE ========== -->
-    <!-- <div class="page" id="page-about">
-      <div style="padding-top: 90px"></div>
-      <section class="about-section">
-        <div class="container">
-          <div class="about-inner">
-            <div class="about-images reveal from-left">
-              <img
-                class="about-img-main"
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80&fit=crop"
-                alt="À propos de Royal Meubles Djelfa"
-              />
-              <img
-                class="about-img-second"
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=450&q=80&fit=crop"
-                alt="Meubles de luxe"
-              />
-            </div>
-            <div class="about-content reveal from-right">
-              <div
-                class="section-label"
-                data-fr="Notre histoire"
-                data-ar="قصتنا"
-              >
-                Notre histoire
-              </div>
-              <h2
-                class="section-title"
-                data-fr="Royal Meubles Djelfa — <span>bien plus que</span> <em>des meubles</em>"
-                data-ar="روائع الأثاث — <span>أكثر من مجرد</span> <em>أثاث</em>"
-              >
-                Royal Meubles Djelfa — <span>bien plus que</span> <em>des meubles</em>
-              </h2>
-              <p
-                style="
-                  color: var(--text-light);
-                  line-height: 2;
-                  margin-bottom: 18px;
-                "
-                data-fr="Depuis plus de 15 ans, nous avons un objectif clair : proposer des meubles luxueux alliant qualité et beauté à des prix compétitifs, afin que chaque famille algérienne mérite le meilleur intérieur."
-                data-ar="انطلقنا منذ أكثر من 15 عامًا بهدف واضح: تقديم أثاث فاخر يجمع بين الجودة والجمال بأسعار تنافسية، ليستمتع كل جزائري بمنزل يستحقه."
-              >
-                Depuis plus de 15 ans, nous avons un objectif clair : proposer
-                des meubles luxueux alliant qualité et beauté à des prix
-                compétitifs, afin que chaque famille algérienne mérite le
-                meilleur intérieur.
-              </p>
-              <div
-                class="about-quote"
-                data-fr='"Nous croyons que le bon mobilier ne décore pas seulement un espace, il crée des souvenirs et des moments inoubliables"'
-                data-ar='"نؤمن بأن الأثاث الجيد لا يُزيّن المكان فحسب، بل يصنع ذكريات ولحظات لا تُنسى"'
-              >
-                "Nous croyons que le bon mobilier ne décore pas seulement un
-                espace, il crée des souvenirs et des moments inoubliables"
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="features-strip">
-        <div class="container">
-          <div class="features-grid">
-            <div class="feature-item reveal">
-              <div class="feature-icon">🚚</div>
-              <h4
-                class="feature-title"
-                data-fr="Livraison sécurisée"
-                data-ar="توصيل آمن"
-              >
-                Livraison sécurisée
-              </h4>
-              <p
-                class="feature-desc"
-                data-fr="Vos meubles livrés en parfait état partout"
-                data-ar="نضمن وصول أثاثك سليمًا لأي ولاية"
-              >
-                Vos meubles livrés en parfait état partout
-              </p>
-            </div>
-            <div class="feature-item reveal reveal-delay-1">
-              <div class="feature-icon">🛠️</div>
-              <h4
-                class="feature-title"
-                data-fr="Montage gratuit"
-                data-ar="تركيب مجاني"
-              >
-                Montage gratuit
-              </h4>
-              <p
-                class="feature-desc"
-                data-fr="Notre équipe monte vos meubles chez vous"
-                data-ar="فريق متخصص لتركيب الأثاث في منزلك"
-              >
-                Notre équipe monte vos meubles chez vous
-              </p>
-            </div>
-            <div class="feature-item reveal reveal-delay-2">
-              <div class="feature-icon">🔄</div>
-              <h4
-                class="feature-title"
-                data-fr="Politique de retour"
-                data-ar="سياسة الإرجاع"
-              >
-                Politique de retour
-              </h4>
-              <p
-                class="feature-desc"
-                data-fr="Retour possible sous 7 jours"
-                data-ar="يمكنك إرجاع المنتج خلال 7 أيام"
-              >
-                Retour possible sous 7 jours
-              </p>
-            </div>
-            <div class="feature-item reveal reveal-delay-3">
-              <div class="feature-icon">💳</div>
-              <h4
-                class="feature-title"
-                data-fr="Paiement flexible"
-                data-ar="دفع مريح"
-              >
-                Paiement flexible
-              </h4>
-              <p
-                class="feature-desc"
-                data-fr="Paiement à la livraison ou en plusieurs fois"
-                data-ar="دفع عند الاستلام أو بالتقسيط"
-              >
-                Paiement à la livraison ou en plusieurs fois
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div> -->
-
-    <!-- ========== OFFERS PAGE ========== -->
+    <!-- OFFERS PAGE -->
     <div class="page" id="page-offers">
       <div style="padding-top: 90px"></div>
       <section class="offers">
@@ -3463,7 +3121,7 @@
               <img
                 class="offer-img"
                 src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&fit=crop"
-                alt="Chambres à coucher"
+                alt=""
               />
               <div class="offer-card-overlay"></div>
               <div class="offer-card-content">
@@ -3508,7 +3166,7 @@
               <img
                 class="offer-img"
                 src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500&q=80&fit=crop"
-                alt="Canapés"
+                alt=""
               />
               <div class="offer-card-overlay"></div>
               <div class="offer-card-content">
@@ -3534,7 +3192,7 @@
               <img
                 class="offer-img"
                 src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80&fit=crop"
-                alt="Bureau"
+                alt=""
               />
               <div class="offer-card-overlay"></div>
               <div class="offer-card-content">
@@ -3560,7 +3218,7 @@
               <img
                 class="offer-img"
                 src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80&fit=crop"
-                alt="Salons"
+                alt=""
               />
               <div class="offer-card-overlay"></div>
               <div class="offer-card-content">
@@ -3586,7 +3244,7 @@
               <img
                 class="offer-img"
                 src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=500&q=80&fit=crop"
-                alt="Armoires"
+                alt=""
               />
               <div class="offer-card-overlay"></div>
               <div class="offer-card-content">
@@ -3603,304 +3261,17 @@
             </div>
           </div>
           <div style="text-align: center; margin-top: 50px" class="reveal">
-            <p
-              style="color: var(--text-light); margin-bottom: 22px"
-              data-fr="Pour profiter des offres, contactez-nous directement via WhatsApp"
-              data-ar="للاستفادة من العروض تواصل معنا مباشرة عبر واتساب"
+            <a
+              href="https://wa.me/213562314115"
+              class="btn btn-whatsapp"
+              data-fr="Commander via WhatsApp"
+              data-ar="اطلب عبر واتساب"
+              >Commander via WhatsApp</a
             >
-              Pour profiter des offres, contactez-nous directement via WhatsApp
-            </p>
-            <div
-              style="
-                display: flex;
-                gap: 14px;
-                justify-content: center;
-                flex-wrap: wrap;
-              "
-            >
-              <a
-                href="https://wa.me/213562314115"
-                class="btn btn-whatsapp"
-                data-fr="Commander via WhatsApp"
-                data-ar="اطلب عبر واتساب"
-                >Commander via WhatsApp</a
-              >
-              <button
-                class="btn btn-outline"
-                onclick="navigateTo('contact')"
-                data-fr="Envoyer une demande"
-                data-ar="أرسل استفسارك"
-              >
-                Envoyer une demande
-              </button>
-            </div>
           </div>
         </div>
       </section>
     </div>
-
-    <!-- ========== CONTACT PAGE ========== -->
-    <!-- <div class="page" id="page-contact">
-      <div style="padding-top: 90px"></div>
-      <section class="contact">
-        <div class="container">
-          <div class="contact-inner">
-            <div class="reveal from-left">
-              <div
-                class="section-label"
-                data-fr="Nous contacter"
-                data-ar="تواصل معنا"
-              >
-                Nous contacter
-              </div>
-              <h2
-                class="contact-info-title"
-                data-fr="Nous sommes là pour <span>vous aider</span>"
-                data-ar="نحن هنا <span>لمساعدتك</span>"
-              >
-                Nous sommes là pour <span>vous aider</span>
-              </h2>
-              <p
-                class="contact-info-desc"
-                data-fr="Vous avez une question ou souhaitez renseignements sur un produit ? Notre équipe est prête à vous répondre dans les plus brefs délais."
-                data-ar="هل لديك سؤال أو تريد الاستفسار عن منتج؟ فريقنا جاهز للرد عليك في أقرب وقت."
-              >
-                Vous avez une question ou souhaitez renseignements sur un
-                produit ? Notre équipe est prête à vous répondre dans les plus
-                brefs délais.
-              </p>
-              <div class="contact-details">
-                <div class="contact-detail">
-                  <div class="detail-icon">📞</div>
-                  <div>
-                    <div
-                      class="detail-label"
-                      data-fr="Téléphone / WhatsApp"
-                      data-ar="الهاتف / واتساب"
-                    >
-                      Téléphone / WhatsApp
-                    </div>
-                    <div class="detail-value">0XXX XXX XXX</div>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <div class="detail-icon">📧</div>
-                  <div>
-                    <div
-                      class="detail-label"
-                      data-fr="Email"
-                      data-ar="البريد الإلكتروني"
-                    >
-                      Email
-                    </div>
-                    <div class="detail-value">info@rouafurniture.dz</div>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <div class="detail-icon">📍</div>
-                  <div>
-                    <div
-                      class="detail-label"
-                      data-fr="Adresse"
-                      data-ar="العنوان"
-                    >
-                      Adresse
-                    </div>
-                    <div
-                      class="detail-value"
-                      data-fr="Algérie — Livraison dans toutes les wilayas"
-                      data-ar="الجزائر — نوصل لجميع الولايات"
-                    >
-                      Algérie — Livraison dans toutes les wilayas
-                    </div>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <div class="detail-icon">🕐</div>
-                  <div>
-                    <div
-                      class="detail-label"
-                      data-fr="Horaires"
-                      data-ar="ساعات العمل"
-                    >
-                      Horaires
-                    </div>
-                    <div
-                      class="detail-value"
-                      data-fr="Sam – Jeu, 8h – 20h"
-                      data-ar="السبت – الخميس، 8ص – 8م"
-                    >
-                      Sam – Jeu, 8h – 20h
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a href="https://wa.me/213562314115" class="btn btn-whatsapp">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style="width: 18px; height: 18px"
-                >
-                  <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  />
-                </svg>
-                <span
-                  data-fr="Nous contacter via WhatsApp"
-                  data-ar="تواصل معنا الآن عبر واتساب"
-                  >Nous contacter via WhatsApp</span
-                >
-              </a>
-            </div>
-            <div class="reveal from-right">
-              <div class="contact-form-wrap">
-                <h3
-                  class="form-title"
-                  data-fr="Envoyez votre demande"
-                  data-ar="أرسل طلبك أو استفسارك"
-                >
-                  Envoyez votre demande
-                </h3>
-                <div id="formSuccess" class="form-success">
-                  <div style="font-size: 3rem; margin-bottom: 10px">✅</div>
-                  <h3
-                    data-fr="Merci ! Votre demande a été envoyée"
-                    data-ar="شكرًا! تم إرسال طلبك بنجاح"
-                  >
-                    Merci ! Votre demande a été envoyée
-                  </h3>
-                  <p
-                    data-fr="Notre équipe vous contactera dans les plus brefs délais"
-                    data-ar="سيتواصل معك فريقنا في أقرب وقت"
-                  >
-                    Notre équipe vous contactera dans les plus brefs délais
-                  </p>
-                </div>
-                <form id="contactForm" onsubmit="handleFormSubmit(event)">
-                  <div class="form-row">
-                    <div class="form-group">
-                      <label data-fr="Nom complet *" data-ar="الاسم الكامل *"
-                        >Nom complet *</label
-                      ><input type="text" placeholder="Votre nom" required />
-                    </div>
-                    <div class="form-group">
-                      <label data-fr="Téléphone *" data-ar="رقم الهاتف *"
-                        >Téléphone *</label
-                      ><input type="tel" placeholder="0XXX XXX XXX" required />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label data-fr="Wilaya *" data-ar="الولاية *"
-                      >Wilaya *</label
-                    >
-                    <select required>
-                      <option
-                        value=""
-                        disabled
-                        selected
-                        data-fr="Choisir votre wilaya"
-                        data-ar="اختر ولايتك"
-                      >
-                        Choisir votre wilaya
-                      </option>
-                      <option>01 - Adrar</option>
-                      <option>02 - Chlef</option>
-                      <option>03 - Laghouat</option>
-                      <option>04 - Oum El Bouaghi</option>
-                      <option>05 - Batna</option>
-                      <option>06 - Béjaïa</option>
-                      <option>07 - Biskra</option>
-                      <option>08 - Béchar</option>
-                      <option>09 - Blida</option>
-                      <option>10 - Bouira</option>
-                      <option>11 - Tamanrasset</option>
-                      <option>12 - Tébessa</option>
-                      <option>13 - Tlemcen</option>
-                      <option>14 - Tiaret</option>
-                      <option>15 - Tizi Ouzou</option>
-                      <option>16 - Alger</option>
-                      <option>17 - Djelfa</option>
-                      <option>18 - Jijel</option>
-                      <option>19 - Sétif</option>
-                      <option>20 - Saïda</option>
-                      <option>21 - Skikda</option>
-                      <option>22 - Sidi Bel Abbès</option>
-                      <option>23 - Annaba</option>
-                      <option>24 - Guelma</option>
-                      <option>25 - Constantine</option>
-                      <option>26 - Médéa</option>
-                      <option>27 - Mostaganem</option>
-                      <option>28 - M'Sila</option>
-                      <option>29 - Mascara</option>
-                      <option>30 - Ouargla</option>
-                      <option>31 - Oran</option>
-                      <option>32 - El Bayadh</option>
-                      <option>33 - Illizi</option>
-                      <option>34 - Bordj Bou Arréridj</option>
-                      <option>35 - Boumerdès</option>
-                      <option>36 - El Tarf</option>
-                      <option>37 - Tindouf</option>
-                      <option>38 - Tissemsilt</option>
-                      <option>39 - El Oued</option>
-                      <option>40 - Khenchela</option>
-                      <option>41 - Souk Ahras</option>
-                      <option>42 - Tipaza</option>
-                      <option>43 - Mila</option>
-                      <option>44 - Aïn Defla</option>
-                      <option>45 - Naâma</option>
-                      <option>46 - Aïn Témouchent</option>
-                      <option>47 - Ghardaïa</option>
-                      <option>48 - Relizane</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label
-                      data-fr="Type de mobilier souhaité"
-                      data-ar="نوع الأثاث المطلوب"
-                      >Type de mobilier souhaité</label
-                    >
-                    <select>
-                      <option value="" disabled selected>
-                        Choisir le type
-                      </option>
-                      <option>Chambre à coucher</option>
-                      <option>Salon</option>
-                      <option>Canapé</option>
-                      <option>Table de salle à manger</option>
-                      <option>Chaises</option>
-                      <option>Armoire</option>
-                      <option>Mobilier de bureau</option>
-                      <option>Ameublement complet</option>
-                      <option>Autre</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label
-                      data-fr="Message supplémentaire"
-                      data-ar="رسالة إضافية"
-                      >Message supplémentaire</label
-                    >
-                    <textarea
-                      placeholder="Décrivez votre besoin..."
-                      data-fr-placeholder="Décrivez votre besoin..."
-                      data-ar-placeholder="اكتب تفاصيل طلبك أو أي استفسار إضافي..."
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-gold form-submit"
-                    data-fr="Envoyer la demande →"
-                    data-ar="إرسال الطلب ←"
-                  >
-                    Envoyer la demande →
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div> -->
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -3916,23 +3287,21 @@
               data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر."
             >
               Nous proposons les meubles d'intérieur et de bureau les plus
-              raffinés, avec une qualité garantie et une livraison dans toutes
-              les wilayas d'Algérie.
+              raffinés.
             </p>
             <div class="footer-socials">
               <a class="social-btn" href="#">f</a>
               <a class="social-btn" href="#">in</a>
-              <a class="social-btn" href="https://wa.me/213562314115">
-                <svg
+              <a class="social-btn" href="https://wa.me/213562314115"
+                ><svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   style="width: 14px; height: 14px"
                 >
                   <path
                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  />
-                </svg>
-              </a>
+                  /></svg
+              ></a>
             </div>
           </div>
           <div class="footer-col">
@@ -4041,14 +3410,6 @@
               <li>
                 <a
                   href="#"
-                  data-fr="Politique de retour"
-                  data-ar="سياسة الإرجاع"
-                  >Politique de retour</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
                   data-fr="Paiement à la livraison"
                   data-ar="الدفع عند الاستلام"
                   >Paiement à la livraison</a
@@ -4072,7 +3433,6 @@
       </div>
     </footer>
 
-    <!-- WHATSAPP FLOAT -->
     <div class="whatsapp-float">
       <span
         class="whatsapp-tooltip"
@@ -4094,16 +3454,131 @@
       </a>
     </div>
 
+    <!-- ================================================================
+         PRODUCT MODAL
+         ================================================================ -->
+    <div class="pmodal-overlay" id="pmodalOverlay" onclick="closePModal(event)">
+      <div class="pmodal" id="pmodal">
+        <button
+          class="pmodal-close"
+          onclick="closePModalDirect()"
+          aria-label="Fermer"
+        >
+          ✕
+        </button>
+
+        <!-- LEFT: gallery -->
+        <div class="pmodal-gallery">
+          <!-- Main image -->
+          <div class="pmodal-main-img-wrap" id="pmodalMainWrap">
+            <img class="pmodal-main-img" id="pmodalImg" src="" alt="" />
+            <div class="pmodal-main-overlay"></div>
+            <span
+              class="pmodal-badge"
+              id="pmodalBadge"
+              style="display: none"
+            ></span>
+            <span class="pmodal-img-counter" id="pmodalCounter"></span>
+            <!-- Arrow nav -->
+            <button
+              class="pmodal-img-arrow prev"
+              id="pmodalImgPrev"
+              onclick="pmodalGalleryNav(-1)"
+              aria-label="Précédent"
+            >
+              ‹
+            </button>
+            <button
+              class="pmodal-img-arrow next"
+              id="pmodalImgNext"
+              onclick="pmodalGalleryNav(1)"
+              aria-label="Suivant"
+            >
+              ›
+            </button>
+          </div>
+
+          <!-- Thumbnails strip -->
+          <div class="pmodal-thumbs-strip">
+            <button
+              class="pmodal-thumb-nav"
+              id="pmodalNavPrev"
+              onclick="pmodalStripScroll(-1)"
+              aria-label="Précédent"
+            >
+              ‹
+            </button>
+            <div class="pmodal-thumbs-outer">
+              <div class="pmodal-thumbs-track" id="pmodalTrack"></div>
+            </div>
+            <button
+              class="pmodal-thumb-nav"
+              id="pmodalNavNext"
+              onclick="pmodalStripScroll(1)"
+              aria-label="Suivant"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: info (scrollable) -->
+        <div class="pmodal-info">
+          <div class="pmodal-cat" id="pmodalCat"></div>
+          <div class="pmodal-name" id="pmodalName"></div>
+          <div class="pmodal-rating">★★★★★</div>
+          <div class="pmodal-price" id="pmodalPrice"></div>
+          <div class="pmodal-divider"></div>
+          <div
+            class="pmodal-desc-label"
+            data-fr="Description du produit"
+            data-ar="وصف المنتج"
+          >
+            Description du produit
+          </div>
+          <div class="pmodal-desc" id="pmodalDesc"></div>
+          <div class="pmodal-actions">
+            <a
+              id="pmodalWaBtn"
+              href="#"
+              class="btn btn-whatsapp"
+              target="_blank"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                style="width: 18px; height: 18px"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              <span data-fr="Commander via WhatsApp" data-ar="اطلب عبر واتساب"
+                >Commander via WhatsApp</span
+              >
+            </a>
+            <button
+              class="btn btn-outline"
+              onclick="closePModalDirect()"
+              data-fr="Continuer"
+              data-ar="متابعة"
+            >
+              Continuer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       const WA = "https://wa.me/213562314115";
       let currentLang = "fr";
-
       const LANG_KEY = "roua_lang";
       const PAGE_KEY = "roua_page";
 
-      function saveLang(lang) {
+      function saveLang(l) {
         try {
-          localStorage.setItem(LANG_KEY, lang);
+          localStorage.setItem(LANG_KEY, l);
         } catch (e) {}
       }
       function loadLang() {
@@ -4113,9 +3588,9 @@
           return "fr";
         }
       }
-      function savePage(page) {
+      function savePage(p) {
         try {
-          localStorage.setItem(PAGE_KEY, page);
+          localStorage.setItem(PAGE_KEY, p);
         } catch (e) {}
       }
       function loadPage() {
@@ -4126,7 +3601,6 @@
         }
       }
 
-      // ============ LANGUAGE SYSTEM ============
       function setLang(lang) {
         if (lang === currentLang) return;
         currentLang = lang;
@@ -4134,24 +3608,16 @@
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
         document
-          .querySelectorAll(".lang-btn, .mobile-lang-btn")
-          .forEach((btn) => {
-            btn.classList.toggle("active", btn.dataset.lang === lang);
-          });
+          .querySelectorAll(".lang-btn,.mobile-lang-btn")
+          .forEach((b) =>
+            b.classList.toggle("active", b.dataset.lang === lang),
+          );
         document.querySelectorAll("[data-fr][data-ar]").forEach((el) => {
           const txt = el.dataset[lang];
           if (!txt) return;
-          if (txt.includes("<")) {
-            el.innerHTML = txt;
-          } else {
-            el.textContent = txt;
-          }
+          if (txt.includes("<")) el.innerHTML = txt;
+          else el.textContent = txt;
         });
-        document
-          .querySelectorAll("[data-fr-placeholder][data-ar-placeholder]")
-          .forEach((el) => {
-            el.placeholder = el.dataset[lang + "Placeholder"] || el.placeholder;
-          });
         document.querySelectorAll(".cat-arrow").forEach((el) => {
           el.textContent = lang === "ar" ? "←" : "→";
         });
@@ -4160,7 +3626,6 @@
         setTimeout(initObserver, 100);
       }
 
-      // ============ NAVIGATION ============
       function navigateTo(page) {
         document
           .querySelectorAll(".page")
@@ -4186,9 +3651,11 @@
         document.body.style.overflow = "";
       }
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeMobileMenu();
+        if (e.key === "Escape") {
+          closeMobileMenu();
+          closePModalDirect();
+        }
       });
-
       window.addEventListener(
         "scroll",
         () => {
@@ -4216,51 +3683,19 @@
           .forEach((el) => obs.observe(el));
       }
 
-      // ============================================================
-      // HERO VIDEO FADE — التعديل الوحيد المضاف على الـ JavaScript
-      // ============================================================
-      (function initHeroVideoFade() {
-        const vid = document.getElementById("heroVid");
-        const fadeCover = document.getElementById("heroFadeCover");
-        if (!vid || !fadeCover) return;
-
-        const FADE_SECONDS = 2.0; // بدأ الـ fade قبل النهاية بكام ثانية
-
-        // نشيل الـ loop الـ native عشان نتحكم إحنا
-        vid.removeAttribute("loop");
-
-        // راقب الوقت وابدأ الـ fade قبل النهاية
-        vid.addEventListener("timeupdate", () => {
-          if (!vid.duration) return;
-          const remaining = vid.duration - vid.currentTime;
-          if (
-            remaining <= FADE_SECONDS &&
-            !fadeCover.classList.contains("fading")
-          ) {
-            fadeCover.classList.add("fading");
-          }
-        });
-
-        // لما الفيديو ينتهي: ارجع للأول وابدأ تاني
-        vid.addEventListener("ended", () => {
-          vid.currentTime = 0;
-          vid.play().catch(() => {});
-          // بعد شوية بسيطة شيل الـ fade عشان الفيديو يبان من جديد
-          setTimeout(() => {
-            fadeCover.classList.remove("fading");
-          }, 300);
-        });
-      })();
-
-      // ============ PRODUCTS DATA ============
+      /* ============================================================
+         PRODUCTS DATA
+         imgs: array of image paths — supports multiple images per product
+         ============================================================ */
       const allProducts = [
         {
           id: 1,
           cat: "commodes",
+          imgs: ["images/1.webp"],
           fr: {
             catName: "commodes",
             name: "D4T avec port SP",
-            desc: "commodes D4T avec port SP — finition EU",
+            desc: "commodes D4T avec port SP — finition EU. Design élégant avec tiroirs spacieux et finition laquée haute brillance. Structure robuste en bois de qualité supérieure, poignées chromées et revêtement résistant aux rayures. Idéal pour les chambres modernes et classiques.",
             price: "65 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4270,23 +3705,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D4T avec port SP",
-            desc: "خزائن الملابس D4T مع port SP — كود EU",
+            desc: "خزائن الملابس D4T مع port SP — كود EU. تصميم أنيق مع أدراج واسعة وتشطيب لامع عالي الجودة.",
             price: "65,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب D4T avec port SP - EU",
           },
-          img: "images/1.webp",
           rating: "★★★★★",
         },
         {
           id: 2,
           cat: "commodes",
+          imgs: ["images/2.webp"],
           fr: {
             catName: "commodes",
             name: "D4T 1.40 SP",
-            desc: "commodes D4T 1.40 SP — finition CC",
+            desc: "commodes D4T 1.40 SP — finition CC. Large commode de 140cm avec multiples rangements intégrés. Finition mate sophistiquée, matériaux nobles et assemblage soigné.",
             price: "77 000 DA",
             oldPrice: null,
             badge: null,
@@ -4296,23 +3731,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D4T 1.40 SP",
-            desc: "خزائن الملابس D4T مقاس 1.40 SP — كود CC",
+            desc: "خزائن الملابس D4T مقاس 1.40 SP — كود CC. خزانة واسعة بعرض 140 سم مع تخزين متعدد.",
             price: "77,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب D4T 1.40 SP - CC",
           },
-          img: "images/2.webp",
           rating: "★★★★★",
         },
         {
           id: 3,
           cat: "commodes",
+          imgs: ["images/3.webp"],
           fr: {
             catName: "commodes",
             name: "commodes 1.60 SP",
-            desc: "commodes 1.60 SP — finition T",
+            desc: "commodes 1.60 SP — finition T. Notre modèle le plus populaire en 160cm, alliant capacité de rangement maximale et design contemporain.",
             price: "88 000 DA",
             oldPrice: null,
             badge: "badge-best",
@@ -4322,23 +3757,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "commodes 1.60 SP",
-            desc: "خزائن الملابس مقاس 1.60 SP — كود T",
+            desc: "خزائن الملابس مقاس 1.60 SP — كود T. طرازنا الأكثر شعبية بعرض 160 سم.",
             price: "88,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "الأكثر طلبًا",
             wa: "طلب commodes 1.60 SP - T",
           },
-          img: "images/3.webp",
           rating: "★★★★★",
         },
         {
           id: 4,
           cat: "commodes",
+          imgs: ["images/4.webp"],
           fr: {
             catName: "commodes",
             name: "D4T SP",
-            desc: "commodes D4T SP — finition EC",
+            desc: "commodes D4T SP — finition EC. Modèle compact et fonctionnel avec 4 tiroirs spacieux.",
             price: "66 000 DA",
             oldPrice: null,
             badge: null,
@@ -4348,23 +3783,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D4T SP",
-            desc: "خزائن الملابس D4T SP — كود EC",
+            desc: "خزائن الملابس D4T SP — كود EC. طراز مدمج وعملي بأربعة أدراج.",
             price: "66,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب D4T SP - EC",
           },
-          img: "images/4.webp",
           rating: "★★★★★",
         },
         {
           id: 5,
           cat: "commodes",
+          imgs: ["images/5.webp"],
           fr: {
             catName: "commodes",
             name: "D9T",
-            desc: "commodes modèle D9T",
+            desc: "commodes modèle D9T. Design exclusif avec 9 tiroirs de rangement.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -4374,23 +3809,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D9T",
-            desc: "خزائن الملابس موديل D9T",
+            desc: "خزائن الملابس موديل D9T. تصميم حصري مع 9 أدراج.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب D9T",
           },
-          img: "images/5.webp",
           rating: "★★★★★",
         },
         {
           id: 6,
           cat: "commodes",
+          imgs: ["images/6.webp"],
           fr: {
             catName: "commodes",
             name: "D4T 1.40 SP Gris",
-            desc: "commodes D4T 1.40 SP couleur gris — finition Cu",
+            desc: "commodes D4T 1.40 SP couleur gris — finition Cu. Version gris contemporain.",
             price: "77 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4400,23 +3835,23 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D4T 1.40 SP Gris",
-            desc: "خزائن الملابس D4T مقاس 1.40 SP باللون الرمادي — كود Cu",
+            desc: "خزائن الملابس D4T مقاس 1.40 SP باللون الرمادي — كود Cu.",
             price: "77,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "رمادي",
             wa: "طلب D4T 1.40 SP Gris - Cu",
           },
-          img: "images/6.webp",
           rating: "★★★★★",
         },
         {
           id: 7,
           cat: "commodes",
+          imgs: ["images/7.webp"],
           fr: {
             catName: "commodes",
             name: "D3T 1.40 SP",
-            desc: "commodes D3T 1.40 SP — finition EE",
+            desc: "commodes D3T 1.40 SP — finition EE. Modèle 3 tiroirs en 140cm.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -4426,49 +3861,49 @@
           ar: {
             catName: "خزائن الملابس",
             name: "D3T 1.40 SP",
-            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE",
+            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب D3T 1.40 SP - EE",
           },
-          img: "images/7.webp",
           rating: "★★★★★",
         },
         {
           id: 8,
           cat: "commodes",
+          imgs: ["images/8.webp"],
           fr: {
             catName: "commodes",
-            name: "D3T 1.40 SP",
-            desc: "commodes D3T 1.40 SP — finition EE",
+            name: "D3T 1.40 SP Premium",
+            desc: "commodes D3T 1.40 SP version Premium — finition EE supérieure.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "Commander D3T 1.40 SP - EE",
+            wa: "Commander D3T 1.40 SP Premium - EE",
           },
           ar: {
             catName: "خزائن الملابس",
-            name: "D3T 1.40 SP",
-            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE",
+            name: "D3T 1.40 SP Premium",
+            desc: "خزائن الملابس D3T مقاس 1.40 SP نسخة Premium.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "طلب D3T 1.40 SP - EE",
+            wa: "طلب D3T 1.40 SP Premium - EE",
           },
-          img: "images/8.webp",
           rating: "★★★★★",
         },
         {
           id: 9,
           cat: "bedroom",
+          imgs: ["images/bedroom-1.webp"],
           fr: {
             catName: "Chambres",
             name: "Chambre complète moderne",
-            desc: "Chambre à coucher complète avec lit, armoire et coiffeuse",
+            desc: "Chambre à coucher complète avec lit, armoire et coiffeuse assortis.",
             price: "120 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4478,23 +3913,23 @@
           ar: {
             catName: "غرف النوم",
             name: "غرفة نوم كاملة مودرن",
-            desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة",
+            desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة متناسقة.",
             price: "120,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب غرفة نوم كاملة مودرن",
           },
-          img: "images/bedroom-1.webp",
           rating: "★★★★★",
         },
         {
           id: 10,
           cat: "salon",
+          imgs: ["images/salon-1.webp"],
           fr: {
             catName: "Canapés",
             name: "Salon complet 7 places",
-            desc: "Salon élégant avec canapé principal, fauteuils et tissu premium",
+            desc: "Salon élégant avec canapé principal 3 places, 2 fauteuils et tissu velours premium.",
             price: "95 000 DA",
             oldPrice: null,
             badge: "badge-best",
@@ -4504,23 +3939,23 @@
           ar: {
             catName: "الصالونات",
             name: "صالون كامل 7 أماكن",
-            desc: "صالون أنيق بكنبة رئيسية وكراسي وخامة فاخرة",
+            desc: "صالون أنيق بكنبة رئيسية 3 أماكن وقماش مخمل فاخر.",
             price: "95,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "الأكثر طلبًا",
             wa: "طلب صالون كامل 7 أماكن",
           },
-          img: "images/salon-1.webp",
           rating: "★★★★★",
         },
         {
           id: 11,
           cat: "living",
+          imgs: ["images/1.webp"],
           fr: {
             catName: "Living",
             name: "Meuble TV moderne",
-            desc: "Meuble TV moderne pour salon avec rangements intégrés",
+            desc: "Meuble TV moderne pour salon avec rangements intégrés.",
             price: "48 000 DA",
             oldPrice: null,
             badge: null,
@@ -4530,23 +3965,23 @@
           ar: {
             catName: "غرف المعيشة",
             name: "وحدة تلفزيون مودرن",
-            desc: "وحدة تلفزيون عصرية لغرفة المعيشة مع مساحات تخزين",
+            desc: "وحدة تلفزيون عصرية لغرفة المعيشة مع مساحات تخزين.",
             price: "48,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب وحدة تلفزيون مودرن",
           },
-          img: "images/1.webp",
           rating: "★★★★★",
         },
         {
           id: 12,
           cat: "tables",
+          imgs: ["images/2.webp"],
           fr: {
             catName: "Tables",
             name: "Table basse élégante",
-            desc: "Table basse moderne pour salon avec finition bois luxe",
+            desc: "Table basse moderne pour salon avec finition bois luxe.",
             price: "22 000 DA",
             oldPrice: null,
             badge: null,
@@ -4556,23 +3991,23 @@
           ar: {
             catName: "الطاولات",
             name: "طاولة وسط أنيقة",
-            desc: "طاولة وسط مودرن للصالون بتشطيب خشبي فاخر",
+            desc: "طاولة وسط مودرن للصالون بتشطيب خشبي فاخر.",
             price: "22,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب طاولة وسط أنيقة",
           },
-          img: "images/2.webp",
           rating: "★★★★★",
         },
         {
           id: 13,
           cat: "wardrobe",
+          imgs: ["images/3.webp"],
           fr: {
             catName: "Armoires",
             name: "Armoire 3 portes",
-            desc: "Armoire spacieuse à 3 portes avec rangements pratiques",
+            desc: "Armoire spacieuse à 3 portes avec rangements pratiques et miroir intégré.",
             price: "70 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4582,23 +4017,23 @@
           ar: {
             catName: "الخزائن",
             name: "خزانة 3 أبواب",
-            desc: "خزانة واسعة بثلاثة أبواب ومساحات تخزين عملية",
+            desc: "خزانة واسعة بثلاثة أبواب ومرآة مدمجة.",
             price: "70,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب خزانة 3 أبواب",
           },
-          img: "images/3.webp",
           rating: "★★★★★",
         },
         {
           id: 14,
           cat: "office",
+          imgs: ["images/4.webp"],
           fr: {
             catName: "Bureau",
             name: "Bureau professionnel",
-            desc: "Bureau moderne adapté au travail et aux espaces professionnels",
+            desc: "Bureau moderne adapté au travail et aux espaces professionnels.",
             price: "38 000 DA",
             oldPrice: null,
             badge: null,
@@ -4608,23 +4043,25 @@
           ar: {
             catName: "الأثاث المكتبي",
             name: "مكتب احترافي",
-            desc: "مكتب مودرن مناسب للعمل والمساحات المهنية",
+            desc: "مكتب مودرن مناسب للعمل والمساحات المهنية.",
             price: "38,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
             wa: "طلب مكتب احترافي",
           },
-          img: "images/4.webp",
           rating: "★★★★★",
         },
+        /* ── Lit Piano: صورة واحدة ── */
         {
           id: 15,
           cat: "lits",
+        
+            img: "images/lit-1.webp",
           fr: {
             catName: "Lits",
             name: "Lit Piano coffre",
-            desc: "Design Piano raffiné avec coffre intégré, alliant élégance moderne et rangement pratique. Apportez une touche de luxe à votre chambre avec ce lit moderne au design épuré. Son dossier rembourré offre un confort optimal, tandis que sa structure intérieure en bois rouge garantit solidité et longévité. Son tissu anti-taches facilite l’entretien au quotidien, avec couleurs personnalisables et tables de chevet assorties incluses. Dimensions : 90 x 190 cm.",
+            desc: "Design Piano raffiné avec coffre intégré, alliant élégance moderne et rangement pratique. Son dossier rembourré offre un confort optimal, tandis que sa structure intérieure en bois rouge garantit solidité et longévité. Tissu anti-taches, couleurs personnalisables, tables de chevet assorties incluses. Dimensions : 90 x 190 cm.",
             price: "33 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4634,23 +4071,24 @@
           ar: {
             catName: "الأسرّة",
             name: "Lit Piano coffre",
-            desc: "سرير Piano بتصميم أنيق مع صندوق تخزين مدمج، يجمع بين الفخامة العصرية والتخزين العملي. ظهر مبطن مريح، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، ألوان قابلة للتخصيص، مع طاولات سرير متناسقة. الأبعاد: 90 × 190 سم.",
+            desc: "سرير Piano بتصميم أنيق مع صندوق تخزين مدمج. ظهر مبطن مريح، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع، ألوان قابلة للتخصيص. الأبعاد: 90 × 190 سم.",
             price: "33,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب Lit Piano coffre - 90 x 190 سم - 33,000 دج",
           },
-          img: "images/lits1.webp",
           rating: "★★★★★",
         },
+        /* ── Lit carré: صورتين (الصورتان المرفوعتان) ── */
         {
           id: 16,
           cat: "lits",
+          imgs: ["images/lits1.webp", "images/lits2.webp"],
           fr: {
             catName: "Lits",
             name: "Lit carré coffre",
-            desc: "Format carré original avec coffre intégré pour un maximum de confort et de rangement. Lit moderne au style épuré, idéal pour créer une ambiance chaleureuse et relaxante dans votre chambre. Sa tête de lit et son pied de lit rembourrés offrent un confort optimal tout en ajoutant une touche sophistiquée. Structure intérieure en bois rouge, tissu anti-taches facile à nettoyer, couleurs personnalisables. Dimensions : 90 x 190 cm.",
+            desc: "Format carré original avec coffre intégré pour un maximum de confort et de rangement. Tête de lit et pied de lit rembourrés, structure intérieure en bois rouge, tissu anti-taches facile à nettoyer, couleurs personnalisables. Dimensions : 90 x 190 cm.",
             price: "33 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4660,44 +4098,164 @@
           ar: {
             catName: "الأسرّة",
             name: "Lit carré coffre",
-            desc: "سرير بتصميم carré مميز مع صندوق تخزين مدمج لتوفير الراحة والمساحة العملية. تصميم مودرن وبسيط يخلق أجواء دافئة ومريحة في غرفة النوم. رأس وقدم السرير مبطنان لراحة أفضل ولمسة أنيقة. هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، وألوان قابلة للتخصيص. الأبعاد: 90 × 190 سم.",
+            desc: "سرير بتصميم carré مميز مع صندوق تخزين مدمج. رأس وقدم السرير مبطنان، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع، ألوان قابلة للتخصيص. الأبعاد: 90 × 190 سم.",
             price: "33,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب Lit carré coffre - 90 x 190 سم - 33,000 دج",
           },
-          img: "images/lits2.webp",
+          rating: "★★★★★",
+        },
+        {
+          id: 17,
+          cat: "lits",
+          img: "images/lits-led-1.webp",
+          imgs: ["images/lits-led-1.webp", "images/lits-led-2.webp"],
+          fr: {
+            catName: "Lits",
+            name: "Lit avec éclairage LED intégré",
+            desc: "Ambiance moderne et lumineuse grâce à un éclairage LED intégré, élégant et pratique. Ce lit coffre avec LED intégrées dans la tête de lit apporte une touche moderne et chaleureuse à votre chambre. Il dispose d’un coffre spacieux, d’une structure intérieure en bois rouge solide, d’un tissu anti-taches facile à nettoyer et de couleurs personnalisables. Dimensions disponibles : 160 x 190 cm à 98 000 DA et 180 x 200 cm à 115 000 DA.",
+            price: "98 000 DA / 115 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "LED",
+            wa: "Commander Lit avec éclairage LED intégré - 160 x 190 cm : 98 000 DA / 180 x 200 cm : 115 000 DA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit avec éclairage LED intégré",
+            desc: "سرير بتصميم مودرن مع إضاءة LED مدمجة في رأس السرير لإضافة أجواء أنيقة ودافئة. يحتوي على صندوق تخزين واسع، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، مع إمكانية تخصيص اللون. المقاسات المتوفرة: 160 × 190 سم بسعر 98,000 دج و 180 × 200 سم بسعر 115,000 دج.",
+            price: "98,000 / 115,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "LED",
+            wa: "طلب Lit avec éclairage LED intégré - 160 x 190 سم : 98,000 دج / 180 x 200 سم : 115,000 دج",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 18,
+          cat: "lits",
+          img: "images/lit-nouva-1.webp",
+          imgs: [
+            "images/lit-nouva-1.webp",
+            "images/lit-nouva-2.webp",
+            "images/lit-nouva-3.webp",
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit Nouva",
+            desc: "Design Nouva élégant, confort supérieur et finitions soignées pour sublimer votre chambre. Ce lit moderne s’adapte parfaitement à tous les intérieurs et apporte une sensation de bien-être immédiat. Sa structure en bois rouge garantit solidité et durabilité, tandis que son tissu anti-taches facilite l’entretien. Disponible en version coffre pour gagner de l’espace facilement. Dimensions disponibles : 160 x 190 cm à 98 000 DA et 180 x 200 cm à 115 000 DA.",
+            price: "98 000 DA / 115 000 DA",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "Coffre",
+            wa: "Commander Lit Nouva - 160 x 190 cm : 98 000 DA / 180 x 200 cm : 115 000 DA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit Nouva",
+            desc: "سرير Nouva بتصميم أنيق وراحة عالية وتشطيب مميز يضيف لمسة عصرية لغرفة النوم. هيكل من الخشب الأحمر لضمان القوة والمتانة، قماش مضاد للبقع وسهل التنظيف، مع إمكانية اختيار اللون المناسب. متوفر بنظام صندوق تخزين لتوفير المساحة. المقاسات المتوفرة: 160 × 190 سم بسعر 98,000 دج و 180 × 200 سم بسعر 115,000 دج.",
+            price: "98,000 / 115,000 دج",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "تخزين",
+            wa: "طلب Lit Nouva - 160 x 190 سم : 98,000 دج / 180 x 200 سم : 115,000 دج",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 19,
+          cat: "lits",
+          img: "images/lit-luxueux-1.webp",
+          imgs: ["images/lit-luxueux-1.webp", "images/lit-luxueux-2.webp"],
+          fr: {
+            catName: "Lits",
+            name: "Lit luxueux",
+            desc: "Raffinement absolu et confort d’exception pour une chambre au style résolument luxueux. Ce lit coffre moderne combine design élégant, confort supérieur et praticité au quotidien. Son grand espace de rangement intégré permet de garder votre chambre propre et organisée. Sa structure solide en bois rouge assure une excellente durabilité, tandis que son tissu anti-taches facilite l’entretien. Couleurs personnalisables. Dimensions disponibles : 160 x 190 cm à 75 000 DA et 180 x 200 cm à 85 000 DA.",
+            price: "75 000 DA / 85 000 DA",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "Luxueux",
+            wa: "Commander Lit luxueux - 160 x 190 cm : 75 000 DA / 180 x 200 cm : 85 000 DA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit luxueux",
+            desc: "سرير فاخر يجمع بين الأناقة والراحة العالية والتنظيم العملي. يحتوي على صندوق تخزين واسع يساعد في ترتيب غرفة النوم بسهولة. هيكل قوي من الخشب الأحمر لضمان المتانة، قماش مضاد للبقع وسهل التنظيف، مع إمكانية تخصيص اللون حسب الذوق. المقاسات المتوفرة: 160 × 190 سم بسعر 75,000 دج و 180 × 200 سم بسعر 85,000 دج.",
+            price: "75,000 / 85,000 دج",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "فاخر",
+            wa: "طلب Lit luxueux - 160 x 190 سم : 75,000 دج / 180 x 200 سم : 85,000 دج",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 20,
+          cat: "lits",
+          img: "images/lit-bois-hetre-1.webp",
+          imgs: [
+            "images/lit-bois-hetre-1.webp",
+            "images/lit-bois-hetre-2.webp",
+            "images/lit-bois-hetre-3.webp",
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit en bois de hêtre",
+            desc: "La beauté naturelle du bois de hêtre alliée à un confort durable et authentique. Ce lit coffre moderne combine design, confort et fonctionnalité grâce à son système relevable qui offre un grand espace de rangement discret. Sa tête de lit rembourrée apporte une touche chaleureuse et raffinée. Structure intérieure en bois rouge, tissu anti-taches facile à nettoyer et couleurs personnalisables. Dimensions disponibles : 160 x 190 cm et 180 x 200 cm.",
+            price: "À partir de 65 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Bois",
+            wa: "Commander Lit en bois de hêtre - Dimensions disponibles : 160 x 190 cm / 180 x 200 cm - Prix à partir de 65 000 DA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit en bois de hêtre",
+            desc: "سرير يجمع بين جمال الخشب الطبيعي والراحة العملية. تصميم coffre مودرن بنظام رفع يوفر مساحة تخزين كبيرة ومخفية. رأس سرير مبطن يضيف لمسة دافئة وراقية، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، وألوان قابلة للتخصيص. المقاسات المتوفرة: 160 × 190 سم و 180 × 200 سم.",
+            price: "ابتداءً من 65,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "خشب",
+            wa: "طلب Lit en bois de hêtre - المقاسات المتوفرة: 160 x 190 سم / 180 x 200 سم - السعر ابتداءً من 65,000 دج",
+          },
           rating: "★★★★★",
         },
       ];
 
+      function shortDesc(str, max = 65) {
+        if (!str || str.length <= max) return str;
+        return str.slice(0, max).trimEnd() + "…";
+      }
+
       function productCardHTML(p, i) {
         const d = p[currentLang];
         const waMsg = encodeURIComponent(d.wa || d.name);
-        return `<div class="product-card reveal" style="transition-delay:${(i % 3) * 0.08}s">
-    <div class="product-image-wrap">
-      <img class="product-img" src="${p.img}" alt="${d.name}" loading="lazy">
-      ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
-      <div class="product-actions-overlay">
-        <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
-        <a href="${WA}?text=${waMsg}" class="btn btn-gold" style="font-size:0.78rem">${currentLang === "ar" ? "اطلب الآن" : "Commander"}</a>
-      </div>
+        const thumb = Array.isArray(p.imgs) ? p.imgs[0] : p.img;
+        return `<div class="product-card reveal" style="transition-delay:${(i % 3) * 0.08}s" onclick="openPModal(${p.id})">
+  <div class="product-image-wrap">
+    <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
+    ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
+    <div class="product-actions-overlay">
+      <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
+      <a href="${WA}?text=${waMsg}" class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "اطلب الآن" : "Commander"}</a>
     </div>
-    <div class="product-body">
-      <div class="product-cat">${d.catName}</div>
-      <h3 class="product-name">${d.name}</h3>
-      <p class="product-desc">${d.desc}</p>
-      <div class="product-footer">
-        <div class="product-price">${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}</div>
-        <div class="product-rating">${p.rating}</div>
-      </div>
+  </div>
+  <div class="product-body">
+    <div class="product-cat">${d.catName}</div>
+    <h3 class="product-name">${d.name}</h3>
+    <p class="product-desc">${shortDesc(d.desc)}</p>
+    <div class="product-footer">
+      <div class="product-price">${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}</div>
+      <div class="product-rating">${p.rating}</div>
     </div>
-  </div>`;
+  </div>
+</div>`;
       }
 
       let currentFilter = "all";
-
       function renderProducts(filter = "all") {
         currentFilter = filter;
         const grid = document.getElementById("productsGrid");
@@ -4709,7 +4267,6 @@
         grid.innerHTML = filtered.map((p, i) => productCardHTML(p, i)).join("");
         setTimeout(initObserver, 50);
       }
-
       function filterProducts(btn, cat) {
         document
           .querySelectorAll(".filter-tab")
@@ -4717,7 +4274,6 @@
         btn.classList.add("active");
         renderProducts(cat);
       }
-
       function renderFeatured() {
         const grid = document.getElementById("homeFeaturedGrid");
         if (!grid) return;
@@ -4728,13 +4284,218 @@
         setTimeout(initObserver, 50);
       }
 
-      function handleFormSubmit(e) {
-        e.preventDefault();
-        document.getElementById("contactForm").style.display = "none";
-        document.getElementById("formSuccess").classList.add("show");
+      /* ============================================================
+         PRODUCT MODAL — multi-image gallery
+         ============================================================ */
+      const THUMB_W = 68;
+      const THUMB_GAP = 7;
+      const THUMB_STEP = THUMB_W + THUMB_GAP;
+
+      let _modal = {
+        productId: null,
+        galleryImgs: [], // current product's image array
+        galleryIdx: 0, // active image index within product
+        stripOffset: 0, // thumb strip scroll
+        thumbList: [], // all thumbs (product gallery only)
+      };
+
+      /* Open modal for a product */
+      function openPModal(productId) {
+        const p = allProducts.find((x) => x.id === productId);
+        if (!p) return;
+
+        _modal.productId = productId;
+        _modal.galleryImgs = Array.isArray(p.imgs) ? p.imgs : [p.img || p.imgs];
+        _modal.galleryIdx = 0;
+        _modal.stripOffset = 0;
+        _modal.thumbList = _modal.galleryImgs; // thumbs = product's own images
+
+        _fillInfo(p);
+        _setMainImage(0, false);
+        _buildThumbs();
+
+        /* re-apply lang inside modal */
+        document
+          .querySelectorAll("#pmodal [data-fr][data-ar]")
+          .forEach((el) => {
+            const txt = el.dataset[currentLang];
+            if (!txt) return;
+            if (txt.includes("<")) el.innerHTML = txt;
+            else el.textContent = txt;
+          });
+
+        document.getElementById("pmodalOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
       }
 
-      // ============ INIT ============
+      /* Fill the info panel */
+      function _fillInfo(p) {
+        const d = p[currentLang];
+        const badge = document.getElementById("pmodalBadge");
+        if (d.badge) {
+          badge.className = "pmodal-badge " + d.badge;
+          badge.textContent = d.badgeText;
+          badge.style.display = "block";
+        } else {
+          badge.style.display = "none";
+        }
+        document.getElementById("pmodalCat").textContent = d.catName;
+        document.getElementById("pmodalName").textContent = d.name;
+        document.getElementById("pmodalPrice").textContent = d.price;
+        document.getElementById("pmodalDesc").textContent = d.desc;
+        const dl = document.querySelector(".pmodal-desc-label");
+        if (dl)
+          dl.textContent =
+            currentLang === "ar" ? "وصف المنتج" : "Description du produit";
+        const cb = document.querySelector(".pmodal-actions .btn-outline");
+        if (cb) cb.textContent = currentLang === "ar" ? "متابعة" : "Continuer";
+        const ws = document.querySelector("#pmodalWaBtn span");
+        if (ws)
+          ws.textContent =
+            currentLang === "ar" ? "اطلب عبر واتساب" : "Commander via WhatsApp";
+        const waMsg = encodeURIComponent(d.wa || d.name);
+        document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+      }
+
+      /* Set the active main image with optional fade */
+      function _setMainImage(idx, animate = true) {
+        const imgs = _modal.galleryImgs;
+        if (!imgs.length) return;
+        idx = Math.max(0, Math.min(idx, imgs.length - 1));
+        _modal.galleryIdx = idx;
+
+        const imgEl = document.getElementById("pmodalImg");
+        if (animate) {
+          imgEl.classList.add("switching");
+          setTimeout(() => {
+            imgEl.src = imgs[idx];
+            imgEl.classList.remove("switching");
+          }, 220);
+        } else {
+          imgEl.src = imgs[idx];
+          imgEl.classList.remove("switching");
+        }
+
+        /* counter */
+        const counter = document.getElementById("pmodalCounter");
+        if (imgs.length > 1) {
+          counter.textContent = idx + 1 + " / " + imgs.length;
+          counter.style.display = "block";
+        } else {
+          counter.style.display = "none";
+        }
+
+        /* arrows on main image */
+        const prev = document.getElementById("pmodalImgPrev");
+        const next = document.getElementById("pmodalImgNext");
+        if (prev) prev.disabled = idx <= 0;
+        if (next) next.disabled = idx >= imgs.length - 1;
+        if (prev) prev.style.display = imgs.length > 1 ? "flex" : "none";
+        if (next) next.style.display = imgs.length > 1 ? "flex" : "none";
+
+        /* sync active thumb */
+        document
+          .querySelectorAll(".pmodal-thumb")
+          .forEach((t, i) => t.classList.toggle("active", i === idx));
+        _centerThumb(idx);
+      }
+
+      /* Arrow navigation on main image */
+      function pmodalGalleryNav(dir) {
+        _setMainImage(_modal.galleryIdx + dir, true);
+      }
+
+      /* Build thumbnails (product's own images) */
+      function _buildThumbs() {
+        const track = document.getElementById("pmodalTrack");
+        track.innerHTML = "";
+        _modal.stripOffset = 0;
+        track.style.transform = "translateX(0)";
+
+        const imgs = _modal.thumbList;
+        if (imgs.length <= 1) {
+          /* hide strip if only 1 image */
+          document.querySelector(".pmodal-thumbs-strip").style.display =
+            imgs.length > 1 ? "flex" : "none";
+          return;
+        }
+        document.querySelector(".pmodal-thumbs-strip").style.display = "flex";
+
+        imgs.forEach((src, i) => {
+          const div = document.createElement("div");
+          div.className = "pmodal-thumb" + (i === 0 ? " active" : "");
+          div.innerHTML = `<div class="pmodal-thumb-img-wrap"><img src="${src}" alt="Photo ${i + 1}" loading="lazy"></div><div class="pmodal-thumb-label">Photo ${i + 1}</div>`;
+          div.addEventListener("click", () => _setMainImage(i, true));
+          track.appendChild(div);
+        });
+
+        _centerThumb(0);
+        _updateStripNav();
+      }
+
+      /* Center a thumb in the strip */
+      function _centerThumb(idx) {
+        const outer = document.querySelector(".pmodal-thumbs-outer");
+        if (!outer) return;
+        const vw = outer.clientWidth;
+        const total = _modal.thumbList.length;
+        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
+        let target = idx * THUMB_STEP - Math.floor((vw - THUMB_W) / 2);
+        target = Math.max(0, Math.min(target, maxOff));
+        _modal.stripOffset = target;
+        document.getElementById("pmodalTrack").style.transform =
+          `translateX(-${_modal.stripOffset}px)`;
+        _updateStripNav();
+      }
+
+      /* Strip arrow scroll */
+      function pmodalStripScroll(dir) {
+        const outer = document.querySelector(".pmodal-thumbs-outer");
+        const total = _modal.thumbList.length;
+        const vw = outer ? outer.clientWidth : 400;
+        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
+        _modal.stripOffset = Math.max(
+          0,
+          Math.min(_modal.stripOffset + dir * THUMB_STEP * 3, maxOff),
+        );
+        document.getElementById("pmodalTrack").style.transform =
+          `translateX(-${_modal.stripOffset}px)`;
+        _updateStripNav();
+      }
+
+      function _updateStripNav() {
+        const outer = document.querySelector(".pmodal-thumbs-outer");
+        const total = _modal.thumbList.length;
+        const vw = outer ? outer.clientWidth : 400;
+        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
+        const prev = document.getElementById("pmodalNavPrev");
+        const next = document.getElementById("pmodalNavNext");
+        if (prev) prev.disabled = _modal.stripOffset <= 0;
+        if (next) next.disabled = _modal.stripOffset >= maxOff;
+      }
+
+      /* Keyboard navigation inside modal */
+      document.addEventListener("keydown", (e) => {
+        if (
+          !document.getElementById("pmodalOverlay").classList.contains("open")
+        )
+          return;
+        if (e.key === "ArrowLeft")
+          pmodalGalleryNav(document.documentElement.dir === "rtl" ? 1 : -1);
+        if (e.key === "ArrowRight")
+          pmodalGalleryNav(document.documentElement.dir === "rtl" ? -1 : 1);
+      });
+
+      function closePModal(e) {
+        if (e && e.target !== document.getElementById("pmodalOverlay")) return;
+        closePModalDirect();
+      }
+      function closePModalDirect() {
+        document.getElementById("pmodalOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* ============ INIT ============ */
       (function init() {
         const savedLang = loadLang();
         const savedPage = loadPage();
@@ -4742,26 +4503,17 @@
         document.documentElement.lang = savedLang;
         document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
         document
-          .querySelectorAll(".lang-btn, .mobile-lang-btn")
-          .forEach((btn) => {
-            btn.classList.toggle("active", btn.dataset.lang === savedLang);
-          });
+          .querySelectorAll(".lang-btn,.mobile-lang-btn")
+          .forEach((b) =>
+            b.classList.toggle("active", b.dataset.lang === savedLang),
+          );
         if (savedLang !== "fr") {
           document.querySelectorAll("[data-fr][data-ar]").forEach((el) => {
             const txt = el.dataset[savedLang];
             if (!txt) return;
-            if (txt.includes("<")) {
-              el.innerHTML = txt;
-            } else {
-              el.textContent = txt;
-            }
+            if (txt.includes("<")) el.innerHTML = txt;
+            else el.textContent = txt;
           });
-          document
-            .querySelectorAll("[data-fr-placeholder][data-ar-placeholder]")
-            .forEach((el) => {
-              el.placeholder =
-                el.dataset[savedLang + "Placeholder"] || el.placeholder;
-            });
           document.querySelectorAll(".cat-arrow").forEach((el) => {
             el.textContent = savedLang === "ar" ? "←" : "→";
           });
@@ -4777,49 +4529,50 @@
       })();
     </script>
     <script>
-      (function () {
-        "use strict";
-        document.addEventListener("contextmenu", function (e) {
-          e.preventDefault();
-        });
 
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "F12" || e.keyCode === 123) {
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
             e.preventDefault();
             return false;
-          }
+        }
 
-          if (
-            e.ctrlKey &&
-            e.shiftKey &&
-            (e.key === "I" || e.key === "J" || e.key === "C")
-          ) {
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
             e.preventDefault();
             return false;
-          }
+        }
 
-          if (e.ctrlKey && (e.key === "u" || e.keyCode === 85)) {
-            e.preventDefault();
-            return false;
-          }
-        });
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
 
-        const devToolsCheck = function () {
-          if (window.console && window.console.time) {
-            (function () {
-              (function () {
-                debugger;
-              }).apply(this, ["alwaysOn"]);
-            })();
-          }
-        };
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
 
-        setInterval(devToolsCheck, 1000);
+    setInterval(devToolsCheck, 1000);
 
-        document.addEventListener("copy", function (e) {
-          e.preventDefault();
-        });
-      })();
-    </script>
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
+</script>
   </body>
 </html>
