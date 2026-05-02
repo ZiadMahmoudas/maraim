@@ -3123,6 +3123,16 @@
             >
               Tout
             </button>
+
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'bahut')"
+              data-fr="Bahut"
+              data-ar="باهوت"
+            >
+              Bahut
+            </button>
+
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'bedroom')"
@@ -3131,14 +3141,7 @@
             >
               Chambres
             </button>
-            <button
-              class="filter-tab"
-              onclick="filterProducts(this, 'living')"
-              data-fr="Salons"
-              data-ar="غرف المعيشة"
-            >
-              Salons
-            </button>
+
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'salon')"
@@ -3147,6 +3150,16 @@
             >
               Canapés
             </button>
+
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'living')"
+              data-fr="Living"
+              data-ar="غرف المعيشة"
+            >
+              Living
+            </button>
+
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'tables')"
@@ -3155,6 +3168,7 @@
             >
               Tables
             </button>
+
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'wardrobe')"
@@ -3163,6 +3177,7 @@
             >
               Armoires
             </button>
+
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'office')"
@@ -4344,6 +4359,162 @@
           img: "images/8.webp",
           rating: "★★★★★",
         },
+        {
+  id: 9,
+  cat: "bedroom",
+  fr: {
+    catName: "Chambres",
+    name: "Chambre complète moderne",
+    desc: "Chambre à coucher complète avec lit, armoire et coiffeuse",
+    price: "120 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Chambre complète moderne",
+  },
+  ar: {
+    catName: "غرف النوم",
+    name: "غرفة نوم كاملة مودرن",
+    desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة",
+    price: "120,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب غرفة نوم كاملة مودرن",
+  },
+  img: "images/bedroom-1.webp",
+  rating: "★★★★★",
+},
+{
+  id: 10,
+  cat: "salon",
+  fr: {
+    catName: "Canapés",
+    name: "Salon complet 7 places",
+    desc: "Salon élégant avec canapé principal, fauteuils et tissu premium",
+    price: "95 000 DA",
+    oldPrice: null,
+    badge: "badge-best",
+    badgeText: "Best-seller",
+    wa: "Commander Salon complet 7 places",
+  },
+  ar: {
+    catName: "الصالونات",
+    name: "صالون كامل 7 أماكن",
+    desc: "صالون أنيق بكنبة رئيسية وكراسي وخامة فاخرة",
+    price: "95,000 دج",
+    oldPrice: null,
+    badge: "badge-best",
+    badgeText: "الأكثر طلبًا",
+    wa: "طلب صالون كامل 7 أماكن",
+  },
+  img: "images/salon-1.webp",
+  rating: "★★★★★",
+},
+{
+  id: 11,
+  cat: "living",
+  fr: {
+    catName: "Living",
+    name: "Meuble TV moderne",
+    desc: "Meuble TV moderne pour salon avec rangements intégrés",
+    price: "48 000 DA",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "Commander Meuble TV moderne",
+  },
+  ar: {
+    catName: "غرف المعيشة",
+    name: "وحدة تلفزيون مودرن",
+    desc: "وحدة تلفزيون عصرية لغرفة المعيشة مع مساحات تخزين",
+    price: "48,000 دج",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "طلب وحدة تلفزيون مودرن",
+  },
+  img: "images/1.webp",
+  rating: "★★★★★",
+},
+{
+  id: 12,
+  cat: "tables",
+  fr: {
+    catName: "Tables",
+    name: "Table basse élégante",
+    desc: "Table basse moderne pour salon avec finition bois luxe",
+    price: "22 000 DA",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "Commander Table basse élégante",
+  },
+  ar: {
+    catName: "الطاولات",
+    name: "طاولة وسط أنيقة",
+    desc: "طاولة وسط مودرن للصالون بتشطيب خشبي فاخر",
+    price: "22,000 دج",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "طلب طاولة وسط أنيقة",
+  },
+  img: "images/2.webp",
+  rating: "★★★★★",
+},
+{
+  id: 13,
+  cat: "wardrobe",
+  fr: {
+    catName: "Armoires",
+    name: "Armoire 3 portes",
+    desc: "Armoire spacieuse à 3 portes avec rangements pratiques",
+    price: "70 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Armoire 3 portes",
+  },
+  ar: {
+    catName: "الخزائن",
+    name: "خزانة 3 أبواب",
+    desc: "خزانة واسعة بثلاثة أبواب ومساحات تخزين عملية",
+    price: "70,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب خزانة 3 أبواب",
+  },
+  img: "images/3.webp",
+  rating: "★★★★★",
+},
+{
+  id: 14,
+  cat: "office",
+  fr: {
+    catName: "Bureau",
+    name: "Bureau professionnel",
+    desc: "Bureau moderne adapté au travail et aux espaces professionnels",
+    price: "38 000 DA",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "Commander Bureau professionnel",
+  },
+  ar: {
+    catName: "الأثاث المكتبي",
+    name: "مكتب احترافي",
+    desc: "مكتب مودرن مناسب للعمل والمساحات المهنية",
+    price: "38,000 دج",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "طلب مكتب احترافي",
+  },
+  img: "images/4.webp",
+  rating: "★★★★★",
+},
       ];
 
       function productCardHTML(p, i) {
