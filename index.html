@@ -4353,7 +4353,6 @@
     <div class="product-image-wrap">
       <img class="product-img" src="${p.img}" alt="${d.name}" loading="lazy">
       ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
-      <button class="product-wishlist" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button>
       <div class="product-actions-overlay">
         <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
         <a href="${WA}?text=${waMsg}" class="btn btn-gold" style="font-size:0.78rem">${currentLang === "ar" ? "اطلب الآن" : "Commander"}</a>
