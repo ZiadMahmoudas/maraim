@@ -17,6 +17,41 @@
       rel="stylesheet"
     />
     <style>
+      /* RTL arrows fix */
+html[dir="rtl"] .cat-arrow {
+  left: auto;
+  right: 16px;
+}
+
+/* Product modal arrows RTL */
+html[dir="rtl"] .pmodal-img-arrow.prev {
+  left: auto;
+  right: 12px;
+}
+
+html[dir="rtl"] .pmodal-img-arrow.next {
+  right: auto;
+  left: 12px;
+}
+
+html[dir="rtl"] .pmodal-thumb-nav {
+  transform: rotate(180deg);
+}
+
+/* Footer arrows RTL */
+html[dir="rtl"] .footer-col ul li a {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+html[dir="rtl"] .footer-col ul li a::before {
+  content: "←";
+}
+
+/* Buttons arrows in RTL */
+html[dir="rtl"] [data-ar*="←"] {
+  direction: rtl;
+}
       :root {
         --gold: #f03232;
         --gold-light: #ff6b6b;
