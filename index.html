@@ -1740,8 +1740,8 @@
         gap: 7px;
       }
       .whatsapp-btn {
-            position: relative;
-    left: 45%;
+        position: relative;
+        left: 45%;
         width: 54px;
         height: 54px;
         background: linear-gradient(135deg, #25d366, #128c7e);
@@ -1764,8 +1764,8 @@
         fill: white;
       }
       .whatsapp-tooltip {
-            position: relative;
-    left: 39%;
+        position: relative;
+        left: 39%;
         background: var(--brown-dark);
         color: white;
         padding: 5px 12px;
@@ -2206,124 +2206,121 @@
         }
       }
       /* HERO FULL VIDEO */
-.hero {
-  min-height: 100svh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  background: var(--brown-dark);
-}
+      .hero {
+        min-height: 100svh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: var(--brown-dark);
+      }
 
-.hero-video-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
-  pointer-events: none;
-}
+      .hero-video-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+        pointer-events: none;
+      }
 
-/* Overlay عشان الكلام يبقى واضح */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(30, 15, 5, 0.82) 0%,
-      rgba(30, 15, 5, 0.55) 45%,
-      rgba(30, 15, 5, 0.28) 100%
-    );
-}
+      /* Overlay عشان الكلام يبقى واضح */
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          rgba(30, 15, 5, 0.82) 0%,
+          rgba(30, 15, 5, 0.55) 45%,
+          rgba(30, 15, 5, 0.28) 100%
+        );
+      }
 
-html[dir="rtl"] .hero::before {
-  background:
-    linear-gradient(
-      -90deg,
-      rgba(30, 15, 5, 0.82) 0%,
-      rgba(30, 15, 5, 0.55) 45%,
-      rgba(30, 15, 5, 0.28) 100%
-    );
-}
+      html[dir="rtl"] .hero::before {
+        background: linear-gradient(
+          -90deg,
+          rgba(30, 15, 5, 0.82) 0%,
+          rgba(30, 15, 5, 0.55) 45%,
+          rgba(30, 15, 5, 0.28) 100%
+        );
+      }
 
-.hero-bg-pattern,
-.hero-right,
-.hero-image-overlay,
-.hero-floating-card {
-  display: none;
-}
+      .hero-bg-pattern,
+      .hero-right,
+      .hero-image-overlay,
+      .hero-floating-card {
+        display: none;
+      }
 
-.hero-left {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 760px;
-  padding: 150px 60px 90px;
-}
+      .hero-left {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 760px;
+        padding: 150px 60px 90px;
+      }
 
-.hero-badge {
-  background: rgba(201, 169, 110, 0.18);
-  border: 1px solid rgba(201, 169, 110, 0.45);
-  color: var(--gold-light);
-}
+      .hero-badge {
+        background: rgba(201, 169, 110, 0.18);
+        border: 1px solid rgba(201, 169, 110, 0.45);
+        color: var(--gold-light);
+      }
 
-.hero-title {
-  color: var(--white);
-  text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
-}
+      .hero-title {
+        color: var(--white);
+        text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+      }
 
-.hero-title .gold-text {
-  color: var(--gold-light);
-}
+      .hero-title .gold-text {
+        color: var(--gold-light);
+      }
 
-.hero-title .italic-text {
-  color: var(--gold);
-}
+      .hero-title .italic-text {
+        color: var(--gold);
+      }
 
-.hero-desc {
-  color: rgba(255, 255, 255, 0.78);
-  max-width: 560px;
-}
+      .hero-desc {
+        color: rgba(255, 255, 255, 0.78);
+        max-width: 560px;
+      }
 
-.hero-stats {
-  border-top: 1px solid rgba(201, 169, 110, 0.35);
-}
+      .hero-stats {
+        border-top: 1px solid rgba(201, 169, 110, 0.35);
+      }
 
-.stat-label {
-  color: rgba(255, 255, 255, 0.62);
-}
+      .stat-label {
+        color: rgba(255, 255, 255, 0.62);
+      }
 
-.hero-scroll-indicator {
-  color: rgba(255, 255, 255, 0.7);
-  z-index: 3;
-}
+      .hero-scroll-indicator {
+        color: rgba(255, 255, 255, 0.7);
+        z-index: 3;
+      }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 100svh;
-  }
+      /* Mobile */
+      @media (max-width: 768px) {
+        .hero {
+          min-height: 100svh;
+        }
 
-  .hero-left {
-    max-width: 100%;
-    padding: 120px 18px 70px;
-  }
+        .hero-left {
+          max-width: 100%;
+          padding: 120px 18px 70px;
+        }
 
-  .hero::before {
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(30, 15, 5, 0.82) 0%,
-        rgba(30, 15, 5, 0.55) 55%,
-        rgba(30, 15, 5, 0.85) 100%
-      );
-  }
-}
+        .hero::before {
+          background: linear-gradient(
+            to bottom,
+            rgba(30, 15, 5, 0.82) 0%,
+            rgba(30, 15, 5, 0.55) 55%,
+            rgba(30, 15, 5, 0.85) 100%
+          );
+        }
+      }
     </style>
   </head>
   <body>
@@ -2363,21 +2360,30 @@ html[dir="rtl"] .hero::before {
       <nav class="mobile-drawer-links" id="mobileNav">
         <a
           href="#"
-          onclick="navigateTo('home'); closeMobileMenu();"
+          onclick="
+            navigateTo('home');
+            closeMobileMenu();
+          "
           data-fr="Accueil"
           data-ar="الرئيسية"
           >Accueil</a
         >
         <a
           href="#"
-          onclick="navigateTo('products'); closeMobileMenu();"
+          onclick="
+            navigateTo('products');
+            closeMobileMenu();
+          "
           data-fr="Produits"
           data-ar="المنتجات"
           >Produits</a
         >
         <a
           href="#"
-          onclick="navigateTo('offers'); closeMobileMenu();"
+          onclick="
+            navigateTo('offers');
+            closeMobileMenu();
+          "
           data-fr="Offres"
           data-ar="العروض"
           >Offres</a
@@ -2465,74 +2471,82 @@ html[dir="rtl"] .hero::before {
 
     <!-- ========== HOME PAGE ========== -->
     <div class="page active" id="page-home">
-<section class="hero page active" id="homePage">
-  <video
-    class="hero-video-bg"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-  >
-    <source src="videos/1.mp4" type="video/mp4" />
-  </video>
+      <section class="hero page active" id="homePage">
+        <video
+          class="hero-video-bg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="videos/1.mp4" type="video/mp4" />
+        </video>
 
-  <div class="hero-left">
-    <div
-      class="hero-badge"
-      data-fr="Meubles de luxe en Algérie"
-      data-ar="أثاث فاخر في الجزائر"
-    >
-      ✦ Meubles de luxe en Algérie
-    </div>
+        <div class="hero-left">
+          <div
+            class="hero-badge"
+            data-fr="Meubles de luxe en Algérie"
+            data-ar="أثاث فاخر في الجزائر"
+          >
+            ✦ Meubles de luxe en Algérie
+          </div>
 
-    <h1 class="hero-title">
-      <span data-fr="Élégance" data-ar="أناقة">Élégance</span>
-      <span class="gold-text" data-fr="pour votre maison" data-ar="لمنزلك">
-        pour votre maison
-      </span>
-      <span class="italic-text" data-fr="avec Roua Furniture" data-ar="مع روائع الأثاث">
-        avec Roua Furniture
-      </span>
-    </h1>
+          <h1 class="hero-title">
+            <span data-fr="Élégance" data-ar="أناقة">Élégance</span>
+            <span
+              class="gold-text"
+              data-fr="pour votre maison"
+              data-ar="لمنزلك"
+            >
+              pour votre maison
+            </span>
+            <span
+              class="italic-text"
+              data-fr="avec Roua Furniture"
+              data-ar="مع روائع الأثاث"
+            >
+              avec Roua Furniture
+            </span>
+          </h1>
 
-    <p
-      class="hero-desc"
-      data-fr="Découvrez une collection premium de chambres, salons et meubles raffinés avec livraison dans toutes les wilayas."
-      data-ar="اكتشف مجموعة فاخرة من غرف النوم والصالونات والأثاث الراقي مع توصيل إلى جميع الولايات."
-    >
-      Découvrez une collection premium de chambres, salons et meubles raffinés avec livraison dans toutes les wilayas.
-    </p>
+          <p
+            class="hero-desc"
+            data-fr="Découvrez une collection premium de chambres, salons et meubles raffinés avec livraison dans toutes les wilayas."
+            data-ar="اكتشف مجموعة فاخرة من غرف النوم والصالونات والأثاث الراقي مع توصيل إلى جميع الولايات."
+          >
+            Découvrez une collection premium de chambres, salons et meubles
+            raffinés avec livraison dans toutes les wilayas.
+          </p>
 
-    <div class="hero-actions">
-      <a href="#" onclick="navigateTo('products')" class="btn btn-gold">
-        Voir les produits
-      </a>
+          <div class="hero-actions">
+            <a href="#" onclick="navigateTo('products')" class="btn btn-gold">
+              Voir les produits
+            </a>
 
-      <a href="https://wa.me/213XXXXXXXXX" class="btn btn-outline">
-        Commander sur WhatsApp
-      </a>
-    </div>
+            <a href="https://wa.me/213XXXXXXXXX" class="btn btn-outline">
+              Commander sur WhatsApp
+            </a>
+          </div>
 
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-num">500+</span>
-        <span class="stat-label">Clients</span>
-      </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">500+</span>
+              <span class="stat-label">Clients</span>
+            </div>
 
-      <div class="stat-item">
-        <span class="stat-num">48</span>
-        <span class="stat-label">Wilayas</span>
-      </div>
+            <div class="stat-item">
+              <span class="stat-num">48</span>
+              <span class="stat-label">Wilayas</span>
+            </div>
 
-      <div class="stat-item">
-        <span class="stat-num">24h</span>
-        <span class="stat-label">Support</span>
-      </div>
-    </div>
-  </div>
-
-</section>
+            <div class="stat-item">
+              <span class="stat-num">24h</span>
+              <span class="stat-label">Support</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- MARQUEE -->
       <div class="marquee-strip">
@@ -3005,14 +3019,8 @@ html[dir="rtl"] .hero::before {
           preload="metadata"
           poster="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1400&q=70&fit=crop"
         >
-          <source
-            src="./videos/2.mp4"
-            type="video/mp4"
-          />
-          <source
-            src="./videos/2.mp4"
-            type="video/mp4"
-          />
+          <source src="./videos/2.mp4" type="video/mp4" />
+          <source src="./videos/2.mp4" type="video/mp4" />
         </video>
         <div class="cta-video-overlay"></div>
         <div class="cta-video-grain"></div>
@@ -3976,16 +3984,28 @@ html[dir="rtl"] .hero::before {
       const PAGE_KEY = "roua_page";
 
       function saveLang(lang) {
-        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        try {
+          localStorage.setItem(LANG_KEY, lang);
+        } catch (e) {}
       }
       function loadLang() {
-        try { return localStorage.getItem(LANG_KEY) || "fr"; } catch (e) { return "fr"; }
+        try {
+          return localStorage.getItem(LANG_KEY) || "fr";
+        } catch (e) {
+          return "fr";
+        }
       }
       function savePage(page) {
-        try { localStorage.setItem(PAGE_KEY, page); } catch (e) {}
+        try {
+          localStorage.setItem(PAGE_KEY, page);
+        } catch (e) {}
       }
       function loadPage() {
-        try { return localStorage.getItem(PAGE_KEY) || "home"; } catch (e) { return "home"; }
+        try {
+          return localStorage.getItem(PAGE_KEY) || "home";
+        } catch (e) {
+          return "home";
+        }
       }
 
       // ============ LANGUAGE SYSTEM ============
@@ -3995,17 +4015,25 @@ html[dir="rtl"] .hero::before {
         saveLang(lang);
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-        document.querySelectorAll(".lang-btn, .mobile-lang-btn").forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.lang === lang);
-        });
+        document
+          .querySelectorAll(".lang-btn, .mobile-lang-btn")
+          .forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.lang === lang);
+          });
         document.querySelectorAll("[data-fr][data-ar]").forEach((el) => {
           const txt = el.dataset[lang];
           if (!txt) return;
-          if (txt.includes("<")) { el.innerHTML = txt; } else { el.textContent = txt; }
+          if (txt.includes("<")) {
+            el.innerHTML = txt;
+          } else {
+            el.textContent = txt;
+          }
         });
-        document.querySelectorAll("[data-fr-placeholder][data-ar-placeholder]").forEach((el) => {
-          el.placeholder = el.dataset[lang + "Placeholder"] || el.placeholder;
-        });
+        document
+          .querySelectorAll("[data-fr-placeholder][data-ar-placeholder]")
+          .forEach((el) => {
+            el.placeholder = el.dataset[lang + "Placeholder"] || el.placeholder;
+          });
         document.querySelectorAll(".cat-arrow").forEach((el) => {
           el.textContent = lang === "ar" ? "←" : "→";
         });
@@ -4016,7 +4044,9 @@ html[dir="rtl"] .hero::before {
 
       // ============ NAVIGATION ============
       function navigateTo(page) {
-        document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
         const target = document.getElementById("page-" + page);
         if (target) {
           target.classList.add("active");
@@ -4041,20 +4071,31 @@ html[dir="rtl"] .hero::before {
         if (e.key === "Escape") closeMobileMenu();
       });
 
-      window.addEventListener("scroll", () => {
-        document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
-      }, { passive: true });
+      window.addEventListener(
+        "scroll",
+        () => {
+          document
+            .getElementById("navbar")
+            .classList.toggle("scrolled", window.scrollY > 50);
+        },
+        { passive: true },
+      );
 
       function initObserver() {
         const obs = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
-              if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                obs.unobserve(e.target);
+              }
             });
           },
-          { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+          { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
         );
-        document.querySelectorAll(".reveal:not(.visible)").forEach((el) => obs.observe(el));
+        document
+          .querySelectorAll(".reveal:not(.visible)")
+          .forEach((el) => obs.observe(el));
       }
 
       // ============================================================
@@ -4074,7 +4115,10 @@ html[dir="rtl"] .hero::before {
         vid.addEventListener("timeupdate", () => {
           if (!vid.duration) return;
           const remaining = vid.duration - vid.currentTime;
-          if (remaining <= FADE_SECONDS && !fadeCover.classList.contains("fading")) {
+          if (
+            remaining <= FADE_SECONDS &&
+            !fadeCover.classList.contains("fading")
+          ) {
             fadeCover.classList.add("fading");
           }
         });
@@ -4093,59 +4137,213 @@ html[dir="rtl"] .hero::before {
       // ============ PRODUCTS DATA ============
       const allProducts = [
         {
-          id: 1, cat: "bedroom",
-          fr: { catName: "Chambres à coucher", name: "Chambre Royale Dimanti", desc: "Ensemble chambre complet au design royal luxueux en bois massif", price: "65 000 DA", oldPrice: "85 000 DA", badge: "badge-best", badgeText: "Best-seller", wa: "Commander Chambre Royale" },
-          ar: { catName: "غرف النوم", name: "غرفة نوم ديمنتي الملكية", desc: "طقم غرفة نوم كامل بتصميم ملكي فاخر مع خشب صلب عالي الجودة", price: "65,000 دج", oldPrice: "85,000 دج", badge: "badge-best", badgeText: "الأكثر مبيعًا", wa: "طلب غرفة نوم ديمنتي" },
-          img: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 1,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D4T avec port SP",
+            desc: "Bahut D4T avec port SP — finition EU",
+            price: "65 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander D4T avec port SP - EU",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D4T avec port SP",
+            desc: "باهوت D4T مع port SP — كود EU",
+            price: "65,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب D4T avec port SP - EU",
+          },
+          img: "images/1.webp",
+          rating: "★★★★★",
         },
         {
-          id: 2, cat: "living",
-          fr: { catName: "Salons", name: "Canapé Velours Régina", desc: "Canapé en velours de luxe aux tons apaisants, idéal pour tous styles", price: "42 000 DA", oldPrice: null, badge: "badge-new", badgeText: "Nouveau", wa: "Commander Canapé Régina" },
-          ar: { catName: "غرف المعيشة", name: "أريكة ريجينا المخملية", desc: "أريكة من المخمل الفاخر بألوان هادئة تناسب كل ديكور عصري", price: "42,000 دج", oldPrice: null, badge: "badge-new", badgeText: "جديد", wa: "طلب أريكة ريجينا" },
-          img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 2,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D4T 1.40 SP",
+            desc: "Bahut D4T 1.40 SP — finition CC",
+            price: "77 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander D4T 1.40 SP - CC",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D4T 1.40 SP",
+            desc: "باهوت D4T مقاس 1.40 SP — كود CC",
+            price: "77,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب D4T 1.40 SP - CC",
+          },
+          img: "images/2.webp",
+          rating: "★★★★★",
         },
         {
-          id: 3, cat: "wardrobe",
-          fr: { catName: "Armoires", name: "Armoire Élite Intelligente", desc: "Armoire au design innovant avec éclairage LED intérieur et tiroirs coulissants", price: "41 000 DA", oldPrice: "55 000 DA", badge: "badge-sale", badgeText: "-25%", wa: "Commander Armoire Élite" },
-          ar: { catName: "الخزائن", name: "خزانة إيليت الذكية", desc: "خزانة بتصميم ذكي مع إضاءة LED داخلية وأدراج ناعمة الحركة", price: "41,000 دج", oldPrice: "55,000 دج", badge: "badge-sale", badgeText: "خصم 25%", wa: "طلب خزانة إيليت" },
-          img: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=75&fit=crop", rating: "★★★★☆"
+          id: 3,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "Bahut 1.60 SP",
+            desc: "Bahut 1.60 SP — finition T",
+            price: "88 000 DA",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "Best-seller",
+            wa: "Commander Bahut 1.60 SP - T",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "Bahut 1.60 SP",
+            desc: "باهوت مقاس 1.60 SP — كود T",
+            price: "88,000 دج",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "الأكثر طلبًا",
+            wa: "طلب Bahut 1.60 SP - T",
+          },
+          img: "images/3.webp",
+          rating: "★★★★★",
         },
         {
-          id: 4, cat: "salon",
-          fr: { catName: "Canapés", name: "Salon Andalou Classique", desc: "Ensemble salon classique authentique avec touches andalouses et dorures raffinées", price: "78 000 DA", oldPrice: null, badge: "badge-best", badgeText: "Best-seller", wa: "Commander Salon Andalou" },
-          ar: { catName: "الصالونات", name: "صالون أندلسي الكلاسيكي", desc: "طقم صالون كلاسيكي أصيل بلمسة أندلسية راقية ونقوش ذهبية", price: "78,000 دج", oldPrice: null, badge: "badge-best", badgeText: "الأكثر مبيعًا", wa: "طلب صالون أندلسي" },
-          img: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 4,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D4T SP",
+            desc: "Bahut D4T SP — finition EC",
+            price: "66 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander D4T SP - EC",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D4T SP",
+            desc: "باهوت D4T SP — كود EC",
+            price: "66,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب D4T SP - EC",
+          },
+          img: "images/4.webp",
+          rating: "★★★★★",
         },
         {
-          id: 5, cat: "office",
-          fr: { catName: "Mobilier de bureau", name: "Bureau Exécutif Premium", desc: "Bureau exécutif spacieux en matériaux importés pour un environnement professionnel", price: "35 000 DA", oldPrice: null, badge: "badge-new", badgeText: "Nouveau", wa: "Commander Bureau Exécutif" },
-          ar: { catName: "الأثاث المكتبي", name: "مكتب إكسيكيوتف الفاخر", desc: "مكتب تنفيذي بمساحة واسعة وخامات مستوردة للبيئة المكتبية الاحترافية", price: "35,000 دج", oldPrice: null, badge: "badge-new", badgeText: "جديد", wa: "طلب مكتب إكسيكيوتف" },
-          img: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 5,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D9T",
+            desc: "Bahut modèle D9T",
+            price: "75 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander D9T",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D9T",
+            desc: "باهوت موديل D9T",
+            price: "75,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب D9T",
+          },
+          img: "images/5.webp",
+          rating: "★★★★★",
         },
         {
-          id: 6, cat: "tables",
-          fr: { catName: "Tables", name: "Grande Table à Manger Moderne", desc: "Table à manger contemporaine pour 8 personnes en chêne naturel massif", price: "22 000 DA", oldPrice: "28 000 DA", badge: "badge-sale", badgeText: "-20%", wa: "Commander Table à Manger" },
-          ar: { catName: "الطاولات", name: "طاولة سفرة مودرن الكبيرة", desc: "طاولة سفرة عصرية تتسع لـ8 أشخاص مصنوعة من خشب البلوط الطبيعي", price: "22,000 دج", oldPrice: "28,000 دج", badge: "badge-sale", badgeText: "خصم 20%", wa: "طلب طاولة سفرة" },
-          img: "https://images.unsplash.com/photo-1549497538-303791108f95?w=600&q=75&fit=crop", rating: "★★★★☆"
+          id: 6,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D4T 1.40 SP Gris",
+            desc: "Bahut D4T 1.40 SP couleur gris — finition Cu",
+            price: "77 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Gris",
+            wa: "Commander D4T 1.40 SP Gris - Cu",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D4T 1.40 SP Gris",
+            desc: "باهوت D4T مقاس 1.40 SP باللون الرمادي — كود Cu",
+            price: "77,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "رمادي",
+            wa: "طلب D4T 1.40 SP Gris - Cu",
+          },
+          img: "images/6.webp",
+          rating: "★★★★★",
         },
         {
-          id: 7, cat: "bedroom",
-          fr: { catName: "Chambres à coucher", name: "Chambre Neo-Classic", desc: "Design néoclassique moderne aux tons apaisants pour une chambre raffinée", price: "55 000 DA", oldPrice: null, badge: "badge-new", badgeText: "Nouveau", wa: "Commander Chambre Neo-Classic" },
-          ar: { catName: "غرف النوم", name: "غرفة نوم نيو كلاسيك", desc: "تصميم كلاسيكي عصري بألوان هادئة تمنح غرفتك طابعًا راقيًا", price: "55,000 دج", oldPrice: null, badge: "badge-new", badgeText: "جديد", wa: "طلب غرفة نوم نيو كلاسيك" },
-          img: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 7,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D3T 1.40 SP",
+            desc: "Bahut D3T 1.40 SP — finition EE",
+            price: "75 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander D3T 1.40 SP - EE",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D3T 1.40 SP",
+            desc: "باهوت D3T مقاس 1.40 SP — كود EE",
+            price: "75,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب D3T 1.40 SP - EE",
+          },
+          img: "images/7.webp",
+          rating: "★★★★★",
         },
         {
-          id: 8, cat: "living",
-          fr: { catName: "Salons", name: "Salon Living 5 Pièces", desc: "Ensemble canapé complet 5 pièces au design moderne et tissus haut de gamme", price: "68 000 DA", oldPrice: "80 000 DA", badge: "badge-sale", badgeText: "-15%", wa: "Commander Salon Living 5 Pièces" },
-          ar: { catName: "غرف المعيشة", name: "طقم جلوس ليفينج 5 قطع", desc: "مجموعة جلوس متكاملة بتصميم عصري وأقمشة عالية الجودة", price: "68,000 دج", oldPrice: "80,000 دج", badge: "badge-sale", badgeText: "خصم 15%", wa: "طلب طقم جلوس ليفينج" },
-          img: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=75&fit=crop", rating: "★★★★★"
+          id: 8,
+          cat: "bahut",
+          fr: {
+            catName: "Bahut",
+            name: "D3T 1.40 SP",
+            desc: "Bahut D3T 1.40 SP — finition EE",
+            price: "75 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander D3T 1.40 SP - EE",
+          },
+          ar: {
+            catName: "باهوت",
+            name: "D3T 1.40 SP",
+            desc: "باهوت D3T مقاس 1.40 SP — كود EE",
+            price: "75,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب D3T 1.40 SP - EE",
+          },
+          img: "images/8.webp",
+          rating: "★★★★★",
         },
-        {
-          id: 9, cat: "office",
-          fr: { catName: "Mobilier de bureau", name: "Fauteuil Directeur Premium", desc: "Fauteuil de direction confortable au design moderne et surfaces en cuir fin", price: "18 000 DA", oldPrice: null, badge: null, badgeText: null, wa: "Commander Fauteuil Premium" },
-          ar: { catName: "الأثاث المكتبي", name: "كرسي إداري بريميوم", desc: "كرسي مكتبي مريح بتصميم عصري وأسطح جلدية ناعمة", price: "18,000 دج", oldPrice: null, badge: null, badgeText: null, wa: "طلب كرسي إداري" },
-          img: "https://images.unsplash.com/photo-1541558869434-2840d308329a?w=600&q=75&fit=crop", rating: "★★★★☆"
-        }
       ];
 
       function productCardHTML(p, i) {
@@ -4179,13 +4377,18 @@ html[dir="rtl"] .hero::before {
         currentFilter = filter;
         const grid = document.getElementById("productsGrid");
         if (!grid) return;
-        const filtered = filter === "all" ? allProducts : allProducts.filter((p) => p.cat === filter);
+        const filtered =
+          filter === "all"
+            ? allProducts
+            : allProducts.filter((p) => p.cat === filter);
         grid.innerHTML = filtered.map((p, i) => productCardHTML(p, i)).join("");
         setTimeout(initObserver, 50);
       }
 
       function filterProducts(btn, cat) {
-        document.querySelectorAll(".filter-tab").forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".filter-tab")
+          .forEach((t) => t.classList.remove("active"));
         btn.classList.add("active");
         renderProducts(cat);
       }
@@ -4193,7 +4396,10 @@ html[dir="rtl"] .hero::before {
       function renderFeatured() {
         const grid = document.getElementById("homeFeaturedGrid");
         if (!grid) return;
-        grid.innerHTML = allProducts.slice(0, 6).map((p, i) => productCardHTML(p, i)).join("");
+        grid.innerHTML = allProducts
+          .slice(0, 6)
+          .map((p, i) => productCardHTML(p, i))
+          .join("");
         setTimeout(initObserver, 50);
       }
 
@@ -4210,23 +4416,34 @@ html[dir="rtl"] .hero::before {
         currentLang = savedLang;
         document.documentElement.lang = savedLang;
         document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
-        document.querySelectorAll(".lang-btn, .mobile-lang-btn").forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.lang === savedLang);
-        });
+        document
+          .querySelectorAll(".lang-btn, .mobile-lang-btn")
+          .forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.lang === savedLang);
+          });
         if (savedLang !== "fr") {
           document.querySelectorAll("[data-fr][data-ar]").forEach((el) => {
             const txt = el.dataset[savedLang];
             if (!txt) return;
-            if (txt.includes("<")) { el.innerHTML = txt; } else { el.textContent = txt; }
+            if (txt.includes("<")) {
+              el.innerHTML = txt;
+            } else {
+              el.textContent = txt;
+            }
           });
-          document.querySelectorAll("[data-fr-placeholder][data-ar-placeholder]").forEach((el) => {
-            el.placeholder = el.dataset[savedLang + "Placeholder"] || el.placeholder;
-          });
+          document
+            .querySelectorAll("[data-fr-placeholder][data-ar-placeholder]")
+            .forEach((el) => {
+              el.placeholder =
+                el.dataset[savedLang + "Placeholder"] || el.placeholder;
+            });
           document.querySelectorAll(".cat-arrow").forEach((el) => {
             el.textContent = savedLang === "ar" ? "←" : "→";
           });
         }
-        document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
         const targetPage = document.getElementById("page-" + savedPage);
         if (targetPage) targetPage.classList.add("active");
         renderFeatured();
@@ -4235,50 +4452,49 @@ html[dir="rtl"] .hero::before {
       })();
     </script>
     <script>
+      (function () {
+        "use strict";
+        document.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
 
-(function() {
-    'use strict';
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || e.keyCode === 123) {
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "F12" || e.keyCode === 123) {
             e.preventDefault();
             return false;
-        }
+          }
 
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+          if (
+            e.ctrlKey &&
+            e.shiftKey &&
+            (e.key === "I" || e.key === "J" || e.key === "C")
+          ) {
             e.preventDefault();
             return false;
-        }
+          }
 
-   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
-        e.preventDefault();
-        return false;
-    }
-    });
+          if (e.ctrlKey && (e.key === "u" || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+          }
+        });
 
-    const devToolsCheck = function() {
-        if (window.console && window.console.time) {
-                (function() {
-                    (function() {
-                        debugger;
-                    }).apply(this, ['alwaysOn']);
-                })();
-         
-        }
-    };
-    
+        const devToolsCheck = function () {
+          if (window.console && window.console.time) {
+            (function () {
+              (function () {
+                debugger;
+              }).apply(this, ["alwaysOn"]);
+            })();
+          }
+        };
 
-    setInterval(devToolsCheck, 1000);
+        setInterval(devToolsCheck, 1000);
 
-
-    document.addEventListener('copy', function(e) {
-        e.preventDefault();
-    });
-
-})();
-</script>
+        document.addEventListener("copy", function (e) {
+          e.preventDefault();
+        });
+      })();
+    </script>
   </body>
 </html>
