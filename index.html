@@ -15,33 +15,38 @@
       rel="stylesheet"
     />
     <style>
-      :root {
-        --gold: #c9a96e;
-        --gold-light: #e8d5a3;
-        --gold-dark: #a07840;
-        --cream: #faf7f2;
-        --beige: #f0e8d8;
-        --beige-mid: #e5d5b8;
-        --brown: #5c3d1e;
-        --brown-light: #8b6b3d;
-        --brown-dark: #1e0f05;
-        --gray-warm: #9b8e82;
-        --gray-light: #f5f2ee;
-        --white: #ffffff;
-        --text-dark: #1a1008;
-        --text-mid: #4a3520;
-        --text-light: #7a6550;
-        --shadow-gold: rgba(201, 169, 110, 0.25);
-        --shadow-dark: rgba(30, 15, 5, 0.15);
+  :root {
+  --gold: #f03232;
+  --gold-light: #ff6b6b;
+  --gold-dark: #c91f1f;
 
-        --font-display: "Cormorant Garamond", serif;
-        --font-body: "DM Sans", sans-serif;
-        --font-serif: "Libre Baskerville", serif;
-        --font-display-ar: "Noto Naskh Arabic", serif;
-        --font-body-ar: "Tajawal", sans-serif;
+  --cream: #f5f7fa;
+  --beige: #eceff6;
+  --beige-mid: #cfd5e3;
 
-        --transition: cubic-bezier(0.4, 0, 0.2, 1);
-      }
+  --brown: #2e248f;
+  --brown-light: #4b3fd1;
+  --brown-dark: #141927;
+
+  --gray-warm: #70798c;
+  --gray-light: #f5f7fa;
+  --white: #ffffff;
+
+  --text-dark: #141927;
+  --text-mid: #2b3142;
+  --text-light: #6f7788;
+
+  --shadow-gold: rgba(240, 50, 50, 0.25);
+  --shadow-dark: rgba(20, 25, 39, 0.18);
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-serif: "Libre Baskerville", serif;
+  --font-display-ar: "Noto Naskh Arabic", serif;
+  --font-body-ar: "Tajawal", sans-serif;
+
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
       html[lang="ar"] {
         --font-display: "Noto Naskh Arabic", serif;
@@ -199,7 +204,10 @@
         margin: 0 auto;
         padding: 0 40px;
       }
-
+      .navbar .container{
+        display: flex;
+        justify-content: space-between;
+      }
       .section-label {
         font-family: var(--font-serif);
         font-style: italic;
@@ -362,18 +370,21 @@
 
       /* NAVBAR */
       .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        padding: 18px 0;
-        transition: all 0.4s var(--transition);
+         position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.4s var(--transition);
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
       }
       .navbar.scrolled {
         background: rgba(250, 247, 242, 0.97);
         backdrop-filter: blur(20px);
-        padding: 12px 0;
         box-shadow: 0 2px 30px var(--shadow-dark);
         border-bottom: 1px solid var(--beige-mid);
       }
@@ -2022,7 +2033,7 @@
           display: flex;
         }
         .hero-left {
-          padding: 90px 18px 50px;
+          padding: 146px 18px 50px;
         }
         .hero-right {
           height: 45vh;
@@ -2160,7 +2171,7 @@
           padding: 0 14px;
         }
         .hero-left {
-          padding: 80px 14px 40px;
+          padding: 146px 14px 40px;
         }
         .hero-right {
           height: 38vh;
@@ -2309,7 +2320,7 @@
 
         .hero-left {
           max-width: 100%;
-          padding: 120px 18px 70px;
+          padding: 146px 18px 70px;
         }
 
         .hero::before {
@@ -2321,6 +2332,80 @@
           );
         }
       }
+      .logo-main img,
+.logo img,
+.footer-brand img,
+.mobile-drawer-logo img {
+  max-width: 150px;
+  height: auto;
+  display: block;
+}
+
+.navbar .logo-main img {
+  max-width: 103px;
+}
+
+.footer-brand img {
+  max-width: 170px;
+}
+
+.mobile-drawer-logo img {
+  max-width: 160px;
+}
+/* WIDTH FIX */
+.container {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* Prevent horizontal overflow */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Logo width fix */
+.logo-main img,
+.logo img,
+.footer-brand img,
+.mobile-drawer-logo img {
+  max-width: 150px;
+  height: auto;
+  display: block;
+}
+
+.footer-brand img {
+  max-width: 170px;
+}
+
+.mobile-drawer-logo img {
+  max-width: 160px;
+}
+
+/* Responsive container */
+@media (max-width: 1024px) {
+  .container {
+    width: min(100% - 28px, 1200px);
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: min(100% - 20px, 1200px);
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 16px, 1200px);
+    padding-inline: 0;
+  }
+}
     </style>
   </head>
   <body>
@@ -2338,7 +2423,7 @@
     >
       <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
       <div class="mobile-drawer-logo">
-        <div class="logo-main">Royal<span>Meubles Djelfa</span></div>
+        <a href="index.html" class="logo-main" style="display: flex;justify-content: center;"><img src="images/logo2.webp" alt=""></a>
         <div class="mobile-lang-toggle">
           <button
             class="mobile-lang-btn active"
@@ -2389,7 +2474,7 @@
         >
       </nav>
       <a
-        href="https://wa.me/213XXXXXXXXX"
+        href="https://wa.me/213562314115"
         class="btn btn-whatsapp mobile-drawer-btn"
       >
         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -2404,10 +2489,10 @@
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
       <div class="container">
+        <a href="index.html" onclick="navigateTo('home')" class="logo logo-main">
+    <img src="images/logo2.webp" alt="">
+        </a>
         <div class="navbar-inner">
-          <a href="#" onclick="navigateTo('home')" class="logo">
-        <div class="logo-main">Royal<span>Meubles Djelfa</span></div>
-          </a>
           <div class="nav-links" id="navLinks">
             <a
               href="#"
@@ -2445,7 +2530,7 @@
               </button>
             </div>
             <a
-              href="https://wa.me/213XXXXXXXXX"
+              href="https://wa.me/213562314115"
               class="btn btn-whatsapp"
               style="padding: 9px 18px; font-size: 0.83rem"
             >
@@ -2523,7 +2608,7 @@
               Voir les produits
             </a>
 
-            <a href="https://wa.me/213XXXXXXXXX" class="btn btn-outline">
+            <a href="https://wa.me/213562314115" class="btn btn-outline">
               Commander sur WhatsApp
             </a>
           </div>
@@ -3059,7 +3144,7 @@
                 flex-wrap: wrap;
               "
             >
-              <a href="https://wa.me/213XXXXXXXXX" class="btn btn-whatsapp">
+              <a href="https://wa.me/213562314115" class="btn btn-whatsapp">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -3125,11 +3210,11 @@
 
             <button
               class="filter-tab"
-              onclick="filterProducts(this, 'bahut')"
-              data-fr="Bahut"
-              data-ar="باهوت"
+              onclick="filterProducts(this, 'commodes')"
+              data-fr="commodes"
+              data-ar="خزائن الملابس"
             >
-              Bahut
+              commodes
             </button>
 
             <button
@@ -3392,7 +3477,7 @@
                   Commandez maintenant et bénéficiez de la livraison gratuite
                 </p>
                 <a
-                  href="https://wa.me/213XXXXXXXXX"
+                  href="https://wa.me/213562314115"
                   class="btn btn-whatsapp"
                   style="margin-top: 12px; font-size: 0.86rem"
                   data-fr="Commander"
@@ -3516,7 +3601,7 @@
               "
             >
               <a
-                href="https://wa.me/213XXXXXXXXX"
+                href="https://wa.me/213562314115"
                 class="btn btn-whatsapp"
                 data-fr="Commander via WhatsApp"
                 data-ar="اطلب عبر واتساب"
@@ -3632,7 +3717,7 @@
                   </div>
                 </div>
               </div>
-              <a href="https://wa.me/213XXXXXXXXX" class="btn btn-whatsapp">
+              <a href="https://wa.me/213562314115" class="btn btn-whatsapp">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -3804,9 +3889,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <div class="logo-main">Roua <span>Furniture</span></div>
-            <div class="logo-sub">روائع الأثاث · Algérie</div>
-            <p
+   <a href="index.html" class="logo-main"><img src="images/logo2.webp" alt=""></a>            <p
               class="footer-desc"
               data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas d'Algérie."
               data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر."
@@ -3818,7 +3901,7 @@
             <div class="footer-socials">
               <a class="social-btn" href="#">f</a>
               <a class="social-btn" href="#">in</a>
-              <a class="social-btn" href="https://wa.me/213XXXXXXXXX">
+              <a class="social-btn" href="https://wa.me/213562314115">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -3977,7 +4060,7 @@
         >Contactez-nous ! 👋</span
       >
       <a
-        href="https://wa.me/213XXXXXXXXX"
+        href="https://wa.me/213562314115"
         class="whatsapp-btn"
         target="_blank"
         aria-label="WhatsApp"
@@ -3991,7 +4074,7 @@
     </div>
 
     <script>
-      const WA = "https://wa.me/213XXXXXXXXX";
+      const WA = "https://wa.me/213562314115";
       let currentLang = "fr";
 
       const LANG_KEY = "roua_lang";
@@ -4152,11 +4235,11 @@
       const allProducts = [
         {
           id: 1,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D4T avec port SP",
-            desc: "Bahut D4T avec port SP — finition EU",
+            desc: "commodes D4T avec port SP — finition EU",
             price: "65 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4164,9 +4247,9 @@
             wa: "Commander D4T avec port SP - EU",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D4T avec port SP",
-            desc: "باهوت D4T مع port SP — كود EU",
+            desc: "خزائن الملابس D4T مع port SP — كود EU",
             price: "65,000 دج",
             oldPrice: null,
             badge: "badge-new",
@@ -4178,11 +4261,11 @@
         },
         {
           id: 2,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D4T 1.40 SP",
-            desc: "Bahut D4T 1.40 SP — finition CC",
+            desc: "commodes D4T 1.40 SP — finition CC",
             price: "77 000 DA",
             oldPrice: null,
             badge: null,
@@ -4190,9 +4273,9 @@
             wa: "Commander D4T 1.40 SP - CC",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D4T 1.40 SP",
-            desc: "باهوت D4T مقاس 1.40 SP — كود CC",
+            desc: "خزائن الملابس D4T مقاس 1.40 SP — كود CC",
             price: "77,000 دج",
             oldPrice: null,
             badge: null,
@@ -4204,37 +4287,37 @@
         },
         {
           id: 3,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
-            name: "Bahut 1.60 SP",
-            desc: "Bahut 1.60 SP — finition T",
+            catName: "commodes",
+            name: "commodes 1.60 SP",
+            desc: "commodes 1.60 SP — finition T",
             price: "88 000 DA",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "Best-seller",
-            wa: "Commander Bahut 1.60 SP - T",
+            wa: "Commander commodes 1.60 SP - T",
           },
           ar: {
-            catName: "باهوت",
-            name: "Bahut 1.60 SP",
-            desc: "باهوت مقاس 1.60 SP — كود T",
+            catName: "خزائن الملابس",
+            name: "commodes 1.60 SP",
+            desc: "خزائن الملابس مقاس 1.60 SP — كود T",
             price: "88,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "الأكثر طلبًا",
-            wa: "طلب Bahut 1.60 SP - T",
+            wa: "طلب commodes 1.60 SP - T",
           },
           img: "images/3.webp",
           rating: "★★★★★",
         },
         {
           id: 4,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D4T SP",
-            desc: "Bahut D4T SP — finition EC",
+            desc: "commodes D4T SP — finition EC",
             price: "66 000 DA",
             oldPrice: null,
             badge: null,
@@ -4242,9 +4325,9 @@
             wa: "Commander D4T SP - EC",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D4T SP",
-            desc: "باهوت D4T SP — كود EC",
+            desc: "خزائن الملابس D4T SP — كود EC",
             price: "66,000 دج",
             oldPrice: null,
             badge: null,
@@ -4256,11 +4339,11 @@
         },
         {
           id: 5,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D9T",
-            desc: "Bahut modèle D9T",
+            desc: "commodes modèle D9T",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -4268,9 +4351,9 @@
             wa: "Commander D9T",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D9T",
-            desc: "باهوت موديل D9T",
+            desc: "خزائن الملابس موديل D9T",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
@@ -4282,11 +4365,11 @@
         },
         {
           id: 6,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D4T 1.40 SP Gris",
-            desc: "Bahut D4T 1.40 SP couleur gris — finition Cu",
+            desc: "commodes D4T 1.40 SP couleur gris — finition Cu",
             price: "77 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4294,9 +4377,9 @@
             wa: "Commander D4T 1.40 SP Gris - Cu",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D4T 1.40 SP Gris",
-            desc: "باهوت D4T مقاس 1.40 SP باللون الرمادي — كود Cu",
+            desc: "خزائن الملابس D4T مقاس 1.40 SP باللون الرمادي — كود Cu",
             price: "77,000 دج",
             oldPrice: null,
             badge: "badge-new",
@@ -4308,11 +4391,11 @@
         },
         {
           id: 7,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D3T 1.40 SP",
-            desc: "Bahut D3T 1.40 SP — finition EE",
+            desc: "commodes D3T 1.40 SP — finition EE",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -4320,9 +4403,9 @@
             wa: "Commander D3T 1.40 SP - EE",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D3T 1.40 SP",
-            desc: "باهوت D3T مقاس 1.40 SP — كود EE",
+            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
@@ -4334,11 +4417,11 @@
         },
         {
           id: 8,
-          cat: "bahut",
+          cat: "commodes",
           fr: {
-            catName: "Bahut",
+            catName: "commodes",
             name: "D3T 1.40 SP",
-            desc: "Bahut D3T 1.40 SP — finition EE",
+            desc: "commodes D3T 1.40 SP — finition EE",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -4346,9 +4429,9 @@
             wa: "Commander D3T 1.40 SP - EE",
           },
           ar: {
-            catName: "باهوت",
+            catName: "خزائن الملابس",
             name: "D3T 1.40 SP",
-            desc: "باهوت D3T مقاس 1.40 SP — كود EE",
+            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
