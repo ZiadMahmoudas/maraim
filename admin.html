@@ -1,0 +1,1688 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Royal Meubles — Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      :root {
+        --gold: #f03232;
+        --gold-light: #ff6b6b;
+        --gold-dark: #c91f1f;
+        --bg: #0d0f1a;
+        --bg2: #13162a;
+        --bg3: #1a1e35;
+        --border: rgba(240, 50, 50, 0.15);
+        --text: #e8eaf0;
+        --text-muted: #6b7280;
+        --white: #fff;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --blue: #3b82f6;
+        --mobile-nav-h: 64px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* ══════════════ LOGIN ══════════════ */
+      #loginScreen {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(240, 50, 50, 0.12) 0%,
+            transparent 70%
+          ),
+          var(--bg);
+        padding: 20px;
+      }
+      .login-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 48px 40px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+      }
+      .login-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 4px;
+      }
+      .login-logo span {
+        color: var(--gold);
+      }
+      .login-sub {
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 36px;
+      }
+      .login-label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .login-input {
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        margin-bottom: 20px;
+        transition: border-color 0.25s;
+        outline: none;
+      }
+      .login-input:focus {
+        border-color: var(--gold);
+      }
+      .login-btn {
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          opacity 0.25s,
+          transform 0.2s;
+      }
+      .login-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .login-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .login-error {
+        margin-top: 14px;
+        padding: 10px 14px;
+        background: rgba(240, 50, 50, 0.12);
+        border: 1px solid rgba(240, 50, 50, 0.3);
+        border-radius: 6px;
+        color: var(--gold-light);
+        font-size: 0.83rem;
+        display: none;
+      }
+
+      /* ══════════════ DASHBOARD ══════════════ */
+      #dashboard {
+        display: none;
+        min-height: 100vh;
+      }
+
+      /* ── Sidebar (desktop) ── */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 230px;
+        height: 100vh;
+        background: var(--bg2);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+        padding: 28px 0;
+        transition: transform 0.3s;
+      }
+      .sidebar-logo {
+        padding: 0 22px 28px;
+        border-bottom: 1px solid var(--border);
+      }
+      .sidebar-logo-main {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .sidebar-logo-main span {
+        color: var(--gold);
+      }
+      .sidebar-logo-sub {
+        font-size: 0.62rem;
+        color: var(--text-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .sidebar-nav {
+        flex: 1;
+        padding: 18px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+      }
+      .nav-item:hover {
+        background: rgba(240, 50, 50, 0.08);
+        color: var(--text);
+      }
+      .nav-item.active {
+        background: rgba(240, 50, 50, 0.15);
+        color: var(--gold-light);
+      }
+      .nav-item .icon {
+        font-size: 1rem;
+        width: 20px;
+        text-align: center;
+      }
+      .sidebar-footer {
+        padding: 16px 12px;
+        border-top: 1px solid var(--border);
+      }
+      .logout-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        background: transparent;
+        width: 100%;
+      }
+      .logout-btn:hover {
+        color: var(--gold);
+      }
+
+      /* ── Mobile top bar ── */
+      .mobile-topbar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        z-index: 200;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+      }
+      .mobile-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .mobile-logo span {
+        color: var(--gold);
+      }
+      .mobile-user {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+      .user-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        flex-shrink: 0;
+      }
+
+      /* ── Mobile bottom nav ── */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--mobile-nav-h);
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        z-index: 200;
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .mob-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.65rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        padding: 8px 0;
+        position: relative;
+      }
+      .mob-nav-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 20%;
+        right: 20%;
+        height: 2px;
+        border-radius: 0 0 2px 2px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transition: transform 0.2s;
+      }
+      .mob-nav-item.active {
+        color: var(--gold-light);
+      }
+      .mob-nav-item.active::after {
+        transform: scaleX(1);
+      }
+      .mob-nav-item .mob-icon {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .mob-nav-logout {
+        flex: 0 0 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        border: none;
+        border-left: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 0.65rem;
+        cursor: pointer;
+        padding: 8px 0;
+        font-family: "DM Sans", sans-serif;
+      }
+      .mob-nav-logout:hover {
+        color: var(--gold);
+      }
+      .mob-nav-logout .mob-icon {
+        font-size: 1.2rem;
+      }
+
+      /* ── Main area ── */
+      .main {
+        margin-left: 230px;
+        min-height: 100vh;
+        padding: 32px 36px;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+      }
+      .page-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .user-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* ── Stats grid ── */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .stat-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 22px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      }
+      .stat-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .stat-value {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1;
+      }
+      .stat-value.red {
+        color: var(--gold);
+      }
+      .stat-value.green {
+        color: var(--green);
+      }
+      .stat-value.yellow {
+        color: var(--yellow);
+      }
+
+      /* ── Sections ── */
+      .section {
+        display: none;
+      }
+      .section.active {
+        display: block;
+      }
+
+      /* ── Table ── */
+      .table-wrap {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .table-header {
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .table-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .table-controls {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        flex: 1;
+        justify-content: flex-end;
+      }
+      .table-search {
+        padding: 8px 14px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.83rem;
+        outline: none;
+        width: 200px;
+        min-width: 0;
+        transition: border-color 0.2s;
+      }
+      .table-search:focus {
+        border-color: var(--gold);
+      }
+      .table-filter {
+        padding: 8px 12px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.83rem;
+        outline: none;
+        cursor: pointer;
+      }
+
+      /* ── Scrollable table container on mobile ── */
+      .table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 560px;
+      }
+      thead th {
+        padding: 12px 18px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        text-align: left;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        transition: background 0.15s;
+        cursor: pointer;
+      }
+      tbody tr:hover {
+        background: rgba(240, 50, 50, 0.05);
+      }
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+      td {
+        padding: 14px 18px;
+        font-size: 0.84rem;
+        color: var(--text);
+        vertical-align: middle;
+      }
+      .order-id {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        color: var(--gold);
+        font-size: 0.9rem;
+      }
+      .customer-name {
+        font-weight: 600;
+        color: var(--white);
+      }
+      .wilaya-badge {
+        padding: 3px 10px;
+        background: rgba(59, 130, 246, 0.15);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: 20px;
+        font-size: 0.72rem;
+        color: #93c5fd;
+        white-space: nowrap;
+      }
+      .status-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+      .status-new {
+        background: rgba(240, 50, 50, 0.15);
+        color: var(--gold-light);
+        border: 1px solid rgba(240, 50, 50, 0.3);
+      }
+      .status-processing {
+        background: rgba(245, 158, 11, 0.15);
+        color: #fcd34d;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+      .status-shipped {
+        background: rgba(16, 185, 129, 0.15);
+        color: #6ee7b7;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .status-done {
+        background: rgba(107, 114, 128, 0.15);
+        color: #9ca3af;
+        border: 1px solid rgba(107, 114, 128, 0.3);
+      }
+      .items-preview {
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+      .action-btns {
+        display: flex;
+        gap: 6px;
+      }
+      .act-btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 0.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .act-btn:hover {
+        opacity: 0.8;
+      }
+      .act-view {
+        background: rgba(240, 50, 50, 0.2);
+        color: var(--gold-light);
+      }
+      .act-delete {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+      }
+
+      /* ── Mobile card view (replaces table on small screens) ── */
+      .order-cards {
+        display: none;
+        padding: 12px;
+      }
+      .order-card {
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        active-state: none;
+      }
+      .order-card:active {
+        background: rgba(240, 50, 50, 0.08);
+        border-color: rgba(240, 50, 50, 0.3);
+      }
+      .order-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .order-card-id {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        color: var(--gold);
+        font-size: 1rem;
+      }
+      .order-card-name {
+        font-weight: 600;
+        color: var(--white);
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+      }
+      .order-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .order-card-date {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+      }
+      .order-card-items {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+      }
+      .order-card-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .card-act-btn {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        text-align: center;
+      }
+      .card-act-view {
+        background: rgba(240, 50, 50, 0.2);
+        color: var(--gold-light);
+      }
+      .card-act-delete {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        flex: 0 0 40px;
+      }
+
+      /* ── Modal ── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        z-index: 500;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+      .modal-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .modal-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px 16px 0 0;
+        padding: 28px 24px 32px;
+        width: 100%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: translateY(30px);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.open .modal-box {
+        transform: translateY(0);
+      }
+      /* drag handle */
+      .modal-handle {
+        width: 40px;
+        height: 4px;
+        background: var(--border);
+        border-radius: 2px;
+        margin: 0 auto 20px;
+      }
+      .modal-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color 0.2s;
+        padding: 4px;
+      }
+      .modal-close:hover {
+        color: var(--gold);
+      }
+      .detail-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .detail-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        min-width: 100px;
+      }
+      .detail-val {
+        font-size: 0.88rem;
+        color: var(--text);
+        flex: 1;
+      }
+      .detail-val.highlight {
+        color: var(--gold);
+        font-weight: 700;
+      }
+      .items-list {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+      }
+      .item-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .item-thumb {
+        width: 46px;
+        height: 36px;
+        border-radius: 4px;
+        object-fit: cover;
+        background: var(--bg3);
+        flex-shrink: 0;
+      }
+      .item-name {
+        font-size: 0.84rem;
+        color: var(--text);
+        font-weight: 500;
+      }
+      .item-price {
+        font-size: 0.82rem;
+        color: var(--gold);
+        margin-left: auto;
+        white-space: nowrap;
+      }
+      .modal-status-row {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+      }
+      .status-row-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .status-btns-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .status-btn {
+        padding: 10px 8px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+      }
+      .status-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .status-btn.active-btn {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+      }
+
+      /* ── Empty / Loading ── */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+      }
+      .empty-state .big {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+      }
+      .empty-state p {
+        font-size: 0.88rem;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+      }
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--border);
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ── Pagination ── */
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 22px;
+        border-top: 1px solid var(--border);
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+      .pag-btns {
+        display: flex;
+        gap: 4px;
+      }
+      .pag-btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 0.78rem;
+        transition: all 0.2s;
+      }
+      .pag-btn:hover:not(:disabled) {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .pag-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      /* ══════════════ RESPONSIVE ══════════════ */
+
+      /* Tablet (max 1024px) */
+      @media (max-width: 1024px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .main {
+          padding: 28px 24px;
+        }
+      }
+
+      /* Mobile (max 768px) */
+      @media (max-width: 768px) {
+        /* Hide desktop sidebar & topbar title */
+        .sidebar {
+          display: none !important;
+        }
+        .topbar {
+          display: none;
+        }
+
+        /* Show mobile chrome */
+        .mobile-topbar {
+          display: flex;
+        }
+        .mobile-nav {
+          display: flex;
+        }
+
+        .main {
+          margin-left: 0;
+          padding: 72px 12px calc(var(--mobile-nav-h) + 12px);
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+        .stat-card {
+          padding: 16px 14px;
+        }
+        .stat-value {
+          font-size: 1.8rem;
+        }
+        .stat-label {
+          font-size: 0.65rem;
+          margin-bottom: 6px;
+        }
+
+        /* Table header stacks */
+        .table-header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 14px 16px;
+          gap: 10px;
+        }
+        .table-controls {
+          width: 100%;
+          justify-content: stretch;
+        }
+        .table-search {
+          width: 100%;
+          flex: 1;
+        }
+        .table-filter {
+          flex: 1;
+          min-width: 0;
+        }
+
+        /* Hide table, show cards */
+        .table-scroll {
+          display: none;
+        }
+        .order-cards {
+          display: block;
+        }
+
+        /* Modal becomes bottom sheet */
+        .modal-overlay {
+          align-items: flex-end;
+        }
+        .modal-box {
+          border-radius: 16px 16px 0 0;
+          max-height: 92vh;
+          padding: 12px 20px 28px;
+        }
+
+        /* Status buttons full width on mobile */
+        .status-btns-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* Pagination compact */
+        .pagination {
+          padding: 12px 16px;
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Very small phones (max 380px) */
+      @media (max-width: 380px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+        }
+        .stat-value {
+          font-size: 1.6rem;
+        }
+        .main {
+          padding: 68px 10px calc(var(--mobile-nav-h) + 8px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════ LOGIN ══════════════ -->
+    <div id="loginScreen">
+      <div class="login-box">
+        <div class="login-logo">Royal <span>Meubles</span></div>
+        <div class="login-sub">Administration</div>
+        <label class="login-label">Email</label>
+        <input
+          class="login-input"
+          type="email"
+          id="loginEmail"
+          placeholder="admin@royalmeubles.dz"
+          autocomplete="username"
+        />
+        <label class="login-label">Mot de passe</label>
+        <input
+          class="login-input"
+          type="password"
+          id="loginPassword"
+          placeholder="••••••••"
+          autocomplete="current-password"
+        />
+        <button class="login-btn" id="loginBtn" onclick="doLogin()">
+          Se connecter
+        </button>
+        <div class="login-error" id="loginError"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════ DASHBOARD ══════════════ -->
+    <div id="dashboard">
+      <!-- Desktop Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-main">Royal <span>Meubles</span></div>
+          <div class="sidebar-logo-sub">Admin Panel</div>
+        </div>
+        <nav class="sidebar-nav">
+          <button
+            class="nav-item active"
+            onclick="showSection('overview', this)"
+          >
+            <span class="icon">📊</span> Vue d'ensemble
+          </button>
+          <button class="nav-item" onclick="showSection('orders', this)">
+            <span class="icon">📦</span> Commandes
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="doLogout()">
+            <span>⎋</span> Déconnexion
+          </button>
+        </div>
+      </aside>
+
+      <!-- Mobile Top Bar -->
+      <div class="mobile-topbar">
+        <div class="mobile-logo">Royal <span>Meubles</span></div>
+        <div class="mobile-user">
+          <div class="user-dot"></div>
+          <span
+            id="mobileUserEmail"
+            style="
+              max-width: 130px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            "
+          ></span>
+        </div>
+      </div>
+
+      <!-- Mobile Bottom Nav -->
+      <nav class="mobile-nav">
+        <button
+          class="mob-nav-item active"
+          id="mob-btn-overview"
+          onclick="showSection('overview', this, true)"
+        >
+          <span class="mob-icon">📊</span>
+          Vue d'ensemble
+        </button>
+        <button
+          class="mob-nav-item"
+          id="mob-btn-orders"
+          onclick="showSection('orders', this, true)"
+        >
+          <span class="mob-icon">📦</span>
+          Commandes
+        </button>
+        <button class="mob-nav-logout" onclick="doLogout()">
+          <span class="mob-icon">⎋</span>
+          Quitter
+        </button>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main">
+        <!-- Desktop topbar -->
+        <div class="topbar">
+          <div class="page-title" id="mainTitle">Vue d'ensemble</div>
+          <div class="user-badge">
+            <div class="user-dot"></div>
+            <span id="userEmail">admin</span>
+          </div>
+        </div>
+
+        <!-- ── Overview ── -->
+        <div class="section active" id="sec-overview">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total commandes</div>
+              <div class="stat-value" id="stat-total">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Nouvelles</div>
+              <div class="stat-value red" id="stat-new">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">En traitement</div>
+              <div class="stat-value yellow" id="stat-proc">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Expédiées</div>
+              <div class="stat-value green" id="stat-ship">—</div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <div class="table-header">
+              <span class="table-title">Dernières commandes</span>
+            </div>
+            <!-- Desktop table -->
+            <div class="table-scroll" id="recentTableWrap">
+              <div class="loading">
+                <span class="spinner"></span> Chargement...
+              </div>
+            </div>
+            <!-- Mobile cards -->
+            <div class="order-cards" id="recentCardsWrap"></div>
+          </div>
+        </div>
+
+        <!-- ── All Orders ── -->
+        <div class="section" id="sec-orders">
+          <div class="table-wrap">
+            <div class="table-header">
+              <span class="table-title">Toutes les commandes</span>
+              <div class="table-controls">
+                <input
+                  class="table-search"
+                  type="text"
+                  placeholder="Rechercher..."
+                  id="searchInput"
+                  oninput="filterTable()"
+                />
+                <select
+                  class="table-filter"
+                  id="statusFilter"
+                  onchange="filterTable()"
+                >
+                  <option value="">Tous les statuts</option>
+                  <option value="new">Nouvelle</option>
+                  <option value="processing">En traitement</option>
+                  <option value="shipped">Expédiée</option>
+                  <option value="done">Terminée</option>
+                </select>
+              </div>
+            </div>
+            <!-- Desktop table -->
+            <div class="table-scroll" id="allTableWrap">
+              <div class="loading">
+                <span class="spinner"></span> Chargement...
+              </div>
+            </div>
+            <!-- Mobile cards -->
+            <div class="order-cards" id="allCardsWrap"></div>
+
+            <div class="pagination" id="paginationRow" style="display: none">
+              <span id="pagInfo"></span>
+              <div class="pag-btns">
+                <button class="pag-btn" id="pagPrev" onclick="changePage(-1)">
+                  ← Préc
+                </button>
+                <button class="pag-btn" id="pagNext" onclick="changePage(1)">
+                  Suiv →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ══════════════ ORDER MODAL ══════════════ -->
+    <div class="modal-overlay" id="orderModal">
+      <div class="modal-box">
+        <div class="modal-handle"></div>
+        <div class="modal-title">
+          Commande <span id="modalOrderId" style="color: var(--gold)"></span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <script>
+      // ══════════════════════════════════════
+      // ⚠️ REPLACE WITH YOUR SUPABASE CREDENTIALS
+      // ══════════════════════════════════════
+      const SUPABASE_URL = "https://tmtglbjxxjytszafacvb.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "sb_publishable_38ZMIGL1mLFrl9yJv3oX3A_0RTKX1SH";
+      // ══════════════════════════════════════
+
+      const { createClient } = supabase;
+      const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      let allOrders = [];
+      let filteredOrders = [];
+      let currentPage = 1;
+      const PER_PAGE = 15;
+
+      // ── AUTH ──
+      async function doLogin() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const pass = document.getElementById("loginPassword").value;
+        const btn = document.getElementById("loginBtn");
+        const err = document.getElementById("loginError");
+        err.style.display = "none";
+        btn.disabled = true;
+        btn.textContent = "Connexion...";
+        const { data, error } = await sb.auth.signInWithPassword({
+          email,
+          password: pass,
+        });
+        if (error) {
+          err.textContent = "Email ou mot de passe incorrect.";
+          err.style.display = "block";
+          btn.disabled = false;
+          btn.textContent = "Se connecter";
+          return;
+        }
+        showDashboard(data.user);
+      }
+      async function doLogout() {
+        await sb.auth.signOut();
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("loginScreen").style.display = "flex";
+      }
+      async function checkSession() {
+        const {
+          data: { session },
+        } = await sb.auth.getSession();
+        if (session) showDashboard(session.user);
+      }
+      function showDashboard(user) {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("userEmail").textContent = user.email;
+        document.getElementById("mobileUserEmail").textContent = user.email;
+        loadOrders();
+      }
+
+      // ── NAVIGATION ──
+      let activeSection = "overview";
+      function showSection(name, el, isMobile = false) {
+        activeSection = name;
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("sec-" + name).classList.add("active");
+
+        if (isMobile) {
+          document
+            .querySelectorAll(".mob-nav-item")
+            .forEach((n) => n.classList.remove("active"));
+          if (el) el.classList.add("active");
+        } else {
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((n) => n.classList.remove("active"));
+          if (el) el.classList.add("active");
+          // also sync mobile
+          document
+            .querySelectorAll(".mob-nav-item")
+            .forEach((n) => n.classList.remove("active"));
+          const mob = document.getElementById("mob-btn-" + name);
+          if (mob) mob.classList.add("active");
+        }
+
+        const titles = { overview: "Vue d'ensemble", orders: "Commandes" };
+        document.getElementById("mainTitle").textContent = titles[name] || name;
+      }
+
+      // ── LOAD ORDERS ──
+      async function loadOrders() {
+        const { data, error } = await sb
+          .from("orders")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          document.getElementById("recentTableWrap").innerHTML =
+            '<div class="loading" style="color:#f87171">Erreur de chargement.</div>';
+          return;
+        }
+        allOrders = data || [];
+        filteredOrders = [...allOrders];
+        updateStats();
+        renderRecentOrders();
+        renderAllOrders();
+      }
+
+      function updateStats() {
+        document.getElementById("stat-total").textContent = allOrders.length;
+        document.getElementById("stat-new").textContent = allOrders.filter(
+          (o) => o.status === "new",
+        ).length;
+        document.getElementById("stat-proc").textContent = allOrders.filter(
+          (o) => o.status === "processing",
+        ).length;
+        document.getElementById("stat-ship").textContent = allOrders.filter(
+          (o) => o.status === "shipped",
+        ).length;
+      }
+
+      // ── HELPERS ──
+      function statusLabel(s) {
+        return (
+          {
+            new: "Nouvelle",
+            processing: "En traitement",
+            shipped: "Expédiée",
+            done: "Terminée",
+          }[s] || s
+        );
+      }
+      function statusClass(s) {
+        return (
+          {
+            new: "status-new",
+            processing: "status-processing",
+            shipped: "status-shipped",
+            done: "status-done",
+          }[s] || "status-new"
+        );
+      }
+      function fmtDate(dt) {
+        return new Date(dt).toLocaleDateString("fr-FR", {
+          day: "2-digit",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      // ── TABLE ROW (desktop) ──
+      function orderRowHTML(o, showActions = true) {
+        const items = o.items || [];
+        const itemNames = items.map((i) => i.name).join(", ");
+        return `<tr onclick="openOrder('${o.id}')">
+    <td><span class="order-id">#${o.id.slice(-6).toUpperCase()}</span></td>
+    <td><span class="customer-name">${o.full_name || "—"}</span></td>
+    <td><span class="wilaya-badge">${o.wilaya || "—"}</span></td>
+    <td><span class="items-preview">${itemNames || "—"}</span></td>
+    <td style="white-space:nowrap;font-size:0.78rem;color:var(--text-muted)">${fmtDate(o.created_at)}</td>
+    <td><span class="status-badge ${statusClass(o.status)}">${statusLabel(o.status)}</span></td>
+    ${
+      showActions
+        ? `<td><div class="action-btns">
+      <button class="act-btn act-view"   onclick="event.stopPropagation();openOrder('${o.id}')">Voir</button>
+      <button class="act-btn act-delete" onclick="event.stopPropagation();deleteOrder('${o.id}')">✕</button>
+    </div></td>`
+        : ""
+    }
+  </tr>`;
+      }
+
+      // ── MOBILE CARD ──
+      function orderCardHTML(o, showActions = true) {
+        const items = o.items || [];
+        const itemNames = items.map((i) => i.name).join(", ");
+        return `<div class="order-card" onclick="openOrder('${o.id}')">
+    <div class="order-card-top">
+      <span class="order-card-id">#${o.id.slice(-6).toUpperCase()}</span>
+      <span class="status-badge ${statusClass(o.status)}">${statusLabel(o.status)}</span>
+    </div>
+    <div class="order-card-name">${o.full_name || "—"}</div>
+    <div class="order-card-meta">
+      <span class="wilaya-badge">${o.wilaya || "—"}</span>
+      <span class="order-card-date">${fmtDate(o.created_at)}</span>
+    </div>
+    <div class="order-card-items">${itemNames || "—"}</div>
+    ${
+      showActions
+        ? `<div class="order-card-actions">
+      <button class="card-act-btn card-act-view" onclick="event.stopPropagation();openOrder('${o.id}')">👁 Voir détails</button>
+      <button class="card-act-btn card-act-delete" onclick="event.stopPropagation();deleteOrder('${o.id}')">✕</button>
+    </div>`
+        : ""
+    }
+  </div>`;
+      }
+
+      // ── RENDER RECENT ──
+      function renderRecentOrders() {
+        const recent = allOrders.slice(0, 8);
+
+        if (!recent.length) {
+          const emptyHTML =
+            '<div class="empty-state"><div class="big">📭</div><p>Aucune commande pour l\'instant</p></div>';
+          document.getElementById("recentTableWrap").innerHTML = emptyHTML;
+          document.getElementById("recentCardsWrap").innerHTML = emptyHTML;
+          return;
+        }
+
+        // Desktop table
+        document.getElementById("recentTableWrap").innerHTML = `
+    <table>
+      <thead><tr><th>N°</th><th>Client</th><th>Wilaya</th><th>Produits</th><th>Date</th><th>Statut</th></tr></thead>
+      <tbody>${recent.map((o) => orderRowHTML(o, false)).join("")}</tbody>
+    </table>`;
+
+        // Mobile cards
+        document.getElementById("recentCardsWrap").innerHTML = recent
+          .map((o) => orderCardHTML(o, false))
+          .join("");
+      }
+
+      // ── RENDER ALL ORDERS ──
+      function renderAllOrders() {
+        const start = (currentPage - 1) * PER_PAGE;
+        const page = filteredOrders.slice(start, start + PER_PAGE);
+        const total = filteredOrders.length;
+
+        if (!total) {
+          const emptyHTML =
+            '<div class="empty-state"><div class="big">📭</div><p>Aucune commande trouvée</p></div>';
+          document.getElementById("allTableWrap").innerHTML = emptyHTML;
+          document.getElementById("allCardsWrap").innerHTML = emptyHTML;
+          document.getElementById("paginationRow").style.display = "none";
+          return;
+        }
+
+        // Desktop table
+        document.getElementById("allTableWrap").innerHTML = `
+    <table>
+      <thead><tr><th>N°</th><th>Client</th><th>Wilaya</th><th>Produits</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody>${page.map((o) => orderRowHTML(o, true)).join("")}</tbody>
+    </table>`;
+
+        // Mobile cards
+        document.getElementById("allCardsWrap").innerHTML = page
+          .map((o) => orderCardHTML(o, true))
+          .join("");
+
+        // Pagination
+        document.getElementById("paginationRow").style.display = "flex";
+        document.getElementById("pagInfo").textContent =
+          `${start + 1}–${Math.min(start + PER_PAGE, total)} sur ${total}`;
+        document.getElementById("pagPrev").disabled = currentPage === 1;
+        document.getElementById("pagNext").disabled = start + PER_PAGE >= total;
+      }
+
+      function changePage(dir) {
+        currentPage += dir;
+        renderAllOrders();
+      }
+
+      function filterTable() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const st = document.getElementById("statusFilter").value;
+        filteredOrders = allOrders.filter((o) => {
+          const matchQ =
+            !q ||
+            (o.full_name || "").toLowerCase().includes(q) ||
+            (o.wilaya || "").toLowerCase().includes(q) ||
+            o.id.toLowerCase().includes(q);
+          const matchS = !st || o.status === st;
+          return matchQ && matchS;
+        });
+        currentPage = 1;
+        renderAllOrders();
+      }
+
+      // ── MODAL ──
+      function openOrder(id) {
+        const o = allOrders.find((x) => x.id === id);
+        if (!o) return;
+        document.getElementById("modalOrderId").textContent =
+          "#" + o.id.slice(-6).toUpperCase();
+        const items = o.items || [];
+        const date = new Date(o.created_at).toLocaleString("fr-FR");
+
+        document.getElementById("modalContent").innerHTML = `
+    <div class="detail-row"><span class="detail-label">Client</span><span class="detail-val highlight">${o.full_name || "—"}</span></div>
+    <div class="detail-row"><span class="detail-label">Téléphone</span><span class="detail-val">${o.phone || "—"}</span></div>
+    <div class="detail-row"><span class="detail-label">Wilaya</span><span class="detail-val">${o.wilaya || "—"}</span></div>
+    <div class="detail-row"><span class="detail-label">Adresse</span><span class="detail-val">${o.address || "—"}</span></div>
+    <div class="detail-row"><span class="detail-label">Date</span><span class="detail-val">${date}</span></div>
+    <div class="detail-row"><span class="detail-label">Statut</span><span class="detail-val"><span class="status-badge ${statusClass(o.status)}">${statusLabel(o.status)}</span></span></div>
+    ${o.notes ? `<div class="detail-row"><span class="detail-label">Notes</span><span class="detail-val">${o.notes}</span></div>` : ""}
+    <div class="items-list">
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Produits (${items.length})</div>
+      ${items
+        .map(
+          (it) => `
+        <div class="item-row">
+          ${it.img ? `<img class="item-thumb" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}
+          <div class="item-name">${it.name}</div>
+          <div class="item-price">${it.price || ""}</div>
+        </div>`,
+        )
+        .join("")}
+    </div>
+    <div class="modal-status-row">
+      <div class="status-row-label">Changer le statut</div>
+      <div class="status-btns-grid">
+        ${["new", "processing", "shipped", "done"]
+          .map(
+            (s) =>
+              `<button class="status-btn ${o.status === s ? "active-btn" : ""}" onclick="updateStatus('${id}','${s}')">${statusLabel(s)}</button>`,
+          )
+          .join("")}
+      </div>
+    </div>`;
+
+        document.getElementById("orderModal").classList.add("open");
+      }
+
+      function closeModal() {
+        document.getElementById("orderModal").classList.remove("open");
+      }
+
+      // Close modal on backdrop tap
+      document.getElementById("orderModal").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("orderModal")) closeModal();
+      });
+
+      // Swipe down to close on mobile
+      let touchStartY = 0;
+      document.querySelector(".modal-box").addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartY = e.touches[0].clientY;
+        },
+        { passive: true },
+      );
+      document.querySelector(".modal-box").addEventListener(
+        "touchend",
+        (e) => {
+          const diff = e.changedTouches[0].clientY - touchStartY;
+          if (diff > 80) closeModal();
+        },
+        { passive: true },
+      );
+
+      async function updateStatus(id, status) {
+        await sb.from("orders").update({ status }).eq("id", id);
+        allOrders = allOrders.map((x) => (x.id === id ? { ...x, status } : x));
+        filteredOrders = filteredOrders.map((x) =>
+          x.id === id ? { ...x, status } : x,
+        );
+        updateStats();
+        renderRecentOrders();
+        renderAllOrders();
+        openOrder(id);
+      }
+
+      async function deleteOrder(id) {
+        if (!confirm("Supprimer cette commande ?")) return;
+        await sb.from("orders").delete().eq("id", id);
+        allOrders = allOrders.filter((x) => x.id !== id);
+        filteredOrders = filteredOrders.filter((x) => x.id !== id);
+        updateStats();
+        renderRecentOrders();
+        renderAllOrders();
+        closeModal();
+      }
+
+      // ── INIT ──
+      checkSession();
+    </script>
+
+      <script>
+
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+            e.preventDefault();
+            return false;
+        }
+
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
+
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
+
+    setInterval(devToolsCheck, 1000);
+
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
+</script>
+  </body>
+</html>

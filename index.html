@@ -16,42 +16,34 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-      /* RTL arrows fix */
-html[dir="rtl"] .cat-arrow {
-  left: auto;
-  right: 16px;
-}
+      html[dir="rtl"] .cat-arrow {
+        left: auto;
+        right: 16px;
+      }
+      html[dir="rtl"] .pmodal-img-arrow.prev {
+        left: auto;
+        right: 12px;
+      }
+      html[dir="rtl"] .pmodal-img-arrow.next {
+        right: auto;
+        left: 12px;
+      }
+      html[dir="rtl"] .pmodal-thumb-nav {
+        transform: rotate(180deg);
+      }
+      html[dir="rtl"] .footer-col ul li a {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+      html[dir="rtl"] .footer-col ul li a::before {
+        content: "←";
+      }
+      html[dir="rtl"] [data-ar*="←"] {
+        direction: rtl;
+      }
 
-/* Product modal arrows RTL */
-html[dir="rtl"] .pmodal-img-arrow.prev {
-  left: auto;
-  right: 12px;
-}
-
-html[dir="rtl"] .pmodal-img-arrow.next {
-  right: auto;
-  left: 12px;
-}
-
-html[dir="rtl"] .pmodal-thumb-nav {
-  transform: rotate(180deg);
-}
-
-/* Footer arrows RTL */
-html[dir="rtl"] .footer-col ul li a {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
-html[dir="rtl"] .footer-col ul li a::before {
-  content: "←";
-}
-
-/* Buttons arrows in RTL */
-html[dir="rtl"] [data-ar*="←"] {
-  direction: rtl;
-}
       :root {
         --gold: #f03232;
         --gold-light: #ff6b6b;
@@ -195,6 +187,266 @@ html[dir="rtl"] [data-ar*="←"] {
           transform: translateX(-50%);
         }
       }
+      @keyframes cartBounce {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        30% {
+          transform: scale(1.35);
+        }
+        60% {
+          transform: scale(0.9);
+        }
+      }
+
+      /* ═══ SUCCESS POPUP MODAL ═══ */
+      .success-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 6, 18, 0.88);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        z-index: 3000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          visibility 0.4s;
+      }
+      .success-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .success-popup {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 0;
+        width: min(520px, 100%);
+        box-shadow:
+          0 60px 120px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(240, 50, 50, 0.15);
+        transform: translateY(40px) scale(0.95);
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        position: relative;
+      }
+      .success-overlay.open .success-popup {
+        transform: translateY(0) scale(1);
+      }
+      .success-popup-header {
+        background: linear-gradient(
+          135deg,
+          var(--gold-dark),
+          var(--gold),
+          var(--gold-light)
+        );
+        padding: 36px 32px 28px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .success-popup-header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .success-checkmark {
+        width: 72px;
+        height: 72px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 2rem;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        position: relative;
+        z-index: 1;
+      }
+      .success-popup-title {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 6px;
+        position: relative;
+        z-index: 1;
+      }
+      html[lang="ar"] .success-popup-title {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .success-popup-subtitle {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.82);
+        position: relative;
+        z-index: 1;
+      }
+      .success-popup-body {
+        padding: 28px 32px;
+        overflow: scroll;
+        height: 53vh;
+      }
+      .success-order-summary {
+        background: var(--gray-light);
+        border: 1px solid var(--beige-mid);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .success-summary-title {
+        font-family: var(--font-display);
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      html[lang="ar"] .success-summary-title {
+        font-family: "Noto Naskh Arabic", serif;
+        letter-spacing: 0;
+      }
+      .success-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--beige-mid);
+        font-size: 0.84rem;
+      }
+      .success-info-row:last-child {
+        border-bottom: none;
+      }
+      .success-info-label {
+        color: var(--text-light);
+        flex-shrink: 0;
+      }
+      .success-info-value {
+        color: var(--text-dark);
+        font-weight: 700;
+        text-align: end;
+      }
+      .success-items-list {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--beige-mid);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .success-item-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.82rem;
+      }
+      .success-item-img {
+        width: 44px;
+        height: 36px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: var(--beige);
+      }
+      .success-item-name {
+        color: var(--text-dark);
+        font-weight: 600;
+        flex: 1;
+      }
+      .success-item-price {
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .success-note-box {
+        background: linear-gradient(
+          135deg,
+          rgba(240, 50, 50, 0.06),
+          rgba(240, 50, 50, 0.03)
+        );
+        border: 1px solid rgba(240, 50, 50, 0.18);
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 0.83rem;
+        color: var(--text-mid);
+        line-height: 1.75;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .success-note-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .success-popup-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .success-popup-actions .btn {
+        flex: 1;
+        min-width: 130px;
+        justify-content: center;
+      }
+      .success-close-x {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 34px;
+        height: 34px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        z-index: 10;
+      }
+      html[dir="rtl"] .success-close-x {
+        right: auto;
+        left: 14px;
+      }
+      .success-close-x:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      /* ═══ CONFETTI ANIMATION ═══ */
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-20px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(600px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      .confetti-piece {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        pointer-events: none;
+        z-index: 4000;
+        animation: confetti-fall linear forwards;
+      }
 
       .reveal {
         opacity: 0;
@@ -229,7 +481,6 @@ html[dir="rtl"] [data-ar*="←"] {
       .container {
         width: min(100% - 32px, 1200px);
         margin-inline: auto;
-        padding-inline: 0;
       }
       html,
       body {
@@ -398,6 +649,265 @@ html[dir="rtl"] [data-ar*="←"] {
       .lang-btn[data-lang="ar"] {
         font-family: "Tajawal", sans-serif;
         font-size: 0.82rem;
+      }
+
+      .cart-btn {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background: rgba(240, 50, 50, 0.1);
+        border: 1.5px solid rgba(240, 50, 50, 0.3);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex-shrink: 0;
+      }
+      .cart-btn:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+      .cart-btn svg {
+        width: 18px;
+        height: 18px;
+        color: var(--gold);
+        transition: color 0.3s;
+      }
+      .cart-btn:hover svg {
+        color: white;
+      }
+      .cart-count {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        min-width: 18px;
+        height: 18px;
+        background: var(--gold);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        border-radius: 10px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+      }
+      .cart-count.visible {
+        display: flex;
+        animation: cartBounce 0.4s var(--transition);
+      }
+
+      .cart-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 25, 39, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 1400;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.35s;
+      }
+      .cart-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(90vw, 400px);
+        height: 100dvh;
+        background: var(--cream);
+        z-index: 1500;
+        display: flex;
+        flex-direction: column;
+        box-shadow: -20px 0 60px rgba(20, 25, 39, 0.2);
+        transform: translateX(100%);
+        transition: transform 0.4s var(--transition);
+      }
+      html[dir="rtl"] .cart-drawer {
+        right: auto;
+        left: 0;
+        transform: translateX(-100%);
+        box-shadow: 20px 0 60px rgba(20, 25, 39, 0.2);
+      }
+      .cart-overlay.open .cart-drawer {
+        transform: translateX(0);
+      }
+      .cart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 22px;
+        border-bottom: 1px solid var(--beige-mid);
+        flex-shrink: 0;
+      }
+      .cart-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+      html[lang="ar"] .cart-title {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .cart-close {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--beige-mid);
+        background: white;
+        color: var(--text-mid);
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .cart-close:hover {
+        background: var(--gold);
+        color: white;
+        border-color: var(--gold);
+      }
+      .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      .cart-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-light);
+      }
+      .cart-empty-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+      }
+      .cart-empty p {
+        font-size: 0.88rem;
+      }
+      .cart-item {
+        display: flex;
+        gap: 12px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--beige);
+        position: relative;
+      }
+      .cart-item-img {
+        width: 68px;
+        height: 56px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: var(--beige);
+      }
+      .cart-item-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .cart-item-name {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      html[lang="ar"] .cart-item-name {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .cart-item-cat {
+        font-size: 0.72rem;
+        color: var(--gold);
+        font-style: italic;
+        margin-bottom: 6px;
+      }
+      html[lang="ar"] .cart-item-cat {
+        font-style: normal;
+      }
+      .cart-item-price {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--gold);
+      }
+      html[lang="ar"] .cart-item-price {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .cart-item-remove {
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid var(--beige-mid);
+        background: white;
+        color: var(--text-light);
+        font-size: 0.75rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      html[dir="rtl"] .cart-item-remove {
+        right: auto;
+        left: 0;
+      }
+      .cart-item-remove:hover {
+        background: #fee2e2;
+        color: #ef4444;
+        border-color: #fca5a5;
+      }
+      .cart-footer {
+        padding: 18px 22px;
+        border-top: 1px solid var(--beige-mid);
+        flex-shrink: 0;
+        background: white;
+      }
+      .cart-total-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+      .cart-total-label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-mid);
+      }
+      .cart-total-val {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+      .cart-checkout-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        color: white;
+        border: none;
+        border-radius: 2px;
+        font-family: var(--font-body);
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .cart-checkout-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px var(--shadow-gold);
       }
 
       .navbar {
@@ -646,7 +1156,6 @@ html[dir="rtl"] [data-ar*="←"] {
         padding: 14px;
       }
 
-      /* HERO */
       .hero {
         min-height: 100svh;
         position: relative;
@@ -811,7 +1320,6 @@ html[dir="rtl"] [data-ar*="←"] {
         z-index: 3;
       }
 
-      /* MARQUEE */
       .marquee-strip {
         direction: ltr;
         background: var(--brown-dark);
@@ -845,7 +1353,6 @@ html[dir="rtl"] [data-ar*="←"] {
         color: var(--gold);
       }
 
-      /* CATEGORIES */
       .categories {
         padding: 90px 0;
         background: var(--gray-light);
@@ -959,7 +1466,6 @@ html[dir="rtl"] [data-ar*="←"] {
         transform: scale(1);
       }
 
-      /* PRODUCTS */
       .products {
         padding: 90px 0;
         background: var(--cream);
@@ -1135,7 +1641,32 @@ html[dir="rtl"] [data-ar*="←"] {
         font-size: 0.8rem;
       }
 
-      /* FEATURES */
+      .cart-toast {
+        position: fixed;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%) translateY(30px);
+        background: var(--brown-dark);
+        color: white;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 2000;
+        opacity: 0;
+        transition: all 0.35s var(--transition);
+        white-space: nowrap;
+        border: 1px solid rgba(240, 50, 50, 0.3);
+        pointer-events: none;
+      }
+      .cart-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
       .features-strip {
         padding: 70px 0;
         background: var(--brown-dark);
@@ -1190,7 +1721,6 @@ html[dir="rtl"] [data-ar*="←"] {
         line-height: 1.8;
       }
 
-      /* TESTIMONIALS */
       .testimonials {
         padding: 90px 0;
       }
@@ -1285,7 +1815,6 @@ html[dir="rtl"] [data-ar*="←"] {
         margin-top: 2px;
       }
 
-      /* OFFERS */
       .offers {
         padding: 90px 0;
         background: var(--gray-light);
@@ -1376,7 +1905,6 @@ html[dir="rtl"] [data-ar*="←"] {
         color: var(--gold);
       }
 
-      /* CTA */
       .cta-section {
         padding: 0;
         position: relative;
@@ -1406,29 +1934,6 @@ html[dir="rtl"] [data-ar*="←"] {
         );
         z-index: 1;
       }
-      .cta-video-grain {
-        position: absolute;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-        z-index: 2;
-        pointer-events: none;
-        opacity: 0.35;
-      }
-      .cta-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 4px;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--gold),
-          transparent
-        );
-        z-index: 3;
-      }
       .cta-content {
         position: relative;
         z-index: 4;
@@ -1437,7 +1942,176 @@ html[dir="rtl"] [data-ar*="←"] {
         text-align: center;
       }
 
-      /* FOOTER */
+      /* ═══ CHECKOUT PAGE ═══ */
+      #page-checkout {
+        background: var(--gray-light);
+      }
+      .checkout-wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+      }
+      .checkout-grid {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 28px;
+        align-items: start;
+      }
+      .checkout-form-box {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--beige-mid);
+        padding: 32px;
+      }
+      .checkout-order-box {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--beige-mid);
+        padding: 24px;
+        position: sticky;
+        top: 100px;
+      }
+      .form-section-title {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 22px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--beige-mid);
+      }
+      html[lang="ar"] .form-section-title {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .form-row {
+        margin-bottom: 18px;
+      }
+      .form-label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text-mid);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+      }
+      .form-label span {
+        color: var(--gold);
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1.5px solid var(--beige-mid);
+        border-radius: 4px;
+        font-family: var(--font-body);
+        font-size: 0.92rem;
+        color: var(--text-dark);
+        background: var(--cream);
+        outline: none;
+        transition: border-color 0.25s;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: var(--gold);
+        background: white;
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-2col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .checkout-submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .checkout-submit-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px var(--shadow-gold);
+      }
+      .checkout-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .order-summary-title {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--beige-mid);
+      }
+      html[lang="ar"] .order-summary-title {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      .summary-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--beige);
+      }
+      .summary-img {
+        width: 52px;
+        height: 42px;
+        border-radius: 4px;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: var(--beige);
+      }
+      .summary-name {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        flex: 1;
+      }
+      .summary-price {
+        font-size: 0.84rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+        direction: ltr;
+      }
+      .summary-count {
+        margin-top: 14px;
+        padding-top: 10px;
+        font-size: 0.82rem;
+        color: var(--text-light);
+        text-align: center;
+      }
+      .payment-badge {
+        margin-top: 18px;
+        padding: 12px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 6px;
+        text-align: center;
+        font-size: 0.82rem;
+        color: #10b981;
+        font-weight: 600;
+      }
+
       .footer {
         background: var(--brown-dark);
         color: rgba(255, 255, 255, 0.65);
@@ -1554,7 +2228,6 @@ html[dir="rtl"] [data-ar*="←"] {
         font-style: normal;
       }
 
-      /* WHATSAPP FLOAT */
       .whatsapp-float {
         position: fixed;
         bottom: 28px;
@@ -1621,7 +2294,6 @@ html[dir="rtl"] [data-ar*="←"] {
         display: block;
       }
 
-      /* LOGO */
       .logo-main img,
       .logo img,
       .footer-brand img,
@@ -1640,9 +2312,7 @@ html[dir="rtl"] [data-ar*="←"] {
         max-width: 160px;
       }
 
-      /* ================================================================
-         PRODUCT MODAL — with scrollable gallery
-         ================================================================ */
+      /* Product modal */
       .pmodal-overlay {
         position: fixed;
         inset: 0;
@@ -1664,26 +2334,22 @@ html[dir="rtl"] [data-ar*="←"] {
         opacity: 1;
         visibility: visible;
       }
-
-      /* Modal wrapper */
       .pmodal {
         background: var(--cream);
         border-radius: 10px;
-        width: min(1040px, 100%);
+        width: min(840px, 100%);
         max-height: 100dvh;
         overflow: hidden;
         display: grid;
         grid-template-columns: 1.15fr 1fr;
         box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6);
-        transform: translateY(30px) scale(0.97);
+        transform: translateY(11px) scale(0.78);
         transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
       }
       .pmodal-overlay.open .pmodal {
-        transform: translateY(0) scale(1);
+        /* transform: translateY(0) scale(1); */
       }
-
-      /* Close btn */
       .pmodal-close {
         position: absolute;
         top: 14px;
@@ -1707,8 +2373,6 @@ html[dir="rtl"] [data-ar*="←"] {
         color: #fff;
         transform: rotate(90deg);
       }
-
-      /* ── LEFT: gallery column ── */
       .pmodal-gallery {
         display: flex;
         flex-direction: column;
@@ -1716,8 +2380,6 @@ html[dir="rtl"] [data-ar*="←"] {
         overflow: hidden;
         min-height: 0;
       }
-
-      /* Main big image */
       .pmodal-main-img-wrap {
         position: relative;
         flex: 1;
@@ -1774,8 +2436,6 @@ html[dir="rtl"] [data-ar*="←"] {
       .pmodal-badge.badge-sale {
         background: #c0392b;
       }
-
-      /* img counter */
       .pmodal-img-counter {
         position: absolute;
         bottom: 12px;
@@ -1790,8 +2450,6 @@ html[dir="rtl"] [data-ar*="←"] {
         z-index: 2;
         pointer-events: none;
       }
-
-      /* Arrow nav on main image */
       .pmodal-img-arrow {
         position: absolute;
         top: 50%;
@@ -1829,8 +2487,6 @@ html[dir="rtl"] [data-ar*="←"] {
         opacity: 0 !important;
         pointer-events: none;
       }
-
-      /* ── THUMBNAILS STRIP ── */
       .pmodal-thumbs-strip {
         flex-shrink: 0;
         background: rgba(8, 6, 18, 0.94);
@@ -1840,7 +2496,6 @@ html[dir="rtl"] [data-ar*="←"] {
         align-items: center;
         gap: 6px;
       }
-
       .pmodal-thumb-nav {
         width: 26px;
         height: 26px;
@@ -1867,7 +2522,6 @@ html[dir="rtl"] [data-ar*="←"] {
         opacity: 0.15;
         pointer-events: none;
       }
-
       .pmodal-thumbs-outer {
         flex: 1;
         overflow: hidden;
@@ -1891,7 +2545,6 @@ html[dir="rtl"] [data-ar*="←"] {
         right: 0;
         background: linear-gradient(to left, rgba(8, 6, 18, 0.9), transparent);
       }
-
       .pmodal-thumbs-track {
         display: flex;
         gap: 7px;
@@ -1899,7 +2552,6 @@ html[dir="rtl"] [data-ar*="←"] {
         will-change: transform;
         padding: 2px 3px;
       }
-
       .pmodal-thumb {
         flex-shrink: 0;
         width: 68px;
@@ -1917,7 +2569,6 @@ html[dir="rtl"] [data-ar*="←"] {
         opacity: 1;
         transform: translateY(-3px);
       }
-
       .pmodal-thumb-img-wrap {
         width: 68px;
         height: 54px;
@@ -1941,7 +2592,6 @@ html[dir="rtl"] [data-ar*="←"] {
       .pmodal-thumb:hover img {
         transform: scale(1.08);
       }
-
       .pmodal-thumb-label {
         font-size: 0.56rem;
         color: rgba(255, 255, 255, 0.32);
@@ -1957,13 +2607,11 @@ html[dir="rtl"] [data-ar*="←"] {
         color: var(--gold-light);
         font-weight: 700;
       }
-
-      /* ── RIGHT: info (scrollable) ── */
       .pmodal-info {
         padding: 36px 30px 28px;
         display: flex;
         flex-direction: column;
-        overflow-y: auto; /* ← scrollable */
+        overflow-y: auto;
         max-height: 92dvh;
         overscroll-behavior: contain;
       }
@@ -1974,7 +2622,6 @@ html[dir="rtl"] [data-ar*="←"] {
         background: var(--gold);
         border-radius: 2px;
       }
-
       .pmodal-cat {
         font-family: var(--font-serif);
         font-style: italic;
@@ -2054,9 +2701,6 @@ html[dir="rtl"] [data-ar*="←"] {
         min-width: 130px;
       }
 
-      /* ================================================================
-         RESPONSIVE
-         ================================================================ */
       @media (max-width: 1024px) {
         .categories-grid {
           grid-template-columns: 1fr 1fr;
@@ -2090,8 +2734,11 @@ html[dir="rtl"] [data-ar*="←"] {
           grid-template-columns: 1fr 1fr;
           gap: 40px;
         }
-        .container {
-          width: min(100% - 28px, 1200px);
+        .checkout-grid {
+          grid-template-columns: 1fr;
+        }
+        .checkout-order-box {
+          position: static;
         }
       }
       @media (max-width: 768px) {
@@ -2126,17 +2773,6 @@ html[dir="rtl"] [data-ar*="←"] {
         .hero-title {
           font-size: clamp(2rem, 8vw, 2.8rem);
         }
-        .hero-stats {
-          gap: 18px;
-          margin-top: 36px;
-          padding-top: 28px;
-        }
-        .stat-num {
-          font-size: 1.7rem;
-        }
-        .hero-scroll-indicator {
-          display: none;
-        }
         .categories {
           padding: 60px 0;
         }
@@ -2159,12 +2795,6 @@ html[dir="rtl"] [data-ar*="←"] {
         }
         .product-desc {
           display: none;
-        }
-        .product-price {
-          font-size: 1.05rem;
-        }
-        .features-strip {
-          padding: 50px 0;
         }
         .features-grid {
           grid-template-columns: 1fr 1fr;
@@ -2211,29 +2841,11 @@ html[dir="rtl"] [data-ar*="←"] {
           padding-bottom: 6px;
           gap: 6px;
         }
-        .filter-tabs::-webkit-scrollbar {
-          height: 3px;
-        }
-        .filter-tabs::-webkit-scrollbar-thumb {
-          background: var(--gold);
-        }
         .filter-tab {
           flex-shrink: 0;
           padding: 7px 14px;
           font-size: 0.8rem;
         }
-        .section-title {
-          font-size: clamp(1.5rem, 6vw, 2.2rem);
-        }
-        .whatsapp-float {
-          bottom: 18px;
-          left: 18px;
-        }
-        .whatsapp-btn {
-          width: 48px;
-          height: 48px;
-        }
-        /* Modal mobile */
         .pmodal {
           grid-template-columns: 1fr;
           max-height: 96dvh;
@@ -2259,18 +2871,30 @@ html[dir="rtl"] [data-ar*="←"] {
         .pmodal-price {
           font-size: 1.45rem;
         }
-        .pmodal-thumbs-strip {
-          padding: 8px 6px;
+        .checkout-wrap {
+          padding: 20px 12px 60px;
         }
-        .pmodal-thumb {
-          width: 58px;
+        .checkout-form-box,
+        .checkout-order-box {
+          padding: 20px 16px;
         }
-        .pmodal-thumb-img-wrap {
-          width: 58px;
-          height: 46px;
+        .form-2col {
+          grid-template-columns: 1fr;
         }
-        .container {
-          width: min(100% - 20px, 1200px);
+        /* Success popup mobile */
+        .success-popup {
+          border-radius: 16px 16px 0 0;
+          align-self: flex-end;
+        }
+        .success-overlay {
+          align-items: flex-end;
+          padding: 0;
+        }
+        .success-popup-body {
+          padding: 20px 20px 28px;
+        }
+        .success-popup-header {
+          padding: 28px 20px 20px;
         }
       }
       @media (max-width: 480px) {
@@ -2285,9 +2909,6 @@ html[dir="rtl"] [data-ar*="←"] {
         }
         .footer-grid {
           grid-template-columns: 1fr;
-        }
-        .container {
-          width: min(100% - 16px, 1200px);
         }
       }
       @media (hover: none) {
@@ -2306,6 +2927,142 @@ html[dir="rtl"] [data-ar*="←"] {
     </style>
   </head>
   <body>
+    <!-- ══ CART TOAST ══ -->
+    <div class="cart-toast" id="cartToast">
+      <span>✓</span> <span id="cartToastMsg">Produit ajouté !</span>
+    </div>
+
+    <!-- ══ SUCCESS POPUP ══ -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-popup" id="successPopup">
+        <div class="success-popup-header">
+          <button class="success-close-x" onclick="closeSuccessPopup()">
+            ✕
+          </button>
+          <div class="success-checkmark">✅</div>
+          <div
+            class="success-popup-title"
+            data-fr="Commande confirmée !"
+            data-ar="تم تأكيد طلبك!"
+          >
+            Commande confirmée !
+          </div>
+          <div
+            class="success-popup-subtitle"
+            data-fr="Merci pour votre confiance 🎉"
+            data-ar="شكرًا على ثقتك 🎉"
+          >
+            Merci pour votre confiance 🎉
+          </div>
+        </div>
+        <div class="success-popup-body">
+          <div class="success-order-summary">
+            <div class="success-summary-title">
+              📋
+              <span data-fr="Résumé de votre commande" data-ar="ملخص طلبك"
+                >Résumé de votre commande</span
+              >
+            </div>
+            <div class="success-info-row">
+              <span class="success-info-label" data-fr="Client" data-ar="العميل"
+                >Client</span
+              >
+              <span class="success-info-value" id="spopCustomer">—</span>
+            </div>
+            <div class="success-info-row">
+              <span
+                class="success-info-label"
+                data-fr="Téléphone"
+                data-ar="الهاتف"
+                >Téléphone</span
+              >
+              <span class="success-info-value" id="spopPhone">—</span>
+            </div>
+            <div class="success-info-row">
+              <span
+                class="success-info-label"
+                data-fr="Wilaya"
+                data-ar="الولاية"
+                >Wilaya</span
+              >
+              <span class="success-info-value" id="spopWilaya">—</span>
+            </div>
+            <div class="success-info-row">
+              <span
+                class="success-info-label"
+                data-fr="Paiement"
+                data-ar="الدفع"
+                >Paiement</span
+              >
+              <span
+                class="success-info-value"
+                style="color: var(--green, #10b981)"
+                data-fr="Cash à la livraison"
+                data-ar="الدفع عند الاستلام"
+                >Cash à la livraison</span
+              >
+            </div>
+            <div class="success-items-list" id="spopItems"></div>
+          </div>
+          <div class="success-note-box">
+            <span class="success-note-icon">📦</span>
+            <span
+              data-fr="Notre équipe va vous contacter très prochainement pour confirmer la livraison. Gardez votre téléphone disponible !"
+              data-ar="سيتصل بك فريقنا قريبًا لتأكيد التوصيل. يُرجى إبقاء هاتفك متاحًا!"
+            >
+              Notre équipe va vous contacter très prochainement pour confirmer
+              la livraison. Gardez votre téléphone disponible !
+            </span>
+          </div>
+          <div class="success-popup-actions">
+            <button
+              class="btn btn-gold"
+              onclick="closeSuccessAndGoHome()"
+              data-fr="Retour à l'accueil"
+              data-ar="العودة للرئيسية"
+            >
+              Retour à l'accueil
+            </button>
+            <button
+              class="btn btn-outline"
+              onclick="closeSuccessAndShop()"
+              data-fr="Continuer les achats"
+              data-ar="متابعة التسوق"
+            >
+              Continuer les achats
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CART DRAWER ══ -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart(event)">
+      <div class="cart-drawer">
+        <div class="cart-header">
+          <span class="cart-title" data-fr="Panier" data-ar="السلة"
+            >Panier</span
+          >
+          <button class="cart-close" onclick="closeCartDirect()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer" id="cartFooter" style="display: none">
+          <div class="cart-total-row">
+            <span class="cart-total-label" data-fr="Articles" data-ar="المنتجات"
+              >Articles</span
+            >
+            <span class="cart-total-val" id="cartTotalItems">0</span>
+          </div>
+          <button class="cart-checkout-btn" onclick="goCheckout()">
+            <span data-fr="Passer la commande" data-ar="إتمام الطلب"
+              >Passer la commande</span
+            >
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div
       class="mobile-overlay"
       id="mobileOverlay"
@@ -2407,6 +3164,21 @@ html[dir="rtl"] [data-ar*="←"] {
             >
           </div>
           <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()" aria-label="Panier">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              <span class="cart-count" id="cartCount">0</span>
+            </button>
             <div class="lang-toggle" id="langToggleDesktop">
               <button
                 class="lang-btn active"
@@ -2433,7 +3205,7 @@ html[dir="rtl"] [data-ar*="←"] {
 
     <!-- HOME PAGE -->
     <div class="page active" id="page-home">
-      <section class="hero page active" id="homePage">
+      <section class="hero active" id="homePage">
         <video
           class="hero-video-bg"
           autoplay
@@ -2893,8 +3665,8 @@ html[dir="rtl"] [data-ar*="←"] {
               <div class="testimonial-quote">"</div>
               <p
                 class="testimonial-text"
-                data-fr="Un service exceptionnel et des meubles de très haute qualité. J'ai commandé une chambre complète, livrée à temps et en parfait état. Je recommande vivement !"
-                data-ar="خدمة ممتازة وأثاث بجودة استثنائية. طلبت غرفة نوم كاملة ووصلت في الوقت المحدد وبحالة مثالية. سأكرر الطلب بالتأكيد."
+                data-fr="Un service exceptionnel et des meubles de très haute qualité. J'ai commandé une chambre complète, livrée à temps et en parfait état."
+                data-ar="خدمة ممتازة وأثاث بجودة استثنائية. طلبت غرفة نوم كاملة ووصلت في الوقت المحدد وبحالة مثالية."
               >
                 Un service exceptionnel et des meubles de très haute qualité.
               </p>
@@ -2961,7 +3733,6 @@ html[dir="rtl"] [data-ar*="←"] {
           <source src="./videos/2.mp4" type="video/mp4" />
         </video>
         <div class="cta-video-overlay"></div>
-        <div class="cta-video-grain"></div>
         <div class="cta-content">
           <div class="container" style="position: relative">
             <div
@@ -3070,19 +3841,19 @@ html[dir="rtl"] [data-ar*="←"] {
             </button>
             <button
               class="filter-tab"
-              onclick="filterProducts(this, 'bedroom')"
-              data-fr="Chambres"
-              data-ar="غرف النوم"
-            >
-              Chambres
-            </button>
-            <button
-              class="filter-tab"
               onclick="filterProducts(this, 'salon')"
               data-fr="Canapés"
               data-ar="الصالونات"
             >
               Canapés
+            </button>
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'bedroom')"
+              data-fr="Chambres"
+              data-ar="غرف النوم"
+            >
+              Chambres
             </button>
             <button
               class="filter-tab"
@@ -3308,6 +4079,220 @@ html[dir="rtl"] [data-ar*="←"] {
       </section>
     </div>
 
+    <!-- CHECKOUT PAGE -->
+    <div class="page" id="page-checkout">
+      <div style="padding-top: 80px"></div>
+      <div class="checkout-wrap">
+        <div style="margin-bottom: 24px">
+          <button
+            onclick="navigateTo('products')"
+            style="
+              background: none;
+              border: none;
+              color: var(--gold);
+              cursor: pointer;
+              font-size: 0.9rem;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            "
+          >
+            ←
+            <span data-fr="Continuer mes achats" data-ar="متابعة التسوق"
+              >Continuer mes achats</span
+            >
+          </button>
+        </div>
+        <h1
+          class="section-title"
+          style="margin-bottom: 28px"
+          data-fr="Finaliser la <span>commande</span>"
+          data-ar="إتمام <span>الطلب</span>"
+        >
+          Finaliser la <span>commande</span>
+        </h1>
+        <div class="checkout-grid">
+          <div class="checkout-form-box">
+            <div
+              class="form-section-title"
+              data-fr="Vos informations"
+              data-ar="بياناتك الشخصية"
+            >
+              Vos informations
+            </div>
+            <div class="form-row">
+              <label class="form-label"
+                ><span>*</span>
+                <span data-fr="Nom complet" data-ar="الاسم الكامل"
+                  >Nom complet</span
+                ></label
+              >
+              <input
+                class="form-input"
+                type="text"
+                id="chk_name"
+                placeholder="Ex: Ahmed Benali"
+              />
+            </div>
+            <div class="form-row">
+              <label class="form-label"
+                ><span>*</span>
+                <span data-fr="Numéro de téléphone" data-ar="رقم الهاتف"
+                  >Numéro de téléphone</span
+                ></label
+              >
+              <input
+                class="form-input"
+                type="tel"
+                id="chk_phone"
+                placeholder="05XXXXXXXX"
+              />
+            </div>
+            <div class="form-row">
+              <label class="form-label"
+                ><span>*</span>
+                <span data-fr="Wilaya" data-ar="الولاية">Wilaya</span></label
+              >
+              <select class="form-select" id="chk_wilaya">
+                <option
+                  value=""
+                  data-fr="-- Choisir une wilaya --"
+                  data-ar="-- اختر الولاية --"
+                >
+                  -- Choisir une wilaya --
+                </option>
+                <option>01 - Adrar</option>
+                <option>02 - Chlef</option>
+                <option>03 - Laghouat</option>
+                <option>04 - Oum El Bouaghi</option>
+                <option>05 - Batna</option>
+                <option>06 - Béjaïa</option>
+                <option>07 - Biskra</option>
+                <option>08 - Béchar</option>
+                <option>09 - Blida</option>
+                <option>10 - Bouira</option>
+                <option>11 - Tamanrasset</option>
+                <option>12 - Tébessa</option>
+                <option>13 - Tlemcen</option>
+                <option>14 - Tiaret</option>
+                <option>15 - Tizi Ouzou</option>
+                <option>16 - Alger</option>
+                <option>17 - Djelfa</option>
+                <option>18 - Jijel</option>
+                <option>19 - Sétif</option>
+                <option>20 - Saïda</option>
+                <option>21 - Skikda</option>
+                <option>22 - Sidi Bel Abbès</option>
+                <option>23 - Annaba</option>
+                <option>24 - Guelma</option>
+                <option>25 - Constantine</option>
+                <option>26 - Médéa</option>
+                <option>27 - Mostaganem</option>
+                <option>28 - M'Sila</option>
+                <option>29 - Mascara</option>
+                <option>30 - Ouargla</option>
+                <option>31 - Oran</option>
+                <option>32 - El Bayadh</option>
+                <option>33 - Illizi</option>
+                <option>34 - Bordj Bou Arréridj</option>
+                <option>35 - Boumerdès</option>
+                <option>36 - El Tarf</option>
+                <option>37 - Tindouf</option>
+                <option>38 - Tissemsilt</option>
+                <option>39 - El Oued</option>
+                <option>40 - Khenchela</option>
+                <option>41 - Souk Ahras</option>
+                <option>42 - Tipaza</option>
+                <option>43 - Mila</option>
+                <option>44 - Aïn Defla</option>
+                <option>45 - Naâma</option>
+                <option>46 - Aïn Témouchent</option>
+                <option>47 - Ghardaïa</option>
+                <option>48 - Relizane</option>
+                <option>49 - Timimoun</option>
+                <option>50 - Bordj Badji Mokhtar</option>
+                <option>51 - Ouled Djellal</option>
+                <option>52 - Béni Abbès</option>
+                <option>53 - In Salah</option>
+                <option>54 - In Guezzam</option>
+                <option>55 - Touggourt</option>
+                <option>56 - Djanet</option>
+                <option>57 - El M'Ghair</option>
+                <option>58 - El Meniaa</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-label"
+                ><span>*</span>
+                <span data-fr="Adresse complète" data-ar="العنوان الكامل"
+                  >Adresse complète</span
+                ></label
+              >
+              <textarea
+                class="form-textarea"
+                id="chk_address"
+                placeholder="Rue, quartier, commune..."
+              ></textarea>
+            </div>
+            <div class="form-row">
+              <label class="form-label"
+                ><span data-fr="Notes (optionnel)" data-ar="ملاحظات (اختياري)"
+                  >Notes (optionnel)</span
+                ></label
+              >
+              <textarea
+                class="form-textarea"
+                id="chk_notes"
+                placeholder="Précisions sur la livraison, couleur souhaitée..."
+                style="min-height: 60px"
+              ></textarea>
+            </div>
+            <div
+              id="chk_error"
+              style="
+                display: none;
+                padding: 10px 14px;
+                background: rgba(240, 50, 50, 0.1);
+                border: 1px solid rgba(240, 50, 50, 0.3);
+                border-radius: 4px;
+                color: var(--gold-dark);
+                font-size: 0.84rem;
+                margin-bottom: 12px;
+              "
+            ></div>
+            <button
+              class="checkout-submit-btn"
+              id="chk_submit"
+              onclick="submitOrder()"
+            >
+              <span data-fr="Confirmer la commande" data-ar="تأكيد الطلب"
+                >Confirmer la commande</span
+              >
+              <span>✓</span>
+            </button>
+            <div class="payment-badge" style="margin-top: 14px">
+              💵
+              <span
+                data-fr="Paiement à la livraison (cash)"
+                data-ar="الدفع عند الاستلام (نقدًا)"
+                >Paiement à la livraison (cash)</span
+              >
+            </div>
+          </div>
+          <div class="checkout-order-box">
+            <div
+              class="order-summary-title"
+              data-fr="Récapitulatif"
+              data-ar="ملخص الطلب"
+            >
+              Récapitulatif
+            </div>
+            <div id="checkoutSummary"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
@@ -3327,16 +4312,17 @@ html[dir="rtl"] [data-ar*="←"] {
             <div class="footer-socials">
               <a class="social-btn" href="#">f</a>
               <a class="social-btn" href="#">in</a>
-              <a class="social-btn" href="https://wa.me/213562314115"
-                ><svg
+              <a class="social-btn" href="https://wa.me/213562314115">
+                <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   style="width: 14px; height: 14px"
                 >
                   <path
                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  /></svg
-              ></a>
+                  />
+                </svg>
+              </a>
             </div>
           </div>
           <div class="footer-col">
@@ -3489,9 +4475,7 @@ html[dir="rtl"] [data-ar*="←"] {
       </a>
     </div>
 
-    <!-- ================================================================
-         PRODUCT MODAL
-         ================================================================ -->
+    <!-- Product Modal -->
     <div class="pmodal-overlay" id="pmodalOverlay" onclick="closePModal(event)">
       <div class="pmodal" id="pmodal">
         <button
@@ -3501,10 +4485,7 @@ html[dir="rtl"] [data-ar*="←"] {
         >
           ✕
         </button>
-
-        <!-- LEFT: gallery -->
         <div class="pmodal-gallery">
-          <!-- Main image -->
           <div class="pmodal-main-img-wrap" id="pmodalMainWrap">
             <img class="pmodal-main-img" id="pmodalImg" src="" alt="" />
             <div class="pmodal-main-overlay"></div>
@@ -3514,7 +4495,6 @@ html[dir="rtl"] [data-ar*="←"] {
               style="display: none"
             ></span>
             <span class="pmodal-img-counter" id="pmodalCounter"></span>
-            <!-- Arrow nav -->
             <button
               class="pmodal-img-arrow prev"
               id="pmodalImgPrev"
@@ -3532,9 +4512,7 @@ html[dir="rtl"] [data-ar*="←"] {
               ›
             </button>
           </div>
-
-          <!-- Thumbnails strip -->
-          <div class="pmodal-thumbs-strip">
+          <!-- <div class="pmodal-thumbs-strip">
             <button
               class="pmodal-thumb-nav"
               id="pmodalNavPrev"
@@ -3554,10 +4532,8 @@ html[dir="rtl"] [data-ar*="←"] {
             >
               ›
             </button>
-          </div>
+          </div> -->
         </div>
-
-        <!-- RIGHT: info (scrollable) -->
         <div class="pmodal-info">
           <div class="pmodal-cat" id="pmodalCat"></div>
           <div class="pmodal-name" id="pmodalName"></div>
@@ -3573,6 +4549,15 @@ html[dir="rtl"] [data-ar*="←"] {
           </div>
           <div class="pmodal-desc" id="pmodalDesc"></div>
           <div class="pmodal-actions">
+            <button
+              class="btn btn-gold"
+              id="pmodalAddCart"
+              onclick="addCurrentToCart()"
+            >
+              <span data-fr="Ajouter au panier" data-ar="أضف للسلة"
+                >Ajouter au panier</span
+              >
+            </button>
             <a
               id="pmodalWaBtn"
               href="#"
@@ -3588,29 +4573,369 @@ html[dir="rtl"] [data-ar*="←"] {
                   d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
                 />
               </svg>
-              <span data-fr="Commander via WhatsApp" data-ar="اطلب عبر واتساب"
-                >Commander via WhatsApp</span
-              >
+              <span data-fr="WhatsApp" data-ar="واتساب">WhatsApp</span>
             </a>
-            <button
-              class="btn btn-outline"
-              onclick="closePModalDirect()"
-              data-fr="Continuer"
-              data-ar="متابعة"
-            >
-              Continuer
-            </button>
+     
           </div>
         </div>
       </div>
     </div>
 
     <script>
+      // ════════════════════════════════════
+      // SUPABASE CONFIG
+      // ════════════════════════════════════
+      const SUPABASE_URL = "https://tmtglbjxxjytszafacvb.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "sb_publishable_38ZMIGL1mLFrl9yJv3oX3A_0RTKX1SH";
+      const { createClient } = supabase;
+      const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
       const WA = "https://wa.me/213562314115";
       let currentLang = "fr";
       const LANG_KEY = "roua_lang";
       const PAGE_KEY = "roua_page";
+      const CART_KEY = "roua_cart";
 
+      // ══════════════════════════════════
+      // SUCCESS POPUP
+      // ══════════════════════════════════
+      function openSuccessPopup(orderData) {
+        // Fill data
+        document.getElementById("spopCustomer").textContent =
+          orderData.full_name || "—";
+        document.getElementById("spopPhone").textContent =
+          orderData.phone || "—";
+        document.getElementById("spopWilaya").textContent =
+          orderData.wilaya || "—";
+
+        // Fill items
+        const itemsEl = document.getElementById("spopItems");
+        const items = orderData.items || [];
+        if (items.length) {
+          itemsEl.innerHTML = `
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">
+              ${currentLang === "ar" ? "المنتجات المطلوبة" : "Produits commandés"}
+            </div>
+            ${items
+              .map(
+                (it) => `
+              <div class="success-item-row">
+                ${it.img ? `<img class="success-item-img" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}
+                <span class="success-item-name">${it.name}</span>
+                <span class="success-item-price">${it.price || ""}</span>
+              </div>
+            `,
+              )
+              .join("")}
+          `;
+          itemsEl.style.display = "flex";
+        } else {
+          itemsEl.style.display = "none";
+        }
+
+        // Apply current lang to popup texts
+        document
+          .querySelectorAll("#successOverlay [data-fr][data-ar]")
+          .forEach((el) => {
+            const txt = el.dataset[currentLang];
+            if (!txt) return;
+            if (txt.includes("<")) el.innerHTML = txt;
+            else el.textContent = txt;
+          });
+
+        // Open overlay
+        document.getElementById("successOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+
+        // Shoot confetti 🎉
+        shootConfetti();
+      }
+
+      function closeSuccessPopup() {
+        document.getElementById("successOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function closeSuccessAndGoHome() {
+        closeSuccessPopup();
+        navigateTo("home");
+      }
+
+      function closeSuccessAndShop() {
+        closeSuccessPopup();
+        navigateTo("products");
+      }
+
+      // Close on overlay click
+      document
+        .getElementById("successOverlay")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeSuccessPopup();
+        });
+
+      // ── CONFETTI ──
+      function shootConfetti() {
+        const colors = [
+          "#f03232",
+          "#ff6b6b",
+          "#ffd700",
+          "#10b981",
+          "#3b82f6",
+          "#c91f1f",
+        ];
+        for (let i = 0; i < 60; i++) {
+          setTimeout(() => {
+            const el = document.createElement("div");
+            el.className = "confetti-piece";
+            el.style.cssText = `
+              left: ${Math.random() * 100}vw;
+              top: -10px;
+              background: ${colors[Math.floor(Math.random() * colors.length)]};
+              width: ${6 + Math.random() * 8}px;
+              height: ${6 + Math.random() * 8}px;
+              border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+              animation-duration: ${1.5 + Math.random() * 2}s;
+              animation-delay: ${Math.random() * 0.5}s;
+            `;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 4000);
+          }, i * 30);
+        }
+      }
+
+      // ══ CART STATE ══
+      let cart = [];
+
+      function loadCart() {
+        try {
+          cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        } catch (e) {
+          cart = [];
+        }
+        updateCartUI();
+      }
+      function saveCart() {
+        try {
+          localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        } catch (e) {}
+        updateCartUI();
+      }
+      function updateCartUI() {
+        const count = cart.length;
+        const cc = document.getElementById("cartCount");
+        cc.textContent = count;
+        cc.classList.toggle("visible", count > 0);
+        renderCartItems();
+      }
+      function renderCartItems() {
+        const el = document.getElementById("cartItems");
+        const footer = document.getElementById("cartFooter");
+        const totalEl = document.getElementById("cartTotalItems");
+        if (!cart.length) {
+          el.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>${currentLang === "ar" ? "السلة فارغة" : "Votre panier est vide"}</p></div>`;
+          if (footer) footer.style.display = "none";
+          return;
+        }
+        if (footer) footer.style.display = "block";
+        if (totalEl)
+          totalEl.textContent =
+            cart.length + (currentLang === "ar" ? " منتجات" : " article(s)");
+        el.innerHTML = cart
+          .map(
+            (item, idx) => `
+          <div class="cart-item">
+            <img class="cart-item-img" src="${item.img || ""}" alt="${item.name}" onerror="this.style.display='none'">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-cat">${item.catName}</div>
+              <div class="cart-item-price">${item.price}</div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+          </div>`,
+          )
+          .join("");
+      }
+      function removeFromCart(idx) {
+        cart.splice(idx, 1);
+        saveCart();
+      }
+
+      function addToCart(productId) {
+        const p = allProducts.find((x) => x.id === productId);
+        if (!p) return;
+        const d = p[currentLang];
+        const img = Array.isArray(p.imgs) ? p.imgs[0] : p.img || "";
+        cart.push({
+          id: p.id,
+          name: d.name,
+          catName: d.catName,
+          price: d.price,
+          img,
+          wa: d.wa,
+        });
+        saveCart();
+        const toast = document.getElementById("cartToast");
+        const msg = document.getElementById("cartToastMsg");
+        msg.textContent =
+          currentLang === "ar"
+            ? `✓ ${d.name} — أضيف للسلة`
+            : `✓ ${d.name} — ajouté au panier`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2800);
+      }
+
+      function openCart() {
+        renderCartItems();
+        document.getElementById("cartOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeCart(e) {
+        if (e && e.target !== document.getElementById("cartOverlay")) return;
+        closeCartDirect();
+      }
+      function closeCartDirect() {
+        document.getElementById("cartOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      function goCheckout() {
+        closeCartDirect();
+        navigateTo("checkout");
+        renderCheckoutSummary();
+      }
+
+      function renderCheckoutSummary() {
+        const el = document.getElementById("checkoutSummary");
+        if (!el) return;
+        if (!cart.length) {
+          el.innerHTML =
+            '<p style="font-size:.84rem;color:var(--text-light)">Panier vide</p>';
+          return;
+        }
+        el.innerHTML =
+          cart
+            .map(
+              (item) => `
+          <div class="summary-item">
+            <img class="summary-img" src="${item.img || ""}" alt="${item.name}" onerror="this.style.display='none'">
+            <span class="summary-name">${item.name}</span>
+            <span class="summary-price">${item.price}</span>
+          </div>`,
+            )
+            .join("") +
+          `<div class="summary-count">${cart.length} ${currentLang === "ar" ? "منتج" : "produit(s)"}</div>`;
+      }
+
+      // ══ ORDER SUBMIT ══
+      async function submitOrder() {
+        const name = document.getElementById("chk_name").value.trim();
+        const phone = document.getElementById("chk_phone").value.trim();
+        const wilaya = document.getElementById("chk_wilaya").value;
+        const address = document.getElementById("chk_address").value.trim();
+        const notes = document.getElementById("chk_notes").value.trim();
+        const errEl = document.getElementById("chk_error");
+        const btn = document.getElementById("chk_submit");
+
+        errEl.style.display = "none";
+
+        if (!name || !phone || !wilaya || !address) {
+          errEl.textContent =
+            currentLang === "ar"
+              ? "يُرجى ملء الاسم، رقم الهاتف، الولاية والعنوان."
+              : "Veuillez remplir le nom, le téléphone, la wilaya et l'adresse.";
+          errEl.style.display = "block";
+          return;
+        }
+        if (!cart.length) {
+          errEl.textContent =
+            currentLang === "ar"
+              ? "السلة فارغة، أضف منتجًا أولًا."
+              : "Votre panier est vide, ajoutez d'abord un produit.";
+          errEl.style.display = "block";
+          return;
+        }
+
+        btn.disabled = true;
+        btn.querySelector("span").textContent =
+          currentLang === "ar" ? "جارٍ التأكيد..." : "Confirmation...";
+
+        const orderItems = cart.map((item) => ({
+          name: item.name,
+          price: item.price,
+          img: item.img || "",
+        }));
+
+        const orderPayload = {
+          full_name: name,
+          phone: phone,
+          wilaya: wilaya,
+          address: address,
+          notes: notes,
+          items: orderItems,
+          status: "new",
+        };
+
+        const waMsg = `Nouvelle commande Royal Meubles Djelfa\n\nNom: ${name}\nTéléphone: ${phone}\nWilaya: ${wilaya}\nAdresse: ${address}\nNotes: ${notes || "-"}\n\nProduits:\n${cart.map((it, i) => `${i + 1}. ${it.name} - ${it.price}`).join("\n")}\n\nPaiement: Cash à la livraison`;
+
+        try {
+          const { error } = await sb.from("orders").insert([orderPayload]);
+
+          if (error) {
+            console.error("Supabase error:", error);
+            // Still open WA even if DB fails
+            // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
+          } else {
+            // Open WhatsApp
+            // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
+          }
+
+          // ✅ Show success popup regardless
+          const savedOrderData = { ...orderPayload };
+          cart = [];
+          saveCart();
+
+          // Reset form
+          ["chk_name", "chk_phone", "chk_address", "chk_notes"].forEach(
+            (id) => {
+              const el = document.getElementById(id);
+              if (el) el.value = "";
+            },
+          );
+          document.getElementById("chk_wilaya").value = "";
+
+          // Go back to products page then show popup
+          navigateTo("products");
+          setTimeout(() => openSuccessPopup(savedOrderData), 300);
+        } catch (e) {
+          console.error("Submit error:", e);
+          // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
+          const savedOrderData = {
+            full_name: name,
+            phone,
+            wilaya,
+            address,
+            notes,
+            items: orderItems,
+          };
+          cart = [];
+          saveCart();
+          ["chk_name", "chk_phone", "chk_address", "chk_notes"].forEach(
+            (id) => {
+              const el = document.getElementById(id);
+              if (el) el.value = "";
+            },
+          );
+          document.getElementById("chk_wilaya").value = "";
+          navigateTo("products");
+          setTimeout(() => openSuccessPopup(savedOrderData), 300);
+        } finally {
+          btn.disabled = false;
+          btn.querySelector("span").textContent =
+            currentLang === "ar" ? "تأكيد الطلب" : "Confirmer la commande";
+        }
+      }
+
+      // ══ LANG ══
       function saveLang(l) {
         try {
           localStorage.setItem(LANG_KEY, l);
@@ -3627,13 +4952,6 @@ html[dir="rtl"] [data-ar*="←"] {
         try {
           localStorage.setItem(PAGE_KEY, p);
         } catch (e) {}
-      }
-      function loadPage() {
-        try {
-          return localStorage.getItem(PAGE_KEY) || "home";
-        } catch (e) {
-          return "home";
-        }
       }
 
       function setLang(lang) {
@@ -3658,6 +4976,7 @@ html[dir="rtl"] [data-ar*="←"] {
         });
         renderProducts(currentFilter);
         renderFeatured();
+        renderCartItems();
         setTimeout(initObserver, 100);
       }
 
@@ -3672,6 +4991,7 @@ html[dir="rtl"] [data-ar*="←"] {
           savePage(page);
           setTimeout(initObserver, 100);
           if (page === "products") renderProducts(currentFilter);
+          if (page === "checkout") renderCheckoutSummary();
         }
       }
 
@@ -3685,10 +5005,13 @@ html[dir="rtl"] [data-ar*="←"] {
         document.getElementById("mobileOverlay").classList.remove("open");
         document.body.style.overflow = "";
       }
+
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           closeMobileMenu();
           closePModalDirect();
+          closeCartDirect();
+          closeSuccessPopup();
         }
       });
       window.addEventListener(
@@ -3718,10 +5041,7 @@ html[dir="rtl"] [data-ar*="←"] {
           .forEach((el) => obs.observe(el));
       }
 
-      /* ============================================================
-         PRODUCTS DATA
-         imgs: array of image paths — supports multiple images per product
-         ============================================================ */
+      // ══ PRODUCTS DATA ══
       const allProducts = [
         {
           id: 1,
@@ -3730,7 +5050,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D4T avec port SP",
-            desc: "commodes D4T avec port SP — finition EU. Design élégant avec tiroirs spacieux et finition laquée haute brillance. Structure robuste en bois de qualité supérieure, poignées chromées et revêtement résistant aux rayures. Idéal pour les chambres modernes et classiques.",
+            desc: "commodes D4T avec port SP — finition EU. Design élégant avec tiroirs spacieux et finition laquée haute brillance.",
             price: "65 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -3740,7 +5060,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "خزائن الملابس",
             name: "D4T avec port SP",
-            desc: "خزائن الملابس D4T مع port SP — كود EU. تصميم أنيق مع أدراج واسعة وتشطيب لامع عالي الجودة.",
+            desc: "خزائن الملابس D4T مع port SP — كود EU.",
             price: "65,000 دج",
             oldPrice: null,
             badge: "badge-new",
@@ -3756,7 +5076,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D4T 1.40 SP",
-            desc: "commodes D4T 1.40 SP — finition CC. Large commode de 140cm avec multiples rangements intégrés. Finition mate sophistiquée, matériaux nobles et assemblage soigné.",
+            desc: "commodes D4T 1.40 SP — finition CC.",
             price: "77 000 DA",
             oldPrice: null,
             badge: null,
@@ -3766,7 +5086,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "خزائن الملابس",
             name: "D4T 1.40 SP",
-            desc: "خزائن الملابس D4T مقاس 1.40 SP — كود CC. خزانة واسعة بعرض 140 سم مع تخزين متعدد.",
+            desc: "خزائن الملابس D4T مقاس 1.40 SP — كود CC.",
             price: "77,000 دج",
             oldPrice: null,
             badge: null,
@@ -3782,7 +5102,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "commodes 1.60 SP",
-            desc: "commodes 1.60 SP — finition T. Notre modèle le plus populaire en 160cm, alliant capacité de rangement maximale et design contemporain.",
+            desc: "commodes 1.60 SP — finition T. Notre modèle le plus populaire en 160cm.",
             price: "88 000 DA",
             oldPrice: null,
             badge: "badge-best",
@@ -3792,7 +5112,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "خزائن الملابس",
             name: "commodes 1.60 SP",
-            desc: "خزائن الملابس مقاس 1.60 SP — كود T. طرازنا الأكثر شعبية بعرض 160 سم.",
+            desc: "خزائن الملابس مقاس 1.60 SP — كود T.",
             price: "88,000 دج",
             oldPrice: null,
             badge: "badge-best",
@@ -3808,7 +5128,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D4T SP",
-            desc: "commodes D4T SP — finition EC. Modèle compact et fonctionnel avec 4 tiroirs spacieux.",
+            desc: "commodes D4T SP — finition EC.",
             price: "66 000 DA",
             oldPrice: null,
             badge: null,
@@ -3818,7 +5138,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "خزائن الملابس",
             name: "D4T SP",
-            desc: "خزائن الملابس D4T SP — كود EC. طراز مدمج وعملي بأربعة أدراج.",
+            desc: "خزائن الملابس D4T SP — كود EC.",
             price: "66,000 دج",
             oldPrice: null,
             badge: null,
@@ -3834,7 +5154,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D9T",
-            desc: "commodes modèle D9T. Design exclusif avec 9 tiroirs de rangement.",
+            desc: "commodes modèle D9T. Design exclusif avec 9 tiroirs.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
@@ -3844,7 +5164,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "خزائن الملابس",
             name: "D9T",
-            desc: "خزائن الملابس موديل D9T. تصميم حصري مع 9 أدراج.",
+            desc: "خزائن الملابس موديل D9T.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
@@ -3860,22 +5180,22 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D4T 1.40 SP Gris",
-            desc: "commodes D4T 1.40 SP couleur gris — finition Cu. Version gris contemporain.",
+            desc: "commodes D4T 1.40 SP couleur gris.",
             price: "77 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Gris",
-            wa: "Commander D4T 1.40 SP Gris - Cu",
+            wa: "Commander D4T 1.40 SP Gris",
           },
           ar: {
             catName: "خزائن الملابس",
             name: "D4T 1.40 SP Gris",
-            desc: "خزائن الملابس D4T مقاس 1.40 SP باللون الرمادي — كود Cu.",
+            desc: "خزائن الملابس D4T باللون الرمادي.",
             price: "77,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "رمادي",
-            wa: "طلب D4T 1.40 SP Gris - Cu",
+            wa: "طلب D4T 1.40 SP Gris",
           },
           rating: "★★★★★",
         },
@@ -3886,22 +5206,22 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D3T 1.40 SP",
-            desc: "commodes D3T 1.40 SP — finition EE. Modèle 3 tiroirs en 140cm.",
+            desc: "commodes D3T 1.40 SP — finition EE.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "Commander D3T 1.40 SP - EE",
+            wa: "Commander D3T 1.40 SP",
           },
           ar: {
             catName: "خزائن الملابس",
             name: "D3T 1.40 SP",
-            desc: "خزائن الملابس D3T مقاس 1.40 SP — كود EE.",
+            desc: "خزائن الملابس D3T.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "طلب D3T 1.40 SP - EE",
+            wa: "طلب D3T 1.40 SP",
           },
           rating: "★★★★★",
         },
@@ -3912,22 +5232,22 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "commodes",
             name: "D3T 1.40 SP Premium",
-            desc: "commodes D3T 1.40 SP version Premium — finition EE supérieure.",
+            desc: "commodes D3T 1.40 SP version Premium.",
             price: "75 000 DA",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "Commander D3T 1.40 SP Premium - EE",
+            wa: "Commander D3T 1.40 SP Premium",
           },
           ar: {
             catName: "خزائن الملابس",
             name: "D3T 1.40 SP Premium",
-            desc: "خزائن الملابس D3T مقاس 1.40 SP نسخة Premium.",
+            desc: "خزائن الملابس D3T Premium.",
             price: "75,000 دج",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "طلب D3T 1.40 SP Premium - EE",
+            wa: "طلب D3T 1.40 SP Premium",
           },
           rating: "★★★★★",
         },
@@ -3948,7 +5268,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "غرف النوم",
             name: "غرفة نوم كاملة مودرن",
-            desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة متناسقة.",
+            desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة.",
             price: "120,000 دج",
             oldPrice: null,
             badge: "badge-new",
@@ -3964,7 +5284,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Canapés",
             name: "Salon complet 7 places",
-            desc: "Salon élégant avec canapé principal 3 places, 2 fauteuils et tissu velours premium.",
+            desc: "Salon élégant avec canapé principal 3 places et tissu velours premium.",
             price: "95 000 DA",
             oldPrice: null,
             badge: "badge-best",
@@ -3974,7 +5294,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "الصالونات",
             name: "صالون كامل 7 أماكن",
-            desc: "صالون أنيق بكنبة رئيسية 3 أماكن وقماش مخمل فاخر.",
+            desc: "صالون أنيق بكنبة رئيسية وقماش مخمل فاخر.",
             price: "95,000 دج",
             oldPrice: null,
             badge: "badge-best",
@@ -3990,7 +5310,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Living",
             name: "Meuble TV moderne",
-            desc: "Meuble TV moderne pour salon avec rangements intégrés.",
+            desc: "Meuble TV moderne pour salon.",
             price: "48 000 DA",
             oldPrice: null,
             badge: null,
@@ -4000,7 +5320,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "غرف المعيشة",
             name: "وحدة تلفزيون مودرن",
-            desc: "وحدة تلفزيون عصرية لغرفة المعيشة مع مساحات تخزين.",
+            desc: "وحدة تلفزيون عصرية.",
             price: "48,000 دج",
             oldPrice: null,
             badge: null,
@@ -4016,7 +5336,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Tables",
             name: "Table basse élégante",
-            desc: "Table basse moderne pour salon avec finition bois luxe.",
+            desc: "Table basse moderne avec finition bois luxe.",
             price: "22 000 DA",
             oldPrice: null,
             badge: null,
@@ -4026,7 +5346,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "الطاولات",
             name: "طاولة وسط أنيقة",
-            desc: "طاولة وسط مودرن للصالون بتشطيب خشبي فاخر.",
+            desc: "طاولة وسط مودرن.",
             price: "22,000 دج",
             oldPrice: null,
             badge: null,
@@ -4042,7 +5362,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Armoires",
             name: "Armoire 3 portes",
-            desc: "Armoire spacieuse à 3 portes avec rangements pratiques et miroir intégré.",
+            desc: "Armoire spacieuse à 3 portes avec miroir intégré.",
             price: "70 000 DA",
             oldPrice: null,
             badge: "badge-new",
@@ -4052,7 +5372,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "الخزائن",
             name: "خزانة 3 أبواب",
-            desc: "خزانة واسعة بثلاثة أبواب ومرآة مدمجة.",
+            desc: "خزانة واسعة بثلاثة أبواب ومرآة.",
             price: "70,000 دج",
             oldPrice: null,
             badge: "badge-new",
@@ -4068,7 +5388,7 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Bureau",
             name: "Bureau professionnel",
-            desc: "Bureau moderne adapté au travail et aux espaces professionnels.",
+            desc: "Bureau moderne adapté au travail.",
             price: "38 000 DA",
             oldPrice: null,
             badge: null,
@@ -4078,7 +5398,7 @@ html[dir="rtl"] [data-ar*="←"] {
           ar: {
             catName: "الأثاث المكتبي",
             name: "مكتب احترافي",
-            desc: "مكتب مودرن مناسب للعمل والمساحات المهنية.",
+            desc: "مكتب مودرن.",
             price: "38,000 دج",
             oldPrice: null,
             badge: null,
@@ -4087,36 +5407,33 @@ html[dir="rtl"] [data-ar*="←"] {
           },
           rating: "★★★★★",
         },
-        /* ── Lit Piano: صورة واحدة ── */
         {
           id: 15,
           cat: "lits",
-        
-            img: "images/lit-1.webp",
-            imags:["images/lit-1.webp","images/lit-2.webp","images/lit-3.webp"],
+          img: "images/lit-1.webp",
+          imgs: ["images/lit-1.webp", "images/lit-2.webp", "images/lit-3.webp"],
           fr: {
             catName: "Lits",
             name: "Lit Piano coffre",
-            desc: "Design Piano raffiné avec coffre intégré, alliant élégance moderne et rangement pratique. Son dossier rembourré offre un confort optimal, tandis que sa structure intérieure en bois rouge garantit solidité et longévité. Tissu anti-taches, couleurs personnalisables, tables de chevet assorties incluses. Dimensions : 90 x 190 cm.",
+            desc: "Design Piano raffiné avec coffre intégré. 90 x 190 cm.",
             price: "33 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Nouveau",
-            wa: "Commander Lit Piano coffre - 90 x 190 cm - 33 000 DA",
+            wa: "Commander Lit Piano coffre - 90 x 190 cm",
           },
           ar: {
             catName: "الأسرّة",
             name: "Lit Piano coffre",
-            desc: "سرير Piano بتصميم أنيق مع صندوق تخزين مدمج. ظهر مبطن مريح، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع، ألوان قابلة للتخصيص. الأبعاد: 90 × 190 سم.",
+            desc: "سرير Piano بتصميم أنيق مع صندوق تخزين. 90 × 190 سم.",
             price: "33,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
-            wa: "طلب Lit Piano coffre - 90 x 190 سم - 33,000 دج",
+            wa: "طلب Lit Piano coffre",
           },
           rating: "★★★★★",
         },
-        /* ── Lit carré: صورتين (الصورتان المرفوعتان) ── */
         {
           id: 16,
           cat: "lits",
@@ -4124,48 +5441,48 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Lits",
             name: "Lit carré coffre",
-            desc: "Format carré original avec coffre intégré pour un maximum de confort et de rangement. Tête de lit et pied de lit rembourrés, structure intérieure en bois rouge, tissu anti-taches facile à nettoyer, couleurs personnalisables. Dimensions : 90 x 190 cm.",
+            desc: "Format carré avec coffre intégré. 90 x 190 cm.",
             price: "33 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Nouveau",
-            wa: "Commander Lit carré coffre - 90 x 190 cm - 33 000 DA",
+            wa: "Commander Lit carré coffre",
           },
           ar: {
             catName: "الأسرّة",
             name: "Lit carré coffre",
-            desc: "سرير بتصميم carré مميز مع صندوق تخزين مدمج. رأس وقدم السرير مبطنان، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع، ألوان قابلة للتخصيص. الأبعاد: 90 × 190 سم.",
+            desc: "سرير carré مع صندوق تخزين.",
             price: "33,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
-            wa: "طلب Lit carré coffre - 90 x 190 سم - 33,000 دج",
+            wa: "طلب Lit carré coffre",
           },
           rating: "★★★★★",
         },
         {
           id: 17,
           cat: "lits",
-          img: "images/lits-led-1.webp",
+          img: "images/lit-led-1.webp",
           fr: {
             catName: "Lits",
-            name: "Lit avec éclairage LED intégré",
-            desc: "Ambiance moderne et lumineuse grâce à un éclairage LED intégré, élégant et pratique. Ce lit coffre avec LED intégrées dans la tête de lit apporte une touche moderne et chaleureuse à votre chambre. Il dispose d’un coffre spacieux, d’une structure intérieure en bois rouge solide, d’un tissu anti-taches facile à nettoyer et de couleurs personnalisables. Dimensions disponibles : 160 x 190 cm à 98 000 DA et 180 x 200 cm à 115 000 DA.",
+            name: "Lit LED 160/180",
+            desc: "Lit coffre avec LED intégrées. 160x190 cm / 180x200 cm.",
             price: "98 000 DA / 115 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "LED",
-            wa: "Commander Lit avec éclairage LED intégré - 160 x 190 cm : 98 000 DA / 180 x 200 cm : 115 000 DA",
+            wa: "Commander Lit LED",
           },
           ar: {
             catName: "الأسرّة",
-            name: "Lit avec éclairage LED intégré",
-            desc: "سرير بتصميم مودرن مع إضاءة LED مدمجة في رأس السرير لإضافة أجواء أنيقة ودافئة. يحتوي على صندوق تخزين واسع، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، مع إمكانية تخصيص اللون. المقاسات المتوفرة: 160 × 190 سم بسعر 98,000 دج و 180 × 200 سم بسعر 115,000 دج.",
+            name: "Lit LED 160/180",
+            desc: "سرير بإضاءة LED مدمجة.",
             price: "98,000 / 115,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "LED",
-            wa: "طلب Lit avec éclairage LED intégré - 160 x 190 سم : 98,000 دج / 180 x 200 سم : 115,000 دج",
+            wa: "طلب Lit LED",
           },
           rating: "★★★★★",
         },
@@ -4181,22 +5498,22 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Lits",
             name: "Lit Nouva",
-            desc: "Design Nouva élégant, confort supérieur et finitions soignées pour sublimer votre chambre. Ce lit moderne s’adapte parfaitement à tous les intérieurs et apporte une sensation de bien-être immédiat. Sa structure en bois rouge garantit solidité et durabilité, tandis que son tissu anti-taches facilite l’entretien. Disponible en version coffre pour gagner de l’espace facilement. Dimensions disponibles : 160 x 190 cm à 98 000 DA et 180 x 200 cm à 115 000 DA.",
+            desc: "Design Nouva élégant. 160x190 / 180x200 cm.",
             price: "98 000 DA / 115 000 DA",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "Coffre",
-            wa: "Commander Lit Nouva - 160 x 190 cm : 98 000 DA / 180 x 200 cm : 115 000 DA",
+            wa: "Commander Lit Nouva",
           },
           ar: {
             catName: "الأسرّة",
             name: "Lit Nouva",
-            desc: "سرير Nouva بتصميم أنيق وراحة عالية وتشطيب مميز يضيف لمسة عصرية لغرفة النوم. هيكل من الخشب الأحمر لضمان القوة والمتانة، قماش مضاد للبقع وسهل التنظيف، مع إمكانية اختيار اللون المناسب. متوفر بنظام صندوق تخزين لتوفير المساحة. المقاسات المتوفرة: 160 × 190 سم بسعر 98,000 دج و 180 × 200 سم بسعر 115,000 دج.",
+            desc: "سرير Nouva بتصميم أنيق.",
             price: "98,000 / 115,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "تخزين",
-            wa: "طلب Lit Nouva - 160 x 190 سم : 98,000 دج / 180 x 200 سم : 115,000 دج",
+            wa: "طلب Lit Nouva",
           },
           rating: "★★★★★",
         },
@@ -4208,22 +5525,22 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Lits",
             name: "Lit luxueux",
-            desc: "Raffinement absolu et confort d’exception pour une chambre au style résolument luxueux. Ce lit coffre moderne combine design élégant, confort supérieur et praticité au quotidien. Son grand espace de rangement intégré permet de garder votre chambre propre et organisée. Sa structure solide en bois rouge assure une excellente durabilité, tandis que son tissu anti-taches facilite l’entretien. Couleurs personnalisables. Dimensions disponibles : 160 x 190 cm à 75 000 DA et 180 x 200 cm à 85 000 DA.",
+            desc: "Raffinement absolu. 160x190 / 180x200 cm.",
             price: "75 000 DA / 85 000 DA",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "Luxueux",
-            wa: "Commander Lit luxueux - 160 x 190 cm : 75 000 DA / 180 x 200 cm : 85 000 DA",
+            wa: "Commander Lit luxueux",
           },
           ar: {
             catName: "الأسرّة",
             name: "Lit luxueux",
-            desc: "سرير فاخر يجمع بين الأناقة والراحة العالية والتنظيم العملي. يحتوي على صندوق تخزين واسع يساعد في ترتيب غرفة النوم بسهولة. هيكل قوي من الخشب الأحمر لضمان المتانة، قماش مضاد للبقع وسهل التنظيف، مع إمكانية تخصيص اللون حسب الذوق. المقاسات المتوفرة: 160 × 190 سم بسعر 75,000 دج و 180 × 200 سم بسعر 85,000 دج.",
+            desc: "سرير فاخر.",
             price: "75,000 / 85,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "فاخر",
-            wa: "طلب Lit luxueux - 160 x 190 سم : 75,000 دج / 180 x 200 سم : 85,000 دج",
+            wa: "طلب Lit luxueux",
           },
           rating: "★★★★★",
         },
@@ -4239,236 +5556,257 @@ html[dir="rtl"] [data-ar*="←"] {
           fr: {
             catName: "Lits",
             name: "Lit en bois de hêtre",
-            desc: "La beauté naturelle du bois de hêtre alliée à un confort durable et authentique. Ce lit coffre moderne combine design, confort et fonctionnalité grâce à son système relevable qui offre un grand espace de rangement discret. Sa tête de lit rembourrée apporte une touche chaleureuse et raffinée. Structure intérieure en bois rouge, tissu anti-taches facile à nettoyer et couleurs personnalisables. Dimensions disponibles : 160 x 190 cm et 180 x 200 cm.",
+            desc: "Bois de hêtre naturel. 160x190 / 180x200 cm.",
             price: "À partir de 65 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Bois",
-            wa: "Commander Lit en bois de hêtre - Dimensions disponibles : 160 x 190 cm / 180 x 200 cm - Prix à partir de 65 000 DA",
+            wa: "Commander Lit en bois de hêtre",
           },
           ar: {
             catName: "الأسرّة",
-            name: "Lit en bois de hêtre",
-            desc: "سرير يجمع بين جمال الخشب الطبيعي والراحة العملية. تصميم coffre مودرن بنظام رفع يوفر مساحة تخزين كبيرة ومخفية. رأس سرير مبطن يضيف لمسة دافئة وراقية، هيكل داخلي من الخشب الأحمر، قماش مضاد للبقع وسهل التنظيف، وألوان قابلة للتخصيص. المقاسات المتوفرة: 160 × 190 سم و 180 × 200 سم.",
+            name: "Lit bois hêtre",
+            desc: "سرير من الخشب الطبيعي.",
             price: "ابتداءً من 65,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "خشب",
-            wa: "طلب Lit en bois de hêtre - المقاسات المتوفرة: 160 x 190 سم / 180 x 200 سم - السعر ابتداءً من 65,000 دج",
+            wa: "طلب Lit bois hêtre",
           },
           rating: "★★★★★",
         },
         {
-  id: 21,
-  cat: "lits",
-  img: "images/litsled1.webp",
-  imgs: ["images/litsled1.webp", "images/litsled2.webp","images/litsled3.webp"],
-  fr: {
-    catName: "Lits",
-    name: "Lit avec éclairage LED intégré",
-    desc: "Design moderne et lumineux avec éclairage LED intégré pour une chambre élégante et tendance. Ce lit coffre compact et pratique est idéal pour optimiser l’espace tout en conservant une touche moderne. Son coffre de rangement intégré offre un espace discret et spacieux pour organiser vos affaires au quotidien. Structure intérieure en bois rouge, tissu anti-taches facile à nettoyer et couleurs personnalisables. Dimensions : 120 x 190 cm.",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "LED",
-    wa: "Commander Lit avec éclairage LED intégré - 120 x 190 cm - 49 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit avec éclairage LED intégré",
-    desc: "سرير مودرن بإضاءة LED مدمجة، مناسب لغرفة أنيقة وعصرية. تصميم compact عملي مع صندوق تخزين مدمج يساعد على توفير المساحة وتنظيم الأغراض اليومية بسهولة. مثالي للغرف الصغيرة أو المساحات المحدودة. هيكل داخلي من الخشب الأحمر لضمان القوة والمتانة، قماش مضاد للبقع وسهل التنظيف، مع إمكانية اختيار اللون حسب الذوق. الأبعاد: 120 × 190 سم.",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "LED",
-    wa: "طلب Lit avec éclairage LED intégré - 120 x 190 سم - 49,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 22,
-  cat: "lits",
-  img: "images/lit-patchwork-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit patchwork coffre",
-    desc: "Design patchwork tendance avec coffre intégré pour un rangement pratique et discret. Craquez pour ce lit patchwork avec coffre intégré, parfait pour apporter une touche originale et tendance à votre chambre. Son design unique en patchwork crée un effet visuel moderne qui s’adapte facilement à différents styles de décoration. Grâce à son coffre de rangement discret, vous bénéficiez d’un espace pratique pour organiser vos affaires tout en gardant une chambre propre et bien structurée. Conçu avec une structure intérieure en bois rouge, ce lit assure robustesse et durabilité. Son tissu anti-taches facilite l’entretien, avec la possibilité de choisir la couleur selon vos envies. Dimensions : 120 x 190 cm.",
-    price: "48 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Patchwork",
-    wa: "Commander Lit patchwork coffre - 120 x 190 cm - 48 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit patchwork coffre",
-    desc: "سرير Patchwork بصندوق تخزين مدمج، مثالي لإضافة لمسة عصرية ومميزة إلى غرفة النوم. يتميز بتصميم patchwork حديث يمنح الغرفة طابعًا أنيقًا ومختلفًا، مع صندوق تخزين عملي ومخفي يساعد على تنظيم الأغراض والحفاظ على الغرفة مرتبة. مصنوع بهيكل داخلي من الخشب الأحمر لضمان القوة والمتانة، مع قماش مضاد للبقع وسهل التنظيف، وإمكانية اختيار اللون حسب الرغبة. الأبعاد: 120 × 190 سم.",
-    price: "48,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Patchwork",
-    wa: "طلب Lit patchwork coffre - 120 x 190 سم - 48,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 23,
-  cat: "lits",
-  img: "images/lit-flottant-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "lit flottant",
-    desc: "Design moderne et élégance suspendue. Adoptez le lit flottant, un choix audacieux qui apporte une touche contemporaine et élégante à votre intérieur. Son effet suspendu donne une impression d’espace et de légèreté, parfait pour une chambre moderne. Sa structure en bois rouge garantit solidité et durabilité, tandis que son tissu anti-taches assure un entretien facile. Personnalisez-le avec la couleur de votre choix pour un rendu unique.",
-    price: "79 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Flottant",
-    wa: "Commander lit flottant - 79 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "lit flottant",
-    desc: "سرير بتصميم معلق وعصري يضيف لمسة أنيقة وحديثة إلى غرفة النوم. يمنح تأثيرًا بصريًا بالخفة والاتساع، ما يجعله مثاليًا للمساحات الحديثة. يتميز بهيكل داخلي من الخشب الأحمر لضمان الصلابة والمتانة، مع قماش مضاد للبقع سهل التنظيف، وإمكانية اختيار اللون حسب الرغبة للحصول على مظهر مميز يناسب ذوقك.",
-    price: "79,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "معلق",
-    wa: "طلب lit flottant - 79,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 24,
-  cat: "lits",
-  img: "images/lits9.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit à trois coffre",
-    desc: "Triple espace de rangement, confort assuré et design pensé pour optimiser votre chambre. Maximisez votre espace avec le lit à trois coffres, une solution intelligente qui combine design moderne, confort optimal et rangement exceptionnel. Grâce à ses trois espaces de rangement intégrés, ce lit vous permet d’organiser facilement vos affaires tout en gardant une chambre propre et harmonieuse. Idéal pour optimiser chaque centimètre de votre espace. Sa structure intérieure en bois rouge garantit robustesse et durabilité, tandis que son tissu anti-taches assure un entretien simple et rapide. Personnalisez votre lit grâce au large choix de couleurs disponibles. Dimensions : 90 x 190 cm.",
-    price: "109 000 DA",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "3 Coffres",
-    wa: "Commander Lit à trois coffre - 90 x 190 cm - 109 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit à trois coffre",
-    desc: "سرير بثلاثة صناديق تخزين مدمجة، يجمع بين التصميم العصري والراحة العملية والتخزين الكبير. يساعدك على تنظيم الأغراض بسهولة مع الحفاظ على غرفة نوم مرتبة وأنيقة، وهو مثالي لاستغلال المساحة بأفضل شكل ممكن. مصنوع بهيكل داخلي من الخشب الأحمر لضمان القوة والمتانة، مع قماش مضاد للبقع سهل التنظيف، وإمكانية اختيار اللون حسب الرغبة. الأبعاد: 90 × 190 سم.",
-    price: "109,000 دج",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "3 صناديق",
-    wa: "طلب Lit à trois coffre - 90 x 190 سم - 109,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 25,
-  cat: "lits",
-  img: "images/lit-dama-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit modèle DAMA",
-    desc: "Élégance intemporelle pour des nuits parfaites. Le lit modèle DAMA combine simplicité, praticité et style élégant pour sublimer votre chambre. Sa structure intérieure en bois rouge assure solidité et durabilité, tandis que son tissu anti-taches facilite l’entretien au quotidien. Couleurs personnalisables selon vos préférences. Dimensions : 120 x 190 cm avec coffre intégré.",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "DAMA",
-    wa: "Commander Lit modèle DAMA - 120 x 190 cm coffre - 49 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit modèle DAMA",
-    desc: "سرير DAMA بتصميم بسيط وعملي وأنيق، مناسب لإضافة لمسة راقية إلى غرفة النوم. يتميز بهيكل داخلي من الخشب الأحمر لضمان القوة والمتانة، مع قماش مضاد للبقع وسهل التنظيف، وإمكانية تغيير الألوان حسب الرغبة. الأبعاد: 120 × 190 سم مع صندوق تخزين.",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "DAMA",
-    wa: "طلب Lit modèle DAMA - 120 x 190 سم coffre - 49,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 26,
-  cat: "lits",
-  img: "images/lit-bois-rouge-1.webp",
-  imgs: ["images/lit-bois-rouge-1.webp", "images/lit-bois-rouge-2.webp","images/lit-bois-rouge-3.webp","images/lit-bois-rouge-4.webp","images/lit-bois-rouge-5.webp","images/lit-bois-rouge-6.webp"],
-  fr: {
-    catName: "Lits",
-    name: "Lit en Bois Rouge Élégant",
-    desc: "Lit en bois rouge élégant, simple, pratique et durable. Disponible en 2 dimensions : 160 x 190 cm à 65 000 DA et 180 x 200 cm à 75 000 DA. Sa structure intérieure en bois rouge garantit solidité et longévité, tandis que son tissu anti-taches facilite l’entretien au quotidien. Couleurs personnalisables selon vos préférences pour s’adapter parfaitement à votre chambre.",
-    price: "65 000 DA / 75 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Bois Rouge",
-    wa: "Commander Lit en Bois Rouge Élégant - 160 x 190 cm : 65 000 DA / 180 x 200 cm : 75 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit en Bois Rouge Élégant",
-    desc: "سرير أنيق من الخشب الأحمر، بسيط وعملي ومتين. متوفر بمقاسين: 160 × 190 سم بسعر 65,000 دج و 180 × 200 سم بسعر 75,000 دج. يتميز بهيكل داخلي من الخشب الأحمر لضمان القوة وطول العمر، مع قماش مضاد للبقع وسهل التنظيف، وإمكانية اختيار اللون حسب الذوق ليتناسب مع غرفة النوم.",
-    price: "65,000 / 75,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "خشب أحمر",
-    wa: "طلب Lit en Bois Rouge Élégant - 160 x 190 سم : 65,000 دج / 180 x 200 سم : 75,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 27,
-  cat: "lits",
-  img: "images/lit-coffre-1.webp",
-  imgs: ["images/lit-coffre-1.webp", "images/lit-coffre-2.webp","images/lit-coffre-3.webp"],
-  fr: {
-    catName: "Lits",
-    name: "Lit coffre",
-    desc: "Rangement intelligent et confort absolu. Le lit coffre idéal pour allier confort et gain de place. Sa structure en bois rouge solide garantit robustesse et durabilité, tandis que son tissu anti-taches facilite l’entretien au quotidien. Couleurs personnalisables selon vos préférences. Dimensions disponibles : 160 x 190 cm à 69 000 DA et 180 x 200 cm à 78 000 DA.",
-    price: "69 000 DA / 78 000 DA",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "Coffre",
-    wa: "Commander Lit coffre - 160 x 190 cm : 69 000 DA / 180 x 200 cm : 78 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit coffre",
-    desc: "سرير بصندوق تخزين ذكي وراحة عالية، مثالي للجمع بين الراحة وتوفير المساحة. يتميز بهيكل قوي من الخشب الأحمر لضمان المتانة وطول العمر، مع قماش مضاد للبقع وسهل التنظيف، وإمكانية اختيار اللون حسب الذوق. المقاسات المتوفرة: 160 × 190 سم بسعر 69,000 دج و 180 × 200 سم بسعر 78,000 دج.",
-    price: "69,000 / 78,000 دج",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "تخزين",
-    wa: "طلب Lit coffre - 160 x 190 سم : 69,000 دج / 180 x 200 سم : 78,000 دج",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 28,
-  cat: "lits",
-  img: "images/lit-trois-coffre-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit à trois coffre",
-    desc: "Triple espace de rangement, confort assuré et design pensé pour optimiser votre chambre. Maximisez votre espace avec le lit à trois coffres, une solution intelligente qui combine design moderne, confort optimal et rangement exceptionnel. Grâce à ses trois espaces de rangement intégrés, ce lit vous permet d’organiser facilement vos affaires tout en gardant une chambre propre et harmonieuse. Idéal pour optimiser chaque centimètre de votre espace. Sa structure intérieure en bois rouge garantit robustesse et durabilité, tandis que son tissu anti-taches assure un entretien simple et rapide. Personnalisez votre lit grâce au large choix de couleurs disponibles. Dimensions : 90 x 190 cm.",
-    price: "109 000 DA",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "3 Coffres",
-    wa: "Commander Lit à trois coffre - 90 x 190 cm - 109 000 DA",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "Lit à trois coffre",
-    desc: "سرير بثلاثة صناديق تخزين مدمجة، يجمع بين التصميم العصري والراحة العملية والتخزين الكبير. يساعدك على تنظيم الأغراض بسهولة مع الحفاظ على غرفة نوم مرتبة وأنيقة، وهو مثالي لاستغلال كل مساحة في الغرفة بأفضل شكل ممكن. يتميز بهيكل داخلي من الخشب الأحمر لضمان القوة والمتانة، مع قماش مضاد للبقع وسهل التنظيف، وإمكانية اختيار اللون حسب الرغبة. الأبعاد: 90 × 190 سم.",
-    price: "109,000 دج",
-    oldPrice: null,
-    badge: "badge-best",
-    badgeText: "3 صناديق",
-    wa: "طلب Lit à trois coffre - 90 x 190 سم - 109,000 دج",
-  },
-  rating: "★★★★★",
-},
+          id: 21,
+          cat: "lits",
+          img: "images/litsled1.webp",
+          imgs: [
+            "images/litsled1.webp",
+            "images/litsled2.webp",
+            "images/litsled3.webp",
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit LED compact 120",
+            desc: "Lit LED compact. 120 x 190 cm.",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "LED",
+            wa: "Commander Lit LED 120x190",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit LED compact 120",
+            desc: "سرير مودرن LED مدمجة.",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "LED",
+            wa: "طلب Lit LED 120x190",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 22,
+          cat: "lits",
+          img: "images/lit-patchwork-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit patchwork coffre",
+            desc: "Design patchwork tendance. 120 x 190 cm.",
+            price: "48 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Patchwork",
+            wa: "Commander Lit patchwork",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit patchwork coffre",
+            desc: "سرير Patchwork.",
+            price: "48,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Patchwork",
+            wa: "طلب Lit patchwork",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 23,
+          cat: "lits",
+          img: "images/lit-flottant-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit flottant",
+            desc: "Design suspendu moderne.",
+            price: "79 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Flottant",
+            wa: "Commander Lit flottant",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit flottant",
+            desc: "سرير بتصميم معلق عصري.",
+            price: "79,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "معلق",
+            wa: "طلب Lit flottant",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 24,
+          cat: "lits",
+          img: "images/lits9.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit à trois coffres",
+            desc: "Triple espace de rangement. 90 x 190 cm.",
+            price: "109 000 DA",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "3 Coffres",
+            wa: "Commander Lit 3 coffres",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit à trois coffres",
+            desc: "سرير بثلاثة صناديق تخزين.",
+            price: "109,000 دج",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "3 صناديق",
+            wa: "طلب Lit 3 coffres",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 25,
+          cat: "lits",
+          img: "images/lit-dama-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit DAMA",
+            desc: "Modèle DAMA élégant. 120 x 190 cm.",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "DAMA",
+            wa: "Commander Lit DAMA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit DAMA",
+            desc: "سرير DAMA أنيق.",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "DAMA",
+            wa: "طلب Lit DAMA",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 26,
+          cat: "lits",
+          img: "images/lit-bois-rouge-1.webp",
+          imgs: [
+            "images/lit-bois-rouge-1.webp",
+            "images/lit-bois-rouge-2.webp",
+            "images/lit-bois-rouge-3.webp",
+            "images/lit-bois-rouge-4.webp",
+            "images/lit-bois-rouge-5.webp",
+            "images/lit-bois-rouge-6.webp",
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit Bois Rouge",
+            desc: "Lit en bois rouge. 160x190 / 180x200 cm.",
+            price: "65 000 DA / 75 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Bois Rouge",
+            wa: "Commander Lit Bois Rouge",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit Bois Rouge",
+            desc: "سرير من الخشب الأحمر.",
+            price: "65,000 / 75,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "خشب أحمر",
+            wa: "طلب Lit Bois Rouge",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 27,
+          cat: "lits",
+          img: "images/lit-coffre-1.webp",
+          imgs: [
+            "images/lit-coffre-1.webp",
+            "images/lit-coffre-2.webp",
+            "images/lit-coffre-3.webp",
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit coffre",
+            desc: "Lit coffre intelligent. 160x190 / 180x200 cm.",
+            price: "69 000 DA / 78 000 DA",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "Coffre",
+            wa: "Commander Lit coffre",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "Lit coffre",
+            desc: "سرير بصندوق تخزين.",
+            price: "69,000 / 78,000 دج",
+            oldPrice: null,
+            badge: "badge-best",
+            badgeText: "تخزين",
+            wa: "طلب Lit coffre",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 28,
+          cat: "salon",
+          img: "images/salon-marina-1.webp",
+          imgs: [
+            "images/salon-marina-1.webp",
+            "images/salon-marina-2.webp",
+            "images/salon-marina-3.webp",
+            "images/salon-marina-4.webp",
+          ],
+          fr: {
+            catName: "Canapés",
+            name: "Salon Marina",
+            desc: "Design moderne avec lignes élégantes et confort exceptionnel.",
+            price: "188 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Marina",
+            wa: "Commander Salon Marina",
+          },
+          ar: {
+            catName: "الصالونات",
+            name: "Salon Marina",
+            desc: "صالون Marina بلمسة عصرية وراحة استثنائية.",
+            price: "188,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Marina",
+            wa: "طلب Salon Marina",
+          },
+          rating: "★★★★★",
+        },
       ];
 
       function shortDesc(str, max = 65) {
@@ -4485,8 +5823,8 @@ html[dir="rtl"] [data-ar*="←"] {
     <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
     ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
     <div class="product-actions-overlay">
+      <button class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation();addToCart(${p.id})">${currentLang === "ar" ? "أضف للسلة" : "Ajouter"}</button>
       <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
-      <a href="${WA}?text=${waMsg}" class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "اطلب الآن" : "Commander"}</a>
     </div>
   </div>
   <div class="product-body">
@@ -4530,51 +5868,34 @@ html[dir="rtl"] [data-ar*="←"] {
         setTimeout(initObserver, 50);
       }
 
-      /* ============================================================
-         PRODUCT MODAL — multi-image gallery
-         ============================================================ */
-      const THUMB_W = 68;
-      const THUMB_GAP = 7;
-      const THUMB_STEP = THUMB_W + THUMB_GAP;
-
+      /* ═══ PRODUCT MODAL ═══ */
+      const THUMB_W = 68,
+        THUMB_GAP = 7,
+        THUMB_STEP = THUMB_W + THUMB_GAP;
       let _modal = {
         productId: null,
-        galleryImgs: [], // current product's image array
-        galleryIdx: 0, // active image index within product
-        stripOffset: 0, // thumb strip scroll
-        thumbList: [], // all thumbs (product gallery only)
+        galleryImgs: [],
+        galleryIdx: 0,
+        stripOffset: 0,
+        thumbList: [],
       };
+      let _currentModalProductId = null;
 
-      /* Open modal for a product */
       function openPModal(productId) {
         const p = allProducts.find((x) => x.id === productId);
         if (!p) return;
-
+        _currentModalProductId = productId;
         _modal.productId = productId;
         _modal.galleryImgs = Array.isArray(p.imgs) ? p.imgs : [p.img || p.imgs];
         _modal.galleryIdx = 0;
         _modal.stripOffset = 0;
-        _modal.thumbList = _modal.galleryImgs; // thumbs = product's own images
-
+        _modal.thumbList = _modal.galleryImgs;
         _fillInfo(p);
         _setMainImage(0, false);
-        _buildThumbs();
-
-        /* re-apply lang inside modal */
-        document
-          .querySelectorAll("#pmodal [data-fr][data-ar]")
-          .forEach((el) => {
-            const txt = el.dataset[currentLang];
-            if (!txt) return;
-            if (txt.includes("<")) el.innerHTML = txt;
-            else el.textContent = txt;
-          });
-
+        // _buildThumbs();
         document.getElementById("pmodalOverlay").classList.add("open");
         document.body.style.overflow = "hidden";
       }
-
-      /* Fill the info panel */
       function _fillInfo(p) {
         const d = p[currentLang];
         const badge = document.getElementById("pmodalBadge");
@@ -4589,27 +5910,25 @@ html[dir="rtl"] [data-ar*="←"] {
         document.getElementById("pmodalName").textContent = d.name;
         document.getElementById("pmodalPrice").textContent = d.price;
         document.getElementById("pmodalDesc").textContent = d.desc;
-        const dl = document.querySelector(".pmodal-desc-label");
-        if (dl)
-          dl.textContent =
-            currentLang === "ar" ? "وصف المنتج" : "Description du produit";
-        const cb = document.querySelector(".pmodal-actions .btn-outline");
-        if (cb) cb.textContent = currentLang === "ar" ? "متابعة" : "Continuer";
-        const ws = document.querySelector("#pmodalWaBtn span");
-        if (ws)
-          ws.textContent =
-            currentLang === "ar" ? "اطلب عبر واتساب" : "Commander via WhatsApp";
         const waMsg = encodeURIComponent(d.wa || d.name);
         document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+        const addBtn = document.getElementById("pmodalAddCart");
+        if (addBtn)
+          addBtn.querySelector("span").textContent =
+            currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
       }
-
-      /* Set the active main image with optional fade */
+      function addCurrentToCart() {
+        if (_currentModalProductId) {
+          addToCart(_currentModalProductId);
+          closePModalDirect();
+          openCart();
+        }
+      }
       function _setMainImage(idx, animate = true) {
         const imgs = _modal.galleryImgs;
         if (!imgs.length) return;
         idx = Math.max(0, Math.min(idx, imgs.length - 1));
         _modal.galleryIdx = idx;
-
         const imgEl = document.getElementById("pmodalImg");
         if (animate) {
           imgEl.classList.add("switching");
@@ -4621,8 +5940,6 @@ html[dir="rtl"] [data-ar*="←"] {
           imgEl.src = imgs[idx];
           imgEl.classList.remove("switching");
         }
-
-        /* counter */
         const counter = document.getElementById("pmodalCounter");
         if (imgs.length > 1) {
           counter.textContent = idx + 1 + " / " + imgs.length;
@@ -4630,61 +5947,47 @@ html[dir="rtl"] [data-ar*="←"] {
         } else {
           counter.style.display = "none";
         }
-
-        /* arrows on main image */
-        const prev = document.getElementById("pmodalImgPrev");
-        const next = document.getElementById("pmodalImgNext");
+        const prev = document.getElementById("pmodalImgPrev"),
+          next = document.getElementById("pmodalImgNext");
         if (prev) prev.disabled = idx <= 0;
         if (next) next.disabled = idx >= imgs.length - 1;
         if (prev) prev.style.display = imgs.length > 1 ? "flex" : "none";
         if (next) next.style.display = imgs.length > 1 ? "flex" : "none";
-
-        /* sync active thumb */
         document
           .querySelectorAll(".pmodal-thumb")
           .forEach((t, i) => t.classList.toggle("active", i === idx));
         _centerThumb(idx);
       }
-
-      /* Arrow navigation on main image */
       function pmodalGalleryNav(dir) {
         _setMainImage(_modal.galleryIdx + dir, true);
       }
-
-      /* Build thumbnails (product's own images) */
-      function _buildThumbs() {
-        const track = document.getElementById("pmodalTrack");
-        track.innerHTML = "";
-        _modal.stripOffset = 0;
-        track.style.transform = "translateX(0)";
-
-        const imgs = _modal.thumbList;
-        if (imgs.length <= 1) {
-          /* hide strip if only 1 image */
-          document.querySelector(".pmodal-thumbs-strip").style.display =
-            imgs.length > 1 ? "flex" : "none";
-          return;
-        }
-        document.querySelector(".pmodal-thumbs-strip").style.display = "flex";
-
-        imgs.forEach((src, i) => {
-          const div = document.createElement("div");
-          div.className = "pmodal-thumb" + (i === 0 ? " active" : "");
-          div.innerHTML = `<div class="pmodal-thumb-img-wrap"><img src="${src}" alt="Photo ${i + 1}" loading="lazy"></div><div class="pmodal-thumb-label">Photo ${i + 1}</div>`;
-          div.addEventListener("click", () => _setMainImage(i, true));
-          track.appendChild(div);
-        });
-
-        _centerThumb(0);
-        _updateStripNav();
-      }
-
-      /* Center a thumb in the strip */
+      // function _buildThumbs() {
+      //   const track = document.getElementById("pmodalTrack");
+      //   track.innerHTML = "";
+      //   _modal.stripOffset = 0;
+      //   track.style.transform = "translateX(0)";
+      //   const imgs = _modal.thumbList;
+      //   if (imgs.length <= 1) {
+      //     document.querySelector(".pmodal-thumbs-strip").style.display =
+      //       imgs.length > 1 ? "flex" : "none";
+      //     return;
+      //   }
+      //   document.querySelector(".pmodal-thumbs-strip").style.display = "flex";
+      //   imgs.forEach((src, i) => {
+      //     const div = document.createElement("div");
+      //     div.className = "pmodal-thumb" + (i === 0 ? " active" : "");
+      //     div.innerHTML = `<div class="pmodal-thumb-img-wrap"><img src="${src}" alt="Photo ${i + 1}" loading="lazy"></div><div class="pmodal-thumb-label">Photo ${i + 1}</div>`;
+      //     div.addEventListener("click", () => _setMainImage(i, true));
+      //     track.appendChild(div);
+      //   });
+      //   _centerThumb(0);
+      //   _updateStripNav();
+      // }
       function _centerThumb(idx) {
         const outer = document.querySelector(".pmodal-thumbs-outer");
         if (!outer) return;
-        const vw = outer.clientWidth;
-        const total = _modal.thumbList.length;
+        const vw = outer.clientWidth,
+          total = _modal.thumbList.length;
         const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
         let target = idx * THUMB_STEP - Math.floor((vw - THUMB_W) / 2);
         target = Math.max(0, Math.min(target, maxOff));
@@ -4693,12 +5996,10 @@ html[dir="rtl"] [data-ar*="←"] {
           `translateX(-${_modal.stripOffset}px)`;
         _updateStripNav();
       }
-
-      /* Strip arrow scroll */
       function pmodalStripScroll(dir) {
         const outer = document.querySelector(".pmodal-thumbs-outer");
-        const total = _modal.thumbList.length;
-        const vw = outer ? outer.clientWidth : 400;
+        const total = _modal.thumbList.length,
+          vw = outer ? outer.clientWidth : 400;
         const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
         _modal.stripOffset = Math.max(
           0,
@@ -4708,19 +6009,16 @@ html[dir="rtl"] [data-ar*="←"] {
           `translateX(-${_modal.stripOffset}px)`;
         _updateStripNav();
       }
-
       function _updateStripNav() {
         const outer = document.querySelector(".pmodal-thumbs-outer");
-        const total = _modal.thumbList.length;
-        const vw = outer ? outer.clientWidth : 400;
+        const total = _modal.thumbList.length,
+          vw = outer ? outer.clientWidth : 400;
         const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
-        const prev = document.getElementById("pmodalNavPrev");
-        const next = document.getElementById("pmodalNavNext");
+        const prev = document.getElementById("pmodalNavPrev"),
+          next = document.getElementById("pmodalNavNext");
         if (prev) prev.disabled = _modal.stripOffset <= 0;
         if (next) next.disabled = _modal.stripOffset >= maxOff;
       }
-
-      /* Keyboard navigation inside modal */
       document.addEventListener("keydown", (e) => {
         if (
           !document.getElementById("pmodalOverlay").classList.contains("open")
@@ -4731,7 +6029,6 @@ html[dir="rtl"] [data-ar*="←"] {
         if (e.key === "ArrowRight")
           pmodalGalleryNav(document.documentElement.dir === "rtl" ? -1 : 1);
       });
-
       function closePModal(e) {
         if (e && e.target !== document.getElementById("pmodalOverlay")) return;
         closePModalDirect();
@@ -4741,10 +6038,10 @@ html[dir="rtl"] [data-ar*="←"] {
         document.body.style.overflow = "";
       }
 
-      /* ============ INIT ============ */
+      /* ═══ INIT ═══ */
       (function init() {
         const savedLang = loadLang();
-        const savedPage = loadPage();
+        const savedPage = localStorage.getItem(PAGE_KEY) || "home";
         currentLang = savedLang;
         document.documentElement.lang = savedLang;
         document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
@@ -4764,13 +6061,18 @@ html[dir="rtl"] [data-ar*="←"] {
             el.textContent = savedLang === "ar" ? "←" : "→";
           });
         }
+        const startPage =
+          savedPage === "checkout" || savedPage === "success"
+            ? "home"
+            : savedPage;
         document
           .querySelectorAll(".page")
           .forEach((p) => p.classList.remove("active"));
-        const targetPage = document.getElementById("page-" + savedPage);
-        if (targetPage) targetPage.classList.add("active");
+        const target = document.getElementById("page-" + startPage);
+        if (target) target.classList.add("active");
+        loadCart();
         renderFeatured();
-        if (savedPage === "products") renderProducts(currentFilter);
+        if (startPage === "products") renderProducts(currentFilter);
         setTimeout(initObserver, 150);
       })();
     </script>
