@@ -10,6 +10,10 @@
     <title>
       Royal Meubles Djelfa| روائع الأثاث — Meubles de Luxe en Algérie
     </title>
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="shortcut icon" href="images/logo2.webp" type="image/x-icon" />
@@ -19,32 +23,219 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-      html[dir="rtl"] .cat-arrow {
-        left: auto;
-        right: 16px;
-      }
-      html[dir="rtl"] .pmodal-img-arrow.prev {
-        left: auto;
-        right: 12px;
-      }
-      html[dir="rtl"] .pmodal-img-arrow.next {
-        right: auto;
-        left: 12px;
-      }
-      html[dir="rtl"] .pmodal-thumb-nav {
-        transform: rotate(180deg);
-      }
-      html[dir="rtl"] .footer-col ul li a {
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-      }
-      html[dir="rtl"] .footer-col ul li a::before {
-        content: "←";
-      }
-      html[dir="rtl"] [data-ar*="←"] {
-        direction: rtl;
-      }
+html[dir="rtl"] .cat-arrow {
+  right: auto;  /* إزالة التحديد السابق */
+  left: 16px;   /* تحديد اليسار */
+}
 
+html[dir="rtl"] .pmodal-img-arrow.prev {
+  right: auto;  /* إزالة التحديد السابق */
+  left: 12px;   /* تحديد اليسار */
+}
+
+html[dir="rtl"] .pmodal-img-arrow.next {
+  left: auto;  /* إزالة التحديد السابق */
+  right: 12px; /* تحديد اليمين */
+}
+
+html[dir="rtl"] .pmodal-thumb-nav {
+  transform: rotate(180deg);  /* عكس الأيقونة لتناسب RTL */
+}
+
+html[dir="rtl"] .footer-col ul li a::before {
+  content: "←";  /* إضافة السهم لليسار في الـ footer */
+}
+
+html[dir="rtl"] {
+  direction: rtl; /* تحديد اتجاه النص من اليمين لليسار */
+}
+.top-bar {
+  background: linear-gradient(135deg, #1a1430, #2a1f5c);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+  padding: 8px 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+}
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.top-bar-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.73rem;
+  color: rgba(201, 169, 110, 0.85);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+html[lang="ar"] .top-bar-text {
+  font-family: "Tajawal", sans-serif;
+  font-style: normal;
+}
+.top-bar-text .dot { color: var(--gold); }
+.top-bar-socials {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-bar-social-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 6px;
+  background: rgba(201, 169, 110, 0.08);
+  color: rgba(201, 169, 110, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.top-bar-social-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: white;
+  transform: translateY(-1px);
+}
+.top-bar-phone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.top-bar-phone a {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(201, 169, 110, 0.75);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+.top-bar-phone a:hover { color: var(--gold-light); }
+.top-bar-phone .sep {
+  width: 1px;
+  height: 12px;
+  background: rgba(201, 169, 110, 0.2);
+}
+@media (max-width: 768px) {
+  .top-bar-text { display: none; }
+  .top-bar-phone { display: none; }
+}
+.navbar { top: 38px; }
+.hero-left { padding-top: 186px !important; }
+#page-products > div:first-child,
+#page-offers > div:first-child,
+#page-checkout > div:first-child { padding-top: 128px !important; }
+@media (max-width: 768px) {
+  .navbar { top: 0; }
+  .hero-left { padding-top: 146px !important; }
+}
+.map-section {
+  background: #141927;
+  padding: 70px 0;
+  font-family: 'DM Sans', sans-serif;
+  direction: ltr;
+}
+.map-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 48px;
+  align-items: center;
+}
+.map-info { display: flex; flex-direction: column; gap: 20px; }
+.map-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(240,50,50,0.12);
+  border: 1px solid rgba(240,50,50,0.35);
+  color: #ff6b6b;
+  padding: 7px 16px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.map-title {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0;
+}
+.map-title span { color: #f03232; }
+.map-details { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+.map-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid #f03232;
+}
+.map-detail-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.map-detail-label {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+}
+.map-detail-value { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+.map-detail-value a { color: #ff6b6b; text-decoration: none; }
+.map-frame-wrap {
+  position: relative;
+  border: 2px solid rgba(240,50,50,0.25);
+  overflow: hidden;
+}
+.map-frame-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c91f1f, #f03232, #ff6b6b);
+  z-index: 2;
+}
+.map-frame-wrap iframe { display: block; width: 100%; height: 480px; border: none; }
+.map-footer {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.map-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #c91f1f, #f03232);
+  color: white;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.map-open-btn:hover { opacity: 0.88; }
+.map-coords { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+@media (max-width: 768px) {
+  .map-inner { grid-template-columns: 1fr; gap: 32px; }
+  .map-frame-wrap iframe { height: 320px; }
+  .map-title { font-size: 1.8rem; }
+}
       :root {
         --gold: #f03232;
         --gold-light: #ff6b6b;
@@ -920,18 +1111,21 @@
         align-content: center;
         justify-content: space-between;
         align-items: center;
+        margin-top: 50px;
       }
       .navbar.scrolled {
         background: rgba(250, 247, 242, 0.97);
         backdrop-filter: blur(20px);
         box-shadow: 0 2px 30px var(--shadow-dark);
         border-bottom: 1px solid var(--beige-mid);
+        margin-top: 0;
       }
       .navbar-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 20px;
+        
       }
       .logo {
         display: flex;
@@ -2887,6 +3081,40 @@
     </style>
   </head>
   <body>
+    <div class="top-bar" id="topBar">
+  <div class="container top-bar-inner">
+    <div class="top-bar-text">
+      <span class="dot">✦</span>
+      <span data-fr="Livraison dans toutes les wilayas d'Algérie" 
+            data-ar="التوصيل لجميع ولايات الجزائر">
+        Livraison dans toutes les wilayas d'Algérie
+      </span>
+    </div>
+    <div class="top-bar-socials">
+      <a class="top-bar-social-btn" href="https://www.facebook.com/Royalmeublesainoussera" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a class="top-bar-social-btn" href="https://www.instagram.com/royalmeubles.dz" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a class="top-bar-social-btn" href="https://www.tiktok.com/@confort808" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a class="top-bar-social-btn" href="https://wa.me/213775530551" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="top-bar-phone">
+      <a href="tel:+213775530551">
+        <i class="fas fa-phone" style="font-size:0.65rem"></i> 0775 530 551
+      </a>
+      <div class="sep"></div>
+      <a href="tel:+213773793322">
+        <i class="fas fa-phone" style="font-size:0.65rem"></i> 0773 793 322
+      </a>
+    </div>
+  </div>
+</div>
     <div class="cart-toast" id="cartToast">
       <span>✓</span> <span id="cartToastMsg">Produit ajouté !</span>
     </div>
@@ -3202,7 +3430,7 @@
             <a href="#" onclick="navigateTo('products')" class="btn btn-gold"
               >Voir les produits</a
             >
-            <a href="https://wa.me/213562314115" class="btn btn-outline"
+            <a href="https://wa.me/213775530551" class="btn btn-outline"
               >Commander sur WhatsApp</a
             >
           </div>
@@ -3673,7 +3901,62 @@
           </div>
         </div>
       </section>
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-info">
+      <span class="map-badge">✦ Notre adresse</span>
+      <h2 class="map-title">Venez nous rendre <span>visite</span></h2>
+      <div class="map-details">
+        <div class="map-detail-row">
+          <span class="map-detail-icon">📍</span>
+          <div class="map-detail-body">
+            <div class="map-detail-label">Adresse</div>
+            <div class="map-detail-value">Royal Meubles Djelfa, Algérie</div>
+          </div>
+        </div>
+        <div class="map-detail-row">
+          <span class="map-detail-icon">📞</span>
+          <div class="map-detail-body">
+            <div class="map-detail-label">Téléphone</div>
+            <div class="map-detail-value">
+              <a href="tel:+213775530551">0775 530 551</a> &nbsp;/&nbsp;
+              <a href="tel:+213773793322">0773 793 322</a>
+            </div>
+          </div>
+        </div>
+        <div class="map-detail-row">
+          <span class="map-detail-icon">🚚</span>
+          <div class="map-detail-body">
+            <div class="map-detail-label">Livraison</div>
+            <div class="map-detail-value">Toutes les 48 wilayas d'Algérie</div>
+          </div>
+        </div>
+        <div class="map-detail-row">
+          <span class="map-detail-icon">⏰</span>
+          <div class="map-detail-body">
+            <div class="map-detail-label">Horaires</div>
+            <div class="map-detail-value">Tous les jours — 08h à 20h</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div>
+      <div class="map-frame-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2704.561525154732!2d3.2448829999999997!3d34.670768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1289cf4d7e07c033%3A0xa5f1bf4b6491d0b1!2sROYAL%20MEUBLES%20DJELFA!5e1!3m2!1sen!2seg!4v1777909754546!5m2!1sen!2seg"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="map-footer">
+        <a class="map-open-btn" href="https://maps.google.com/?q=ROYAL+MEUBLES+DJELFA" target="_blank">
+          Ouvrir dans Google Maps →
+        </a>
+        <span class="map-coords">34.6708° N, 3.2449° E</span>
+      </div>
+    </div>
+  </div>
+</section>
       <section class="cta-section">
         <video
           class="cta-video-bg"
@@ -3723,7 +4006,7 @@
                 flex-wrap: wrap;
               "
             >
-              <a href="https://wa.me/213562314115" class="btn btn-whatsapp">
+              <a href="https://wa.me/213775530551" class="btn btn-whatsapp">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -3796,7 +4079,7 @@
             <button
               class="filter-tab"
               onclick="filterProducts(this, 'salon')"
-              data-fr="Canapés"
+              data-fr="Salons"
               data-ar="الصالونات"
             >
               Canapés
@@ -3913,7 +4196,7 @@
                   Commandez maintenant et bénéficiez de la livraison gratuite
                 </p>
                 <a
-                  href="https://wa.me/213562314115"
+                  href="https://wa.me/213775530551"
                   class="btn btn-whatsapp"
                   style="margin-top: 12px; font-size: 0.86rem"
                   data-fr="Commander"
@@ -4022,7 +4305,7 @@
           </div>
           <div style="text-align: center; margin-top: 50px" class="reveal">
             <a
-              href="https://wa.me/213562314115"
+              href="https://wa.me/213775530551"
               class="btn btn-whatsapp"
               data-fr="Commander via WhatsApp"
               data-ar="اطلب عبر واتساب"
@@ -4244,164 +4527,100 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <a href="#" class="logo-main"
-              ><img src="images/logo2.webp" alt=""
-            /></a>
-            <p
-              class="footer-desc"
-              data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas d'Algérie."
-              data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر."
-            >
-              Nous proposons les meubles d'intérieur et de bureau les plus
-              raffinés.
-            </p>
-            <div class="footer-socials">
-              <a class="social-btn" href="#">f</a>
-              <a class="social-btn" href="#">in</a>
-              <a class="social-btn" href="https://wa.me/213562314115"
-                ><svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style="width: 14px; height: 14px"
-                >
-                  <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  /></svg
-              ></a>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h4 data-fr="Navigation" data-ar="الصفحات">Navigation</h4>
-            <ul>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('home')"
-                  data-fr="Accueil"
-                  data-ar="الرئيسية"
-                  >Accueil</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Produits"
-                  data-ar="المنتجات"
-                  >Produits</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('offers')"
-                  data-fr="Offres"
-                  data-ar="العروض"
-                  >Offres</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4 data-fr="Catégories" data-ar="الأقسام">Catégories</h4>
-            <ul>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Chambres à coucher"
-                  data-ar="غرف النوم"
-                  >Chambres à coucher</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Salons"
-                  data-ar="غرف المعيشة"
-                  >Salons</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Canapés"
-                  data-ar="الصالونات"
-                  >Canapés</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Armoires"
-                  data-ar="الخزائن"
-                  >Armoires</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onclick="navigateTo('products')"
-                  data-fr="Mobilier de bureau"
-                  data-ar="الأثاث المكتبي"
-                  >Mobilier de bureau</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4 data-fr="Nos services" data-ar="خدماتنا">Nos services</h4>
-            <ul>
-              <li>
-                <a
-                  href="#"
-                  data-fr="Livraison nationale"
-                  data-ar="توصيل لجميع الولايات"
-                  >Livraison nationale</a
-                >
-              </li>
-              <li>
-                <a href="#" data-fr="Montage gratuit" data-ar="تركيب مجاني"
-                  >Montage gratuit</a
-                >
-              </li>
-              <li>
-                <a href="#" data-fr="Qualité garantie" data-ar="ضمان الجودة"
-                  >Qualité garantie</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  data-fr="Paiement à la livraison"
-                  data-ar="الدفع عند الاستلام"
-                  >Paiement à la livraison</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span
-            data-fr="© 2025 Royal Meubles Djelfa — Tous droits réservés"
-            data-ar="© 2025 روائع الأثاث — جميع الحقوق محفوظة"
-            >© 2025 Royal Meubles Djelfa — Tous droits réservés</span
-          >
-          <span
-            data-fr="Fait avec ♥ en Algérie 🇩🇿"
-            data-ar="صُنع بـ ♥ في الجزائر 🇩🇿"
-            >Fait avec ♥ en Algérie 🇩🇿</span
-          >
-        </div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo-main">
+          <img src="images/logo2.webp" alt="" />
+        </a>
+        <p class="footer-desc" data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas d'Algérie." data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر.">
+          Nous proposons les meubles d'intérieur et de bureau les plus raffinés.
+        </p>
+       <div class="footer-socials">
+  <!-- Facebook -->
+  <a class="social-btn" href="https://www.facebook.com/Royalmeublesainoussera" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <!-- WhatsApp -->
+  <a class="social-btn" href="https://wa.me/213775530551">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <!-- Instagram -->
+  <a class="social-btn" href="https://www.instagram.com/royalmeubles.dz" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <!-- TikTok -->
+  <a class="social-btn" href="https://www.tiktok.com/@royal.meubles.dz" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+</div>
       </div>
-    </footer>
+
+      <!-- إضافة أرقام الهاتف تحت في الفوتر -->
+      <div class="footer-col">
+        <h4 data-fr="Nous Contacter" data-ar="اتصل بنا">Nous Contacter</h4>
+        <ul>
+          <li>
+            <a href="tel:+213775530551" data-fr="Appelez-nous : 0775530551" data-ar="اتصل بنا: 0775530551">
+              0775530551
+            </a>
+          </li>
+          <li>
+            <a href="tel:+213773793322" data-fr="Appelez-nous : 0773793322" data-ar="اتصل بنا: 0773793322">
+              0773793322
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-fr="Navigation" data-ar="الصفحات">Navigation</h4>
+        <ul>
+          <li>
+            <a href="#" onclick="navigateTo('home')" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Produits" data-ar="المنتجات">Produits</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('offers')" data-fr="Offres" data-ar="العروض">Offres</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-fr="Catégories" data-ar="الأقسام">Catégories</h4>
+        <ul>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Chambres à coucher" data-ar="غرف النوم">Chambres à coucher</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Salons" data-ar="غرف المعيشة">Salons</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Canapés" data-ar="الصالونات">Canapés</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Armoires" data-ar="الخزائن">Armoires</a>
+          </li>
+          <li>
+            <a href="#" onclick="navigateTo('products')" data-fr="Mobilier de bureau" data-ar="الأثاث المكتبي">Mobilier de bureau</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-fr="© 2025 Royal Meubles Djelfa — Tous droits réservés" data-ar="© 2025 روائع الأثاث — جميع الحقوق محفوظة">
+        © 2025 Royal Meubles Djelfa — Tous droits réservés
+      </span>
+      <span data-fr="Fait avec ♥ en Algérie 🇩🇿" data-ar="صُنع بـ ♥ في الجزائر 🇩🇿">
+        Fait avec ♥ en Algérie 🇩🇿
+      </span>
+    </div>
+  </div>
+</footer>
 
     <div class="whatsapp-float">
       <span
@@ -4411,7 +4630,7 @@
         >Contactez-nous ! 👋</span
       >
       <a
-        href="https://wa.me/213562314115"
+        href="https://wa.me/213775530551"
         class="whatsapp-btn"
         target="_blank"
         aria-label="WhatsApp"
@@ -4518,7 +4737,7 @@
       const { createClient } = supabase;
       const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      const WA = "https://wa.me/213562314115";
+      const WA = "https://wa.me/213775530551";
       let currentLang = "fr";
       const LANG_KEY = "roua_lang";
       const PAGE_KEY = "roua_page";
@@ -5263,11 +5482,12 @@
           cat: "lits",
           img: "images/lit-1.webp",
           imgs: ["images/lit-1.webp", "images/lit-2.webp", "images/lit-3.webp"],
-            colors: [                          // ← برا fr وar
-    { hex: "#c8a96e", fr: "Beige doré",      ar: "بيج ذهبي"   },
-    { hex: "#4a4a4a", fr: "Gris anthracite", ar: "رمادي غامق" },
-    { hex: "#8B2020", fr: "Bordeaux",        ar: "بوردو"      },
-  ],
+          colors: [
+            // ← برا fr وar
+            { hex: "#c8a96e", fr: "Beige doré", ar: "بيج ذهبي" },
+            { hex: "#4a4a4a", fr: "Gris anthracite", ar: "رمادي غامق" },
+            { hex: "#8B2020", fr: "Bordeaux", ar: "بوردو" },
+          ],
           fr: {
             catName: "Lits",
             name: "Lit Piano coffre",
@@ -5277,10 +5497,11 @@
             badge: "badge-new",
             badgeText: "Nouveau",
             wa: "Commander Lit Piano coffre - 90 x 190 cm",
-              sizes: [                         // ← جوه fr
-      { label: "180 x 200 cm", price: "115,000.00 DA" },
-      { label: "160 x 190 cm", price: "98,000.00 DA"  },
-    ],
+            sizes: [
+              // ← جوه fr
+              { label: "180 x 200 cm", price: "115,000.00 DA" },
+              { label: "160 x 190 cm", price: "98,000.00 DA" },
+            ],
           },
           ar: {
             catName: "الأسرّة",
@@ -5291,10 +5512,11 @@
             badge: "badge-new",
             badgeText: "جديد",
             wa: "طلب Lit Piano coffre",
-              sizes: [                         // ← جوه fr
-      { label: "180 x 200 cm", price: "115,000.00 DA" },
-      { label: "160 x 190 cm", price: "98,000.00 DA"  },
-    ],
+            sizes: [
+              // ← جوه fr
+              { label: "180 x 200 cm", price: "115,000.00 DA" },
+              { label: "160 x 190 cm", price: "98,000.00 DA" },
+            ],
           },
           rating: "★★★★★",
         },
@@ -5324,32 +5546,7 @@
           },
           rating: "★★★★★",
         },
-        {
-          id: 17,
-          cat: "lits",
-          img: "images/lit-led-1.webp",
-          fr: {
-            catName: "Lits",
-            name: "Lit LED 160/180",
-            desc: "Lit coffre avec LED intégrées. 160x190 cm / 180x200 cm.",
-            price: "98 000 DA / 115 000 DA",
-            oldPrice: null,
-            badge: "badge-new",
-            badgeText: "LED",
-            wa: "Commander Lit LED",
-          },
-          ar: {
-            catName: "الأسرّة",
-            name: "Lit LED 160/180",
-            desc: "سرير بإضاءة LED مدمجة.",
-            price: "98,000 / 115,000 دج",
-            oldPrice: null,
-            badge: "badge-new",
-            badgeText: "LED",
-            wa: "طلب Lit LED",
-          },
-          rating: "★★★★★",
-        },
+
         {
           id: 18,
           cat: "lits",
@@ -5625,7 +5822,7 @@
             "images/lit-coffre-2.webp",
             "images/lit-coffre-3.webp",
           ],
-    
+
           fr: {
             catName: "Lits",
             name: "Lit coffre",
@@ -5658,7 +5855,7 @@
             "images/salon-marina-3.webp",
             "images/salon-marina-4.webp",
           ],
-    
+
           fr: {
             catName: "Canapés",
             name: "Salon Marina",
@@ -6156,7 +6353,7 @@
         setTimeout(initObserver, 150);
       })();
     </script>
-       <script>
+    <script>
       (function () {
         "use strict";
         document.addEventListener("contextmenu", function (e) {
