@@ -1448,10 +1448,7 @@ html[lang="ar"] .top-bar-text {
         font-weight: 900;
         animation-name: fadeRight;
       }
-      .hero-title .gold-text {
-        color: var(--gold-light);
-        display: block;
-      }
+
       .hero-title .italic-text {
         font-style: italic;
         font-weight: 300;
@@ -1588,6 +1585,7 @@ html[lang="ar"] .top-bar-text {
         overflow: hidden;
         cursor: pointer;
         aspect-ratio: 3/4;
+        border-radius: 28px;
       }
       .cat-card.large {
         grid-column: span 1;
@@ -1712,11 +1710,11 @@ html[lang="ar"] .top-bar-text {
         border-color: var(--gold);
         color: white;
       }
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
+   .products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
       .product-card {
         background: var(--white);
         overflow: hidden;
@@ -1725,6 +1723,7 @@ html[lang="ar"] .top-bar-text {
         position: relative;
         border-bottom: 2px solid transparent;
         cursor: pointer;
+        border-radius: 16px;
       }
       .product-card:hover {
         transform: translateY(-5px);
@@ -1735,6 +1734,7 @@ html[lang="ar"] .top-bar-text {
         position: relative;
         aspect-ratio: 4/3;
         overflow: hidden;
+        border-radius: 16px 16px 0 0;
       }
       .product-img {
         width: 100%;
@@ -3106,10 +3106,7 @@ html[lang="ar"] .top-bar-text {
   margin-bottom: 22px;
   animation: fadeLeft 0.8s var(--transition) 0.4s both;
 }
-.hero-title .gold-text {
-  color: #ffd700;               /* ← أصفر ذهبي فاقع بدل الأحمر */
-  display: block;
-}
+
 .hero-title .italic-text {
   font-style: italic;
   font-weight: 300;
@@ -3142,6 +3139,71 @@ html[lang="ar"] .top-bar-text {
   -webkit-background-clip: text;  /* Apply the background gradient to the text */
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);  /* Soft white glow */
   display: block;
+}
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+#homeFeaturedGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+  #homeFeaturedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* الـ offers grid — 4 كارت جنب بعض */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+}
+
+/* إلغاء الـ large span */
+.offer-card.large {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-height: auto;
+}
+
+/* border-radius احترافي */
+.offer-card {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .offer-card.large {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 }
     </style>
   </head>
@@ -3627,58 +3689,8 @@ html[lang="ar"] .top-bar-text {
             </h2>
           </div>
           <div class="categories-grid">
-            <div
-              class="cat-card large reveal from-left"
-              onclick="navigateToCategory('lits')"
-            >
-              <img
-                class="cat-img"
-                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80&fit=crop"
-                alt="Chambres à coucher"
-              />
-              <div class="cat-card-overlay"></div>
-              <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="Chambres à coucher"
-                  data-ar="غرف النوم"
-                >
-                  Chambres à coucher
-                </div>
-                <div
-                  class="cat-count"
-                  data-fr="+45 produits"
-                  data-ar="+45 منتج"
-                >
-                  +45 produits
-                </div>
-              </div>
-              <div class="cat-arrow">→</div>
-            </div>
-            <div
-              class="cat-card reveal reveal-delay-1"
-              onclick="navigateToCategory('salon')"
-            >
-              <img
-                class="cat-img"
-                src="images/salonHome.webp"
-                alt="Salons"
-              />
-              <div class="cat-card-overlay"></div>
-              <div class="cat-card-content">
-                <div class="cat-name" data-fr="Salons" data-ar="غرف المعيشة">
-                  Salons
-                </div>
-                <div
-                  class="cat-count"
-                  data-fr="+38 produits"
-                  data-ar="+38 منتج"
-                >
-                  +38 produits
-                </div>
-              </div>
-              <div class="cat-arrow">→</div>
-            </div>
+         
+      
             <div
               class="cat-card reveal reveal-delay-2"
              onclick="navigateToCategory('salon')"
@@ -3707,6 +3719,59 @@ html[lang="ar"] .top-bar-text {
               </div>
               <div class="cat-arrow">→</div>
             </div>
+               <div
+              class="cat-card large reveal from-left"
+              onclick="navigateToCategory('lits')"
+            >
+              <img
+                class="cat-img"
+                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80&fit=crop"
+                alt="Chambres à coucher"
+              />
+              <div class="cat-card-overlay"></div>
+              <div class="cat-card-content">
+                <div
+                  class="cat-name"
+                  data-fr="Chambres à coucher"
+                  data-ar="غرف النوم"
+                >
+                  Chambres à coucher
+                </div>
+                <div
+                  class="cat-count"
+                  data-fr="+45 produits"
+                  data-ar="+45 منتج"
+                >
+                  +45 produits
+                </div>
+              </div>
+              <div class="cat-arrow">→</div>
+            </div>
+                  <div
+              class="cat-card reveal reveal-delay-1"
+              onclick="navigateToCategory('salon')"
+            >
+              <img
+                class="cat-img"
+                src="images/salonHome.webp"
+                alt="Salons"
+              />
+              <div class="cat-card-overlay"></div>
+              <div class="cat-card-content">
+                <div class="cat-name" data-fr="Salons" data-ar="غرف المعيشة">
+                  Salons
+                </div>
+                <div
+                  class="cat-count"
+                  data-fr="+38 produits"
+                  data-ar="+38 منتج"
+                >
+                  +38 produits
+                </div>
+              </div>
+              <div class="cat-arrow">→</div>
+            </div>
+            
             <div
               class="cat-card reveal reveal-delay-1"
               onclick="navigateToCategory('wardrobe')"
@@ -3976,9 +4041,9 @@ html[lang="ar"] .top-bar-text {
                  data-fr="Adresse" 
                  data-ar="العنوان">Adresse</div>
             <div class="map-detail-value" 
-                 data-fr="Royal Meubles Algérie" 
-                 data-ar="روايل موبل الجلفة، الجزائر">
-              Royal Meubles Algérie
+                 data-fr="Djelfa" 
+                 data-ar="الجلفة">
+             Djelfa
             </div>
           </div>
         </div>
@@ -4115,7 +4180,7 @@ html[lang="ar"] .top-bar-text {
     </div>
 
     <!-- PRODUCTS PAGE -->
-    <div class="page" id="page-products">
+    <div class="page" id="page-offers">
       <div style="padding-top: 90px"></div>
       <section class="products">
         <div class="container">
@@ -4180,36 +4245,14 @@ html[lang="ar"] .top-bar-text {
             </button>
             <button
               class="filter-tab"
-              onclick="filterProducts(this, 'living')"
-              data-fr="Living"
-              data-ar="غرف المعيشة"
-            >
-              Living
-            </button>
-            <button
-              class="filter-tab"
               onclick="filterProducts(this, 'tables')"
               data-fr="Tables"
               data-ar="الطاولات"
             >
               Tables
             </button>
-            <button
-              class="filter-tab"
-              onclick="filterProducts(this, 'wardrobe')"
-              data-fr="Armoires"
-              data-ar="الخزائن"
-            >
-              Armoires
-            </button>
-            <button
-              class="filter-tab"
-              onclick="filterProducts(this, 'office')"
-              data-fr="Bureau"
-              data-ar="الأثاث المكتبي"
-            >
-              Bureau
-            </button>
+ 
+
           </div>
           <div class="products-grid" id="productsGrid"></div>
         </div>
@@ -4217,18 +4260,21 @@ html[lang="ar"] .top-bar-text {
     </div>
 
     <!-- OFFERS PAGE -->
-    <div class="page" id="page-offers">
+    <div class="page" id="page-products">
       <div style="padding-top: 90px"></div>
       <section class="offers">
         <div class="container">
           <div class="offers-header reveal">
-            <div
-              class="section-label"
-              data-fr="Durée limitée"
-              data-ar="لفترة محدودة"
-            >
-              Durée limitée
-            </div>
+            <a
+               href="#"
+  onclick="navigateTo('offers'); return false;"
+  class="section-label"
+  style="cursor:pointer; text-decoration:none;"
+  data-fr="Catalogue complet"
+  data-ar="المعرض الكامل"
+>
+  Catalogue complet
+</a>
             <h2
               class="section-title"
               data-fr="Shop <span>exceptionnelles</span>"
@@ -4281,14 +4327,7 @@ html[lang="ar"] .top-bar-text {
                 >
                   Commandez maintenant et bénéficiez de la livraison gratuite
                 </p>
-                <a
-                  href="https://wa.me/213775530551"
-                  class="btn btn-whatsapp"
-                  style="margin-top: 12px; font-size: 0.86rem"
-                  data-fr="Commander"
-                  data-ar="اطلب الآن"
-                  >Commander</a
-                >
+            
               </div>
             </div>
             <div class="offer-card reveal reveal-delay-1">
@@ -5502,14 +5541,14 @@ html[lang="ar"] .top-bar-text {
           cat: "office",
           imgs: ["images/4.webp"],
           fr: {
-            catName: "Bureau",
-            name: "Bureau professionnel",
-            desc: "Bureau moderne adapté au travail.",
+            catName: "commodes",
+            name: "commode professionnel",
+            desc: "commode moderne adapté au travail.",
             price: "38 000 DA",
             oldPrice: null,
             badge: null,
             badgeText: null,
-            wa: "Commander Bureau professionnel",
+            wa: "Commander commode professionnel",
           },
           ar: {
             catName: "الأثاث المكتبي",
@@ -6324,6 +6363,129 @@ html[lang="ar"] .top-bar-text {
     wa: "طلب تسريحة High Gloss",
   },
   rating: "★★★★★",
+},
+
+{
+  id: 46,
+  cat: "lits",
+  img: "images/lit-arc-1.webp",
+  imgs: [
+    "images/lit-arc-1.webp",
+    "images/lit-arc-2.webp"
+  ],
+  colors: [
+    { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
+    { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" }
+  ],
+  fr: {
+    catName: "Lits",
+    name: "Lit d’arc",
+    desc: "Lit d’arc avec structure intérieure en bois rouge, tissu anti-taches avec possibilité de choisir les couleurs.",
+    price: "45 000 DA / 55 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Lit d’arc",
+    sizes: [
+      { label: "Lit 90 x 1.90 m", price: "45 000 DA" },
+      { label: "Lit 1.20 x 1.90 m", price: "55 000 DA" }
+    ]
+  },
+  ar: {
+    catName: "الأسرّة",
+    name: "سرير Arc",
+    desc: "سرير بتصميم أنيق مع هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+    price: "45,000 / 55,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب سرير Arc",
+    sizes: [
+      { label: "90 × 1.90 م", price: "45,000 دج" },
+      { label: "1.20 × 1.90 م", price: "55,000 دج" }
+    ]
+  },
+  rating: "★★★★★"
+},
+{
+  id: 47,
+  cat: "lits",
+  img: "images/lit-tunisie-1.webp",
+  imgs: [
+    "images/lit-tunisie-1.webp",
+    "images/lit-tunisie-2.webp"
+  ],
+  colors: [
+    { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
+    { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" }
+  ],
+  fr: {
+    catName: "Lits",
+    name: "Lit Tunisie",
+    desc: "Lit Tunisie avec structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
+    price: "69 000 DA / 79 000 DA",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "Commander Lit Tunisie",
+    sizes: [
+      { label: "Lit 1.60 x 1.90 m", price: "69 000 DA" },
+      { label: "Lit 1.80 x 2.00 m", price: "79 000 DA" }
+    ]
+  },
+  ar: {
+    catName: "الأسرّة",
+    name: "سرير تونس",
+    desc: "سرير بتصميم تونسي مع هيكل داخلي من الخشب الأحمر وقماش مقاوم للبقع مع اختيار الألوان.",
+    price: "69,000 / 79,000 دج",
+    oldPrice: null,
+    badge: null,
+    badgeText: null,
+    wa: "طلب سرير تونس",
+    sizes: [
+      { label: "1.60 × 1.90 م", price: "69,000 دج" },
+      { label: "1.80 × 2.00 م", price: "79,000 دج" }
+    ]
+  },
+  rating: "★★★★★"
+},
+{
+  id: 48,
+  cat: "lits",
+  img: "images/lit-luxe-2.webp",
+  colors: [
+    { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
+    { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" }
+  ],
+  fr: {
+    catName: "Lits",
+    name: "Lit Luxueux",
+    desc: "Lit luxueux avec coffre, structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
+    price: "75 000 DA / 85 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Coffre",
+    wa: "Commander Lit Luxueux",
+    sizes: [
+      { label: "Lit 1.60 x 1.90 m", price: "75 000 DA" },
+      { label: "Lit 1.80 x 2.00 m", price: "85 000 DA" }
+    ]
+  },
+  ar: {
+    catName: "الأسرّة",
+    name: "سرير فاخر",
+    desc: "سرير فاخر بصندوق تخزين، هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+    price: "75,000 / 85,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "بصندوق",
+    wa: "طلب سرير فاخر",
+    sizes: [
+      { label: "1.60 × 1.90 م", price: "75,000 دج" },
+      { label: "1.80 × 2.00 م", price: "85,000 دج" }
+    ]
+  },
+  rating: "★★★★★"
 },
       ];
 
