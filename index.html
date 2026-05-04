@@ -49,6 +49,24 @@ html[dir="rtl"] .footer-col ul li a::before {
 html[dir="rtl"] {
   direction: rtl; /* تحديد اتجاه النص من اليمين لليسار */
 }
+html[dir="rtl"] .map-inner {
+  direction: rtl;
+}
+html[dir="rtl"] .map-detail-row {
+  border-left: none;
+  border-right: 3px solid #f03232;
+}
+html[dir="rtl"] .map-open-btn {
+  direction: rtl;
+}
+html[dir="rtl"] .map-title {
+  font-family: "Noto Naskh Arabic", serif;
+}
+html[dir="rtl"] .map-badge,
+html[dir="rtl"] .map-detail-label,
+html[dir="rtl"] .map-detail-value {
+  font-family: "Tajawal", sans-serif;
+}
 .top-bar {
   background: linear-gradient(135deg, #1a1430, #2a1f5c);
   border-bottom: 1px solid rgba(201, 169, 110, 0.35);
@@ -3078,6 +3096,27 @@ html[lang="ar"] .top-bar-text {
           opacity: 1 !important;
         }
       }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--white);          /* ← "Élégance" أبيض واضح */
+  text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+  margin-bottom: 22px;
+  animation: fadeLeft 0.8s var(--transition) 0.4s both;
+}
+.hero-title .gold-text {
+  color: #ffd700;               /* ← أصفر ذهبي فاقع بدل الأحمر */
+  display: block;
+}
+.hero-title .italic-text {
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.65);  /* ← أبيض شفاف */
+  display: block;
+  font-size: 0.82em;
+}
     </style>
   </head>
   <body>
@@ -3427,25 +3466,25 @@ html[lang="ar"] .top-bar-text {
             raffinés avec livraison dans toutes les wilayas.
           </p>
           <div class="hero-actions">
-            <a href="#" onclick="navigateTo('products')" class="btn btn-gold"
+            <a data-ar="عرض المنتجات" data-fr="Voir les produits" href="#" onclick="navigateTo('products')" class="btn btn-gold"
               >Voir les produits</a
             >
-            <a href="https://wa.me/213775530551" class="btn btn-outline"
+            <a data-ar="اطلب عبر واتساب" data-fr="Commander sur WhatsApp" href="https://wa.me/213775530551" class="btn btn-outline"
               >Commander sur WhatsApp</a
             >
           </div>
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-num">500+</span
-              ><span class="stat-label">Clients</span>
+              ><span  data-ar="عملاء" data-fr="Clients" class="stat-label">Clients</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">48</span
-              ><span class="stat-label">Wilayas</span>
+              ><span  data-ar="ولايات" data-fr="Wilayas" class="stat-label">Wilayas</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">24h</span
-              ><span class="stat-label">Support</span>
+              ><span  data-ar="دعم" data-fr="Support" class="stat-label">Support</span>
             </div>
           </div>
         </div>
@@ -3605,7 +3644,7 @@ html[lang="ar"] .top-bar-text {
             >
               <img
                 class="cat-img"
-                src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80&fit=crop"
+                src="images/salonHome.webp"
                 alt="Salons"
               />
               <div class="cat-card-overlay"></div>
@@ -3904,20 +3943,34 @@ html[lang="ar"] .top-bar-text {
 <section class="map-section">
   <div class="map-inner">
     <div class="map-info">
-      <span class="map-badge">✦ Notre adresse</span>
-      <h2 class="map-title">Venez nous rendre <span>visite</span></h2>
+      <span class="map-badge" 
+            data-fr="✦ Notre adresse" 
+            data-ar="✦ عنواننا">✦ Notre adresse</span>
+      <h2 class="map-title" 
+          data-fr="Venez nous rendre <span>visite</span>" 
+          data-ar="زورونا <span>عن كثب</span>">
+        Venez nous rendre <span>visite</span>
+      </h2>
       <div class="map-details">
         <div class="map-detail-row">
           <span class="map-detail-icon">📍</span>
           <div class="map-detail-body">
-            <div class="map-detail-label">Adresse</div>
-            <div class="map-detail-value">Royal Meubles Djelfa, Algérie</div>
+            <div class="map-detail-label" 
+                 data-fr="Adresse" 
+                 data-ar="العنوان">Adresse</div>
+            <div class="map-detail-value" 
+                 data-fr="Royal Meubles Djelfa, Algérie" 
+                 data-ar="روايل موبل الجلفة، الجزائر">
+              Royal Meubles Djelfa, Algérie
+            </div>
           </div>
         </div>
         <div class="map-detail-row">
           <span class="map-detail-icon">📞</span>
           <div class="map-detail-body">
-            <div class="map-detail-label">Téléphone</div>
+            <div class="map-detail-label" 
+                 data-fr="Téléphone" 
+                 data-ar="الهاتف">Téléphone</div>
             <div class="map-detail-value">
               <a href="tel:+213775530551">0775 530 551</a> &nbsp;/&nbsp;
               <a href="tel:+213773793322">0773 793 322</a>
@@ -3927,15 +3980,27 @@ html[lang="ar"] .top-bar-text {
         <div class="map-detail-row">
           <span class="map-detail-icon">🚚</span>
           <div class="map-detail-body">
-            <div class="map-detail-label">Livraison</div>
-            <div class="map-detail-value">Toutes les 48 wilayas d'Algérie</div>
+            <div class="map-detail-label" 
+                 data-fr="Livraison" 
+                 data-ar="التوصيل">Livraison</div>
+            <div class="map-detail-value" 
+                 data-fr="Toutes les 48 wilayas d'Algérie" 
+                 data-ar="جميع الولايات الـ 48 في الجزائر">
+              Toutes les 48 wilayas d'Algérie
+            </div>
           </div>
         </div>
         <div class="map-detail-row">
           <span class="map-detail-icon">⏰</span>
           <div class="map-detail-body">
-            <div class="map-detail-label">Horaires</div>
-            <div class="map-detail-value">Tous les jours — 08h à 20h</div>
+            <div class="map-detail-label" 
+                 data-fr="Horaires" 
+                 data-ar="أوقات العمل">Horaires</div>
+            <div class="map-detail-value" 
+                 data-fr="Tous les jours — 08h à 20h" 
+                 data-ar="كل الأيام — من 08:00 إلى 20:00">
+              Tous les jours — 08h à 20h
+            </div>
           </div>
         </div>
       </div>
@@ -3949,7 +4014,11 @@ html[lang="ar"] .top-bar-text {
         </iframe>
       </div>
       <div class="map-footer">
-        <a class="map-open-btn" href="https://maps.google.com/?q=ROYAL+MEUBLES+DJELFA" target="_blank">
+        <a class="map-open-btn" 
+           href="https://maps.google.com/?q=ROYAL+MEUBLES+DJELFA" 
+           target="_blank"
+           data-fr="Ouvrir dans Google Maps →"
+           data-ar="← فتح في خرائط Google">
           Ouvrir dans Google Maps →
         </a>
         <span class="map-coords">34.6708° N, 3.2449° E</span>
