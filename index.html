@@ -3117,6 +3117,20 @@ html[lang="ar"] .top-bar-text {
   display: block;
   font-size: 0.82em;
 }
+/* For the second button: Commander sur WhatsApp */
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+}
+
+.btn-outline:hover {
+  background: linear-gradient(135deg, #ffd700, #ffcc00, #ff9900);  /* Yellow gradient */
+  border-color: #ffd700;  /* Border to match hover */
+  color: var(--white);     /* Text color change to white */
+  transform: translateY(-2px);
+}
+
     </style>
   </head>
   <body>
@@ -3239,10 +3253,10 @@ html[lang="ar"] .top-bar-text {
             <button
               class="btn btn-gold"
               onclick="closeSuccessAndGoHome()"
-              data-fr="Retour à l'accueil"
+              data-fr="Retour à l'Home"
               data-ar="العودة للرئيسية"
             >
-              Retour à l'accueil
+              Retour à l'Home
             </button>
             <button
               class="btn btn-outline"
@@ -3327,9 +3341,9 @@ html[lang="ar"] .top-bar-text {
             navigateTo('home');
             closeMobileMenu();
           "
-          data-fr="Accueil"
+          data-fr="Home"
           data-ar="الرئيسية"
-          >Accueil</a
+          >Home</a
         >
         <a
           href="#"
@@ -3337,9 +3351,9 @@ html[lang="ar"] .top-bar-text {
             navigateTo('products');
             closeMobileMenu();
           "
-          data-fr="Produits"
+          data-fr="CATHEGORIES"
           data-ar="المنتجات"
-          >Produits</a
+          >CATHEGORIES</a
         >
         <a
           href="#"
@@ -3347,9 +3361,9 @@ html[lang="ar"] .top-bar-text {
             navigateTo('offers');
             closeMobileMenu();
           "
-          data-fr="Offres"
+          data-fr="SHOP"
           data-ar="العروض"
-          >Offres</a
+          >SHOP</a
         >
       </nav>
     </aside>
@@ -3365,23 +3379,23 @@ html[lang="ar"] .top-bar-text {
             <a
               href="#"
               onclick="navigateTo('home')"
-              data-fr="Accueil"
+              data-fr="Home"
               data-ar="الرئيسية"
-              >Accueil</a
+              >Home</a
             >
             <a
               href="#"
               onclick="navigateTo('products')"
-              data-fr="Produits"
+              data-fr="CATHEGORIES"
               data-ar="المنتجات"
-              >Produits</a
+              >CATHEGORIES</a
             >
             <a
               href="#"
               onclick="navigateTo('offers')"
-              data-fr="Offres"
+              data-fr="SHOP"
               data-ar="العروض"
-              >Offres</a
+              >SHOP</a
             >
           </div>
           <div class="nav-actions">
@@ -3479,7 +3493,7 @@ html[lang="ar"] .top-bar-text {
               ><span  data-ar="عملاء" data-fr="Clients" class="stat-label">Clients</span>
             </div>
             <div class="stat-item">
-              <span class="stat-num">48</span
+              <span class="stat-num">20</span
               ><span  data-ar="ولايات" data-fr="Wilayas" class="stat-label">Wilayas</span>
             </div>
             <div class="stat-item">
@@ -3599,20 +3613,11 @@ html[lang="ar"] .top-bar-text {
                 >notre collection</span
               >
             </h2>
-            <!-- <p
-              class="section-desc"
-              style="margin: 0 auto"
-              data-fr="Des chambres aux salons — tout ce dont vous avez besoin pour votre maison idéale"
-              data-ar="من غرف النوم إلى الصالونات — كل ما تحتاجه لمنزل أحلامك"
-            >
-              Des chambres aux salons — tout ce dont vous avez besoin pour votre
-              maison idéale
-            </p> -->
           </div>
           <div class="categories-grid">
             <div
               class="cat-card large reveal from-left"
-              onclick="navigateTo('products')"
+              onclick="navigateToCategory('salon')"
             >
               <img
                 class="cat-img"
@@ -3640,7 +3645,7 @@ html[lang="ar"] .top-bar-text {
             </div>
             <div
               class="cat-card reveal reveal-delay-1"
-              onclick="navigateTo('products')"
+              onclick="navigateToCategory('salon')"
             >
               <img
                 class="cat-img"
@@ -3664,21 +3669,21 @@ html[lang="ar"] .top-bar-text {
             </div>
             <div
               class="cat-card reveal reveal-delay-2"
-              onclick="navigateTo('products')"
+             onclick="navigateToCategory('salon')"
             >
               <img
                 class="cat-img"
                 src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500&q=80&fit=crop"
-                alt="Canapés"
+                alt="Salons"
               />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
                 <div
                   class="cat-name"
-                  data-fr="Canapés & Sofas"
+                  data-fr="Salons & Sofas"
                   data-ar="الصالونات"
                 >
-                  Canapés &amp; Sofas
+                  Salons &amp; Sofas
                 </div>
                 <div
                   class="cat-count"
@@ -3692,7 +3697,7 @@ html[lang="ar"] .top-bar-text {
             </div>
             <div
               class="cat-card reveal reveal-delay-1"
-              onclick="navigateTo('products')"
+              onclick="navigateToCategory('salon')"
             >
               <img
                 class="cat-img"
@@ -3716,7 +3721,7 @@ html[lang="ar"] .top-bar-text {
             </div>
             <div
               class="cat-card reveal reveal-delay-2"
-              onclick="navigateTo('products')"
+              onclick="navigateToCategory('salon')"
             >
               <img
                 class="cat-img"
@@ -3984,9 +3989,9 @@ html[lang="ar"] .top-bar-text {
                  data-fr="Livraison" 
                  data-ar="التوصيل">Livraison</div>
             <div class="map-detail-value" 
-                 data-fr="Toutes les 12 wilayas d'Algérie" 
-                 data-ar="جميع الولايات الـ 12 في الجزائر">
-              Toutes les 12 wilayas d'Algérie
+                 data-fr="Toutes les 20 wilayas d'Algérie" 
+                 data-ar="جميع الولايات الـ 20 في الجزائر">
+              Toutes les 20 wilayas d'Algérie
             </div>
           </div>
         </div>
@@ -4052,10 +4057,10 @@ html[lang="ar"] .top-bar-text {
             <h2
               class="section-title reveal"
               style="color: var(--white)"
-              data-fr="-30% sur toutes les <span>chambres à coucher</span>"
-              data-ar="خصم 30% على <span>جميع غرف النوم</span>"
+              data-fr="SHOP sur <span>tous les produits</span>"
+              data-ar="العروض<span> لكل المنتجات</span>"
             >
-              -30% sur toutes les <span>chambres à coucher</span>
+              SHOP sur <span>tous les produits</span>
             </h2>
             <p
               class="section-desc reveal"
@@ -4151,7 +4156,7 @@ html[lang="ar"] .top-bar-text {
               data-fr="Salons"
               data-ar="الصالونات"
             >
-              Canapés
+              Salons
             </button>
             <button
               class="filter-tab"
@@ -4214,10 +4219,10 @@ html[lang="ar"] .top-bar-text {
             </div>
             <h2
               class="section-title"
-              data-fr="Offres <span>exceptionnelles</span>"
+              data-fr="SHOP <span>exceptionnelles</span>"
               data-ar="عروض <span>لا تُفوَّت</span>"
             >
-              Offres <span>exceptionnelles</span>
+              SHOP <span>exceptionnelles</span>
             </h2>
             <p
               class="section-desc"
@@ -4290,10 +4295,10 @@ html[lang="ar"] .top-bar-text {
                 >
                 <div
                   class="offer-title"
-                  data-fr="Canapés & Sofas"
+                  data-fr="Salons & Sofas"
                   data-ar="الصالونات"
                 >
-                  Canapés &amp; Sofas
+                  Salons &amp; Sofas
                 </div>
                 <div class="offer-discount" data-fr="-20%" data-ar="خصم 20%">
                   -20%
@@ -4607,13 +4612,13 @@ html[lang="ar"] .top-bar-text {
         <h4 data-fr="Navigation" data-ar="الصفحات">Navigation</h4>
         <ul>
           <li>
-            <a href="#" onclick="navigateTo('home')" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+            <a href="#" onclick="navigateTo('home')" data-fr="Home" data-ar="الرئيسية">Home</a>
           </li>
           <li>
             <a href="#" onclick="navigateTo('products')" data-fr="Produits" data-ar="المنتجات">Produits</a>
           </li>
           <li>
-            <a href="#" onclick="navigateTo('offers')" data-fr="Offres" data-ar="العروض">Offres</a>
+            <a href="#" onclick="navigateTo('offers')" data-fr="SHOP" data-ar="العروض">SHOP</a>
           </li>
         </ul>
       </div>
@@ -4628,7 +4633,7 @@ html[lang="ar"] .top-bar-text {
             <a href="#" onclick="navigateTo('products')" data-fr="Salons" data-ar="غرف المعيشة">Salons</a>
           </li>
           <li>
-            <a href="#" onclick="navigateTo('products')" data-fr="Canapés" data-ar="الصالونات">Canapés</a>
+            <a href="#" onclick="navigateTo('products')" data-fr="Salons" data-ar="الصالونات">Salons</a>
           </li>
           <li>
             <a href="#" onclick="navigateTo('products')" data-fr="Armoires" data-ar="الخزائن">Armoires</a>
@@ -5381,7 +5386,7 @@ html[lang="ar"] .top-bar-text {
           cat: "salon",
           imgs: ["images/salon-1.webp"],
           fr: {
-            catName: "Canapés",
+            catName: "Salons",
             name: "Salon complet 7 places",
             desc: "Salon élégant avec canapé principal 3 places et tissu velours premium.",
             price: "95 000 DA",
@@ -5886,7 +5891,7 @@ html[lang="ar"] .top-bar-text {
           ],
 
           fr: {
-            catName: "Canapés",
+            catName: "Salons",
             name: "Salon Marina",
             desc: "Design moderne avec lignes élégantes et confort exceptionnel.",
             price: "188 000 DA",
@@ -6399,6 +6404,17 @@ document.getElementById('chk_wilaya').addEventListener('change', function() {
         document.getElementById('deliveryPrice').textContent = "0 DA";
     }
 });
+function navigateToCategory(cat) {
+  navigateTo('products');
+  setTimeout(() => {
+    const allTabs = document.querySelectorAll('.filter-tab');
+    allTabs.forEach(t => t.classList.remove('active'));
+    // نشغّل الفلتر المطلوب
+    const matchingTab = [...allTabs].find(t => t.getAttribute('onclick')?.includes(`'${cat}'`));
+    if (matchingTab) matchingTab.classList.add('active');
+    renderProducts(cat);
+  }, 50);
+}
     </script>
     <script>
       (function () {
