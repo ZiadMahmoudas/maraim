@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Royal Meubles — Admin Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="shortcut icon" href="images/logo2.webp" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -1558,16 +1559,16 @@
     ${o.notes ? `<div class="detail-row"><span class="detail-label">Notes</span><span class="detail-val">${o.notes}</span></div>` : ""}
     <div class="items-list">
       <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Produits (${items.length})</div>
-      ${items
-        .map(
-          (it) => `
-        <div class="item-row">
-          ${it.img ? `<img class="item-thumb" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}
-          <div class="item-name">${it.name}</div>
-          <div class="item-price">${it.price || ""}</div>
-        </div>`,
-        )
-        .join("")}
+     ${items.map((it) => `
+  <div class="item-row">
+    ${it.img ? `<img class="item-thumb" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}
+    <div style="flex:1">
+      <div class="item-name">${it.name}</div>
+      ${it.size ? `<div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px">📐 ${it.size}</div>` : ""}
+      ${it.color ? `<div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px">🎨 ${it.color}</div>` : ""}
+    </div>
+    <div class="item-price">${it.price || ""}</div>
+  </div>`).join("")}
     </div>
     <div class="modal-status-row">
       <div class="status-row-label">Changer le statut</div>
@@ -1638,51 +1639,50 @@
       checkSession();
     </script>
 
-      <script>
+    <script>
+      (function () {
+        "use strict";
+        document.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
 
-(function() {
-    'use strict';
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || e.keyCode === 123) {
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "F12" || e.keyCode === 123) {
             e.preventDefault();
             return false;
-        }
+          }
 
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+          if (
+            e.ctrlKey &&
+            e.shiftKey &&
+            (e.key === "I" || e.key === "J" || e.key === "C")
+          ) {
             e.preventDefault();
             return false;
-        }
+          }
 
-   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
-        e.preventDefault();
-        return false;
-    }
-    });
+          if (e.ctrlKey && (e.key === "u" || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+          }
+        });
 
-    const devToolsCheck = function() {
-        if (window.console && window.console.time) {
-                (function() {
-                    (function() {
-                        debugger;
-                    }).apply(this, ['alwaysOn']);
-                })();
-         
-        }
-    };
-    
+        const devToolsCheck = function () {
+          if (window.console && window.console.time) {
+            (function () {
+              (function () {
+                debugger;
+              }).apply(this, ["alwaysOn"]);
+            })();
+          }
+        };
 
-    setInterval(devToolsCheck, 1000);
+        setInterval(devToolsCheck, 1000);
 
-
-    document.addEventListener('copy', function(e) {
-        e.preventDefault();
-    });
-
-})();
-</script>
+        document.addEventListener("copy", function (e) {
+          e.preventDefault();
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -12,6 +12,7 @@
     </title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" href="images/logo2.webp" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -199,8 +200,17 @@
           transform: scale(0.9);
         }
       }
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-20px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(600px) rotate(720deg);
+          opacity: 0;
+        }
+      }
 
-      /* ═══ SUCCESS POPUP MODAL ═══ */
       .success-overlay {
         position: fixed;
         inset: 0;
@@ -425,18 +435,6 @@
       }
       .success-close-x:hover {
         background: rgba(255, 255, 255, 0.35);
-      }
-
-      /* ═══ CONFETTI ANIMATION ═══ */
-      @keyframes confetti-fall {
-        0% {
-          transform: translateY(-20px) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(600px) rotate(720deg);
-          opacity: 0;
-        }
       }
       .confetti-piece {
         position: fixed;
@@ -1942,7 +1940,6 @@
         text-align: center;
       }
 
-      /* ═══ CHECKOUT PAGE ═══ */
       #page-checkout {
         background: var(--gray-light);
       }
@@ -2312,7 +2309,6 @@
         max-width: 160px;
       }
 
-      /* Product modal */
       .pmodal-overlay {
         position: fixed;
         inset: 0;
@@ -2346,9 +2342,6 @@
         transform: translateY(11px) scale(0.78);
         transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-      }
-      .pmodal-overlay.open .pmodal {
-        /* transform: translateY(0) scale(1); */
       }
       .pmodal-close {
         position: absolute;
@@ -2487,126 +2480,6 @@
         opacity: 0 !important;
         pointer-events: none;
       }
-      .pmodal-thumbs-strip {
-        flex-shrink: 0;
-        background: rgba(8, 6, 18, 0.94);
-        border-top: 1px solid rgba(240, 50, 50, 0.18);
-        padding: 10px 8px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .pmodal-thumb-nav {
-        width: 26px;
-        height: 26px;
-        flex-shrink: 0;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 50%;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.95rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-        padding: 0;
-        line-height: 1;
-      }
-      .pmodal-thumb-nav:hover {
-        background: var(--gold);
-        border-color: var(--gold);
-        color: #fff;
-      }
-      .pmodal-thumb-nav:disabled {
-        opacity: 0.15;
-        pointer-events: none;
-      }
-      .pmodal-thumbs-outer {
-        flex: 1;
-        overflow: hidden;
-        position: relative;
-      }
-      .pmodal-thumbs-outer::before,
-      .pmodal-thumbs-outer::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 18px;
-        z-index: 2;
-        pointer-events: none;
-      }
-      .pmodal-thumbs-outer::before {
-        left: 0;
-        background: linear-gradient(to right, rgba(8, 6, 18, 0.9), transparent);
-      }
-      .pmodal-thumbs-outer::after {
-        right: 0;
-        background: linear-gradient(to left, rgba(8, 6, 18, 0.9), transparent);
-      }
-      .pmodal-thumbs-track {
-        display: flex;
-        gap: 7px;
-        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: transform;
-        padding: 2px 3px;
-      }
-      .pmodal-thumb {
-        flex-shrink: 0;
-        width: 68px;
-        cursor: pointer;
-        transition:
-          transform 0.22s,
-          opacity 0.22s;
-        opacity: 0.42;
-      }
-      .pmodal-thumb:hover {
-        opacity: 0.78;
-        transform: translateY(-2px);
-      }
-      .pmodal-thumb.active {
-        opacity: 1;
-        transform: translateY(-3px);
-      }
-      .pmodal-thumb-img-wrap {
-        width: 68px;
-        height: 54px;
-        border-radius: 4px;
-        overflow: hidden;
-        border: 2px solid transparent;
-        transition:
-          border-color 0.22s,
-          box-shadow 0.22s;
-      }
-      .pmodal-thumb.active .pmodal-thumb-img-wrap {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(240, 50, 50, 0.22);
-      }
-      .pmodal-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.32s;
-      }
-      .pmodal-thumb:hover img {
-        transform: scale(1.08);
-      }
-      .pmodal-thumb-label {
-        font-size: 0.56rem;
-        color: rgba(255, 255, 255, 0.32);
-        margin-top: 4px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: center;
-        transition: color 0.22s;
-        font-family: var(--font-body);
-      }
-      .pmodal-thumb.active .pmodal-thumb-label {
-        color: var(--gold-light);
-        font-weight: 700;
-      }
       .pmodal-info {
         padding: 36px 30px 28px;
         display: flex;
@@ -2699,6 +2572,94 @@
         font-size: 0.88rem;
         padding: 13px 16px;
         min-width: 130px;
+      }
+
+      /* Variants */
+      .pmodal-variants {
+        margin-bottom: 18px;
+      }
+      .pmodal-variant-block {
+        margin-bottom: 14px;
+      }
+      .pmodal-variant-title {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.7rem;
+        color: var(--text-light);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 9px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      html[lang="ar"] .pmodal-variant-title {
+        font-style: normal;
+        font-family: "Tajawal", sans-serif;
+        letter-spacing: 0;
+      }
+      .pmodal-variant-title strong {
+        color: var(--gold);
+        font-family: var(--font-body);
+        font-size: 0.82rem;
+        font-style: normal;
+        letter-spacing: 0;
+      }
+      .pmodal-variant-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .pmodal-variant-btn {
+        padding: 7px 15px;
+        border: 1.5px solid var(--beige-mid);
+        background: var(--white);
+        color: var(--text-mid);
+        font-family: var(--font-body);
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.22s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        line-height: 1;
+      }
+      .pmodal-variant-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .pmodal-variant-btn.selected {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+        box-shadow: 0 3px 10px rgba(240, 50, 50, 0.25);
+      }
+      .pmodal-variant-btn .size-price {
+        font-size: 0.7rem;
+        opacity: 0.78;
+        font-weight: 400;
+      }
+      .pmodal-variant-btn.selected .size-price {
+        opacity: 1;
+      }
+      .color-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(0, 0, 0, 0.14);
+        flex-shrink: 0;
+      }
+      .pmodal-variant-required-note {
+        font-size: 0.72rem;
+        color: #ef4444;
+        margin-top: 6px;
+        display: none;
+      }
+      .pmodal-variant-required-note.show {
+        display: block;
       }
 
       @media (max-width: 1024px) {
@@ -2881,7 +2842,6 @@
         .form-2col {
           grid-template-columns: 1fr;
         }
-        /* Success popup mobile */
         .success-popup {
           border-radius: 16px 16px 0 0;
           align-self: flex-end;
@@ -2927,12 +2887,11 @@
     </style>
   </head>
   <body>
-    <!-- ══ CART TOAST ══ -->
     <div class="cart-toast" id="cartToast">
       <span>✓</span> <span id="cartToastMsg">Produit ajouté !</span>
     </div>
 
-    <!-- ══ SUCCESS POPUP ══ -->
+    <!-- SUCCESS POPUP -->
     <div class="success-overlay" id="successOverlay">
       <div class="success-popup" id="successPopup">
         <div class="success-popup-header">
@@ -2966,8 +2925,7 @@
             <div class="success-info-row">
               <span class="success-info-label" data-fr="Client" data-ar="العميل"
                 >Client</span
-              >
-              <span class="success-info-value" id="spopCustomer">—</span>
+              ><span class="success-info-value" id="spopCustomer">—</span>
             </div>
             <div class="success-info-row">
               <span
@@ -2975,8 +2933,7 @@
                 data-fr="Téléphone"
                 data-ar="الهاتف"
                 >Téléphone</span
-              >
-              <span class="success-info-value" id="spopPhone">—</span>
+              ><span class="success-info-value" id="spopPhone">—</span>
             </div>
             <div class="success-info-row">
               <span
@@ -2984,8 +2941,7 @@
                 data-fr="Wilaya"
                 data-ar="الولاية"
                 >Wilaya</span
-              >
-              <span class="success-info-value" id="spopWilaya">—</span>
+              ><span class="success-info-value" id="spopWilaya">—</span>
             </div>
             <div class="success-info-row">
               <span
@@ -2993,8 +2949,7 @@
                 data-fr="Paiement"
                 data-ar="الدفع"
                 >Paiement</span
-              >
-              <span
+              ><span
                 class="success-info-value"
                 style="color: var(--green, #10b981)"
                 data-fr="Cash à la livraison"
@@ -3009,10 +2964,9 @@
             <span
               data-fr="Notre équipe va vous contacter très prochainement pour confirmer la livraison. Gardez votre téléphone disponible !"
               data-ar="سيتصل بك فريقنا قريبًا لتأكيد التوصيل. يُرجى إبقاء هاتفك متاحًا!"
+              >Notre équipe va vous contacter très prochainement pour confirmer
+              la livraison. Gardez votre téléphone disponible !</span
             >
-              Notre équipe va vous contacter très prochainement pour confirmer
-              la livraison. Gardez votre téléphone disponible !
-            </span>
           </div>
           <div class="success-popup-actions">
             <button
@@ -3036,7 +2990,7 @@
       </div>
     </div>
 
-    <!-- ══ CART DRAWER ══ -->
+    <!-- CART DRAWER -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart(event)">
       <div class="cart-drawer">
         <div class="cart-header">
@@ -4126,8 +4080,7 @@
                 <span data-fr="Nom complet" data-ar="الاسم الكامل"
                   >Nom complet</span
                 ></label
-              >
-              <input
+              ><input
                 class="form-input"
                 type="text"
                 id="chk_name"
@@ -4140,8 +4093,7 @@
                 <span data-fr="Numéro de téléphone" data-ar="رقم الهاتف"
                   >Numéro de téléphone</span
                 ></label
-              >
-              <input
+              ><input
                 class="form-input"
                 type="tel"
                 id="chk_phone"
@@ -4227,8 +4179,7 @@
                 <span data-fr="Adresse complète" data-ar="العنوان الكامل"
                   >Adresse complète</span
                 ></label
-              >
-              <textarea
+              ><textarea
                 class="form-textarea"
                 id="chk_address"
                 placeholder="Rue, quartier, commune..."
@@ -4239,8 +4190,7 @@
                 ><span data-fr="Notes (optionnel)" data-ar="ملاحظات (اختياري)"
                   >Notes (optionnel)</span
                 ></label
-              >
-              <textarea
+              ><textarea
                 class="form-textarea"
                 id="chk_notes"
                 placeholder="Précisions sur la livraison, couleur souhaitée..."
@@ -4312,17 +4262,16 @@
             <div class="footer-socials">
               <a class="social-btn" href="#">f</a>
               <a class="social-btn" href="#">in</a>
-              <a class="social-btn" href="https://wa.me/213562314115">
-                <svg
+              <a class="social-btn" href="https://wa.me/213562314115"
+                ><svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   style="width: 14px; height: 14px"
                 >
                   <path
                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  />
-                </svg>
-              </a>
+                  /></svg
+              ></a>
             </div>
           </div>
           <div class="footer-col">
@@ -4475,7 +4424,7 @@
       </a>
     </div>
 
-    <!-- Product Modal -->
+    <!-- PRODUCT MODAL -->
     <div class="pmodal-overlay" id="pmodalOverlay" onclick="closePModal(event)">
       <div class="pmodal" id="pmodal">
         <button
@@ -4512,27 +4461,6 @@
               ›
             </button>
           </div>
-          <!-- <div class="pmodal-thumbs-strip">
-            <button
-              class="pmodal-thumb-nav"
-              id="pmodalNavPrev"
-              onclick="pmodalStripScroll(-1)"
-              aria-label="Précédent"
-            >
-              ‹
-            </button>
-            <div class="pmodal-thumbs-outer">
-              <div class="pmodal-thumbs-track" id="pmodalTrack"></div>
-            </div>
-            <button
-              class="pmodal-thumb-nav"
-              id="pmodalNavNext"
-              onclick="pmodalStripScroll(1)"
-              aria-label="Suivant"
-            >
-              ›
-            </button>
-          </div> -->
         </div>
         <div class="pmodal-info">
           <div class="pmodal-cat" id="pmodalCat"></div>
@@ -4575,7 +4503,6 @@
               </svg>
               <span data-fr="WhatsApp" data-ar="واتساب">WhatsApp</span>
             </a>
-     
           </div>
         </div>
       </div>
@@ -4601,40 +4528,27 @@
       // SUCCESS POPUP
       // ══════════════════════════════════
       function openSuccessPopup(orderData) {
-        // Fill data
         document.getElementById("spopCustomer").textContent =
           orderData.full_name || "—";
         document.getElementById("spopPhone").textContent =
           orderData.phone || "—";
         document.getElementById("spopWilaya").textContent =
           orderData.wilaya || "—";
-
-        // Fill items
         const itemsEl = document.getElementById("spopItems");
         const items = orderData.items || [];
         if (items.length) {
-          itemsEl.innerHTML = `
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">
-              ${currentLang === "ar" ? "المنتجات المطلوبة" : "Produits commandés"}
-            </div>
-            ${items
+          itemsEl.innerHTML =
+            `<div style="font-size:0.72rem;font-weight:700;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">${currentLang === "ar" ? "المنتجات المطلوبة" : "Produits commandés"}</div>` +
+            items
               .map(
-                (it) => `
-              <div class="success-item-row">
-                ${it.img ? `<img class="success-item-img" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}
-                <span class="success-item-name">${it.name}</span>
-                <span class="success-item-price">${it.price || ""}</span>
-              </div>
-            `,
+                (it) =>
+                  `<div class="success-item-row">${it.img ? `<img class="success-item-img" src="${it.img}" alt="" onerror="this.style.display='none'">` : ""}<span class="success-item-name">${it.name}${it.size ? " — " + it.size : ""}${it.color ? " · " + it.color : ""}</span><span class="success-item-price">${it.price || ""}</span></div>`,
               )
-              .join("")}
-          `;
+              .join("");
           itemsEl.style.display = "flex";
         } else {
           itemsEl.style.display = "none";
         }
-
-        // Apply current lang to popup texts
         document
           .querySelectorAll("#successOverlay [data-fr][data-ar]")
           .forEach((el) => {
@@ -4643,38 +4557,28 @@
             if (txt.includes("<")) el.innerHTML = txt;
             else el.textContent = txt;
           });
-
-        // Open overlay
         document.getElementById("successOverlay").classList.add("open");
         document.body.style.overflow = "hidden";
-
-        // Shoot confetti 🎉
         shootConfetti();
       }
-
       function closeSuccessPopup() {
         document.getElementById("successOverlay").classList.remove("open");
         document.body.style.overflow = "";
       }
-
       function closeSuccessAndGoHome() {
         closeSuccessPopup();
         navigateTo("home");
       }
-
       function closeSuccessAndShop() {
         closeSuccessPopup();
         navigateTo("products");
       }
-
-      // Close on overlay click
       document
         .getElementById("successOverlay")
         .addEventListener("click", function (e) {
           if (e.target === this) closeSuccessPopup();
         });
 
-      // ── CONFETTI ──
       function shootConfetti() {
         const colors = [
           "#f03232",
@@ -4688,25 +4592,17 @@
           setTimeout(() => {
             const el = document.createElement("div");
             el.className = "confetti-piece";
-            el.style.cssText = `
-              left: ${Math.random() * 100}vw;
-              top: -10px;
-              background: ${colors[Math.floor(Math.random() * colors.length)]};
-              width: ${6 + Math.random() * 8}px;
-              height: ${6 + Math.random() * 8}px;
-              border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
-              animation-duration: ${1.5 + Math.random() * 2}s;
-              animation-delay: ${Math.random() * 0.5}s;
-            `;
+            el.style.cssText = `left:${Math.random() * 100}vw;top:-10px;background:${colors[Math.floor(Math.random() * colors.length)]};width:${6 + Math.random() * 8}px;height:${6 + Math.random() * 8}px;border-radius:${Math.random() > 0.5 ? "50%" : "2px"};animation-duration:${1.5 + Math.random() * 2}s;animation-delay:${Math.random() * 0.5}s;`;
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 4000);
           }, i * 30);
         }
       }
 
-      // ══ CART STATE ══
+      // ══════════════════════════════════
+      // CART
+      // ══════════════════════════════════
       let cart = [];
-
       function loadCart() {
         try {
           cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -4748,7 +4644,7 @@
             <img class="cart-item-img" src="${item.img || ""}" alt="${item.name}" onerror="this.style.display='none'">
             <div class="cart-item-info">
               <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-cat">${item.catName}</div>
+              <div class="cart-item-cat">${item.catName}${item.extraInfo ? " · " + item.extraInfo : ""}</div>
               <div class="cart-item-price">${item.price}</div>
             </div>
             <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
@@ -4760,31 +4656,6 @@
         cart.splice(idx, 1);
         saveCart();
       }
-
-      function addToCart(productId) {
-        const p = allProducts.find((x) => x.id === productId);
-        if (!p) return;
-        const d = p[currentLang];
-        const img = Array.isArray(p.imgs) ? p.imgs[0] : p.img || "";
-        cart.push({
-          id: p.id,
-          name: d.name,
-          catName: d.catName,
-          price: d.price,
-          img,
-          wa: d.wa,
-        });
-        saveCart();
-        const toast = document.getElementById("cartToast");
-        const msg = document.getElementById("cartToastMsg");
-        msg.textContent =
-          currentLang === "ar"
-            ? `✓ ${d.name} — أضيف للسلة`
-            : `✓ ${d.name} — ajouté au panier`;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2800);
-      }
-
       function openCart() {
         renderCartItems();
         document.getElementById("cartOverlay").classList.add("open");
@@ -4803,7 +4674,6 @@
         navigateTo("checkout");
         renderCheckoutSummary();
       }
-
       function renderCheckoutSummary() {
         const el = document.getElementById("checkoutSummary");
         if (!el) return;
@@ -4815,18 +4685,16 @@
         el.innerHTML =
           cart
             .map(
-              (item) => `
-          <div class="summary-item">
-            <img class="summary-img" src="${item.img || ""}" alt="${item.name}" onerror="this.style.display='none'">
-            <span class="summary-name">${item.name}</span>
-            <span class="summary-price">${item.price}</span>
-          </div>`,
+              (item) =>
+                `<div class="summary-item"><img class="summary-img" src="${item.img || ""}" alt="${item.name}" onerror="this.style.display='none'"><span class="summary-name">${item.name}${item.extraInfo ? " — " + item.extraInfo : ""}</span><span class="summary-price">${item.price}</span></div>`,
             )
             .join("") +
           `<div class="summary-count">${cart.length} ${currentLang === "ar" ? "منتج" : "produit(s)"}</div>`;
       }
 
-      // ══ ORDER SUBMIT ══
+      // ══════════════════════════════════
+      // ORDER SUBMIT
+      // ══════════════════════════════════
       async function submitOrder() {
         const name = document.getElementById("chk_name").value.trim();
         const phone = document.getElementById("chk_phone").value.trim();
@@ -4835,9 +4703,7 @@
         const notes = document.getElementById("chk_notes").value.trim();
         const errEl = document.getElementById("chk_error");
         const btn = document.getElementById("chk_submit");
-
         errEl.style.display = "none";
-
         if (!name || !phone || !wilaya || !address) {
           errEl.textContent =
             currentLang === "ar"
@@ -4854,47 +4720,33 @@
           errEl.style.display = "block";
           return;
         }
-
         btn.disabled = true;
         btn.querySelector("span").textContent =
           currentLang === "ar" ? "جارٍ التأكيد..." : "Confirmation...";
-
+        // ✅ size و color بيتحفظوا هنا
         const orderItems = cart.map((item) => ({
           name: item.name,
           price: item.price,
           img: item.img || "",
+          size: item.selectedSize || null,
+          color: item.selectedColor || null,
+          extra: item.extraInfo || null,
         }));
-
         const orderPayload = {
           full_name: name,
-          phone: phone,
-          wilaya: wilaya,
-          address: address,
-          notes: notes,
+          phone,
+          wilaya,
+          address,
+          notes,
           items: orderItems,
           status: "new",
         };
-
-        const waMsg = `Nouvelle commande Royal Meubles Djelfa\n\nNom: ${name}\nTéléphone: ${phone}\nWilaya: ${wilaya}\nAdresse: ${address}\nNotes: ${notes || "-"}\n\nProduits:\n${cart.map((it, i) => `${i + 1}. ${it.name} - ${it.price}`).join("\n")}\n\nPaiement: Cash à la livraison`;
-
         try {
           const { error } = await sb.from("orders").insert([orderPayload]);
-
-          if (error) {
-            console.error("Supabase error:", error);
-            // Still open WA even if DB fails
-            // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
-          } else {
-            // Open WhatsApp
-            // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
-          }
-
-          // ✅ Show success popup regardless
+          if (error) console.error("Supabase error:", error);
           const savedOrderData = { ...orderPayload };
           cart = [];
           saveCart();
-
-          // Reset form
           ["chk_name", "chk_phone", "chk_address", "chk_notes"].forEach(
             (id) => {
               const el = document.getElementById(id);
@@ -4902,13 +4754,10 @@
             },
           );
           document.getElementById("chk_wilaya").value = "";
-
-          // Go back to products page then show popup
           navigateTo("products");
           setTimeout(() => openSuccessPopup(savedOrderData), 300);
         } catch (e) {
           console.error("Submit error:", e);
-          // window.open(WA + "?text=" + encodeURIComponent(waMsg), "_blank");
           const savedOrderData = {
             full_name: name,
             phone,
@@ -4935,7 +4784,9 @@
         }
       }
 
-      // ══ LANG ══
+      // ══════════════════════════════════
+      // LANG & NAVIGATION
+      // ══════════════════════════════════
       function saveLang(l) {
         try {
           localStorage.setItem(LANG_KEY, l);
@@ -4979,7 +4830,6 @@
         renderCartItems();
         setTimeout(initObserver, 100);
       }
-
       function navigateTo(page) {
         document
           .querySelectorAll(".page")
@@ -4994,7 +4844,6 @@
           if (page === "checkout") renderCheckoutSummary();
         }
       }
-
       function openMobileMenu() {
         document.getElementById("mobileMenu").classList.add("open");
         document.getElementById("mobileOverlay").classList.add("open");
@@ -5041,7 +4890,9 @@
           .forEach((el) => obs.observe(el));
       }
 
-      // ══ PRODUCTS DATA ══
+      // ══════════════════════════════════
+      // PRODUCTS DATA
+      // ══════════════════════════════════
       const allProducts = [
         {
           id: 1,
@@ -5586,23 +5437,23 @@
           ],
           fr: {
             catName: "Lits",
-            name: "Lit LED compact 120",
-            desc: "Lit LED compact. 120 x 190 cm.",
-            price: "49 000 DA",
+            name: "Lit avec éclairage LED intégré",
+            desc: "Optez pour ce lit coffre compact et pratique, idéal pour optimiser l'espace dans votre chambre tout en conservant une touche moderne et élégante.",
+            price: "49,000.00 DA",
             oldPrice: null,
             badge: "badge-new",
-            badgeText: "LED",
-            wa: "Commander Lit LED 120x190",
+            badgeText: "Nouveau",
+            wa: "Commander Lit avec éclairage LED intégré",
           },
           ar: {
             catName: "الأسرّة",
-            name: "Lit LED compact 120",
-            desc: "سرير مودرن LED مدمجة.",
+            name: "سرير مع إضاءة LED مدمجة",
+            desc: "اختر هذا السرير المدمج والعملي، المثالي لتحسين المساحة في غرفتك مع الحفاظ على لمسة عصرية وأنيقة.",
             price: "49,000 دج",
             oldPrice: null,
             badge: "badge-new",
-            badgeText: "LED",
-            wa: "طلب Lit LED 120x190",
+            badgeText: "جديد",
+            wa: "طلب سرير مع إضاءة LED مدمجة",
           },
           rating: "★★★★★",
         },
@@ -5724,23 +5575,31 @@
           ],
           fr: {
             catName: "Lits",
-            name: "Lit Bois Rouge",
-            desc: "Lit en bois rouge. 160x190 / 180x200 cm.",
-            price: "65 000 DA / 75 000 DA",
+            name: "Lit Nouva",
+            desc: "Avec le lit Nouva, offrez à votre chambre une touche de modernité et de confort au quotidien. Sa structure en bois rouge garantit solidité et durabilité.",
+            price: "115,000.00 DA",
             oldPrice: null,
             badge: "badge-new",
-            badgeText: "Bois Rouge",
-            wa: "Commander Lit Bois Rouge",
+            badgeText: "Nouveau",
+            wa: "Commander Lit Nouva",
+            sizes: [
+              { label: "180 x 200 cm", price: "115,000.00 DA" },
+              { label: "160 x 190 cm", price: "98,000.00 DA" },
+            ],
           },
           ar: {
             catName: "الأسرّة",
-            name: "Lit Bois Rouge",
-            desc: "سرير من الخشب الأحمر.",
-            price: "65,000 / 75,000 دج",
+            name: "سرير نوفي",
+            desc: "مع سرير نوفي، قدّم لغرفتك لمسة من الحداثة والراحة اليومية. هيكله المصنوع من الخشب الأحمر يضمن المتانة والصلابة.",
+            price: "115,000 دج",
             oldPrice: null,
             badge: "badge-new",
-            badgeText: "خشب أحمر",
-            wa: "طلب Lit Bois Rouge",
+            badgeText: "جديد",
+            wa: "طلب سرير نوفي",
+            sizes: [
+              { label: "180 x 200 cm", price: "115,000 دج" },
+              { label: "160 x 190 cm", price: "98,000 دج" },
+            ],
           },
           rating: "★★★★★",
         },
@@ -5807,6 +5666,130 @@
           },
           rating: "★★★★★",
         },
+        {
+          id: 29,
+          cat: "salon",
+          img: "images/salon-oss.webp",
+          imgs: ["images/salon-oss.webp", "images/salon-oss1.webp"],
+          fr: {
+            catName: "Salons",
+            name: "Salon OSS",
+            desc: "Le Salon OSS séduit par son design épuré et son confort remarquable.",
+            price: "175 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Salon OSS",
+          },
+          ar: {
+            catName: "غرف المعيشة",
+            name: "صالون OSS",
+            desc: "صالون OSS يتميز بتصميمه العصري وراحته المذهلة.",
+            price: "175,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب صالون OSS",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 30,
+          cat: "salon",
+          img: "images/salon-oss-6-place.webp",
+          imgs: [
+            "images/salon-oss-6-place.webp",
+            "images/salon-oss-6-place1.webp",
+            "images/salon-oss-6-place2.webp",
+          ],
+          fr: {
+            catName: "Salons",
+            name: "Salon OSS 6 places",
+            desc: "Pensé pour le confort et la praticité, le Salon OSS 6 places séduit par ses lignes épurées et son assise agréable.",
+            price: "175,000.00 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Salon OSS 6 places",
+          },
+          ar: {
+            catName: "غرف المعيشة",
+            name: "صالون OSS 6 أماكن",
+            desc: "تم تصميم صالون OSS 6 أماكن من أجل الراحة والعملية، ويتميز بخطوطه النظيفة وراحة الجلوس المريحة.",
+            price: "175,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب صالون OSS 6 أماكن",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 31,
+          cat: "salon",
+          img: "images/salon-convertible.webp",
+          imgs: [
+            "images/salon-convertible.webp",
+            "images/salon-convertible1.webp",
+            "images/salon-convertible3.webp",
+            "images/salon-convertible4.webp",
+          ],
+          fr: {
+            catName: "Salons",
+            name: "Salon convertible élégant et pratique",
+            desc: "Transformez votre espace en un instant grâce à un salon qui devient un lit confortable. Structure intérieure renforcée avec ossature en bois et métal.",
+            price: "128,000.00 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Salon convertible élégant et pratique",
+          },
+          ar: {
+            catName: "غرف المعيشة",
+            name: "صالون قابل للتحويل أنيق وعملية",
+            desc: "حوّل مساحتك في لحظة بفضل صالون يتحول إلى سرير مريح. هيكل داخلي معزز بإطار خشبي ومعدني لتحقيق أقصى قدر من المتانة.",
+            price: "128,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب صالون قابل للتحويل أنيق وعملية",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 32,
+          cat: "salon",
+          img: "images/salon-maurice.webp",
+          imgs: [
+            "images/salon-maurice.webp",
+            "images/salon-maurice1.webp",
+            "images/salon-maurice2.webp",
+            "images/salon-maurice3.webp",
+            "images/salon-maurice4.webp",
+            "images/salon-maurice5.webp",
+          ],
+          fr: {
+            catName: "Salons",
+            name: "Salon Maurice",
+            desc: "Le Salon Maurice allie élégance traditionnelle et confort moderne. Avec ses finitions soignées et son design harmonieux.",
+            price: "345,000.00 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Salon Maurice",
+          },
+          ar: {
+            catName: "غرف المعيشة",
+            name: "صالون موريس",
+            desc: "صالون موريس يجمع بين الأناقة التقليدية والراحة الحديثة. مع تشطيباته الدقيقة وتصميمه المتناغم.",
+            price: "345,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب صالون موريس",
+          },
+          rating: "★★★★★",
+        },
       ];
 
       function shortDesc(str, max = 65) {
@@ -5819,24 +5802,24 @@
         const waMsg = encodeURIComponent(d.wa || d.name);
         const thumb = Array.isArray(p.imgs) ? p.imgs[0] : p.img;
         return `<div class="product-card reveal" style="transition-delay:${(i % 3) * 0.08}s" onclick="openPModal(${p.id})">
-  <div class="product-image-wrap">
-    <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
-    ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
-    <div class="product-actions-overlay">
-      <button class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation();addToCart(${p.id})">${currentLang === "ar" ? "أضف للسلة" : "Ajouter"}</button>
-      <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
-    </div>
-  </div>
-  <div class="product-body">
-    <div class="product-cat">${d.catName}</div>
-    <h3 class="product-name">${d.name}</h3>
-    <p class="product-desc">${shortDesc(d.desc)}</p>
-    <div class="product-footer">
-      <div class="product-price">${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}</div>
-      <div class="product-rating">${p.rating}</div>
-    </div>
-  </div>
-</div>`;
+          <div class="product-image-wrap">
+            <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
+            ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
+            <div class="product-actions-overlay">
+              <button class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation();openPModal(${p.id})">${currentLang === "ar" ? "أضف للسلة" : "Ajouter"}</button>
+              <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">${d.catName}</div>
+            <h3 class="product-name">${d.name}</h3>
+            <p class="product-desc">${shortDesc(d.desc)}</p>
+            <div class="product-footer">
+              <div class="product-price">${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}</div>
+              <div class="product-rating">${p.rating}</div>
+            </div>
+          </div>
+        </div>`;
       }
 
       let currentFilter = "all";
@@ -5868,7 +5851,9 @@
         setTimeout(initObserver, 50);
       }
 
-      /* ═══ PRODUCT MODAL ═══ */
+      // ══════════════════════════════════
+      // PRODUCT MODAL
+      // ══════════════════════════════════
       const THUMB_W = 68,
         THUMB_GAP = 7,
         THUMB_STEP = THUMB_W + THUMB_GAP;
@@ -5878,6 +5863,8 @@
         galleryIdx: 0,
         stripOffset: 0,
         thumbList: [],
+        selectedSize: null,
+        selectedColor: null,
       };
       let _currentModalProductId = null;
 
@@ -5886,16 +5873,18 @@
         if (!p) return;
         _currentModalProductId = productId;
         _modal.productId = productId;
-        _modal.galleryImgs = Array.isArray(p.imgs) ? p.imgs : [p.img || p.imgs];
+        _modal.galleryImgs = Array.isArray(p.imgs) ? p.imgs : [p.img || ""];
         _modal.galleryIdx = 0;
         _modal.stripOffset = 0;
         _modal.thumbList = _modal.galleryImgs;
+        _modal.selectedSize = null;
+        _modal.selectedColor = null;
         _fillInfo(p);
         _setMainImage(0, false);
-        // _buildThumbs();
         document.getElementById("pmodalOverlay").classList.add("open");
         document.body.style.overflow = "hidden";
       }
+
       function _fillInfo(p) {
         const d = p[currentLang];
         const badge = document.getElementById("pmodalBadge");
@@ -5916,14 +5905,145 @@
         if (addBtn)
           addBtn.querySelector("span").textContent =
             currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
+        _renderVariants(p);
       }
-      function addCurrentToCart() {
-        if (_currentModalProductId) {
-          addToCart(_currentModalProductId);
-          closePModalDirect();
-          openCart();
+
+      function _renderVariants(p) {
+        const existingVariants = document.getElementById("pmodalVariants");
+        if (existingVariants) existingVariants.remove();
+        const hasSizes =
+          p[currentLang].sizes && p[currentLang].sizes.length > 0;
+        const hasColors = p.colors && p.colors.length > 0;
+        if (!hasSizes && !hasColors) return;
+        const divider = document.querySelector(".pmodal-divider");
+        const variantsEl = document.createElement("div");
+        variantsEl.id = "pmodalVariants";
+        variantsEl.className = "pmodal-variants";
+        if (hasSizes) {
+          const sizeLabel = currentLang === "ar" ? "المقاس" : "Taille";
+          const block = document.createElement("div");
+          block.className = "pmodal-variant-block";
+          block.innerHTML = `<div class="pmodal-variant-title">${sizeLabel} — <strong id="pmodalSizeSelected">${currentLang === "ar" ? "اختر مقاسًا" : "Choisir une taille"}</strong></div><div class="pmodal-variant-btns" id="pmodalSizeBtns"></div><div class="pmodal-variant-required-note" id="pmodalSizeNote">${currentLang === "ar" ? "⚠ يُرجى اختيار المقاس أولًا" : "⚠ Veuillez choisir une taille"}</div>`;
+          variantsEl.appendChild(block);
+          setTimeout(() => {
+            const btnsEl = document.getElementById("pmodalSizeBtns");
+            if (!btnsEl) return;
+            p[currentLang].sizes.forEach((s, i) => {
+              const btn = document.createElement("button");
+              btn.className = "pmodal-variant-btn";
+              btn.innerHTML = `${s.label} <span class="size-price">${s.price}</span>`;
+              btn.onclick = () => _selectSize(p, s, i);
+              btnsEl.appendChild(btn);
+            });
+          }, 0);
         }
+        if (hasColors) {
+          const colorLabel = currentLang === "ar" ? "اللون" : "Couleur";
+          const block = document.createElement("div");
+          block.className = "pmodal-variant-block";
+          block.innerHTML = `<div class="pmodal-variant-title">${colorLabel} — <strong id="pmodalColorSelected">${currentLang === "ar" ? "اختر لونًا" : "Choisir une couleur"}</strong></div><div class="pmodal-variant-btns" id="pmodalColorBtns"></div><div class="pmodal-variant-required-note" id="pmodalColorNote">${currentLang === "ar" ? "⚠ يُرجى اختيار اللون أولًا" : "⚠ Veuillez choisir une couleur"}</div>`;
+          variantsEl.appendChild(block);
+          setTimeout(() => {
+            const btnsEl = document.getElementById("pmodalColorBtns");
+            if (!btnsEl) return;
+            p.colors.forEach((c, i) => {
+              const btn = document.createElement("button");
+              btn.className = "pmodal-variant-btn";
+              const label = currentLang === "ar" ? c.ar : c.fr;
+              btn.innerHTML = `<span class="color-dot" style="background:${c.hex}"></span>${label}`;
+              btn.onclick = () => _selectColor(p, c, i);
+              btnsEl.appendChild(btn);
+            });
+          }, 0);
+        }
+        if (divider) divider.parentNode.insertBefore(variantsEl, divider);
       }
+
+      function _selectSize(p, size, idx) {
+        _modal.selectedSize = size;
+        document.getElementById("pmodalPrice").textContent = size.price;
+        const selectedLabel = document.getElementById("pmodalSizeSelected");
+        if (selectedLabel) selectedLabel.textContent = size.label;
+        document
+          .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
+          .forEach((b, i) => b.classList.toggle("selected", i === idx));
+        const note = document.getElementById("pmodalSizeNote");
+        if (note) note.classList.remove("show");
+      }
+
+      function _selectColor(p, color, idx) {
+        _modal.selectedColor = color;
+        const label = currentLang === "ar" ? color.ar : color.fr;
+        const selectedLabel = document.getElementById("pmodalColorSelected");
+        if (selectedLabel) selectedLabel.textContent = label;
+        document
+          .querySelectorAll("#pmodalColorBtns .pmodal-variant-btn")
+          .forEach((b, i) => b.classList.toggle("selected", i === idx));
+        const note = document.getElementById("pmodalColorNote");
+        if (note) note.classList.remove("show");
+      }
+
+      // ✅ دالة واحدة بس — مش فيها تكرار
+      function addCurrentToCart() {
+        if (!_currentModalProductId) return;
+        const p = allProducts.find((x) => x.id === _currentModalProductId);
+        if (!p) return;
+        const hasSizes =
+          p[currentLang].sizes && p[currentLang].sizes.length > 0;
+        const hasColors = p.colors && p.colors.length > 0;
+        let valid = true;
+        if (hasSizes && !_modal.selectedSize) {
+          const note = document.getElementById("pmodalSizeNote");
+          if (note) note.classList.add("show");
+          valid = false;
+        }
+        if (hasColors && !_modal.selectedColor) {
+          const note = document.getElementById("pmodalColorNote");
+          if (note) note.classList.add("show");
+          valid = false;
+        }
+        if (!valid) return;
+        const d = p[currentLang];
+        const img = Array.isArray(p.imgs) ? p.imgs[0] : p.img || "";
+        let finalPrice = d.price;
+        if (_modal.selectedSize) finalPrice = _modal.selectedSize.price;
+        let extraInfo = "";
+        if (_modal.selectedSize) extraInfo += _modal.selectedSize.label;
+        if (_modal.selectedColor) {
+          const colorLabel =
+            currentLang === "ar"
+              ? _modal.selectedColor.ar
+              : _modal.selectedColor.fr;
+          extraInfo += (extraInfo ? " · " : "") + colorLabel;
+        }
+        cart.push({
+          id: p.id,
+          name: d.name,
+          catName: d.catName,
+          price: finalPrice,
+          img,
+          wa: d.wa,
+          selectedSize: _modal.selectedSize ? _modal.selectedSize.label : null,
+          selectedColor: _modal.selectedColor
+            ? currentLang === "ar"
+              ? _modal.selectedColor.ar
+              : _modal.selectedColor.fr
+            : null,
+          extraInfo,
+        });
+        saveCart();
+        const toast = document.getElementById("cartToast");
+        const msg = document.getElementById("cartToastMsg");
+        msg.textContent =
+          currentLang === "ar"
+            ? `✓ ${d.name}${extraInfo ? " — " + extraInfo : ""} — أضيف للسلة`
+            : `✓ ${d.name}${extraInfo ? " — " + extraInfo : ""} — ajouté au panier`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+        closePModalDirect();
+        openCart();
+      }
+
       function _setMainImage(idx, animate = true) {
         const imgs = _modal.galleryImgs;
         if (!imgs.length) return;
@@ -5949,76 +6069,19 @@
         }
         const prev = document.getElementById("pmodalImgPrev"),
           next = document.getElementById("pmodalImgNext");
-        if (prev) prev.disabled = idx <= 0;
-        if (next) next.disabled = idx >= imgs.length - 1;
-        if (prev) prev.style.display = imgs.length > 1 ? "flex" : "none";
-        if (next) next.style.display = imgs.length > 1 ? "flex" : "none";
-        document
-          .querySelectorAll(".pmodal-thumb")
-          .forEach((t, i) => t.classList.toggle("active", i === idx));
-        _centerThumb(idx);
+        if (prev) {
+          prev.disabled = idx <= 0;
+          prev.style.display = imgs.length > 1 ? "flex" : "none";
+        }
+        if (next) {
+          next.disabled = idx >= imgs.length - 1;
+          next.style.display = imgs.length > 1 ? "flex" : "none";
+        }
       }
       function pmodalGalleryNav(dir) {
         _setMainImage(_modal.galleryIdx + dir, true);
       }
-      // function _buildThumbs() {
-      //   const track = document.getElementById("pmodalTrack");
-      //   track.innerHTML = "";
-      //   _modal.stripOffset = 0;
-      //   track.style.transform = "translateX(0)";
-      //   const imgs = _modal.thumbList;
-      //   if (imgs.length <= 1) {
-      //     document.querySelector(".pmodal-thumbs-strip").style.display =
-      //       imgs.length > 1 ? "flex" : "none";
-      //     return;
-      //   }
-      //   document.querySelector(".pmodal-thumbs-strip").style.display = "flex";
-      //   imgs.forEach((src, i) => {
-      //     const div = document.createElement("div");
-      //     div.className = "pmodal-thumb" + (i === 0 ? " active" : "");
-      //     div.innerHTML = `<div class="pmodal-thumb-img-wrap"><img src="${src}" alt="Photo ${i + 1}" loading="lazy"></div><div class="pmodal-thumb-label">Photo ${i + 1}</div>`;
-      //     div.addEventListener("click", () => _setMainImage(i, true));
-      //     track.appendChild(div);
-      //   });
-      //   _centerThumb(0);
-      //   _updateStripNav();
-      // }
-      function _centerThumb(idx) {
-        const outer = document.querySelector(".pmodal-thumbs-outer");
-        if (!outer) return;
-        const vw = outer.clientWidth,
-          total = _modal.thumbList.length;
-        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
-        let target = idx * THUMB_STEP - Math.floor((vw - THUMB_W) / 2);
-        target = Math.max(0, Math.min(target, maxOff));
-        _modal.stripOffset = target;
-        document.getElementById("pmodalTrack").style.transform =
-          `translateX(-${_modal.stripOffset}px)`;
-        _updateStripNav();
-      }
-      function pmodalStripScroll(dir) {
-        const outer = document.querySelector(".pmodal-thumbs-outer");
-        const total = _modal.thumbList.length,
-          vw = outer ? outer.clientWidth : 400;
-        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
-        _modal.stripOffset = Math.max(
-          0,
-          Math.min(_modal.stripOffset + dir * THUMB_STEP * 3, maxOff),
-        );
-        document.getElementById("pmodalTrack").style.transform =
-          `translateX(-${_modal.stripOffset}px)`;
-        _updateStripNav();
-      }
-      function _updateStripNav() {
-        const outer = document.querySelector(".pmodal-thumbs-outer");
-        const total = _modal.thumbList.length,
-          vw = outer ? outer.clientWidth : 400;
-        const maxOff = Math.max(0, total * THUMB_STEP - THUMB_GAP - vw);
-        const prev = document.getElementById("pmodalNavPrev"),
-          next = document.getElementById("pmodalNavNext");
-        if (prev) prev.disabled = _modal.stripOffset <= 0;
-        if (next) next.disabled = _modal.stripOffset >= maxOff;
-      }
+
       document.addEventListener("keydown", (e) => {
         if (
           !document.getElementById("pmodalOverlay").classList.contains("open")
@@ -6038,7 +6101,9 @@
         document.body.style.overflow = "";
       }
 
-      /* ═══ INIT ═══ */
+      // ══════════════════════════════════
+      // INIT
+      // ══════════════════════════════════
       (function init() {
         const savedLang = loadLang();
         const savedPage = localStorage.getItem(PAGE_KEY) || "home";
@@ -6076,51 +6141,50 @@
         setTimeout(initObserver, 150);
       })();
     </script>
-    <script>
+       <script>
+      (function () {
+        "use strict";
+        document.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
 
-(function() {
-    'use strict';
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || e.keyCode === 123) {
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "F12" || e.keyCode === 123) {
             e.preventDefault();
             return false;
-        }
+          }
 
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+          if (
+            e.ctrlKey &&
+            e.shiftKey &&
+            (e.key === "I" || e.key === "J" || e.key === "C")
+          ) {
             e.preventDefault();
             return false;
-        }
+          }
 
-   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
-        e.preventDefault();
-        return false;
-    }
-    });
+          if (e.ctrlKey && (e.key === "u" || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+          }
+        });
 
-    const devToolsCheck = function() {
-        if (window.console && window.console.time) {
-                (function() {
-                    (function() {
-                        debugger;
-                    }).apply(this, ['alwaysOn']);
-                })();
-         
-        }
-    };
-    
+        const devToolsCheck = function () {
+          if (window.console && window.console.time) {
+            (function () {
+              (function () {
+                debugger;
+              }).apply(this, ["alwaysOn"]);
+            })();
+          }
+        };
 
-    setInterval(devToolsCheck, 1000);
+        setInterval(devToolsCheck, 1000);
 
-
-    document.addEventListener('copy', function(e) {
-        e.preventDefault();
-    });
-
-})();
-</script>
+        document.addEventListener("copy", function (e) {
+          e.preventDefault();
+        });
+      })();
+    </script>
   </body>
 </html>
