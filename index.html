@@ -2547,13 +2547,13 @@ html[lang="ar"] .top-bar-text {
         border-radius: 10px;
         width: min(840px, 100%);
         max-height: 100dvh;
-        overflow: hidden;
         display: grid;
         grid-template-columns: 1.15fr 1fr;
         box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6);
         transform: translateY(11px) scale(0.78);
         transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
+        overflow-y: auto;
       }
       .pmodal-close {
         position: absolute;
@@ -2697,7 +2697,6 @@ html[lang="ar"] .top-bar-text {
         display: flex;
         flex-direction: column;
         overflow-y: auto;
-        max-height: 92dvh;
         overscroll-behavior: contain;
       }
       .pmodal-info::-webkit-scrollbar {
@@ -3036,7 +3035,6 @@ html[lang="ar"] .top-bar-text {
         }
         .pmodal-info {
           padding: 22px 18px 24px;
-          max-height: 55dvh;
         }
         .pmodal-name {
           font-size: 1.25rem;
@@ -3128,6 +3126,14 @@ html[lang="ar"] .top-bar-text {
   transform: translateY(-2px);
 }
 .hero-title span {
+
+  background: linear-gradient(
+341deg, #ffd700, #ffcc00, #ff9900);  /* Yellow gradient */
+  color: transparent;
+  -webkit-background-clip: text;  /* Clip the gradient to the text */
+  display: block;
+}
+.hero-title .gold-text {
   background: linear-gradient(135deg, #ffd700, #ffcc00, #ff9900);  /* Yellow gradient */
   color: transparent;
   -webkit-background-clip: text;  /* Clip the gradient to the text */
@@ -3693,7 +3699,7 @@ html[lang="ar"] .top-bar-text {
       
             <div
               class="cat-card reveal reveal-delay-2"
-             onclick="navigateToCategory('salon')"
+             onclick="navigateToCategory('commodes')"
             >
               <img
                 class="cat-img"
@@ -3704,17 +3710,17 @@ html[lang="ar"] .top-bar-text {
               <div class="cat-card-content">
                 <div
                   class="cat-name"
-                  data-fr="Salons & Sofas"
-                  data-ar="الصالونات"
+                  data-fr="commodes"
+                  data-ar="الممشطات"
                 >
-                  Salons &amp; Sofas
+                  commodes
                 </div>
                 <div
                   class="cat-count"
-                  data-fr="+22 produits"
-                  data-ar="+22 منتج"
+                  data-fr="13 produits"
+                  data-ar="13 منتج"
                 >
-                  +22 produits
+                  13 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
@@ -3739,10 +3745,10 @@ html[lang="ar"] .top-bar-text {
                 </div>
                 <div
                   class="cat-count"
-                  data-fr="+45 produits"
-                  data-ar="+45 منتج"
+                  data-fr="19  produits"
+                  data-ar="19  منتج"
                 >
-                  +45 produits
+                  19  produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
@@ -3763,10 +3769,10 @@ html[lang="ar"] .top-bar-text {
                 </div>
                 <div
                   class="cat-count"
-                  data-fr="+38 produits"
-                  data-ar="+38 منتج"
+                  data-fr="6 produits"
+                  data-ar="6 منتج"
                 >
-                  +38 produits
+                  6 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
@@ -3798,7 +3804,7 @@ html[lang="ar"] .top-bar-text {
             </div>
             <div
               class="cat-card reveal reveal-delay-2"
-              onclick="navigateToCategory('commodes')"
+              onclick="navigateToCategory('tables')"
             >
               <img
                 class="cat-img"
@@ -3809,17 +3815,17 @@ html[lang="ar"] .top-bar-text {
               <div class="cat-card-content">
                 <div
                   class="cat-name"
-                  data-fr="Mobilier de bureau"
-                  data-ar="الأثاث المكتبي"
+                  data-fr="Tables"
+                  data-ar="طاولات"
                 >
-                  Mobilier de bureau
+                  Tables
                 </div>
                 <div
                   class="cat-count"
-                  data-fr="+28 produits"
-                  data-ar="+28 منتج"
+                  data-fr="3 produits"
+                  data-ar="3 منتج"
                 >
-                  +28 produits
+                  3 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
@@ -4291,143 +4297,53 @@ html[lang="ar"] .top-bar-text {
               Profitez des meilleurs prix sur nos produits sélectionnés
             </p>
           </div>
-          <div class="offers-grid">
-            <div class="offer-card large reveal from-left">
-              <img
-                class="offer-img"
-                src="images/Lits.webp"
-                alt=""
-              />
-              <div class="offer-card-overlay"></div>
-              <div class="offer-card-content">
-                <span
-                  class="offer-tag"
-                  data-fr="⚡ Offre du mois"
-                  data-ar="⚡ عرض الشهر"
-                  >⚡ Offre du mois</span
-                >
-                <div
-                  class="offer-title"
-                  data-fr="Chambres complètes"
-                  data-ar="غرف النوم الكاملة"
-                >
-                  Chambres complètes
-                </div>
-                <div class="offer-discount" data-fr="-30%" data-ar="خصم 30%">
-                  -30%
-                </div>
-                <p
-                  style="
-                    color: rgba(255, 255, 255, 0.65);
-                    font-size: 0.84rem;
-                    margin: 8px 0;
-                  "
-                  data-fr="Commandez maintenant et bénéficiez de la livraison gratuite"
-                  data-ar="اطلب الآن واستمتع بالتوصيل المجاني"
-                >
-                  Commandez maintenant et bénéficiez de la livraison gratuite
-                </p>
-            
-              </div>
-            </div>
-            <div class="offer-card reveal reveal-delay-1">
-              <img
-                class="offer-img"
-                src="images/t1.webp"
-                alt=""
-              />
-              <div class="offer-card-overlay"></div>
-              <div class="offer-card-content">
-                <span
-                  class="offer-tag"
-                  data-fr="🔥 Offre limitée"
-                  data-ar="🔥 عرض محدود"
-                  >🔥 Offre limitée</span
-                >
-                <div
-                  class="offer-title"
-                  data-fr="Salons & Sofas"
-                  data-ar="الصالونات"
-                >
-                  Salons &amp; Sofas
-                </div>
-                <div class="offer-discount" data-fr="-20%" data-ar="خصم 20%">
-                  -20%
-                </div>
-              </div>
-            </div>
-            <div class="offer-card reveal reveal-delay-2">
-              <img
-                class="offer-img"
-                src="images/commends.webp"
-                alt=""
-              />
-              <div class="offer-card-overlay"></div>
-              <div class="offer-card-content">
-                <span
-                  class="offer-tag"
-                  data-fr="💼 Offre spéciale"
-                  data-ar="💼 عرض خاص"
-                  >💼 Offre spéciale</span
-                >
-                <div
-                  class="offer-title"
-                  data-fr="Mobilier de bureau"
-                  data-ar="الأثاث المكتبي"
-                >
-                  Mobilier de bureau
-                </div>
-                <div class="offer-discount" data-fr="-25%" data-ar="خصم 25%">
-                  -25%
-                </div>
-              </div>
-            </div>
-            <div class="offer-card reveal reveal-delay-1">
-              <img
-                class="offer-img"
-                src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80&fit=crop"
-                alt=""
-              />
-              <div class="offer-card-overlay"></div>
-              <div class="offer-card-content">
-                <span
-                  class="offer-tag"
-                  data-fr="🎁 Cadeau offert"
-                  data-ar="🎁 هدية مجانية"
-                  >🎁 Cadeau offert</span
-                >
-                <div class="offer-title" data-fr="Salons" data-ar="غرف المعيشة">
-                  Salons
-                </div>
-                <div
-                  class="offer-discount"
-                  data-fr="+ 2 coussins offerts"
-                  data-ar="+ وسادتان مجانًا"
-                >
-                  + 2 coussins offerts
-                </div>
-              </div>
-            </div>
-            <div class="offer-card reveal reveal-delay-2">
-              <img
-                class="offer-img"
-                src="images/t1.webp"
-                alt=""
-              />
-              <div class="offer-card-overlay"></div>
-              <div class="offer-card-content">
-                <span class="offer-tag" data-fr="⭐ Nouveau" data-ar="⭐ جديد"
-                  >⭐ Nouveau</span
-                >
-                <div class="offer-title" data-fr="Coiffeuses" data-ar="الخزائن">
-                  Coiffeuses
-                </div>
-                <div class="offer-discount" data-fr="-15%" data-ar="خصم 15%">
-                  -15%
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="categories-grid">
+      <div class="cat-card reveal reveal-delay-1" onclick="navigateToCategory('lits')">
+        <img class="cat-img" src="images/Lits.webp" alt="Lits">
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-name" data-fr="Lits" data-ar="الأسرّة">Lits</div>
+          <div class="cat-count" data-fr="19 produits" data-ar="19 منتج">19 produits</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card large reveal from-left" onclick="navigateToCategory('commodes')">
+        <img class="cat-img" src="images/t1.webp" alt="commodes">
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-name" data-fr="commodes" data-ar="الخزائن">commodes</div>
+          <div class="cat-count" data-fr="13 produits" data-ar="13 منتج">13 produits</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-1" onclick="navigateToCategory('salon')">
+        <img class="cat-img" src="images/salons.webp" alt="Salons">
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-name" data-fr="Salons" data-ar="الصالونات">Salons</div>
+          <div class="cat-count" data-fr="6 produits" data-ar="6 منتج">6 produits</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2" onclick="navigateToCategory('coiffeuse')">
+        <img class="cat-img" src="images/t1.webp" alt="Coiffeuses">
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-name" data-fr="Coiffeuses" data-ar="التسريحات">Coiffeuses</div>
+          <div class="cat-count" data-fr="+30 produits" data-ar="+30 منتج">+30 produits</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2" onclick="navigateToCategory('tables')">
+        <img class="cat-img" src="images/commends.webp" alt="Tables">
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-name" data-fr="Tables" data-ar="الطاولات">Tables</div>
+          <div class="cat-count" data-fr="3 produits" data-ar="3 منتج">3 produits</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+    </div>
           <div style="text-align: center; margin-top: 50px" class="reveal">
             <a
               href="https://wa.me/213775530551"
@@ -5149,7 +5065,8 @@ html[lang="ar"] .top-bar-text {
           window.scrollTo({ top: 0, behavior: "smooth" });
           savePage(page);
           setTimeout(initObserver, 100);
-          if (page === "products") renderProducts(currentFilter);
+         if (page === "products") renderProducts(currentFilter);
+if (page === "offers") renderProducts(currentFilter); 
           if (page === "checkout") renderCheckoutSummary();
         }
       }
@@ -5440,7 +5357,7 @@ html[lang="ar"] .top-bar-text {
         {
           id: 10,
           cat: "salon",
-          imgs: ["images/salon-1.webp"],
+          img:"images/salon-1.webp",
           fr: {
             catName: "Salons",
             name: "Salon complet 7 places",
@@ -5491,7 +5408,7 @@ html[lang="ar"] .top-bar-text {
         },
         {
           id: 12,
-          cat: "tables",
+          cat: "commodes",
           imgs: ["images/2.webp"],
           fr: {
             catName: "Tables",
@@ -5517,10 +5434,10 @@ html[lang="ar"] .top-bar-text {
         },
         {
           id: 13,
-          cat: "coiffeuse",
+          cat: "commodes",
           imgs: ["images/3.webp"],
           fr: {
-            catName: "Coiffeuses",
+            catName: "commodes",
             name: "Armoire 3 portes",
             desc: "Armoire spacieuse à 3 portes avec miroir intégré.",
             price: "70 000 DA",
@@ -5665,33 +5582,6 @@ html[lang="ar"] .top-bar-text {
             badge: "badge-best",
             badgeText: "تخزين",
             wa: "طلب Lit Nouva",
-          },
-          rating: "★★★★★",
-        },
-        {
-          id: 19,
-          cat: "lits",
-          img: "images/lit-luxueux-1.webp",
-          imgs: ["images/lit-luxueux-1.webp", "images/lit-luxueux-2.webp"],
-          fr: {
-            catName: "Lits",
-            name: "Lit luxueux",
-            desc: "Raffinement absolu. 160x190 / 180x200 cm.",
-            price: "75 000 DA / 85 000 DA",
-            oldPrice: null,
-            badge: "badge-best",
-            badgeText: "Luxueux",
-            wa: "Commander Lit luxueux",
-          },
-          ar: {
-            catName: "الأسرّة",
-            name: "Lit luxueux",
-            desc: "سرير فاخر.",
-            price: "75,000 / 85,000 دج",
-            oldPrice: null,
-            badge: "badge-best",
-            badgeText: "فاخر",
-            wa: "طلب Lit luxueux",
           },
           rating: "★★★★★",
         },
@@ -6950,6 +6840,7 @@ html[lang="ar"] .top-bar-text {
       // INIT
       // ══════════════════════════════════
       (function init() {
+
         const savedLang = loadLang();
         const savedPage = localStorage.getItem(PAGE_KEY) || "home";
         currentLang = savedLang;
@@ -6982,7 +6873,7 @@ html[lang="ar"] .top-bar-text {
         if (target) target.classList.add("active");
         loadCart();
         renderFeatured();
-        if (startPage === "products") renderProducts(currentFilter);
+        if (startPage === 'offers') renderProducts(currentFilter);
         setTimeout(initObserver, 150);
       })();
       // تعريف الأسعار الخاصة بكل ولاية
@@ -7004,15 +6895,20 @@ document.getElementById('chk_wilaya').addEventListener('change', function() {
     }
 });
 function navigateToCategory(cat) {
+  currentFilter = cat;
   navigateTo('offers');
+  
   setTimeout(() => {
-    const allTabs = document.querySelectorAll('.filter-tab');
+    const allTabs = document.querySelectorAll('#filterTabs .filter-tab');
     allTabs.forEach(t => t.classList.remove('active'));
-    // نشغّل الفلتر المطلوب
-    const matchingTab = [...allTabs].find(t => t.getAttribute('onclick')?.includes(`'${cat}'`));
+    const matchingTab = [...allTabs].find(t => 
+      (t.getAttribute('onclick') || '').includes(`'${cat}'`)
+    );
     if (matchingTab) matchingTab.classList.add('active');
+    
     renderProducts(cat);
-  }, 50);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 150);  // زيادة من 120 لـ 150
 }
     </script>
     <script>
