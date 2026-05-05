@@ -3208,6 +3208,30 @@ color: #7b6700;
     gap: 10px;
   }
 }
+/* Product card colors */
+.product-card {
+  border: 1px solid transparent;
+}
+
+.product-card:hover {
+  border-color: #d4af37;
+  box-shadow: 0 14px 40px rgba(212, 175, 55, 0.22);
+}
+
+.product-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+  border-color: #ffd700;
+}
+/* اللون العادي للنص */
+.product-card p {
+  transition: 0.3s ease;
+}
+
+/* لما تعمل hover على الكارت كله */
+.product-card:hover p {
+  color: #d4af37; /* ذهبي */
+}
     </style>
   </head>
   <body>
@@ -3843,10 +3867,10 @@ color: #7b6700;
               </h4>
               <p
                 class="feature-desc"
-                data-fr="Livraison sécurisée dans  20 wilayas d'Algérie"
+                data-fr="Livraison sécurisée dans  20 wilayas "
                 data-ar="نوصل أثاثك بأمان لجميع الولايات 20"
               >
-                Livraison sécurisée dans  20 wilayas d'Algérie
+                Livraison sécurisée dans  20 wilayas 
               </p>
             </div>
             <div class="feature-item reveal reveal-delay-1">
@@ -4618,7 +4642,7 @@ color: #7b6700;
         <a href="#" class="logo-main">
           <img src="images/logo2.webp" alt="" />
         </a>
-        <p class="footer-desc" data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas d'Algérie." data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر.">
+        <p class="footer-desc" data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas ." data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر.">
           Nous proposons les meubles d'intérieur et de bureau les plus raffinés.
         </p>
        <div class="footer-socials">
@@ -4670,7 +4694,7 @@ color: #7b6700;
             <a href="#" onclick="navigateTo('home')" data-fr="Home" data-ar="الرئيسية">Home</a>
           </li>
           <li>
-            <a href="#" onclick="navigateTo('products')" data-fr="Produits" data-ar="المنتجات">Produits</a>
+            <a href="#" onclick="navigateTo('products')" data-fr="Cathégories" data-ar="التصنيفات">Cathégories</a>
           </li>
           <li>
             <a href="#" onclick="navigateTo('offers')" data-fr="Shop" data-ar="العروض">Shop</a>
