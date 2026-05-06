@@ -4985,6 +4985,7 @@ color: #7b6700;
           )
           .join("");
       }
+      
       function removeFromCart(idx) {
         cart.splice(idx, 1);
         saveCart();
@@ -5574,8 +5575,6 @@ if (page === "offers") renderProducts(currentFilter);
           colors: [
             // ← برا fr وar
             { hex: "#c8a96e", fr: "Beige doré", ar: "بيج ذهبي" },
-            { hex: "#4a4a4a", fr: "Gris anthracite", ar: "رمادي غامق" },
-            { hex: "#8B2020", fr: "Bordeaux", ar: "بوردو" },
           ],
           fr: {
             catName: "Lits",
@@ -6702,29 +6701,45 @@ if (page === "offers") renderProducts(currentFilter);
         document.body.style.overflow = "hidden";
       }
 
-      function _fillInfo(p) {
-        const d = p[currentLang];
-        const badge = document.getElementById("pmodalBadge");
-        if (d.badge) {
-          badge.className = "pmodal-badge " + d.badge;
-          badge.textContent = d.badgeText;
-          badge.style.display = "block";
-        } else {
-          badge.style.display = "none";
-        }
-        document.getElementById("pmodalCat").textContent = d.catName;
-        document.getElementById("pmodalName").textContent = d.name;
-        document.getElementById("pmodalPrice").textContent = d.price;
-        document.getElementById("pmodalDesc").textContent = d.desc;
-        const waMsg = encodeURIComponent(d.wa || d.name);
-        document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
-        const addBtn = document.getElementById("pmodalAddCart");
-        if (addBtn)
-          addBtn.querySelector("span").textContent =
-            currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
-        _renderVariants(p);
-      }
+ function _fillInfo(p) {
+  const d = p[currentLang];
 
+  _modal.selectedSize = null;
+  _modal.selectedColor = null;
+
+  const badge = document.getElementById("pmodalBadge");
+  if (d.badge) {
+    badge.className = "pmodal-badge " + d.badge;
+    badge.textContent = d.badgeText;
+    badge.style.display = "block";
+  } else {
+    badge.style.display = "none";
+  }
+
+  document.getElementById("pmodalCat").textContent = d.catName;
+  document.getElementById("pmodalName").textContent = d.name;
+
+  const cleanDesc = cleanProductDesc(d.desc);
+
+  document.getElementById("pmodalDesc").innerHTML = `
+    <div>${cleanDesc}</div>
+  `;
+
+  const priceEl = document.getElementById("pmodalPrice");
+  priceEl.textContent = "";
+  priceEl.style.display = "none";
+
+  const waMsg = encodeURIComponent(d.wa || d.name);
+  document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+
+  const addBtn = document.getElementById("pmodalAddCart");
+  if (addBtn) {
+    addBtn.querySelector("span").textContent =
+      currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
+  }
+
+  _renderVariants(p);
+}
       function _renderVariants(p) {
         const existingVariants = document.getElementById("pmodalVariants");
         if (existingVariants) existingVariants.remove();
@@ -6776,18 +6791,59 @@ if (page === "offers") renderProducts(currentFilter);
         if (divider) divider.parentNode.insertBefore(variantsEl, divider);
       }
 
-      function _selectSize(p, size, idx) {
-        _modal.selectedSize = size;
-        document.getElementById("pmodalPrice").textContent = size.price;
-        const selectedLabel = document.getElementById("pmodalSizeSelected");
-        if (selectedLabel) selectedLabel.textContent = size.label;
-        document
-          .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
-          .forEach((b, i) => b.classList.toggle("selected", i === idx));
-        const note = document.getElementById("pmodalSizeNote");
-        if (note) note.classList.remove("show");
-      }
+  function _selectSize(p, size, idx) {
+  const d = p[currentLang];
+  const cleanDesc = cleanProductDesc(d.desc);
 
+  _modal.selectedSize = size;
+
+  const priceEl = document.getElementById("pmodalPrice");
+  priceEl.textContent = size.price;
+  priceEl.style.display = "block";
+  priceEl.style.opacity = "1";
+
+  const descEl = document.getElementById("pmodalDesc");
+
+  const selectedSizeText =
+    currentLang === "ar"
+      ? `المقاس المختار: ${size.label}`
+      : `Taille choisie : ${size.label}`;
+
+  descEl.innerHTML = `
+    <div>${cleanDesc}</div>
+    <div style="margin-top: 12px; font-weight: 600; color: var(--gold);">
+      ${selectedSizeText}
+    </div>
+  `;
+
+  document
+    .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
+    .forEach((b, i) => b.classList.toggle("selected", i === idx));
+
+  const note = document.getElementById("pmodalSizeNote");
+  if (note) note.classList.remove("show");
+
+  const waText =
+    currentLang === "ar"
+      ? `${d.wa || d.name} - المقاس: ${size.label} - السعر: ${size.price}`
+      : `${d.wa || d.name} - Taille: ${size.label} - Prix: ${size.price}`;
+
+  document.getElementById("pmodalWaBtn").href =
+    WA + "?text=" + encodeURIComponent(waText);
+}
+function cleanProductDesc(desc) {
+  if (!desc) return "";
+
+  return desc
+    // يشيل مقاسات زي 90 x 190 cm أو 160x190 cm
+    .replace(/\b\d+\s*x\s*\d+\s*cm\.?\b/gi, "")
+    // يشيل مسافات زيادة
+    .replace(/\s{2,}/g, " ")
+    // يشيل الشرطات أو النقاط الزيادة في الآخر
+    .replace(/\s+[—\-]\s*$/g, "")
+    .replace(/\s+\.\s*$/g, "")
+    .trim();
+}
       function _selectColor(p, color, idx) {
         _modal.selectedColor = color;
         const label = currentLang === "ar" ? color.ar : color.fr;
