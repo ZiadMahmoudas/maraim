@@ -4985,7 +4985,6 @@ color: #7b6700;
           )
           .join("");
       }
-      
       function removeFromCart(idx) {
         cart.splice(idx, 1);
         saveCart();
@@ -6701,11 +6700,9 @@ if (page === "offers") renderProducts(currentFilter);
         document.body.style.overflow = "hidden";
       }
 
- function _fillInfo(p) {
+  function _fillInfo(p) {
   const d = p[currentLang];
-
-  _modal.selectedSize = null;
-  _modal.selectedColor = null;
+  const hasSizes = d.sizes && d.sizes.length > 0;
 
   const badge = document.getElementById("pmodalBadge");
   if (d.badge) {
@@ -6719,15 +6716,18 @@ if (page === "offers") renderProducts(currentFilter);
   document.getElementById("pmodalCat").textContent = d.catName;
   document.getElementById("pmodalName").textContent = d.name;
 
-  const cleanDesc = cleanProductDesc(d.desc);
-
-  document.getElementById("pmodalDesc").innerHTML = `
-    <div>${cleanDesc}</div>
-  `;
-
+  // لو المنتج له مقاسات: متظهرش السعر غير لما يختار مقاس
   const priceEl = document.getElementById("pmodalPrice");
-  priceEl.textContent = "";
-  priceEl.style.display = "none";
+  if (hasSizes) {
+    priceEl.textContent = currentLang === "ar" ? "اختر" : "Choisissez";
+    priceEl.style.opacity = "0.65";
+  } else {
+    priceEl.textContent = d.price;
+    priceEl.style.opacity = "1";
+  }
+
+  // الوصف الأساسي
+  document.getElementById("pmodalDesc").textContent = d.desc;
 
   const waMsg = encodeURIComponent(d.wa || d.name);
   document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
@@ -6740,6 +6740,7 @@ if (page === "offers") renderProducts(currentFilter);
 
   _renderVariants(p);
 }
+
       function _renderVariants(p) {
         const existingVariants = document.getElementById("pmodalVariants");
         if (existingVariants) existingVariants.remove();
@@ -6791,9 +6792,8 @@ if (page === "offers") renderProducts(currentFilter);
         if (divider) divider.parentNode.insertBefore(variantsEl, divider);
       }
 
-  function _selectSize(p, size, idx) {
+   function _selectSize(p, size, idx) {
   const d = p[currentLang];
-  const cleanDesc = cleanProductDesc(d.desc);
 
   _modal.selectedSize = size;
 
@@ -6802,19 +6802,11 @@ if (page === "offers") renderProducts(currentFilter);
   priceEl.style.display = "block";
   priceEl.style.opacity = "1";
 
+  const selectedLabel = document.getElementById("pmodalSizeSelected");
+  if (selectedLabel) selectedLabel.textContent = size.label;
+
   const descEl = document.getElementById("pmodalDesc");
-
-  const selectedSizeText =
-    currentLang === "ar"
-      ? `المقاس المختار: ${size.label}`
-      : `Taille choisie : ${size.label}`;
-
-  descEl.innerHTML = `
-    <div>${cleanDesc}</div>
-    <div style="margin-top: 12px; font-weight: 600; color: var(--gold);">
-      ${selectedSizeText}
-    </div>
-  `;
+  descEl.innerHTML = renderModalDesc(d.desc, size.label);
 
   document
     .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
@@ -6835,14 +6827,40 @@ function cleanProductDesc(desc) {
   if (!desc) return "";
 
   return desc
-    // يشيل مقاسات زي 90 x 190 cm أو 160x190 cm
-    .replace(/\b\d+\s*x\s*\d+\s*cm\.?\b/gi, "")
-    // يشيل مسافات زيادة
+    // يشيل مقاسات فرنسي/إنجليزي: 90 x 190 cm / 160x190 cm / 1.20 x 1.90 m
+    .replace(/\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)\.?\b/gi, "")
+
+    // يشيل مقاسات مكتوبة كذا مقاس: 160x190 / 180x200 cm
+    .replace(/\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*\/\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?\b/gi, "")
+
+    // يشيل الجمل القصيرة اللي بتبدأ بكلمة مقاس
+    .replace(/(?:مقاس|Format)\s*[:：]?\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?/gi, "")
+
+    // تنظيف المسافات والنقط الزيادة
     .replace(/\s{2,}/g, " ")
-    // يشيل الشرطات أو النقاط الزيادة في الآخر
+    .replace(/\s+\./g, ".")
+    .replace(/\.{2,}/g, ".")
     .replace(/\s+[—\-]\s*$/g, "")
-    .replace(/\s+\.\s*$/g, "")
     .trim();
+}
+
+function renderModalDesc(desc, selectedSizeLabel = "") {
+  const cleanDesc = cleanProductDesc(desc);
+
+  const selectedSizeText = selectedSizeLabel
+    ? currentLang === "ar"
+      ? `المقاس المختار: ${selectedSizeLabel}`
+      : `Taille choisie : ${selectedSizeLabel}`
+    : "";
+
+  return `
+    <div class="pmodal-desc-main">${cleanDesc}</div>
+    ${
+      selectedSizeText
+        ? `<div class="pmodal-desc-size">${selectedSizeText}</div>`
+        : ""
+    }
+  `;
 }
       function _selectColor(p, color, idx) {
         _modal.selectedColor = color;
