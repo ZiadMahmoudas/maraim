@@ -5437,32 +5437,6 @@ if (page === "offers") renderProducts(currentFilter);
           rating: "★★★★★",
         },
         {
-          id: 9,
-          cat: "bedroom",
-          imgs: ["images/bedroom-1.webp"],
-          fr: {
-            catName: "Chambres",
-            name: "Chambre complète moderne",
-            desc: "Chambre à coucher complète avec lit, armoire et coiffeuse assortis.",
-            price: "120 000 DA",
-            oldPrice: null,
-            badge: "badge-new",
-            badgeText: "Nouveau",
-            wa: "Commander Chambre complète moderne",
-          },
-          ar: {
-            catName: "غرف النوم",
-            name: "غرفة نوم كاملة مودرن",
-            desc: "غرفة نوم كاملة تشمل سرير، خزانة وتسريحة.",
-            price: "120,000 دج",
-            oldPrice: null,
-            badge: "badge-new",
-            badgeText: "جديد",
-            wa: "طلب غرفة نوم كاملة مودرن",
-          },
-          rating: "★★★★★",
-        },
-        {
           id: 10,
           cat: "salon",
           img:"images/salon-1.webp",
@@ -6774,7 +6748,7 @@ if (page === "offers") renderProducts(currentFilter);
             p[currentLang].sizes.forEach((s, i) => {
               const btn = document.createElement("button");
               btn.className = "pmodal-variant-btn";
-              btn.innerHTML = `${s.label} <span class="size-price">${s.price}</span>`;
+              btn.innerHTML = `${s.label}`;
               btn.onclick = () => _selectSize(p, s, i);
               btnsEl.appendChild(btn);
             });
