@@ -7,13 +7,11 @@
       name="description"
       content="Meubles de luxe en Algérie - Chambres à coucher - Salons - Livraison dans toutes les wilayas"
     />
-    <title>
-      Royal Meubles| روائع الأثاث — Meubles de Luxe en Algérie
-    </title>
+    <title>Royal Meubles| روائع الأثاث — Meubles de Luxe en Algérie</title>
     <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-/>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="shortcut icon" href="images/logo2.webp" type="image/x-icon" />
@@ -23,237 +21,296 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-html[dir="rtl"] .cat-arrow {
-  right: auto;  /* إزالة التحديد السابق */
-  left: 16px;   /* تحديد اليسار */
-}
+      html[dir="rtl"] .cat-arrow {
+        right: auto; /* إزالة التحديد السابق */
+        left: 16px; /* تحديد اليسار */
+      }
 
-html[dir="rtl"] .pmodal-img-arrow.prev {
-  right: auto;  /* إزالة التحديد السابق */
-  left: 12px;   /* تحديد اليسار */
-}
+      html[dir="rtl"] .pmodal-img-arrow.prev {
+        right: auto; /* إزالة التحديد السابق */
+        left: 12px; /* تحديد اليسار */
+      }
 
-html[dir="rtl"] .pmodal-img-arrow.next {
-  left: auto;  /* إزالة التحديد السابق */
-  right: 12px; /* تحديد اليمين */
-}
+      html[dir="rtl"] .pmodal-img-arrow.next {
+        left: auto; /* إزالة التحديد السابق */
+        right: 12px; /* تحديد اليمين */
+      }
 
-html[dir="rtl"] .pmodal-thumb-nav {
-  transform: rotate(180deg);  /* عكس الأيقونة لتناسب RTL */
-}
+      html[dir="rtl"] .pmodal-thumb-nav {
+        transform: rotate(180deg); /* عكس الأيقونة لتناسب RTL */
+      }
 
-html[dir="rtl"] .footer-col ul li a::before {
-  content: "←";  /* إضافة السهم لليسار في الـ footer */
-}
+      html[dir="rtl"] .footer-col ul li a::before {
+        content: "←"; /* إضافة السهم لليسار في الـ footer */
+      }
 
-html[dir="rtl"] {
-  direction: rtl; /* تحديد اتجاه النص من اليمين لليسار */
-}
-html[dir="rtl"] .map-inner {
-  direction: rtl;
-}
-html[dir="rtl"] .map-detail-row {
-  border-left: none;
-  border-right: 3px solid #f03232;
-}
-html[dir="rtl"] .map-open-btn {
-  direction: rtl;
-}
-html[dir="rtl"] .map-title {
-  font-family: "Noto Naskh Arabic", serif;
-}
-html[dir="rtl"] .map-badge,
-html[dir="rtl"] .map-detail-label,
-html[dir="rtl"] .map-detail-value {
-  font-family: "Tajawal", sans-serif;
-}
-.top-bar {
-  background: linear-gradient(135deg, #1a1430, #2a1f5c);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.35);
-  padding: 8px 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1001;
-}
-.top-bar-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.top-bar-text {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.73rem;
-  color: rgba(201, 169, 110, 0.85);
-  letter-spacing: 0.06em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-html[lang="ar"] .top-bar-text {
-  font-family: "Tajawal", sans-serif;
-  font-style: normal;
-}
-.top-bar-text .dot { color: var(--gold); }
-.top-bar-socials {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.top-bar-social-btn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid rgba(201, 169, 110, 0.3);
-  border-radius: 6px;
-  background: rgba(201, 169, 110, 0.08);
-  color: rgba(201, 169, 110, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  transition: all 0.3s;
-  text-decoration: none;
-}
-.top-bar-social-btn:hover {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: white;
-  transform: translateY(-1px);
-}
-.top-bar-phone {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.top-bar-phone a {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: rgba(201, 169, 110, 0.75);
-  letter-spacing: 0.04em;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.2s;
-}
-.top-bar-phone a:hover { color: var(--gold-light); }
-.top-bar-phone .sep {
-  width: 1px;
-  height: 12px;
-  background: rgba(201, 169, 110, 0.2);
-}
-@media (max-width: 768px) {
-  .top-bar-text { display: none; }
-  .top-bar-phone { display: none; }
-}
-.navbar { top: 38px; }
-.hero-left { padding-top: 186px !important; }
-#page-products > div:first-child,
-#page-offers > div:first-child,
-#page-checkout > div:first-child { padding-top: 128px !important; }
-@media (max-width: 768px) {
-  .navbar { top: 0; }
-  .hero-left { padding-top: 146px !important; }
-}
-.map-section {
-  background: #141927;
-  padding: 70px 0;
-  font-family: 'DM Sans', sans-serif;
-  direction: ltr;
-}
-.map-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 48px;
-  align-items: center;
-}
-.map-info { display: flex; flex-direction: column; gap: 20px; }
-.map-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(240,50,50,0.12);
-  border: 1px solid rgba(240,50,50,0.35);
-  color: #ff6b6b;
-  padding: 7px 16px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  width: fit-content;
-}
-.map-title {
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.15;
-  margin: 0;
-}
-.map-title span { color: #f03232; }
-.map-details { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
-.map-detail-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-left: 3px solid #f03232;
-}
-.map-detail-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-.map-detail-label {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 2px;
-}
-.map-detail-value { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; }
-.map-detail-value a { color: #ff6b6b; text-decoration: none; }
-.map-frame-wrap {
-  position: relative;
-  border: 2px solid rgba(240,50,50,0.25);
-  overflow: hidden;
-}
-.map-frame-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #c91f1f, #f03232, #ff6b6b);
-  z-index: 2;
-}
-.map-frame-wrap iframe { display: block; width: 100%; height: 480px; border: none; }
-.map-footer {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.map-open-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, #c91f1f, #f03232);
-  color: white;
-  font-size: 0.84rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-.map-open-btn:hover { opacity: 0.88; }
-.map-coords { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
-@media (max-width: 768px) {
-  .map-inner { grid-template-columns: 1fr; gap: 32px; }
-  .map-frame-wrap iframe { height: 320px; }
-  .map-title { font-size: 1.8rem; }
-}
+      html[dir="rtl"] {
+        direction: rtl; /* تحديد اتجاه النص من اليمين لليسار */
+      }
+      html[dir="rtl"] .map-inner {
+        direction: rtl;
+      }
+      html[dir="rtl"] .map-detail-row {
+        border-left: none;
+        border-right: 3px solid #f03232;
+      }
+      html[dir="rtl"] .map-open-btn {
+        direction: rtl;
+      }
+      html[dir="rtl"] .map-title {
+        font-family: "Noto Naskh Arabic", serif;
+      }
+      html[dir="rtl"] .map-badge,
+      html[dir="rtl"] .map-detail-label,
+      html[dir="rtl"] .map-detail-value {
+        font-family: "Tajawal", sans-serif;
+      }
+      .top-bar {
+        background: linear-gradient(135deg, #1a1430, #2a1f5c);
+        border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+        padding: 8px 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+      }
+      .top-bar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .top-bar-text {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.73rem;
+        color: rgba(201, 169, 110, 0.85);
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      html[lang="ar"] .top-bar-text {
+        font-family: "Tajawal", sans-serif;
+        font-style: normal;
+      }
+      .top-bar-text .dot {
+        color: var(--gold);
+      }
+      .top-bar-socials {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .top-bar-social-btn {
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(201, 169, 110, 0.3);
+        border-radius: 6px;
+        background: rgba(201, 169, 110, 0.08);
+        color: rgba(201, 169, 110, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+      .top-bar-social-btn:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+        transform: translateY(-1px);
+      }
+      .top-bar-phone {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .top-bar-phone a {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: rgba(201, 169, 110, 0.75);
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.2s;
+      }
+      .top-bar-phone a:hover {
+        color: var(--gold-light);
+      }
+      .top-bar-phone .sep {
+        width: 1px;
+        height: 12px;
+        background: rgba(201, 169, 110, 0.2);
+      }
+      @media (max-width: 768px) {
+        .top-bar-text {
+          display: none;
+        }
+        .top-bar-phone {
+          display: none;
+        }
+      }
+      .navbar {
+        top: 38px;
+      }
+      .hero-left {
+        padding-top: 186px !important;
+      }
+      #page-products > div:first-child,
+      #page-offers > div:first-child,
+      #page-checkout > div:first-child {
+        padding-top: 128px !important;
+      }
+      @media (max-width: 768px) {
+        .navbar {
+          top: 0;
+        }
+        .hero-left {
+          padding-top: 146px !important;
+        }
+      }
+      .map-section {
+        background: #141927;
+        padding: 70px 0;
+        font-family: "DM Sans", sans-serif;
+        direction: ltr;
+      }
+      .map-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .map-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .map-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(240, 50, 50, 0.12);
+        border: 1px solid rgba(240, 50, 50, 0.35);
+        color: #ff6b6b;
+        padding: 7px 16px;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        width: fit-content;
+      }
+      .map-title {
+        font-family: "Cormorant Garamond", "Georgia", serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.15;
+        margin: 0;
+      }
+      .map-title span {
+        color: #f03232;
+      }
+      .map-details {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 4px;
+      }
+      .map-detail-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-left: 3px solid #f03232;
+      }
+      .map-detail-icon {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .map-detail-label {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.35);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 2px;
+      }
+      .map-detail-value {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+      }
+      .map-detail-value a {
+        color: #ff6b6b;
+        text-decoration: none;
+      }
+      .map-frame-wrap {
+        position: relative;
+        border: 2px solid rgba(240, 50, 50, 0.25);
+        overflow: hidden;
+      }
+      .map-frame-wrap::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #c91f1f, #f03232, #ff6b6b);
+        z-index: 2;
+      }
+      .map-frame-wrap iframe {
+        display: block;
+        width: 100%;
+        height: 480px;
+        border: none;
+      }
+      .map-footer {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .map-open-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        background: linear-gradient(135deg, #c91f1f, #f03232);
+        color: white;
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .map-open-btn:hover {
+        opacity: 0.88;
+      }
+      .map-coords {
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.25);
+      }
+      @media (max-width: 768px) {
+        .map-inner {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .map-frame-wrap iframe {
+          height: 320px;
+        }
+        .map-title {
+          font-size: 1.8rem;
+        }
+      }
       :root {
         --gold: #f03232;
         --gold-light: #ff6b6b;
@@ -1143,7 +1200,6 @@ html[lang="ar"] .top-bar-text {
         align-items: center;
         justify-content: space-between;
         gap: 20px;
-        
       }
       .logo {
         display: flex;
@@ -1710,11 +1766,11 @@ html[lang="ar"] .top-bar-text {
         border-color: var(--gold);
         color: white;
       }
-   .products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
       .product-card {
         background: var(--white);
         overflow: hidden;
@@ -3094,181 +3150,217 @@ html[lang="ar"] .top-bar-text {
           opacity: 1 !important;
         }
       }
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
-  font-weight: 700;
-  line-height: 1.05;
-  color: var(--white);          /* ← "Élégance" أبيض واضح */
-  text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
-  margin-bottom: 22px;
-  animation: fadeLeft 0.8s var(--transition) 0.4s both;
-}
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 5vw, 4.6rem);
+        font-weight: 700;
+        line-height: 1.05;
+        color: var(--white); /* ← "Élégance" أبيض واضح */
+        text-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+        margin-bottom: 22px;
+        animation: fadeLeft 0.8s var(--transition) 0.4s both;
+      }
 
-.hero-title .italic-text {
-  font-style: italic;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.65);  /* ← أبيض شفاف */
-  display: block;
-  font-size: 0.82em;
-}
-/* For the second button: Commander sur WhatsApp */
-.btn-outline {
-  background: transparent;
-  border: 1.5px solid var(--gold);
-  color: var(--gold);
-}
+      .hero-title .italic-text {
+        font-style: italic;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.65); /* ← أبيض شفاف */
+        display: block;
+        font-size: 0.82em;
+      }
+      /* For the second button: Commander sur WhatsApp */
+      .btn-outline {
+        background: transparent;
+        border: 1.5px solid var(--gold);
+        color: var(--gold);
+      }
 
-.btn-outline:hover {
-  background: linear-gradient(135deg, #ffd700, #ffcc00, #ff9900);  /* Yellow gradient */
-  border-color: #ffd700;  /* Border to match hover */
-  color: var(--white);     /* Text color change to white */
-  transform: translateY(-2px);
-}
-.hero-title span {
+      .btn-outline:hover {
+        background: linear-gradient(
+          135deg,
+          #ffd700,
+          #ffcc00,
+          #ff9900
+        ); /* Yellow gradient */
+        border-color: #ffd700; /* Border to match hover */
+        color: var(--white); /* Text color change to white */
+        transform: translateY(-2px);
+      }
+      .hero-title span {
+        color: #7b6700;
+        display: block;
+      }
+      .hero-title .gold-text {
+        background: linear-gradient(
+          135deg,
+          #ffd700,
+          #ffcc00,
+          #ff9900
+        ); /* Yellow gradient */
+        color: transparent;
+        -webkit-background-clip: text; /* Clip the gradient to the text */
+        display: block;
+      }
+      .italic-text {
+        background: linear-gradient(
+          135deg,
+          #ffd700,
+          #ffcc00,
+          #ffee00
+        ); /* Yellow gradient */
+        color: transparent;
+        -webkit-background-clip: text; /* Apply the background gradient to the text */
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8); /* Soft white glow */
+        display: block;
+      }
+      @media (max-width: 1200px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
 
-color: #7b6700;
-  display: block;
-}
-.hero-title .gold-text {
-  background: linear-gradient(135deg, #ffd700, #ffcc00, #ff9900);  /* Yellow gradient */
-  color: transparent;
-  -webkit-background-clip: text;  /* Clip the gradient to the text */
-  display: block;
-}
-.italic-text{
-  background: linear-gradient(135deg, #ffd700, #ffcc00, #ffee00);  /* Yellow gradient */
-  color: transparent;
-  -webkit-background-clip: text;  /* Apply the background gradient to the text */
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);  /* Soft white glow */
-  display: block;
-}
-@media (max-width: 1200px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+      @media (max-width: 768px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 14px;
+        }
+      }
 
-@media (max-width: 768px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-}
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+      }
+      #homeFeaturedGrid {
+        grid-template-columns: repeat(4, 1fr);
+      }
 
-@media (max-width: 480px) {
-  .products-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-}
-#homeFeaturedGrid {
-  grid-template-columns: repeat(4, 1fr);
-}
+      @media (max-width: 768px) {
+        #homeFeaturedGrid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      /* الـ offers grid — 4 كارت جنب بعض */
+      .offers-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: 16px;
+      }
 
-@media (max-width: 768px) {
-  #homeFeaturedGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-/* الـ offers grid — 4 كارت جنب بعض */
-.offers-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 16px;
-}
+      /* إلغاء الـ large span */
+      .offer-card.large {
+        grid-column: span 1;
+        grid-row: span 1;
+        min-height: auto;
+      }
 
-/* إلغاء الـ large span */
-.offer-card.large {
-  grid-column: span 1;
-  grid-row: span 1;
-  min-height: auto;
-}
+      /* border-radius احترافي */
+      .offer-card {
+        border-radius: 16px;
+        overflow: hidden;
+      }
 
-/* border-radius احترافي */
-.offer-card {
-  border-radius: 16px;
-  overflow: hidden;
-}
+      /* responsive */
+      @media (max-width: 1024px) {
+        .offers-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .offer-card.large {
+          grid-column: span 1;
+        }
+      }
 
-/* responsive */
-@media (max-width: 1024px) {
-  .offers-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .offer-card.large {
-    grid-column: span 1;
-  }
-}
+      @media (max-width: 600px) {
+        .offers-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+      }
+      /* Product card colors */
+      .product-card {
+        border: 1px solid transparent;
+      }
 
-@media (max-width: 600px) {
-  .offers-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-}
-/* Product card colors */
-.product-card {
-  border: 1px solid transparent;
-}
+      .product-card:hover {
+        border-color: #d4af37;
+        box-shadow: 0 14px 40px rgba(212, 175, 55, 0.22);
+      }
 
-.product-card:hover {
-  border-color: #d4af37;
-  box-shadow: 0 14px 40px rgba(212, 175, 55, 0.22);
-}
+      .product-card:active {
+        transform: scale(0.97);
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        border-color: #ffd700;
+      }
+      /* اللون العادي للنص */
+      .product-card p {
+        transition: 0.3s ease;
+      }
 
-.product-card:active {
-  transform: scale(0.97);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-  border-color: #ffd700;
-}
-/* اللون العادي للنص */
-.product-card p {
-  transition: 0.3s ease;
-}
-
-/* لما تعمل hover على الكارت كله */
-.product-card:hover p {
-  color: #d4af37; /* ذهبي */
-}
+      /* لما تعمل hover على الكارت كله */
+      .product-card:hover p {
+        color: #d4af37; /* ذهبي */
+      }
     </style>
   </head>
   <body>
     <div class="top-bar" id="topBar">
-  <div class="container top-bar-inner">
-    <div class="top-bar-text">
-      <span class="dot">✦</span>
-      <span data-fr="Livraison disponible dans 20 wilayas." 
-            data-ar="خدمة التوصيل متاحة في 20 ولاية.">
-        Livraison disponible dans 20 wilayas.
-      </span>
+      <div class="container top-bar-inner">
+        <div class="top-bar-text">
+          <span class="dot">✦</span>
+          <span
+            data-fr="Livraison disponible dans 20 wilayas."
+            data-ar="خدمة التوصيل متاحة في 20 ولاية."
+          >
+            Livraison disponible dans 20 wilayas.
+          </span>
+        </div>
+        <div class="top-bar-socials">
+          <a
+            class="top-bar-social-btn"
+            href="https://www.facebook.com/Royalmeublesainoussera"
+            target="_blank"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            class="top-bar-social-btn"
+            href="https://www.instagram.com/royalmeubles.dz"
+            target="_blank"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            class="top-bar-social-btn"
+            href="https://www.tiktok.com/@confort808"
+            target="_blank"
+            aria-label="TikTok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a
+            class="top-bar-social-btn"
+            href="https://wa.me/213775530551"
+            target="_blank"
+            aria-label="WhatsApp"
+          >
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+        <div class="top-bar-phone">
+          <a href="tel:+213775530551">
+            <i class="fas fa-phone" style="font-size: 0.65rem"></i> 0775 530 551
+          </a>
+          <div class="sep"></div>
+          <a href="tel:+213773793322">
+            <i class="fas fa-phone" style="font-size: 0.65rem"></i> 0773 793 322
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="top-bar-socials">
-      <a class="top-bar-social-btn" href="https://www.facebook.com/Royalmeublesainoussera" target="_blank" aria-label="Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a class="top-bar-social-btn" href="https://www.instagram.com/royalmeubles.dz" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a class="top-bar-social-btn" href="https://www.tiktok.com/@confort808" target="_blank" aria-label="TikTok">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <a class="top-bar-social-btn" href="https://wa.me/213775530551" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-    </div>
-    <div class="top-bar-phone">
-      <a href="tel:+213775530551">
-        <i class="fas fa-phone" style="font-size:0.65rem"></i> 0775 530 551
-      </a>
-      <div class="sep"></div>
-      <a href="tel:+213773793322">
-        <i class="fas fa-phone" style="font-size:0.65rem"></i> 0773 793 322
-      </a>
-    </div>
-  </div>
-</div>
     <div class="cart-toast" id="cartToast">
       <span>✓</span> <span id="cartToastMsg">Produit ajouté !</span>
     </div>
@@ -3581,25 +3673,40 @@ color: #7b6700;
             raffinés avec livraison dans toutes les wilayas.
           </p>
           <div class="hero-actions">
-            <a data-ar="عرض المنتجات" data-fr="Voir les produits" href="#" onclick="navigateTo('products')" class="btn btn-gold"
+            <a
+              data-ar="عرض المنتجات"
+              data-fr="Voir les produits"
+              href="#"
+              onclick="navigateTo('products')"
+              class="btn btn-gold"
               >Voir les produits</a
             >
-            <a data-ar="اطلب عبر واتساب" data-fr="Commander sur WhatsApp" href="https://wa.me/213775530551" class="btn btn-outline"
+            <a
+              data-ar="اطلب عبر واتساب"
+              data-fr="Commander sur WhatsApp"
+              href="https://wa.me/213775530551"
+              class="btn btn-outline"
               >Commander sur WhatsApp</a
             >
           </div>
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-num">500+</span
-              ><span  data-ar="عملاء" data-fr="Clients" class="stat-label">Clients</span>
+              ><span data-ar="عملاء" data-fr="Clients" class="stat-label"
+                >Clients</span
+              >
             </div>
             <div class="stat-item">
               <span class="stat-num">20</span
-              ><span  data-ar="ولايات" data-fr="Wilayas" class="stat-label">Wilayas</span>
+              ><span data-ar="ولايات" data-fr="Wilayas" class="stat-label"
+                >Wilayas</span
+              >
             </div>
             <div class="stat-item">
               <span class="stat-num">24h</span
-              ><span  data-ar="دعم" data-fr="Support" class="stat-label">Support</span>
+              ><span data-ar="دعم" data-fr="Support" class="stat-label"
+                >Support</span
+              >
             </div>
           </div>
         </div>
@@ -3718,33 +3825,21 @@ color: #7b6700;
           <div class="categories-grid">
             <div
               class="cat-card reveal reveal-delay-2"
-             onclick="navigateToCategory('commodes')"
+              onclick="navigateToCategory('commodes')"
             >
-              <img
-                class="cat-img"
-                src="images/coffie.webp"
-                alt="Salons"
-              />
+              <img class="cat-img" src="images/coffie.webp" alt="Salons" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="commodes"
-                  data-ar="الممشطات"
-                >
+                <div class="cat-name" data-fr="commodes" data-ar="الممشطات">
                   commodes
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="13 produits"
-                  data-ar="13 منتج"
-                >
+                <div class="cat-count" data-fr="13 produits" data-ar="13 منتج">
                   13 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-               <div
+            <div
               class="cat-card large reveal from-left"
               onclick="navigateToCategory('lits')"
             >
@@ -3755,67 +3850,45 @@ color: #7b6700;
               />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="Lits"
-                  data-ar="اسرة"
-                >
-                  Lits
-                </div>
+                <div class="cat-name" data-fr="Lits" data-ar="اسرة">Lits</div>
                 <div
                   class="cat-count"
                   data-fr="19  produits"
                   data-ar="19  منتج"
                 >
-                  19  produits
+                  19 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-                  <div
+            <div
               class="cat-card reveal reveal-delay-1"
               onclick="navigateToCategory('salon')"
             >
-              <img
-                class="cat-img"
-                src="images/salons.webp"
-                alt="Salons"
-              />
+              <img class="cat-img" src="images/salons.webp" alt="Salons" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
                 <div class="cat-name" data-fr="Salons" data-ar="غرف المعيشة">
                   Salons
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="6 produits"
-                  data-ar="6 منتج"
-                >
+                <div class="cat-count" data-fr="6 produits" data-ar="6 منتج">
                   6 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-            
+
             <div
               class="cat-card reveal reveal-delay-1"
               onclick="navigateToCategory('coiffeuse')"
             >
-              <img
-                class="cat-img"
-                src="images/t1.webp"
-                alt="Coiffeuses"
-              />
+              <img class="cat-img" src="images/t1.webp" alt="Coiffeuses" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
                 <div class="cat-name" data-fr="Coiffeuses" data-ar="الخزائن">
                   Coiffeuses
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="5 produits"
-                  data-ar="5 منتج"
-                >
+                <div class="cat-count" data-fr="5 produits" data-ar="5 منتج">
                   5 produits
                 </div>
               </div>
@@ -3825,25 +3898,13 @@ color: #7b6700;
               class="cat-card reveal reveal-delay-2"
               onclick="navigateToCategory('tables')"
             >
-              <img
-                class="cat-img"
-                src="images/commends.webp"
-                alt="Bureau"
-              />
+              <img class="cat-img" src="images/commends.webp" alt="Bureau" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="Tables"
-                  data-ar="طاولات"
-                >
+                <div class="cat-name" data-fr="Tables" data-ar="طاولات">
                   Tables
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="3 produits"
-                  data-ar="3 منتج"
-                >
+                <div class="cat-count" data-fr="3 produits" data-ar="3 منتج">
                   3 produits
                 </div>
               </div>
@@ -3870,7 +3931,7 @@ color: #7b6700;
                 data-fr="Livraison sécurisée dans  20 wilayas "
                 data-ar="نوصل أثاثك بأمان لجميع الولايات 20"
               >
-                Livraison sécurisée dans  20 wilayas 
+                Livraison sécurisée dans 20 wilayas
               </p>
             </div>
             <div class="feature-item reveal reveal-delay-1">
@@ -4047,92 +4108,124 @@ color: #7b6700;
           </div>
         </div>
       </section>
-<section class="map-section">
-  <div class="map-inner">
-    <div class="map-info">
-      <span class="map-badge" 
-            data-fr="✦ Notre adresse" 
-            data-ar="✦ عنواننا">✦ Notre adresse</span>
-      <h2 class="map-title" 
-          data-fr="Venez nous rendre <span>visite</span>" 
-          data-ar="زورونا <span>عن كثب</span>">
-        Venez nous rendre <span>visite</span>
-      </h2>
-      <div class="map-details">
-        <div class="map-detail-row">
-          <span class="map-detail-icon">📍</span>
-          <div class="map-detail-body">
-            <div class="map-detail-label" 
-                 data-fr="Adresse" 
-                 data-ar="العنوان">Adresse</div>
-            <div class="map-detail-value" 
-                 data-fr="Djelfa" 
-                 data-ar="الجلفة">
-             Djelfa
+      <section class="map-section">
+        <div class="map-inner">
+          <div class="map-info">
+            <span
+              class="map-badge"
+              data-fr="✦ Notre adresse"
+              data-ar="✦ عنواننا"
+              >✦ Notre adresse</span
+            >
+            <h2
+              class="map-title"
+              data-fr="Venez nous rendre <span>visite</span>"
+              data-ar="زورونا <span>عن كثب</span>"
+            >
+              Venez nous rendre <span>visite</span>
+            </h2>
+            <div class="map-details">
+              <div class="map-detail-row">
+                <span class="map-detail-icon">📍</span>
+                <div class="map-detail-body">
+                  <div
+                    class="map-detail-label"
+                    data-fr="Adresse"
+                    data-ar="العنوان"
+                  >
+                    Adresse
+                  </div>
+                  <div
+                    class="map-detail-value"
+                    data-fr="Djelfa"
+                    data-ar="الجلفة"
+                  >
+                    Djelfa
+                  </div>
+                </div>
+              </div>
+              <div class="map-detail-row">
+                <span class="map-detail-icon">📞</span>
+                <div class="map-detail-body">
+                  <div
+                    class="map-detail-label"
+                    data-fr="Téléphone"
+                    data-ar="الهاتف"
+                  >
+                    Téléphone
+                  </div>
+                  <div class="map-detail-value">
+                    <a href="tel:+213775530551">0775 530 551</a> &nbsp;/&nbsp;
+                    <a href="tel:+213773793322">0773 793 322</a>
+                  </div>
+                </div>
+              </div>
+              <div class="map-detail-row">
+                <span class="map-detail-icon">🚚</span>
+                <div class="map-detail-body">
+                  <div
+                    class="map-detail-label"
+                    data-fr="Livraison"
+                    data-ar="التوصيل"
+                  >
+                    Livraison
+                  </div>
+                  <div
+                    class="map-detail-value"
+                    data-fr="Livraison disponible dans 20 wilayas."
+                    data-ar="خدمة التوصيل متاحة في 20 ولاية."
+                  >
+                    Livraison disponible dans 20 wilayas.
+                  </div>
+                </div>
+              </div>
+              <div class="map-detail-row">
+                <span class="map-detail-icon">⏰</span>
+                <div class="map-detail-body">
+                  <div
+                    class="map-detail-label"
+                    data-fr="Horaires"
+                    data-ar="أوقات العمل"
+                  >
+                    Horaires
+                  </div>
+                  <div
+                    class="map-detail-value"
+                    data-fr="Tous les jours — 08h à 20h"
+                    data-ar="كل الأيام — من 08:00 إلى 20:00"
+                  >
+                    Tous les jours — 08h à 20h
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="map-detail-row">
-          <span class="map-detail-icon">📞</span>
-          <div class="map-detail-body">
-            <div class="map-detail-label" 
-                 data-fr="Téléphone" 
-                 data-ar="الهاتف">Téléphone</div>
-            <div class="map-detail-value">
-              <a href="tel:+213775530551">0775 530 551</a> &nbsp;/&nbsp;
-              <a href="tel:+213773793322">0773 793 322</a>
-            </div>
-          </div>
-        </div>
-        <div class="map-detail-row">
-          <span class="map-detail-icon">🚚</span>
-          <div class="map-detail-body">
-            <div class="map-detail-label" 
-                 data-fr="Livraison" 
-                 data-ar="التوصيل">Livraison</div>
-            <div class="map-detail-value" 
-                 data-fr="Livraison disponible dans 20 wilayas." 
-                 data-ar="خدمة التوصيل متاحة في 20 ولاية.">
-              Livraison disponible dans 20 wilayas.
-            </div>
-          </div>
-        </div>
-        <div class="map-detail-row">
-          <span class="map-detail-icon">⏰</span>
-          <div class="map-detail-body">
-            <div class="map-detail-label" 
-                 data-fr="Horaires" 
-                 data-ar="أوقات العمل">Horaires</div>
-            <div class="map-detail-value" 
-                 data-fr="Tous les jours — 08h à 20h" 
-                 data-ar="كل الأيام — من 08:00 إلى 20:00">
-              Tous les jours — 08h à 20h
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div>
-      <div class="map-frame-wrap">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2704.561525154732!2d3.2448829999999997!3d34.670768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1289cf4d7e07c033%3A0xa5f1bf4b6491d0b1!2sROYAL%20MEUBLES%20DJELFA!5e1!3m2!1sen!2seg!4v1777909754546!5m2!1sen!2seg"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-      <div class="map-footer">
-        <a class="map-open-btn" 
-           href="https://maps.google.com/?q=ROYAL+MEUBLES+DJELFA" 
-           target="_blank"
-           data-fr="Ouvrir dans Google Maps →"
-           data-ar="← فتح في خرائط Google">
-          Ouvrir dans Google Maps →
-        </a>
-        <span class="map-coords">34.6708° N, 3.2449° E</span>
-      </div>
-    </div>
-  </div>
-</section>
+          <div>
+            <div class="map-frame-wrap">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2704.561525154732!2d3.2448829999999997!3d34.670768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1289cf4d7e07c033%3A0xa5f1bf4b6491d0b1!2sROYAL%20MEUBLES%20DJELFA!5e1!3m2!1sen!2seg!4v1777909754546!5m2!1sen!2seg"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              >
+              </iframe>
+            </div>
+            <div class="map-footer">
+              <a
+                class="map-open-btn"
+                href="https://maps.google.com/?q=ROYAL+MEUBLES+DJELFA"
+                target="_blank"
+                data-fr="Ouvrir dans Google Maps →"
+                data-ar="← فتح في خرائط Google"
+              >
+                Ouvrir dans Google Maps →
+              </a>
+              <span class="map-coords">34.6708° N, 3.2449° E</span>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="cta-section">
         <video
           class="cta-video-bg"
@@ -4276,8 +4369,14 @@ color: #7b6700;
             >
               Tables
             </button>
- 
-
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'matelas')"
+              data-fr="MATELAS"
+              data-ar="المراتب"
+            >
+              MATELAS
+            </button>
           </div>
           <div class="products-grid" id="productsGrid"></div>
         </div>
@@ -4291,15 +4390,18 @@ color: #7b6700;
         <div class="container">
           <div class="offers-header reveal">
             <a
-               href="#"
-  onclick="navigateTo('offers'); return false;"
-  class="section-label"
-  style="cursor:pointer; text-decoration:none;"
-  data-fr="Catalogue complet"
-  data-ar="المعرض الكامل"
->
-  Catalogue complet
-</a>
+              href="#"
+              onclick="
+                navigateTo('offers');
+                return false;
+              "
+              class="section-label"
+              style="cursor: pointer; text-decoration: none"
+              data-fr="Catalogue complet"
+              data-ar="المعرض الكامل"
+            >
+              Catalogue complet
+            </a>
             <h2
               class="section-title"
               data-fr="Shop <span>exceptionnelles</span>"
@@ -4316,36 +4418,24 @@ color: #7b6700;
               Profitez des meilleurs prix sur nos produits sélectionnés
             </p>
           </div>
-        <div class="categories-grid">
+          <div class="categories-grid">
             <div
               class="cat-card reveal reveal-delay-2"
-             onclick="navigateToCategory('commodes')"
+              onclick="navigateToCategory('commodes')"
             >
-              <img
-                class="cat-img"
-                src="images/coffie.webp"
-                alt="Salons"
-              />
+              <img class="cat-img" src="images/coffie.webp" alt="Salons" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="commodes"
-                  data-ar="الممشطات"
-                >
+                <div class="cat-name" data-fr="commodes" data-ar="الممشطات">
                   commodes
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="13 produits"
-                  data-ar="13 منتج"
-                >
+                <div class="cat-count" data-fr="13 produits" data-ar="13 منتج">
                   13 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-               <div
+            <div
               class="cat-card large reveal from-left"
               onclick="navigateToCategory('lits')"
             >
@@ -4356,67 +4446,45 @@ color: #7b6700;
               />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="Lits"
-                  data-ar="اسرة"
-                >
-                  Lits
-                </div>
+                <div class="cat-name" data-fr="Lits" data-ar="اسرة">Lits</div>
                 <div
                   class="cat-count"
                   data-fr="19  produits"
                   data-ar="19  منتج"
                 >
-                  19  produits
+                  19 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-                  <div
+            <div
               class="cat-card reveal reveal-delay-1"
               onclick="navigateToCategory('salon')"
             >
-              <img
-                class="cat-img"
-                src="images/salons.webp"
-                alt="Salons"
-              />
+              <img class="cat-img" src="images/salons.webp" alt="Salons" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
                 <div class="cat-name" data-fr="Salons" data-ar="غرف المعيشة">
                   Salons
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="6 produits"
-                  data-ar="6 منتج"
-                >
+                <div class="cat-count" data-fr="6 produits" data-ar="6 منتج">
                   6 produits
                 </div>
               </div>
               <div class="cat-arrow">→</div>
             </div>
-            
+
             <div
               class="cat-card reveal reveal-delay-1"
               onclick="navigateToCategory('coiffeuse')"
             >
-              <img
-                class="cat-img"
-                src="images/t1.webp"
-                alt="Coiffeuses"
-              />
+              <img class="cat-img" src="images/t1.webp" alt="Coiffeuses" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
                 <div class="cat-name" data-fr="Coiffeuses" data-ar="الخزائن">
                   Coiffeuses
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="5 produits"
-                  data-ar="5 منتج"
-                >
+                <div class="cat-count" data-fr="5 produits" data-ar="5 منتج">
                   5 produits
                 </div>
               </div>
@@ -4426,25 +4494,13 @@ color: #7b6700;
               class="cat-card reveal reveal-delay-2"
               onclick="navigateToCategory('tables')"
             >
-              <img
-                class="cat-img"
-                src="images/commends.webp"
-                alt="Bureau"
-              />
+              <img class="cat-img" src="images/commends.webp" alt="Bureau" />
               <div class="cat-card-overlay"></div>
               <div class="cat-card-content">
-                <div
-                  class="cat-name"
-                  data-fr="Tables"
-                  data-ar="طاولات"
-                >
+                <div class="cat-name" data-fr="Tables" data-ar="طاولات">
                   Tables
                 </div>
-                <div
-                  class="cat-count"
-                  data-fr="3 produits"
-                  data-ar="3 منتج"
-                >
+                <div class="cat-count" data-fr="3 produits" data-ar="3 منتج">
                   3 produits
                 </div>
               </div>
@@ -4536,33 +4592,37 @@ color: #7b6700;
                 ><span>*</span>
                 <span data-fr="Wilaya" data-ar="الولاية">Wilaya</span></label
               >
-             <select class="form-select" id="chk_wilaya">
-    <option value="" data-fr="-- Choisir une wilaya --" data-ar="-- اختر الولاية --">
-        -- Choisir une wilaya --
-    </option>
-    <option value="01">01 - Adrar</option>
-    <option value="02">02 - Chlef</option>
-    <option value="03">03 - Laghouat</option>
-    <option value="04">04 - Oum El Bouaghi</option>
-    <option value="05">05 - Batna</option>
-    <option value="06">06 - Béjaïa</option>
-    <option value="07">07 - Biskra</option>
-    <option value="08">08 - Béchar</option>
-    <option value="09">09 - Blida</option>
-    <option value="10">10 - Bouira</option>
-    <option value="11">11 - Tamanrasset</option>
-    <option value="12">12 - Tébessa</option>
-    <option value="13">13 - Tlemcen</option>
-    <option value="14">14 - Tiaret</option>
-    <option value="15">15 - Tizi Ouzou</option>
-    <option value="16">16 - Alger</option>
-    <option value="17">17 - Djelfa</option>
-    <option value="18">18 - Jijel</option>
-    <option value="19">19 - Sétif</option>
-    <option value="20">20 - Saïda</option>
-</select>
+              <select class="form-select" id="chk_wilaya">
+                <option
+                  value=""
+                  data-fr="-- Choisir une wilaya --"
+                  data-ar="-- اختر الولاية --"
+                >
+                  -- Choisir une wilaya --
+                </option>
+                <option value="01">01 - Adrar</option>
+                <option value="02">02 - Chlef</option>
+                <option value="03">03 - Laghouat</option>
+                <option value="04">04 - Oum El Bouaghi</option>
+                <option value="05">05 - Batna</option>
+                <option value="06">06 - Béjaïa</option>
+                <option value="07">07 - Biskra</option>
+                <option value="08">08 - Béchar</option>
+                <option value="09">09 - Blida</option>
+                <option value="10">10 - Bouira</option>
+                <option value="11">11 - Tamanrasset</option>
+                <option value="12">12 - Tébessa</option>
+                <option value="13">13 - Tlemcen</option>
+                <option value="14">14 - Tiaret</option>
+                <option value="15">15 - Tizi Ouzou</option>
+                <option value="16">16 - Alger</option>
+                <option value="17">17 - Djelfa</option>
+                <option value="18">18 - Jijel</option>
+                <option value="19">19 - Sétif</option>
+                <option value="20">20 - Saïda</option>
+              </select>
 
-<p>سعر التوصيل: <span id="deliveryPrice">0 DA</span></p>
+              <p>سعر التوصيل: <span id="deliveryPrice">0 DA</span></p>
             </div>
             <div class="form-row">
               <label class="form-label"
@@ -4635,106 +4695,199 @@ color: #7b6700;
     </div>
 
     <!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo-main">
-          <img src="images/logo2.webp" alt="" />
-        </a>
-        <p class="footer-desc" data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas ." data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر.">
-          Nous proposons les meubles d'intérieur et de bureau les plus raffinés.
-        </p>
-       <div class="footer-socials">
-  <!-- Facebook -->
-  <a class="social-btn" href="https://www.facebook.com/Royalmeublesainoussera" target="_blank">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <!-- WhatsApp -->
-  <a class="social-btn" href="https://wa.me/213775530551">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <!-- Instagram -->
-  <a class="social-btn" href="https://www.instagram.com/royalmeubles.dz" target="_blank">
-    <i class="fab fa-instagram"></i>
-  </a>
-  <!-- TikTok -->
-  <a class="social-btn" href="https://www.tiktok.com/@royal.meubles.dz" target="_blank">
-    <i class="fab fa-tiktok"></i>
-  </a>
-</div>
-      </div>
-
-      <!-- إضافة أرقام الهاتف تحت في الفوتر -->
-      <div class="footer-col">
-        <h4 data-fr="Nous Contacter" data-ar="اتصل بنا">Nous Contacter</h4>
-        <ul>
-          <li>
-            <a href="tel:+213775530551" data-fr="Appelez-nous : 0775530551" data-ar="اتصل بنا: 0775530551">
-              0775530551
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="#" class="logo-main">
+              <img src="images/logo2.webp" alt="" />
             </a>
-          </li>
-          <li>
-            <a href="tel:+213773793322" data-fr="Appelez-nous : 0773793322" data-ar="اتصل بنا: 0773793322">
-              0773793322
-            </a>
-          </li>
-             <li>
-      <a href="mailto:slimane4717@gmail.com" data-fr="Email : slimane4717@gmail.com" data-ar="البريد الإلكتروني: slimane4717@gmail.com">
-        slimane4717@gmail.com
-      </a>
-    </li>
-        </ul>
-      </div>
+            <p
+              class="footer-desc"
+              data-fr="Nous proposons les meubles d'intérieur et de bureau les plus raffinés, avec une qualité garantie et une livraison dans toutes les wilayas ."
+              data-ar="نقدم أرقى قطع الأثاث المنزلي والمكتبي بجودة مضمونة وتوصيل لجميع ولايات الجزائر."
+            >
+              Nous proposons les meubles d'intérieur et de bureau les plus
+              raffinés.
+            </p>
+            <div class="footer-socials">
+              <!-- Facebook -->
+              <a
+                class="social-btn"
+                href="https://www.facebook.com/Royalmeublesainoussera"
+                target="_blank"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <!-- WhatsApp -->
+              <a class="social-btn" href="https://wa.me/213775530551">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <!-- Instagram -->
+              <a
+                class="social-btn"
+                href="https://www.instagram.com/royalmeubles.dz"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <!-- TikTok -->
+              <a
+                class="social-btn"
+                href="https://www.tiktok.com/@royal.meubles.dz"
+                target="_blank"
+              >
+                <i class="fab fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
 
-      <div class="footer-col">
-        <h4 data-fr="Navigation" data-ar="الصفحات">Navigation</h4>
-        <ul>
-          <li>
-            <a href="#" onclick="navigateTo('home')" data-fr="Home" data-ar="الرئيسية">Home</a>
-          </li>
-          <li>
-            <a href="#" onclick="navigateTo('products')" data-fr="Cathégories" data-ar="التصنيفات">Cathégories</a>
-          </li>
-          <li>
-            <a href="#" onclick="navigateTo('offers')" data-fr="Shop" data-ar="العروض">Shop</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4 data-fr="Catégories" data-ar="الأقسام">Catégories</h4>
-        <ul>
-          <li>
-            <a href="#" onclick="navigateToCategory('lits')" data-fr="Lits" data-ar="الاسرة">Lits</a>
-          </li>
-          <li>
-            <a href="#" onclick="navigateToCategory('salon')" data-fr="Salons" data-ar="غرف المعيشة">Salons</a>
-          </li>
-      
-          <li>
-            <a href="#" onclick="navigateToCategory('coiffeuse')" data-fr="Coiffeuses" data-ar="الخزائن">Coiffeuses</a>
-          </li>
-          <li>
-            <a href="#" onclick="navigateToCategory('commodes')" data-fr="commodes" data-ar="الممشطات">commodes</a>
-          </li>
+          <!-- إضافة أرقام الهاتف تحت في الفوتر -->
+          <div class="footer-col">
+            <h4 data-fr="Nous Contacter" data-ar="اتصل بنا">Nous Contacter</h4>
+            <ul>
               <li>
-            <a href="#" onclick="navigateToCategory('tables')" data-fr="Tables" data-ar="طاولات">Tables</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+                <a
+                  href="tel:+213775530551"
+                  data-fr="Appelez-nous : 0775530551"
+                  data-ar="اتصل بنا: 0775530551"
+                >
+                  0775530551
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+213773793322"
+                  data-fr="Appelez-nous : 0773793322"
+                  data-ar="اتصل بنا: 0773793322"
+                >
+                  0773793322
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:slimane4717@gmail.com"
+                  data-fr="Email : slimane4717@gmail.com"
+                  data-ar="البريد الإلكتروني: slimane4717@gmail.com"
+                >
+                  slimane4717@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
 
-    <div class="footer-bottom">
-      <span data-fr="© 2025 Royal Meubles — Tous droits réservés" data-ar="© 2025 روائع الأثاث — جميع الحقوق محفوظة">
-        © 2025 Royal Meubles — Tous droits réservés
-      </span>
-      <span data-fr="Fait avec ♥ en Algérie 🇩🇿" data-ar="صُنع بـ ♥ في الجزائر 🇩🇿">
-        Fait avec ♥ en Algérie 🇩🇿
-      </span>
-    </div>
-  </div>
-</footer>
+          <div class="footer-col">
+            <h4 data-fr="Navigation" data-ar="الصفحات">Navigation</h4>
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateTo('home')"
+                  data-fr="Home"
+                  data-ar="الرئيسية"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateTo('products')"
+                  data-fr="Cathégories"
+                  data-ar="التصنيفات"
+                  >Cathégories</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateTo('offers')"
+                  data-fr="Shop"
+                  data-ar="العروض"
+                  >Shop</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4 data-fr="Catégories" data-ar="الأقسام">Catégories</h4>
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('lits')"
+                  data-fr="Lits"
+                  data-ar="الاسرة"
+                  >Lits</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('salon')"
+                  data-fr="Salons"
+                  data-ar="غرف المعيشة"
+                  >Salons</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('coiffeuse')"
+                  data-fr="Coiffeuses"
+                  data-ar="الخزائن"
+                  >Coiffeuses</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('commodes')"
+                  data-fr="commodes"
+                  data-ar="الممشطات"
+                  >commodes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('tables')"
+                  data-fr="Tables"
+                  data-ar="طاولات"
+                  >Tables</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('matelas')"
+                  data-fr="MATELAS"
+                  data-ar="المراتب"
+                >
+                  MATELAS
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span
+            data-fr="© 2025 Royal Meubles — Tous droits réservés"
+            data-ar="© 2025 روائع الأثاث — جميع الحقوق محفوظة"
+          >
+            © 2025 Royal Meubles — Tous droits réservés
+          </span>
+          <span
+            data-fr="Fait avec ♥ en Algérie 🇩🇿"
+            data-ar="صُنع بـ ♥ في الجزائر 🇩🇿"
+          >
+            Fait avec ♥ en Algérie 🇩🇿
+          </span>
+        </div>
+      </div>
+    </footer>
 
     <div class="whatsapp-float">
       <span
@@ -5173,8 +5326,8 @@ color: #7b6700;
           window.scrollTo({ top: 0, behavior: "smooth" });
           savePage(page);
           setTimeout(initObserver, 100);
-         if (page === "products") renderProducts(currentFilter);
-if (page === "offers") renderProducts(currentFilter); 
+          if (page === "products") renderProducts(currentFilter);
+          if (page === "offers") renderProducts(currentFilter);
           if (page === "checkout") renderCheckoutSummary();
         }
       }
@@ -5439,7 +5592,7 @@ if (page === "offers") renderProducts(currentFilter);
         {
           id: 10,
           cat: "salon",
-          img:"images/salon-1.webp",
+          img: "images/salon-1.webp",
           fr: {
             catName: "Salons",
             name: "Salon complet 7 places",
@@ -5644,7 +5797,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             "images/lit-nouva-2.webp",
             "images/lit-nouva-3.webp",
           ],
-       
+
           fr: {
             catName: "Lits",
             name: "Lit Piano avec éclairage LED intégré ",
@@ -5654,7 +5807,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             oldPrice: null,
             badge: "badge-best",
             badgeText: "Coffre",
-               sizes:[
+            sizes: [
               { label: "160 x 190 cm", price: "98,000 DA" },
               { label: " 180 x 200 cm", price: "115,000 DA" },
             ],
@@ -5668,7 +5821,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             oldPrice: null,
             badge: "badge-best",
             badgeText: "تخزين",
-               sizes:[
+            sizes: [
               { label: "160 x 190 سم", price: "98,000 دج" },
               { label: " 180 x 200 سم", price: "115,000 دج" },
             ],
@@ -5842,49 +5995,49 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
           },
           rating: "★★★★★",
         },
-       {
-  id: 26,
-  cat: "lits",
-  img: "images/lit-bois-rouge-1.webp",
-  imgs: [
-    "images/lit-bois-rouge-1.webp",
-    "images/lit-bois-rouge-2.webp",
-    "images/lit-bois-rouge-3.webp",
-    "images/lit-bois-rouge-4.webp",
-    "images/lit-bois-rouge-5.webp",
-    "images/lit-bois-rouge-6.webp",
-  ],
+        {
+          id: 26,
+          cat: "lits",
+          img: "images/lit-bois-rouge-1.webp",
+          imgs: [
+            "images/lit-bois-rouge-1.webp",
+            "images/lit-bois-rouge-2.webp",
+            "images/lit-bois-rouge-3.webp",
+            "images/lit-bois-rouge-4.webp",
+            "images/lit-bois-rouge-5.webp",
+            "images/lit-bois-rouge-6.webp",
+          ],
 
-  fr: {
-    catName: "Lits",
-    name: "Lit Nouva",
-    desc: "Lit Nouva avec structure intérieure en bois rouge, solide et durable. Tissu anti-taches avec possibilité de choisir les couleurs selon votre goût.",
-    price: "145 000 DA / 155 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander Lit Nouva",
-    sizes: [
-      { label: "Lit 1,80 x 2,00 m", price: "155 000 DA" },
-      { label: "Lit 1,60 x 1,90 m", price: "145 000 DA" },
-    ],
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير نوڤا",
-    desc: "سرير نوڤا بهيكل داخلي من الخشب الأحمر، قوي ومتين. قماش مضاد للبقع مع إمكانية اختيار الألوان حسب ذوقك.",
-    price: "145,000 / 155,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب سرير نوڤا",
-    sizes: [
-      { label: "سرير 1.80 × 2.00 م", price: "155,000 دج" },
-      { label: "سرير 1.60 × 1.90 م", price: "145,000 دج" },
-    ],
-  },
-  rating: "★★★★★",
-},
+          fr: {
+            catName: "Lits",
+            name: "Lit Nouva",
+            desc: "Lit Nouva avec structure intérieure en bois rouge, solide et durable. Tissu anti-taches avec possibilité de choisir les couleurs selon votre goût.",
+            price: "145 000 DA / 155 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Lit Nouva",
+            sizes: [
+              { label: "Lit 1,80 x 2,00 m", price: "155 000 DA" },
+              { label: "Lit 1,60 x 1,90 m", price: "145 000 DA" },
+            ],
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير نوڤا",
+            desc: "سرير نوڤا بهيكل داخلي من الخشب الأحمر، قوي ومتين. قماش مضاد للبقع مع إمكانية اختيار الألوان حسب ذوقك.",
+            price: "145,000 / 155,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب سرير نوڤا",
+            sizes: [
+              { label: "سرير 1.80 × 2.00 م", price: "155,000 دج" },
+              { label: "سرير 1.60 × 1.90 م", price: "145,000 دج" },
+            ],
+          },
+          rating: "★★★★★",
+        },
         {
           id: 27,
           cat: "lits",
@@ -5904,10 +6057,10 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             badge: "badge-best",
             badgeText: "Coffre",
             wa: "Commander Lit coffre",
-              sizes: [
-        { label: "160 × 190 cm", price: "69,000 DA" },
-      { label: "180 × 200 cm", price: "78,000 DA" },
-    ],
+            sizes: [
+              { label: "160 × 190 cm", price: "69,000 DA" },
+              { label: "180 × 200 cm", price: "78,000 DA" },
+            ],
           },
           ar: {
             catName: "الأسرّة",
@@ -5918,10 +6071,10 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             badge: "badge-best",
             badgeText: "تخزين",
             wa: "طلب Lit coffre",
-              sizes: [
-      { label: "160 × 190 سم", price: "69,000 دج" },
-      { label: "180 × 200 سم", price: "78,000 دج" },
-    ],
+            sizes: [
+              { label: "160 × 190 سم", price: "69,000 دج" },
+              { label: "180 × 200 سم", price: "78,000 دج" },
+            ],
           },
           rating: "★★★★★",
         },
@@ -6083,539 +6236,587 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
           rating: "★★★★★",
         },
         {
-  id: 33,
-  cat: "lits",
-  img: "images/nova-terra-1.webp",
+          id: 33,
+          cat: "lits",
+          img: "images/nova-terra-1.webp",
 
-  fr: {
-    catName: "Lits",
-    name: "Lit modèle NOVA Terra",
-    desc: "Lit modèle NOVA Terra avec coffre 1.20 x 1.90 m. Structure intérieure en bois rouge, tissu anti-taches avec possibilité de changer les couleurs.",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander Lit modèle NOVA Terra",
+          fr: {
+            catName: "Lits",
+            name: "Lit modèle NOVA Terra",
+            desc: "Lit modèle NOVA Terra avec coffre 1.20 x 1.90 m. Structure intérieure en bois rouge, tissu anti-taches avec possibilité de changer les couleurs.",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Lit modèle NOVA Terra",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير NOVA Terra",
+            desc: "سرير NOVA Terra بصندوق تخزين مقاس 1.20 × 1.90 م. هيكل داخلي من الخشب الأحمر، وقماش مضاد للبقع مع إمكانية تغيير الألوان.",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب سرير NOVA Terra",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 34,
+          cat: "lits",
+          img: "images/dama-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit modèle DAMA",
+            desc: "Lit modèle DAMA avec coffre 1.20 x 1.90 m. Structure intérieure en bois rouge, tissu anti-taches avec possibilité de changer les couleurs.",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Lit modèle DAMA",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير DAMA",
+            desc: "سرير DAMA بصندوق تخزين مقاس 1.20 × 1.90 م. هيكل داخلي من الخشب الأحمر، وقماش مضاد للبقع مع إمكانية تغيير الألوان.",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب سرير DAMA",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 35,
+          cat: "tables",
+          img: "images/table-chevet-3t-1.webp",
 
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير NOVA Terra",
-    desc: "سرير NOVA Terra بصندوق تخزين مقاس 1.20 × 1.90 م. هيكل داخلي من الخشب الأحمر، وقماش مضاد للبقع مع إمكانية تغيير الألوان.",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب سرير NOVA Terra",
+          fr: {
+            catName: "Tables",
+            name: "T.D 3T",
+            desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de trois tiroirs spacieux. Les poignées rondes en finition dorée apportent une touche de luxe et de raffinement.",
+            price: "22 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander T.D 3T",
+          },
+          ar: {
+            catName: "الطاولات",
+            name: "T.D 3T",
+            desc: "طاولة جانبية أنيقة بتصميم مودرن ولون أبيض مائل للكريمي، مزودة بثلاثة أدراج واسعة للتخزين العملي، مع مقابض دائرية ذهبية تضيف لمسة فاخرة.",
+            price: "22,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب T.D 3T",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 36,
+          cat: "tables",
+          img: "images/table-chevet-3t-2-1.webp",
 
-  },
-  rating: "★★★★★",
-},
-{
-  id: 34,
-  cat: "lits",
-  img: "images/dama-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit modèle DAMA",
-    desc: "Lit modèle DAMA avec coffre 1.20 x 1.90 m. Structure intérieure en bois rouge, tissu anti-taches avec possibilité de changer les couleurs.",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander Lit modèle DAMA",
+          fr: {
+            catName: "Tables",
+            name: "T.D 3T",
+            desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de trois tiroirs spacieux pour un rangement pratique. Style chic et minimaliste idéal à côté du lit.",
+            price: "22 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander T.D 3T",
+          },
+          ar: {
+            catName: "الطاولات",
+            name: "T.D 3T",
+            desc: "طاولة سرير أنيقة بتصميم عصري ولون أبيض مائل للكريمي، تحتوي على ثلاثة أدراج واسعة وعملية، وتكمل ديكور غرفة النوم بشكل شيك وبسيط.",
+            price: "22,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب T.D 3T",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 37,
+          cat: "tables",
+          img: "images/table-chevet-2t-sp-1.webp",
 
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير DAMA",
-    desc: "سرير DAMA بصندوق تخزين مقاس 1.20 × 1.90 م. هيكل داخلي من الخشب الأحمر، وقماش مضاد للبقع مع إمكانية تغيير الألوان.",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب سرير DAMA",
+          fr: {
+            catName: "Tables",
+            name: "T.D 2T SP",
+            desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de deux tiroirs spacieux pour un rangement pratique. Les poignées rondes en finition dorée ajoutent une touche de luxe.",
+            price: "16 500 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander T.D 2T SP",
+          },
+          ar: {
+            catName: "الطاولات",
+            name: "T.D 2T SP",
+            desc: "طاولة جانبية أنيقة بتصميم مودرن ولون أبيض مائل للكريمي، مزودة بدرجين واسعين للتخزين العملي، مع مقابض دائرية ذهبية تضيف لمسة فاخرة.",
+            price: "16,500 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب T.D 2T SP",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 38,
+          cat: "coiffeuse",
+          img: "images/coiffeuse-1.webp",
+          fr: {
+            catName: "Coiffeuses",
+            name: "Coiffeuse MDF",
+            desc: "Coiffeuse moderne au design élégant avec plusieurs tiroirs pratiques. Structure en MDF avec miroir rond pour une touche raffinée.",
+            price: "75 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "MDF",
+            wa: "Commander Coiffeuse MDF",
+          },
+          ar: {
+            catName: "التسريحات",
+            name: "تسريحة MDF",
+            desc: "تسريحة مودرن بتصميم أنيق تحتوي على عدة أدراج للتخزين، مصنوعة من MDF مع مرآة دائرية تضيف لمسة فخامة.",
+            price: "75,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "MDF",
+            wa: "طلب تسريحة MDF",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 39,
+          cat: "coiffeuse",
+          img: "images/coiffeuse-2.webp",
+          fr: {
+            catName: "Coiffeuses",
+            name: "Coiffeuse High Gloss",
+            desc: "Coiffeuse moderne finition High Gloss brillante avec tiroirs spacieux et miroir rond élégant.",
+            price: "58 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Gloss",
+            wa: "Commander Coiffeuse High Gloss",
+          },
+          ar: {
+            catName: "التسريحات",
+            name: "تسريحة هاي جلوس",
+            desc: "تسريحة مودرن بلمعة High Gloss مع أدراج واسعة ومرآة دائرية أنيقة.",
+            price: "58,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Gloss",
+            wa: "طلب تسريحة High Gloss",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 40,
+          cat: "coiffeuse",
+          img: "images/coiffeuse-3.webp",
+          fr: {
+            catName: "Coiffeuses",
+            name: "Coiffeuse MDF",
+            desc: "Design minimaliste en MDF avec rangement pratique et miroir rond élégant.",
+            price: "45 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander Coiffeuse MDF",
+          },
+          ar: {
+            catName: "التسريحات",
+            name: "تسريحة MDF",
+            desc: "تصميم بسيط وعصري من MDF مع مساحة تخزين عملية ومرآة دائرية.",
+            price: "45,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب تسريحة MDF",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 41,
+          cat: "coiffeuse",
+          img: "images/coiffeuse-4.webp",
+          fr: {
+            catName: "Coiffeuses",
+            name: "Coiffeuse High Gloss",
+            desc: "Coiffeuse moderne بلمعة عالية High Gloss مع تصميم أنيق وخطوط نظيفة.",
+            price: "68 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Gloss",
+            wa: "Commander Coiffeuse High Gloss",
+          },
+          ar: {
+            catName: "التسريحات",
+            name: "تسريحة هاي جلوس",
+            desc: "تسريحة عصرية بلمعة High Gloss وتصميم أنيق يناسب غرف النوم الحديثة.",
+            price: "68,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Gloss",
+            wa: "طلب تسريحة High Gloss",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 42,
+          cat: "coiffeuse",
+          img: "images/coiffeuse-5.webp",
+          fr: {
+            catName: "Coiffeuses",
+            name: "Coiffeuse High Gloss",
+            desc: "Coiffeuse chic avec finition brillante High Gloss, idéale pour une chambre moderne.",
+            price: "58 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander Coiffeuse High Gloss",
+          },
+          ar: {
+            catName: "التسريحات",
+            name: "تسريحة هاي جلوس",
+            desc: "تسريحة شيك بلمعة High Gloss مناسبة للغرف العصرية.",
+            price: "58,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب تسريحة High Gloss",
+          },
+          rating: "★★★★★",
+        },
 
-  },
-  rating: "★★★★★",
-},
-{
-  id: 35,
-  cat: "tables",
-  img: "images/table-chevet-3t-1.webp",
+        {
+          id: 46,
+          cat: "lits",
+          img: "images/lit-arc-1.webp",
+          imgs: ["images/lit-arc-1.webp", "images/lit-arc-2.webp"],
 
-  fr: {
-    catName: "Tables",
-    name: "T.D 3T",
-    desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de trois tiroirs spacieux. Les poignées rondes en finition dorée apportent une touche de luxe et de raffinement.",
-    price: "22 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander T.D 3T",
-  },
-  ar: {
-    catName: "الطاولات",
-    name: "T.D 3T",
-    desc: "طاولة جانبية أنيقة بتصميم مودرن ولون أبيض مائل للكريمي، مزودة بثلاثة أدراج واسعة للتخزين العملي، مع مقابض دائرية ذهبية تضيف لمسة فاخرة.",
-    price: "22,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب T.D 3T",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 36,
-  cat: "tables",
-  img: "images/table-chevet-3t-2-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit d’arc",
+            desc: "Lit d’arc avec structure intérieure en bois rouge, tissu anti-taches avec possibilité de choisir les couleurs.",
+            price: "45 000 DA / 55 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Lit d’arc",
+            sizes: [
+              { label: "Lit 90 x 1.90 m", price: "45 000 DA" },
+              { label: "Lit 1.20 x 1.90 m", price: "55 000 DA" },
+            ],
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير Arc",
+            desc: "سرير بتصميم أنيق مع هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+            price: "45,000 / 55,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب سرير Arc",
+            sizes: [
+              { label: "90 × 1.90 م", price: "45,000 دج" },
+              { label: "1.20 × 1.90 م", price: "55,000 دج" },
+            ],
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 47,
+          cat: "lits",
+          img: "images/lit-tunisie-1.webp",
+          imgs: ["images/lit-tunisie-1.webp", "images/lit-tunisie-2.webp"],
 
-  fr: {
-    catName: "Tables",
-    name: "T.D 3T",
-    desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de trois tiroirs spacieux pour un rangement pratique. Style chic et minimaliste idéal à côté du lit.",
-    price: "22 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander T.D 3T",
-  },
-  ar: {
-    catName: "الطاولات",
-    name: "T.D 3T",
-    desc: "طاولة سرير أنيقة بتصميم عصري ولون أبيض مائل للكريمي، تحتوي على ثلاثة أدراج واسعة وعملية، وتكمل ديكور غرفة النوم بشكل شيك وبسيط.",
-    price: "22,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب T.D 3T",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 37,
-  cat: "tables",
-  img: "images/table-chevet-2t-sp-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit Tunisie",
+            desc: "Lit Tunisie avec structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
+            price: "69 000 DA / 79 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander Lit Tunisie",
+            sizes: [
+              { label: "Lit 1.60 x 1.90 m", price: "69 000 DA" },
+              { label: "Lit 1.80 x 2.00 m", price: "79 000 DA" },
+            ],
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير تونس",
+            desc: "سرير بتصميم تونسي مع هيكل داخلي من الخشب الأحمر وقماش مقاوم للبقع مع اختيار الألوان.",
+            price: "69,000 / 79,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب سرير تونس",
+            sizes: [
+              { label: "1.60 × 1.90 م", price: "69,000 دج" },
+              { label: "1.80 × 2.00 م", price: "79,000 دج" },
+            ],
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 48,
+          cat: "lits",
+          img: "images/lit-luxe-2.webp",
+          colors: [
+            { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
+            { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" },
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit Luxueux",
+            desc: "Lit luxueux avec coffre, structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
+            price: "75 000 DA / 85 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Coffre",
+            wa: "Commander Lit Luxueux",
+            sizes: [
+              { label: "Lit 1.60 x 1.90 m", price: "75 000 DA" },
+              { label: "Lit 1.80 x 2.00 m", price: "85 000 DA" },
+            ],
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير فاخر",
+            desc: "سرير فاخر بصندوق تخزين، هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+            price: "75,000 / 85,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "بصندوق",
+            wa: "طلب سرير فاخر",
+            sizes: [
+              { label: "1.60 × 1.90 م", price: "75,000 دج" },
+              { label: "1.80 × 2.00 م", price: "85,000 دج" },
+            ],
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 49,
+          cat: "commodes",
+          img: "images/commend.webp",
+          imgs: ["images/commend.webp"],
+          fr: {
+            catName: "commodes",
+            name: "C6T UN",
+            desc: "",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander C6T UN",
+          },
+          ar: {
+            catName: "خزائن الملابس",
+            name: "C6T UN",
+            desc: "",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب C6T UN",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 50,
+          cat: "commodes",
+          img: "images/commend1.webp",
+          imgs: ["images/commend1.webp"],
+          fr: {
+            catName: "commodes",
+            name: "C6T UN",
+            desc: "",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander C6T UN",
+          },
+          ar: {
+            catName: "خزائن الملابس",
+            name: "C6T UN",
+            desc: "",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب C6T UN",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 51,
+          cat: "commodes",
+          img: "images/commend3.webp",
+          imgs: ["images/commend3.webp"],
+          fr: {
+            catName: "commodes",
+            name: "C6T UN",
+            desc: "",
+            price: "49 000 DA",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "Commander C6T UN",
+          },
+          ar: {
+            catName: "خزائن الملابس",
+            name: "C6T UN",
+            desc: "",
+            price: "49,000 دج",
+            oldPrice: null,
+            badge: null,
+            badgeText: null,
+            wa: "طلب C6T UN",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 52,
+          cat: "lits",
+          img: "images/lit-luxueux-new-1.webp",
+          imgs: [
+            "images/lit-luxueux-new-1.webp",
+            "images/lit-luxueux-new-2.webp",
+          ],
+          colors: [
+            { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
+            { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" },
+          ],
+          fr: {
+            catName: "Lits",
+            name: "Lit luxueux",
+            desc: "Lit luxueux avec coffre. Structure intérieure en bois rouge et tissu anti-taches avec possibilité de choisir les couleurs.",
+            price: "75 000 DA / 85 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Coffre",
+            wa: "Commander Lit luxueux",
+            sizes: [
+              { label: "Lit 1,80 x 2,00 m", price: "85 000 DA" },
+              { label: "Lit 1,60 x 1,90 m", price: "75 000 DA" },
+            ],
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير فاخر",
+            desc: "سرير فاخر بصندوق تخزين. هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+            price: "75,000 / 85,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "بصندوق",
+            wa: "طلب سرير فاخر",
+            sizes: [
+              { label: "سرير 1.80 × 2.00 م", price: "85,000 دج" },
+              { label: "سرير 1.60 × 1.90 م", price: "75,000 دج" },
+            ],
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 50,
+          cat: "lits",
+          img: "images/lit-promo-1.webp",
+          fr: {
+            catName: "Lits",
+            name: "Lit en promotion",
+            desc: "Lit avec structure intérieure en bois rouge, tissu anti-taches avec possibilité de choisir les couleurs.",
+            price: "28 000 DA",
+            oldPrice: "32 000 DA",
+            badge: "badge-sale",
+            badgeText: "Promo",
+            wa: "Commander Lit en promotion",
+          },
+          ar: {
+            catName: "الأسرّة",
+            name: "سرير عرض خاص",
+            desc: "سرير بهيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
+            price: "28,000 دج",
+            oldPrice: "32,000 دج",
+            badge: "badge-sale",
+            badgeText: "تخفيض",
+            wa: "طلب سرير عرض خاص",
+          },
+          rating: "★★★★★",
+        },
+        {
+          id: 100,
+          cat: "matelas",
+          img: "images/matelas.webp",
+          imgs: ["images/matelas.webp", "images/metelas1.webp"],
 
-  fr: {
-    catName: "Tables",
-    name: "T.D 2T SP",
-    desc: "Table de chevet élégante au design moderne, couleur blanc cassé, dotée de deux tiroirs spacieux pour un rangement pratique. Les poignées rondes en finition dorée ajoutent une touche de luxe.",
-    price: "16 500 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander T.D 2T SP",
-  },
-  ar: {
-    catName: "الطاولات",
-    name: "T.D 2T SP",
-    desc: "طاولة جانبية أنيقة بتصميم مودرن ولون أبيض مائل للكريمي، مزودة بدرجين واسعين للتخزين العملي، مع مقابض دائرية ذهبية تضيف لمسة فاخرة.",
-    price: "16,500 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب T.D 2T SP",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 38,
-  cat: "coiffeuse",
-  img: "images/coiffeuse-1.webp",
-  fr: {
-    catName: "Coiffeuses",
-    name: "Coiffeuse MDF",
-    desc: "Coiffeuse moderne au design élégant avec plusieurs tiroirs pratiques. Structure en MDF avec miroir rond pour une touche raffinée.",
-    price: "75 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "MDF",
-    wa: "Commander Coiffeuse MDF",
-  },
-  ar: {
-    catName: "التسريحات",
-    name: "تسريحة MDF",
-    desc: "تسريحة مودرن بتصميم أنيق تحتوي على عدة أدراج للتخزين، مصنوعة من MDF مع مرآة دائرية تضيف لمسة فخامة.",
-    price: "75,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "MDF",
-    wa: "طلب تسريحة MDF",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 39,
-  cat: "coiffeuse",
-  img: "images/coiffeuse-2.webp",
-  fr: {
-    catName: "Coiffeuses",
-    name: "Coiffeuse High Gloss",
-    desc: "Coiffeuse moderne finition High Gloss brillante avec tiroirs spacieux et miroir rond élégant.",
-    price: "58 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Gloss",
-    wa: "Commander Coiffeuse High Gloss",
-  },
-  ar: {
-    catName: "التسريحات",
-    name: "تسريحة هاي جلوس",
-    desc: "تسريحة مودرن بلمعة High Gloss مع أدراج واسعة ومرآة دائرية أنيقة.",
-    price: "58,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Gloss",
-    wa: "طلب تسريحة High Gloss",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 40,
-  cat: "coiffeuse",
-  img: "images/coiffeuse-3.webp",
-  fr: {
-    catName: "Coiffeuses",
-    name: "Coiffeuse MDF",
-    desc: "Design minimaliste en MDF avec rangement pratique et miroir rond élégant.",
-    price: "45 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander Coiffeuse MDF",
-  },
-  ar: {
-    catName: "التسريحات",
-    name: "تسريحة MDF",
-    desc: "تصميم بسيط وعصري من MDF مع مساحة تخزين عملية ومرآة دائرية.",
-    price: "45,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب تسريحة MDF",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 41,
-  cat: "coiffeuse",
-  img: "images/coiffeuse-4.webp",
-  fr: {
-    catName: "Coiffeuses",
-    name: "Coiffeuse High Gloss",
-    desc: "Coiffeuse moderne بلمعة عالية High Gloss مع تصميم أنيق وخطوط نظيفة.",
-    price: "68 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Gloss",
-    wa: "Commander Coiffeuse High Gloss",
-  },
-  ar: {
-    catName: "التسريحات",
-    name: "تسريحة هاي جلوس",
-    desc: "تسريحة عصرية بلمعة High Gloss وتصميم أنيق يناسب غرف النوم الحديثة.",
-    price: "68,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Gloss",
-    wa: "طلب تسريحة High Gloss",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 42,
-  cat: "coiffeuse",
-  img: "images/coiffeuse-5.webp",
-  fr: {
-    catName: "Coiffeuses",
-    name: "Coiffeuse High Gloss",
-    desc: "Coiffeuse chic avec finition brillante High Gloss, idéale pour une chambre moderne.",
-    price: "58 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander Coiffeuse High Gloss",
-  },
-  ar: {
-    catName: "التسريحات",
-    name: "تسريحة هاي جلوس",
-    desc: "تسريحة شيك بلمعة High Gloss مناسبة للغرف العصرية.",
-    price: "58,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب تسريحة High Gloss",
-  },
-  rating: "★★★★★",
-},
+          fr: {
+            catName: "MATELAS",
+            name: "Matelas ATLANTIS – Dormivital",
+            desc: `Le confort sur-mesure pour un sommeil réparateur.
 
-{
-  id: 46,
-  cat: "lits",
-  img: "images/lit-arc-1.webp",
-  imgs: [
-    "images/lit-arc-1.webp",
-    "images/lit-arc-2.webp"
-  ],
+• Double Confort : 2 faces au choix (Moelleuse ou Très Ferme).
+• Technologie : Mousse à mémoire de forme Viscotouch pour un accueil personnalisé.
+• Soutien : Base haute densité OrthoBase (36 kg/m³) pour un maintien optimal.
+• Qualité : Tissu certifié Oeko-Tex et fibres hypoallergéniques.
+• Épaisseur : 27 cm.
+• Tailles : Toutes les dimensions sont disponibles.`,
 
-  fr: {
-    catName: "Lits",
-    name: "Lit d’arc",
-    desc: "Lit d’arc avec structure intérieure en bois rouge, tissu anti-taches avec possibilité de choisir les couleurs.",
-    price: "45 000 DA / 55 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Nouveau",
-    wa: "Commander Lit d’arc",
-    sizes: [
-      { label: "Lit 90 x 1.90 m", price: "45 000 DA" },
-      { label: "Lit 1.20 x 1.90 m", price: "55 000 DA" }
-    ]
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير Arc",
-    desc: "سرير بتصميم أنيق مع هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
-    price: "45,000 / 55,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "جديد",
-    wa: "طلب سرير Arc",
-    sizes: [
-      { label: "90 × 1.90 م", price: "45,000 دج" },
-      { label: "1.20 × 1.90 م", price: "55,000 دج" }
-    ]
-  },
-  rating: "★★★★★"
-},
-{
-  id: 47,
-  cat: "lits",
-  img: "images/lit-tunisie-1.webp",
-  imgs: [
-    "images/lit-tunisie-1.webp",
-    "images/lit-tunisie-2.webp"
-  ],
+            price: "À partir de 43 000 DA",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "Nouveau",
+            wa: "Commander Matelas ATLANTIS – Dormivital",
 
-  fr: {
-    catName: "Lits",
-    name: "Lit Tunisie",
-    desc: "Lit Tunisie avec structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
-    price: "69 000 DA / 79 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander Lit Tunisie",
-    sizes: [
-      { label: "Lit 1.60 x 1.90 m", price: "69 000 DA" },
-      { label: "Lit 1.80 x 2.00 m", price: "79 000 DA" }
-    ]
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير تونس",
-    desc: "سرير بتصميم تونسي مع هيكل داخلي من الخشب الأحمر وقماش مقاوم للبقع مع اختيار الألوان.",
-    price: "69,000 / 79,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب سرير تونس",
-    sizes: [
-      { label: "1.60 × 1.90 م", price: "69,000 دج" },
-      { label: "1.80 × 2.00 م", price: "79,000 دج" }
-    ]
-  },
-  rating: "★★★★★"
-},
-{
-  id: 48,
-  cat: "lits",
-  img: "images/lit-luxe-2.webp",
-  colors: [
-    { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
-    { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" }
-  ],
-  fr: {
-    catName: "Lits",
-    name: "Lit Luxueux",
-    desc: "Lit luxueux avec coffre, structure intérieure en bois rouge et tissu anti-taches avec choix des couleurs.",
-    price: "75 000 DA / 85 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Coffre",
-    wa: "Commander Lit Luxueux",
-    sizes: [
-      { label: "Lit 1.60 x 1.90 m", price: "75 000 DA" },
-      { label: "Lit 1.80 x 2.00 m", price: "85 000 DA" }
-    ]
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير فاخر",
-    desc: "سرير فاخر بصندوق تخزين، هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
-    price: "75,000 / 85,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "بصندوق",
-    wa: "طلب سرير فاخر",
-    sizes: [
-      { label: "1.60 × 1.90 م", price: "75,000 دج" },
-      { label: "1.80 × 2.00 م", price: "85,000 دج" }
-    ]
-  },
-  rating: "★★★★★"
-},
-{
-  id: 49,
-  cat: "commodes",
-  img: "images/commend.webp",
-  imgs: ["images/commend.webp"],
-  fr: {
-    catName: "commodes",
-    name: "C6T UN",
-    desc: "",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander C6T UN",
-  },
-  ar: {
-    catName: "خزائن الملابس",
-    name: "C6T UN",
-    desc: "",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب C6T UN",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 50,
-  cat: "commodes",
-  img: "images/commend1.webp",
-  imgs: ["images/commend1.webp"],
-  fr: {
-    catName: "commodes",
-    name: "C6T UN",
-    desc: "",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander C6T UN",
-  },
-  ar: {
-    catName: "خزائن الملابس",
-    name: "C6T UN",
-    desc: "",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب C6T UN",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 51,
-  cat: "commodes",
-  img: "images/commend3.webp",
-  imgs: ["images/commend3.webp"],
-  fr: {
-    catName: "commodes",
-    name: "C6T UN",
-    desc: "",
-    price: "49 000 DA",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "Commander C6T UN",
-  },
-  ar: {
-    catName: "خزائن الملابس",
-    name: "C6T UN",
-    desc: "",
-    price: "49,000 دج",
-    oldPrice: null,
-    badge: null,
-    badgeText: null,
-    wa: "طلب C6T UN",
-  },
-  rating: "★★★★★",
-},
-{
-  id: 52,
-  cat: "lits",
-  img: "images/lit-luxueux-new-1.webp",
-  imgs: [
-    "images/lit-luxueux-new-1.webp",
-    "images/lit-luxueux-new-2.webp"
-  ],
-  colors: [
-    { hex: "#c8a96e", fr: "Beige", ar: "بيج" },
-    { hex: "#2f4f6f", fr: "Bleu", ar: "أزرق" }
-  ],
-  fr: {
-    catName: "Lits",
-    name: "Lit luxueux",
-    desc: "Lit luxueux avec coffre. Structure intérieure en bois rouge et tissu anti-taches avec possibilité de choisir les couleurs.",
-    price: "75 000 DA / 85 000 DA",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "Coffre",
-    wa: "Commander Lit luxueux",
-    sizes: [
-      { label: "Lit 1,80 x 2,00 m", price: "85 000 DA" },
-      { label: "Lit 1,60 x 1,90 m", price: "75 000 DA" },
-    ],
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير فاخر",
-    desc: "سرير فاخر بصندوق تخزين. هيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
-    price: "75,000 / 85,000 دج",
-    oldPrice: null,
-    badge: "badge-new",
-    badgeText: "بصندوق",
-    wa: "طلب سرير فاخر",
-    sizes: [
-      { label: "سرير 1.80 × 2.00 م", price: "85,000 دج" },
-      { label: "سرير 1.60 × 1.90 م", price: "75,000 دج" },
-    ],
-  },
-  rating: "★★★★★",
-},
-{
-  id: 50,
-  cat: "lits",
-  img: "images/lit-promo-1.webp",
-  fr: {
-    catName: "Lits",
-    name: "Lit en promotion",
-    desc: "Lit avec structure intérieure en bois rouge, tissu anti-taches avec possibilité de choisir les couleurs.",
-    price: "28 000 DA",
-    oldPrice: "32 000 DA",
-    badge: "badge-sale",
-    badgeText: "Promo",
-    wa: "Commander Lit en promotion",
-  },
-  ar: {
-    catName: "الأسرّة",
-    name: "سرير عرض خاص",
-    desc: "سرير بهيكل داخلي من الخشب الأحمر وقماش مضاد للبقع مع إمكانية اختيار الألوان.",
-    price: "28,000 دج",
-    oldPrice: "32,000 دج",
-    badge: "badge-sale",
-    badgeText: "تخفيض",
-    wa: "طلب سرير عرض خاص",
-  },
-  rating: "★★★★★",
-},
+            sizes: [
+              { label: "90 × 190 cm", price: "43 000 DA" },
+              { label: "160 × 190 cm", price: "73 000 DA" },
+              { label: "180 × 200 cm", price: "85 000 DA" },
+            ],
+          },
+
+          ar: {
+            catName: "المراتب",
+            name: "مرتبة ATLANTIS من Dormivital",
+            desc: `راحة مثالية ونوم صحي كل ليلة.
+
+• راحتان في واحدة: وجه مريح ووجه صلب جداً لتختار ما يناسبك.
+• تكنولوجيا متطورة: مزودة بميموري فوم (Viscotouch) يتكيف مع شكل الجسم.
+• دعم طبي: قاعدة OrthoBase عالية الكثافة (36 كجم/م³) لدعم الظهر.
+• نسيج صحي: قماش معتمد من Oeko-Tex ومضاد للحساسية.
+• الارتفاع: 27 سم.
+• الأحجام: متوفرة بجميع المقاسات.`,
+
+            price: "ابتداءً من 43,000 دج",
+            oldPrice: null,
+            badge: "badge-new",
+            badgeText: "جديد",
+            wa: "طلب مرتبة ATLANTIS من Dormivital",
+
+            sizes: [
+              { label: "90 × 190 سم", price: "43,000 دج" },
+              { label: "160 × 190 سم", price: "73,000 دج" },
+              { label: "180 × 200 سم", price: "85,000 دج" },
+            ],
+          },
+
+          rating: "★★★★★",
+        },
       ];
 
       function shortDesc(str, max = 65) {
@@ -6711,46 +6912,46 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
         document.body.style.overflow = "hidden";
       }
 
-  function _fillInfo(p) {
-  const d = p[currentLang];
-  const hasSizes = d.sizes && d.sizes.length > 0;
+      function _fillInfo(p) {
+        const d = p[currentLang];
+        const hasSizes = d.sizes && d.sizes.length > 0;
 
-  const badge = document.getElementById("pmodalBadge");
-  if (d.badge) {
-    badge.className = "pmodal-badge " + d.badge;
-    badge.textContent = d.badgeText;
-    badge.style.display = "block";
-  } else {
-    badge.style.display = "none";
-  }
+        const badge = document.getElementById("pmodalBadge");
+        if (d.badge) {
+          badge.className = "pmodal-badge " + d.badge;
+          badge.textContent = d.badgeText;
+          badge.style.display = "block";
+        } else {
+          badge.style.display = "none";
+        }
 
-  document.getElementById("pmodalCat").textContent = d.catName;
-  document.getElementById("pmodalName").textContent = d.name;
+        document.getElementById("pmodalCat").textContent = d.catName;
+        document.getElementById("pmodalName").textContent = d.name;
 
-  // لو المنتج له مقاسات: متظهرش السعر غير لما يختار مقاس
-  const priceEl = document.getElementById("pmodalPrice");
-  if (hasSizes) {
-    priceEl.textContent = currentLang === "ar" ? "اختر" : "Choisissez";
-    priceEl.style.opacity = "0.65";
-  } else {
-    priceEl.textContent = d.price;
-    priceEl.style.opacity = "1";
-  }
+        // لو المنتج له مقاسات: متظهرش السعر غير لما يختار مقاس
+        const priceEl = document.getElementById("pmodalPrice");
+        if (hasSizes) {
+          priceEl.textContent = currentLang === "ar" ? "اختر" : "Choisissez";
+          priceEl.style.opacity = "0.65";
+        } else {
+          priceEl.textContent = d.price;
+          priceEl.style.opacity = "1";
+        }
 
-  // الوصف الأساسي
-  document.getElementById("pmodalDesc").textContent = d.desc;
+        // الوصف الأساسي
+        document.getElementById("pmodalDesc").textContent = d.desc;
 
-  const waMsg = encodeURIComponent(d.wa || d.name);
-  document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+        const waMsg = encodeURIComponent(d.wa || d.name);
+        document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
 
-  const addBtn = document.getElementById("pmodalAddCart");
-  if (addBtn) {
-    addBtn.querySelector("span").textContent =
-      currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
-  }
+        const addBtn = document.getElementById("pmodalAddCart");
+        if (addBtn) {
+          addBtn.querySelector("span").textContent =
+            currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
+        }
 
-  _renderVariants(p);
-}
+        _renderVariants(p);
+      }
 
       function _renderVariants(p) {
         const existingVariants = document.getElementById("pmodalVariants");
@@ -6803,68 +7004,79 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
         if (divider) divider.parentNode.insertBefore(variantsEl, divider);
       }
 
-   function _selectSize(p, size, idx) {
-  const d = p[currentLang];
+      function _selectSize(p, size, idx) {
+        const d = p[currentLang];
 
-  _modal.selectedSize = size;
+        _modal.selectedSize = size;
 
-  const priceEl = document.getElementById("pmodalPrice");
-  priceEl.textContent = size.price;
-  priceEl.style.display = "block";
-  priceEl.style.opacity = "1";
+        const priceEl = document.getElementById("pmodalPrice");
+        priceEl.textContent = size.price;
+        priceEl.style.display = "block";
+        priceEl.style.opacity = "1";
 
-  const selectedLabel = document.getElementById("pmodalSizeSelected");
-  if (selectedLabel) selectedLabel.textContent = size.label;
+        const selectedLabel = document.getElementById("pmodalSizeSelected");
+        if (selectedLabel) selectedLabel.textContent = size.label;
 
-  const descEl = document.getElementById("pmodalDesc");
-  descEl.innerHTML = renderModalDesc(d.desc, size.label);
+        const descEl = document.getElementById("pmodalDesc");
+        descEl.innerHTML = renderModalDesc(d.desc, size.label);
 
-  document
-    .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
-    .forEach((b, i) => b.classList.toggle("selected", i === idx));
+        document
+          .querySelectorAll("#pmodalSizeBtns .pmodal-variant-btn")
+          .forEach((b, i) => b.classList.toggle("selected", i === idx));
 
-  const note = document.getElementById("pmodalSizeNote");
-  if (note) note.classList.remove("show");
+        const note = document.getElementById("pmodalSizeNote");
+        if (note) note.classList.remove("show");
 
-  const waText =
-    currentLang === "ar"
-      ? `${d.wa || d.name} - المقاس: ${size.label} - السعر: ${size.price}`
-      : `${d.wa || d.name} - Taille: ${size.label} - Prix: ${size.price}`;
+        const waText =
+          currentLang === "ar"
+            ? `${d.wa || d.name} - المقاس: ${size.label} - السعر: ${size.price}`
+            : `${d.wa || d.name} - Taille: ${size.label} - Prix: ${size.price}`;
 
-  document.getElementById("pmodalWaBtn").href =
-    WA + "?text=" + encodeURIComponent(waText);
-}
-function cleanProductDesc(desc) {
-  if (!desc) return "";
+        document.getElementById("pmodalWaBtn").href =
+          WA + "?text=" + encodeURIComponent(waText);
+      }
+      function cleanProductDesc(desc) {
+        if (!desc) return "";
 
-  return desc
-    // يشيل مقاسات فرنسي/إنجليزي: 90 x 190 cm / 160x190 cm / 1.20 x 1.90 m
-    .replace(/\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)\.?\b/gi, "")
+        return (
+          desc
+            // يشيل مقاسات فرنسي/إنجليزي: 90 x 190 cm / 160x190 cm / 1.20 x 1.90 m
+            .replace(
+              /\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)\.?\b/gi,
+              "",
+            )
 
-    // يشيل مقاسات مكتوبة كذا مقاس: 160x190 / 180x200 cm
-    .replace(/\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*\/\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?\b/gi, "")
+            // يشيل مقاسات مكتوبة كذا مقاس: 160x190 / 180x200 cm
+            .replace(
+              /\b\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*\/\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?\b/gi,
+              "",
+            )
 
-    // يشيل الجمل القصيرة اللي بتبدأ بكلمة مقاس
-    .replace(/(?:مقاس|Format)\s*[:：]?\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?/gi, "")
+            // يشيل الجمل القصيرة اللي بتبدأ بكلمة مقاس
+            .replace(
+              /(?:مقاس|Format)\s*[:：]?\s*\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:cm|m|سم|م)?\.?/gi,
+              "",
+            )
 
-    // تنظيف المسافات والنقط الزيادة
-    .replace(/\s{2,}/g, " ")
-    .replace(/\s+\./g, ".")
-    .replace(/\.{2,}/g, ".")
-    .replace(/\s+[—\-]\s*$/g, "")
-    .trim();
-}
+            // تنظيف المسافات والنقط الزيادة
+            .replace(/\s{2,}/g, " ")
+            .replace(/\s+\./g, ".")
+            .replace(/\.{2,}/g, ".")
+            .replace(/\s+[—\-]\s*$/g, "")
+            .trim()
+        );
+      }
 
-function renderModalDesc(desc, selectedSizeLabel = "") {
-  const cleanDesc = cleanProductDesc(desc);
+      function renderModalDesc(desc, selectedSizeLabel = "") {
+        const cleanDesc = cleanProductDesc(desc);
 
-  const selectedSizeText = selectedSizeLabel
-    ? currentLang === "ar"
-      ? `المقاس المختار: ${selectedSizeLabel}`
-      : `Taille choisie : ${selectedSizeLabel}`
-    : "";
+        const selectedSizeText = selectedSizeLabel
+          ? currentLang === "ar"
+            ? `المقاس المختار: ${selectedSizeLabel}`
+            : `Taille choisie : ${selectedSizeLabel}`
+          : "";
 
-  return `
+        return `
     <div class="pmodal-desc-main">${cleanDesc}</div>
     ${
       selectedSizeText
@@ -6872,7 +7084,7 @@ function renderModalDesc(desc, selectedSizeLabel = "") {
         : ""
     }
   `;
-}
+      }
       function _selectColor(p, color, idx) {
         _modal.selectedColor = color;
         const label = currentLang === "ar" ? color.ar : color.fr;
@@ -7007,7 +7219,6 @@ function renderModalDesc(desc, selectedSizeLabel = "") {
       // INIT
       // ══════════════════════════════════
       (function init() {
-
         const savedLang = loadLang();
         const savedPage = localStorage.getItem(PAGE_KEY) || "home";
         currentLang = savedLang;
@@ -7040,43 +7251,46 @@ function renderModalDesc(desc, selectedSizeLabel = "") {
         if (target) target.classList.add("active");
         loadCart();
         renderFeatured();
-        if (startPage === 'offers') renderProducts(currentFilter);
+        if (startPage === "offers") renderProducts(currentFilter);
         setTimeout(initObserver, 150);
       })();
       // تعريف الأسعار الخاصة بكل ولاية
-const deliveryPrices = {
-    "01": 10000,  // Adrar
-    "02": 10000,  // Chlef
-    "09": 10000,  // Blida
-    "10": 10000,  // Bouira
-};
+      const deliveryPrices = {
+        "01": 10000, // Adrar
+        "02": 10000, // Chlef
+        "09": 10000, // Blida
+        10: 10000, // Bouira
+      };
 
-// استماع لاختيار الولاية
-document.getElementById('chk_wilaya').addEventListener('change', function() {
-    const selectedWilaya = this.value;
-    const price = deliveryPrices[selectedWilaya];
-    if (price) {
-        document.getElementById('deliveryPrice').textContent = price + " DA";
-    } else {
-        document.getElementById('deliveryPrice').textContent = "0 DA";
-    }
-});
-function navigateToCategory(cat) {
-  currentFilter = cat;
-  navigateTo('offers');
-  
-  setTimeout(() => {
-    const allTabs = document.querySelectorAll('#filterTabs .filter-tab');
-    allTabs.forEach(t => t.classList.remove('active'));
-    const matchingTab = [...allTabs].find(t => 
-      (t.getAttribute('onclick') || '').includes(`'${cat}'`)
-    );
-    if (matchingTab) matchingTab.classList.add('active');
-    
-    renderProducts(cat);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 150);  // زيادة من 120 لـ 150
-}
+      // استماع لاختيار الولاية
+      document
+        .getElementById("chk_wilaya")
+        .addEventListener("change", function () {
+          const selectedWilaya = this.value;
+          const price = deliveryPrices[selectedWilaya];
+          if (price) {
+            document.getElementById("deliveryPrice").textContent =
+              price + " DA";
+          } else {
+            document.getElementById("deliveryPrice").textContent = "0 DA";
+          }
+        });
+      function navigateToCategory(cat) {
+        currentFilter = cat;
+        navigateTo("offers");
+
+        setTimeout(() => {
+          const allTabs = document.querySelectorAll("#filterTabs .filter-tab");
+          allTabs.forEach((t) => t.classList.remove("active"));
+          const matchingTab = [...allTabs].find((t) =>
+            (t.getAttribute("onclick") || "").includes(`'${cat}'`),
+          );
+          if (matchingTab) matchingTab.classList.add("active");
+
+          renderProducts(cat);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 150); // زيادة من 120 لـ 150
+      }
     </script>
     <script>
       (function () {
