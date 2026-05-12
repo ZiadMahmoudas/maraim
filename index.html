@@ -5657,7 +5657,7 @@
             catName: "Salons",
             name: "Salon complet 7 places",
             desc: "Salon élégant avec canapé principal 3 places et tissu velours premium.",
-            price: "95 000 DA",
+            // price: "95 000 DA",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "Best-seller",
@@ -5667,7 +5667,7 @@
             catName: "الصالونات",
             name: "صالون كامل 7 أماكن",
             desc: "صالون أنيق بكنبة رئيسية وقماش مخمل فاخر.",
-            price: "95,000 دج",
+            // price: "95,000 دج",
             oldPrice: null,
             badge: "badge-best",
             badgeText: "الأكثر طلبًا",
@@ -6153,7 +6153,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "Salons",
             name: "Salon Marina",
             desc: "Design moderne avec lignes élégantes et confort exceptionnel.",
-            price: "188 000 DA",
+            // price: "188 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Marina",
@@ -6163,7 +6163,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "الصالونات",
             name: "Salon Marina",
             desc: "صالون Marina بلمسة عصرية وراحة استثنائية.",
-            price: "188,000 دج",
+            // price: "188,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Marina",
@@ -6180,7 +6180,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "Salons",
             name: "Salon OSS",
             desc: "Le Salon OSS séduit par son design épuré et son confort remarquable.",
-            price: "175 000 DA",
+            // price: "175 000 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Nouveau",
@@ -6190,7 +6190,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "غرف المعيشة",
             name: "صالون OSS",
             desc: "صالون OSS يتميز بتصميمه العصري وراحته المذهلة.",
-            price: "175,000 دج",
+            // price: "175,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
@@ -6211,7 +6211,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "Salons",
             name: "Salon OSS 6 places",
             desc: "Pensé pour le confort et la praticité, le Salon OSS 6 places séduit par ses lignes épurées et son assise agréable.",
-            price: "175,000.00 DA",
+            // price: "175,000.00 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Nouveau",
@@ -6221,7 +6221,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "غرف المعيشة",
             name: "صالون OSS 6 أماكن",
             desc: "تم تصميم صالون OSS 6 أماكن من أجل الراحة والعملية، ويتميز بخطوطه النظيفة وراحة الجلوس المريحة.",
-            price: "175,000 دج",
+            // price: "175,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
@@ -6277,7 +6277,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "Salons",
             name: "Salon Maurice",
             desc: "Le Salon Maurice allie élégance traditionnelle et confort moderne. Avec ses finitions soignées et son design harmonieux.",
-            price: "345,000.00 DA",
+            // price: "345,000.00 DA",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "Nouveau",
@@ -6287,7 +6287,7 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
             catName: "غرف المعيشة",
             name: "صالون موريس",
             desc: "صالون موريس يجمع بين الأناقة التقليدية والراحة الحديثة. مع تشطيباته الدقيقة وتصميمه المتناغم.",
-            price: "345,000 دج",
+            // price: "345,000 دج",
             oldPrice: null,
             badge: "badge-new",
             badgeText: "جديد",
@@ -7084,30 +7084,49 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
         return str.slice(0, max).trimEnd() + "…";
       }
 
-      function productCardHTML(p, i) {
-        const d = p[currentLang];
-        const waMsg = encodeURIComponent(d.wa || d.name);
-        const thumb = Array.isArray(p.imgs) ? p.imgs[0] : p.img;
-        return `<div class="product-card reveal" style="transition-delay:${(i % 3) * 0.08}s" onclick="openPModal(${p.id})">
-          <div class="product-image-wrap">
-            <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
-            ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
-            <div class="product-actions-overlay">
-              <button class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation();openPModal(${p.id})">${currentLang === "ar" ? "أضف للسلة" : "Ajouter"}</button>
-              <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem" onclick="event.stopPropagation()">${currentLang === "ar" ? "واتساب" : "WhatsApp"}</a>
-            </div>
-          </div>
-          <div class="product-body">
-            <div class="product-cat">${d.catName}</div>
-            <h3 class="product-name">${d.name}</h3>
-            <p class="product-desc">${shortDesc(d.desc)}</p>
-            <div class="product-footer">
-              <div class="product-price">${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}</div>
-              <div class="product-rating">${p.rating}</div>
-            </div>
-          </div>
-        </div>`;
-      }
+   function productCardHTML(p, i) {
+  const d = p[currentLang];
+  const hasPrice = !!d.price;
+  const waMsg = encodeURIComponent(d.wa || d.name);
+  const thumb = Array.isArray(p.imgs) ? p.imgs[0] : p.img;
+
+  const priceText = hasPrice
+    ? `${d.oldPrice ? `<span class="old-price">${d.oldPrice}</span>` : ""}${d.price}`
+    : currentLang === "ar"
+      ? "السعر عند الطلب"
+      : "Prix sur demande";
+
+  return `<div class="product-card reveal" style="transition-delay:${(i % 3) * 0.08}s" onclick="openPModal(${p.id})">
+    <div class="product-image-wrap">
+      <img class="product-img" src="${thumb}" alt="${d.name}" loading="lazy">
+      ${d.badge ? `<span class="product-badge ${d.badge}">${d.badgeText}</span>` : ""}
+
+      <div class="product-actions-overlay">
+        ${
+          hasPrice
+            ? `<button class="btn btn-gold" style="font-size:0.78rem" onclick="event.stopPropagation();openPModal(${p.id})">
+                ${currentLang === "ar" ? "أضف للسلة" : "Ajouter"}
+              </button>`
+            : ""
+        }
+
+        <a href="${WA}?text=${waMsg}" class="btn btn-whatsapp" style="font-size:0.78rem; ${!hasPrice ? "width:100%;" : ""}" onclick="event.stopPropagation()" target="_blank">
+          ${currentLang === "ar" ? "واتساب" : "WhatsApp"}
+        </a>
+      </div>
+    </div>
+
+    <div class="product-body">
+      <div class="product-cat">${d.catName}</div>
+      <h3 class="product-name">${d.name}</h3>
+      <p class="product-desc">${shortDesc(d.desc)}</p>
+      <div class="product-footer">
+        <div class="product-price">${priceText}</div>
+        <div class="product-rating">${p.rating}</div>
+      </div>
+    </div>
+  </div>`;
+}
 
       let currentFilter = "all";
       function renderProducts(filter = "all") {
@@ -7172,46 +7191,65 @@ Tissu anti-taches avec possibilité de choisir les couleurs`,
         document.body.style.overflow = "hidden";
       }
 
-      function _fillInfo(p) {
-        const d = p[currentLang];
-        const hasSizes = d.sizes && d.sizes.length > 0;
+     function _fillInfo(p) {
+  const d = p[currentLang];
+  const hasSizes = d.sizes && d.sizes.length > 0;
+  const hasPrice = !!d.price;
 
-        const badge = document.getElementById("pmodalBadge");
-        if (d.badge) {
-          badge.className = "pmodal-badge " + d.badge;
-          badge.textContent = d.badgeText;
-          badge.style.display = "block";
-        } else {
-          badge.style.display = "none";
-        }
+  const badge = document.getElementById("pmodalBadge");
+  if (d.badge) {
+    badge.className = "pmodal-badge " + d.badge;
+    badge.textContent = d.badgeText;
+    badge.style.display = "block";
+  } else {
+    badge.style.display = "none";
+  }
 
-        document.getElementById("pmodalCat").textContent = d.catName;
-        document.getElementById("pmodalName").textContent = d.name;
+  document.getElementById("pmodalCat").textContent = d.catName;
+  document.getElementById("pmodalName").textContent = d.name;
 
-        // لو المنتج له مقاسات: متظهرش السعر غير لما يختار مقاس
-        const priceEl = document.getElementById("pmodalPrice");
-        if (hasSizes) {
-          priceEl.textContent = currentLang === "ar" ? "اختر" : "Choisissez";
-          priceEl.style.opacity = "0.65";
-        } else {
-          priceEl.textContent = d.price;
-          priceEl.style.opacity = "1";
-        }
+  const priceEl = document.getElementById("pmodalPrice");
+  const addBtn = document.getElementById("pmodalAddCart");
+  const waBtn = document.getElementById("pmodalWaBtn");
 
-        // الوصف الأساسي
-        document.getElementById("pmodalDesc").textContent = d.desc;
+  if (!hasPrice) {
+    priceEl.textContent = currentLang === "ar" ? "السعر عند الطلب" : "Prix sur demande";
+    priceEl.style.opacity = "1";
 
-        const waMsg = encodeURIComponent(d.wa || d.name);
-        document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+    if (addBtn) addBtn.style.display = "none";
 
-        const addBtn = document.getElementById("pmodalAddCart");
-        if (addBtn) {
-          addBtn.querySelector("span").textContent =
-            currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
-        }
+    if (waBtn) {
+      waBtn.style.flex = "1 1 100%";
+      waBtn.style.justifyContent = "center";
+    }
+  } else {
+    if (hasSizes) {
+      priceEl.textContent = currentLang === "ar" ? "اختر" : "Choisissez";
+      priceEl.style.opacity = "0.65";
+    } else {
+      priceEl.textContent = d.price;
+      priceEl.style.opacity = "1";
+    }
 
-        _renderVariants(p);
-      }
+    if (addBtn) {
+      addBtn.style.display = "inline-flex";
+      addBtn.querySelector("span").textContent =
+        currentLang === "ar" ? "أضف للسلة" : "Ajouter au panier";
+    }
+
+    if (waBtn) {
+      waBtn.style.flex = "";
+      waBtn.style.justifyContent = "center";
+    }
+  }
+
+  document.getElementById("pmodalDesc").textContent = d.desc;
+
+  const waMsg = encodeURIComponent(d.wa || d.name);
+  document.getElementById("pmodalWaBtn").href = WA + "?text=" + waMsg;
+
+  _renderVariants(p);
+}
 
       function _renderVariants(p) {
         const existingVariants = document.getElementById("pmodalVariants");
