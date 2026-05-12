@@ -389,7 +389,65 @@
         background: var(--gold);
         border-radius: 3px;
       }
+/* Navbar color after scroll */
+.navbar.scrolled {
+  background: linear-gradient(135deg, #141927 0%, #1c2235 55%, #2b3142 100%) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 14px 40px rgba(20, 25, 39, 0.24) !important;
+  border-bottom: 1px solid rgba(240, 50, 50, 0.28) !important;
+  margin-top: 0 !important;
+}
 
+/* Links after scroll */
+.navbar.scrolled .nav-links a {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.navbar.scrolled .nav-links a:hover {
+  color: #ff6b6b !important;
+}
+
+/* Logo image after scroll */
+.navbar.scrolled .logo img,
+.navbar.scrolled .logo-main img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Cart button after scroll */
+.navbar.scrolled .cart-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+.navbar.scrolled .cart-btn svg {
+  color: #ffffff !important;
+}
+
+.navbar.scrolled .cart-btn:hover {
+  background: #f03232 !important;
+  border-color: #f03232 !important;
+}
+
+/* Language switch after scroll */
+.navbar.scrolled .lang-toggle {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+.navbar.scrolled .lang-btn {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.navbar.scrolled .lang-btn.active {
+  background: #f03232 !important;
+  color: #ffffff !important;
+}
+
+/* Hamburger after scroll */
+.navbar.scrolled .hamburger span {
+  background: #ffffff !important;
+}
       @keyframes fadeUp {
         from {
           opacity: 0;
