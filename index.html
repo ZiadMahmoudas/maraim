@@ -3144,7 +3144,7 @@
         }
         .pmodal-gallery {
           max-height: 52vw;
-          min-height: 200px;
+          min-height: 479px;
         }
         .pmodal-info {
           padding: 22px 18px 24px;
@@ -4442,6 +4442,22 @@
             >
               Oreillers
             </button>
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'Armoires')"
+              data-fr="Armoires"
+              data-ar="خزائن الملابس"
+            >
+              Armoires
+            </button>
+            <button
+              class="filter-tab"
+              onclick="filterProducts(this, 'Ensemble Tête-à-tête')"
+              data-fr="Ensemble Tête-à-tête"
+              data-ar="فرقة تيت آ تييت"
+            >
+              Ensemble Tête-à-tête
+            </button>
           </div>
           <div class="products-grid" id="productsGrid"></div>
         </div>
@@ -4941,6 +4957,22 @@
                   data-ar="الوسائد"
                 >
                   Oreillers
+                </a>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('Armoires')"
+                  data-fr="Armoires"
+                  data-ar="خزائن الملابس"
+                >
+                  Armoires
+                </a>
+                <a
+                  href="#"
+                  onclick="navigateToCategory('Ensemble Tête-à-tête')"
+                  data-fr="Ensemble Tête-à-tête"
+                  data-ar="فرقة تيت آ تييت"
+                >
+                  Ensemble Tête-à-tête
                 </a>
               </li>
             </ul>
@@ -6724,18 +6756,18 @@ Tissu anti-taches avec possibilité de changer les couleurs`,
 
   fr: {
     catName: "commodes",
-    name: "UN - C6T",
+    name: "Lit en bois rouge",
     desc: "Ensemble composé d'une commode et d'un lit. Vous pouvez commander la commode seule, le lit seul, ou l'ensemble complet selon votre besoin.",
     price: "À partir de 34 000 DA",
     oldPrice: null,
     badge: null,
     badgeText: null,
-    wa: "Commander UN - C6T",
+    wa: "Commander Lit en bois rouge",
 
     sizes: [
       { label: "Lit seul", price: "34 000 DA" },
-      { label: "Commode seule", price: "49 000 DA" },
-      { label: "Lit + Commode", price: "83 000 DA" },
+      { label: "Commode seule", price: "34 000 DA" },
+      { label: "Lit + Commode", price: "68 000 DA" },
     ],
   },
 
@@ -7056,7 +7088,7 @@ Tissu anti-taches avec possibilité de changer les couleurs`,
         },
         {
   id: 47,
-  cat: "commodes",
+  cat: "Armoires",
   img: "images/armoire-chaussures.webp",
   imgs: [
     "images/armoire-chaussures.webp",
@@ -7065,7 +7097,7 @@ Tissu anti-taches avec possibilité de changer les couleurs`,
   ],
 
   fr: {
-    catName: "Commodes",
+    catName: "Armoires",
     name: "Armoire à chaussures",
     desc: ``,
 
@@ -7234,8 +7266,197 @@ Lit élégant avec table de nuit incluse, conçu pour une chambre moderne et raf
 
   rating: "★★★★★",
 },
-      ];
+{
+  id: 51,
+  cat: "Armoires",
+  img: "images/armoire-bois-hetre.webp",
+  imgs: ["images/armoire-bois-hetre.webp"],
 
+  fr: {
+    catName: "Armoires",
+    name: "Armoire en bois hêtre",
+    desc: `Commode moderne avec miroir, fabriquée en bois de hêtre massif.
+Finition haut de gamme avec peinture de marque Jansse & Finy.
+Élégance, solidité et praticité réunies dans un design raffiné.`,
+
+    price: "55 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Hêtre",
+    wa: "Commander Armoire en bois hêtre",
+  },
+
+  ar: {
+    catName: "خزائن الملابس",
+    name: "Armoire en bois hêtre",
+    desc: `كومود عصرية مع مرآة، مصنوعة من خشب الزان الصلب.
+تشطيب فاخر بدهان من ماركة Jansse & Finy.
+أناقة، متانة وعملية في تصميم راقٍ ومميز.`,
+
+    price: "55,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "خشب زان",
+    wa: "طلب Armoire en bois hêtre",
+  },
+
+  rating: "★★★★★",
+},
+{
+  id: 52,
+  cat: "Ensemble Tête-à-tête",
+  img: "images/ensemble-tete-a-tete-moderne.webp",
+  imgs: [
+    "images/ensemble-tete-a-tete-moderne.webp",
+  "images/ensemble-tete-a-tete-moderne1.webp"
+],
+
+  colors: [
+    { hex: "#d8c3a5", fr: "Beige", ar: "بيج" },
+    { hex: "#000000", fr: "Black", ar: "اسود" },
+  ],
+
+  fr: {
+    catName: "Ensemble Tête-à-tête",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "Ensemble de deux fauteuils design avec table basse – élégant, moderne et confortable.",
+
+    price: "85 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Ensemble Tête-à-tête moderne",
+  },
+
+  ar: {
+    catName: "فرقة تيت آ تييت",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "طقم مكوّن من كرسيين بتصميم عصري مع طاولة وسط صغيرة — أنيق، حديث ومريح.",
+
+    price: "85,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب Ensemble Tête-à-tête moderne",
+  },
+
+  rating: "★★★★★",
+},
+{
+  id: 53,
+  cat: "Ensemble Tête-à-tête",
+  img: "images/ensemble-tete-a-tete-moderne2.webp",
+  imgs: [
+    "images/ensemble-tete-a-tete-moderne2.webp",
+],
+
+  fr: {
+    catName: "Ensemble Tête-à-tête",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "Ensemble de deux fauteuils design avec table basse – élégant, moderne et confortable.",
+
+    price: "88 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Ensemble Tête-à-tête moderne",
+  },
+
+  ar: {
+    catName: "فرقة تيت آ تييت",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "طقم مكوّن من كرسيين بتصميم عصري مع طاولة وسط صغيرة — أنيق، حديث ومريح.",
+
+    price: "88,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب Ensemble Tête-à-tête moderne",
+  },
+
+  rating: "★★★★★",
+},
+{
+  id: 54,
+  cat: "Ensemble Tête-à-tête",
+  img: "images/ensemble-tete-a-tete-moderne3.webp",
+  imgs: [
+    "images/ensemble-tete-a-tete-moderne3.webp",
+],
+
+  fr: {
+    catName: "Ensemble Tête-à-tête",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "Ensemble de deux fauteuils design avec table basse – élégant, moderne et confortable.",
+
+    price: "88 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Ensemble Tête-à-tête moderne",
+  },
+
+  ar: {
+    catName: "فرقة تيت آ تييت",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "طقم مكوّن من كرسيين بتصميم عصري مع طاولة وسط صغيرة — أنيق، حديث ومريح.",
+
+    price: "88,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب Ensemble Tête-à-tête moderne",
+  },
+
+  rating: "★★★★★",
+},
+{
+  id: 55,
+  cat: "Ensemble Tête-à-tête",
+  img: "images/ensemble-tete-a-tete-moderne4.webp",
+  imgs: [
+    "images/ensemble-tete-a-tete-moderne4.webp",
+],
+
+  fr: {
+    catName: "Ensemble Tête-à-tête",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "Ensemble de deux fauteuils design avec table basse – élégant, moderne et confortable.",
+
+    price: "125 000 DA",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "Nouveau",
+    wa: "Commander Ensemble Tête-à-tête moderne",
+  },
+
+  ar: {
+    catName: "فرقة تيت آ تييت",
+    name: "Ensemble Tête-à-tête moderne",
+    desc: "طقم مكوّن من كرسيين بتصميم عصري مع طاولة وسط صغيرة — أنيق، حديث ومريح.",
+
+    price: "125,000 دج",
+    oldPrice: null,
+    badge: "badge-new",
+    badgeText: "جديد",
+    wa: "طلب Ensemble Tête-à-tête moderne",
+  },
+
+  rating: "★★★★★",
+},
+      ];
+const COMMODES_COLORS = [
+  { hex: "#d8c3a5", fr: "Beige", ar: "بيج" },
+  { hex: "#ffffff", fr: "Blanc", ar: "أبيض" },
+  { hex: "#2f6f4e", fr: "Vert", ar: "أخضر" },
+  { hex: "#808080", fr: "Gris", ar: "رمادي" },
+];
+
+allProducts.forEach((product) => {
+  if (product.cat === "commodes") {
+    product.colors = COMMODES_COLORS;
+  }
+});
       function shortDesc(str, max = 65) {
         if (!str || str.length <= max) return str;
         return str.slice(0, max).trimEnd() + "…";
